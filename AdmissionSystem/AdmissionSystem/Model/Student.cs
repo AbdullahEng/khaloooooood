@@ -8,7 +8,12 @@ namespace AdmissionSystem.Model
     public class Student
     {  public int Id { get; set; }
         public string high_school_certificate { get; set; }//syrian or not syrian certificate.
-       // public Country Cirtificate_city  { get; set; } هل هذا يتصل بجدول البلاد ؟؟؟؟؟؟؟وسؤال تاني انو براي هذا الفيتشر لازم تكون موجوده بجدول الشهاده بحيث اذا كان الشهاده اجنبية لازم يعبي منين اخدها واذا كانت الشهاده سورية لازم ينحط با ديفلت امو البلد سوري  
+      
+         public Country Cirtificate_city  { get; set; }// هل هذا يتصل بجدول البلاد ؟؟؟؟؟؟؟وسؤال تاني انو براي هذا الفيتشر لازم تكون موجوده بجدول الشهاده بحيث اذا كان الشهاده اجنبية لازم يعبي منين اخدها واذا كانت الشهاده سورية لازم ينحط باي ديفولت انو البلد سوري  
+        /// <summary>
+        /// إي المفروض يرتبط بجدول البلاد 1
+        /// 2اذا كان هون ولا بجدول الشهاده نفس الشي  مو العلاقه واحد ل واحد 
+        /// </summary>
         public string First_Name_AR { get; set; }
         public string Father_Name_AR { get; set; }
         public string Grandfather_Name_AR { get; set; }
@@ -35,8 +40,8 @@ namespace AdmissionSystem.Model
         public string Identity_back_image { get; set; }
         public Admission_Eligibilty_Requist_For_UNsy_Certificate Admission_Eligibilty_Requist_For_UNsy_Certificate { get; set; }
         public Statues_Of_Student Statues_Of_Student { get; set; }
-        public Tracking_Rate Tracking_Rate { get; set; }
-        // public Statues_Of_Admission_Eligibilty Statues_Of_Admission_Eligibilty { get; set; }
-      //  public Accabtable_config Accabtable_configInfo { get; set; }
+        public Tracking_Rate FK_Tracking_Rate { get; set; }//sorry i modify it ^_^
+         public Statues_of_admission_eligibilty Statues_Of_Admission_Eligibilty { get; set; }//Modifid AB
+        public Accabtable_config FK_Accabtable_configInfo { get; set; }//Modifid AB//one_to_one relationship
     }
 }

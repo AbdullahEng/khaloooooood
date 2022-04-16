@@ -12,8 +12,9 @@ namespace AdmissionSystem.Model
         public bool Checked_Identity { get; set; }
         public bool Checked_city_certificate { get; set; }
         public bool Checked_Rate { get; set; }
-        public int Studentid { get; set; }
-        public Student Student_Info { get; set; }
-        public Employee Employee_Info { get; set; }
+        public int FK_Student_InfoId { get; set; }//sorry i modify it ^_^//one_to_one relationship
+        public Student FK_Student_Info { get; set; }//If you like modify the name to FK_Student_Info //sorry i modify it ^_^//one_to_one relationship
+        public int FK_Employee_InfoId { get; set; }//sorry i modify it ^_^
+        public Employee FK_Employee_Info { get; set; }//If you like modify the name to FK_Employee_Info 
     }
 }
