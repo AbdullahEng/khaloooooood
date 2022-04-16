@@ -12,7 +12,9 @@ namespace AdmissionSystem.Model
         public DateTime date_of_high_school_cirtificate { get; set; }
         public string Image_of_crtificat_URL { get; set; }//ما العمل اذا كانت الشهادة من اكثر من صورة 
         /// <summary>
-        /// بيغير الجامعه 
+        /// بيغير الجامعه ( ͡¬ ‿ ͡¬)
+        /// بخخخخخخخخخخخخ
+        /// ممكن تكون مصفوفة بس هلق كنت عم شوف الشهاده يلي صورناها عند عبدو فهيي كانت صورة وححده لشهاد كويتية ....عكلن منسأل ان شاء الله 
         /// </summary>
         public string check_recipt_image_URL { get; set; }
       

@@ -12,7 +12,7 @@ namespace AdmissionSystem.Model
         public Statues_of_admission_eligibilty FK_Statues_of_admission_eligibilty { get; set; }//one_to_many relationship
         public int FK_studentId { get; set; }//one_to_one relationship
         public Student FK_student { get; set; }//one_to_one relationship
-        public bool Accepted_Wishes { get; set; }
-
+        public bool Accepted_Or_Not { get; set; }// سوري على قولتك ^_^
+        public string Accepted_wish { get; set; }// ممكن تكون سترينغ او فورن كي  شو رأيك؟؟ 
     }
 }
