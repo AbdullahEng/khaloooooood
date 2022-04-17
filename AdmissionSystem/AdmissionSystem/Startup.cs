@@ -1,4 +1,5 @@
 using AdmissionSystem.Data;
+using AdmissionSystem.Model.Identity_classes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,14 +31,26 @@ namespace AdmissionSystem
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            services.AddIdentity<MyIdentityUser, MyIdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+       .AddEntityFrameworkStores<ApplicationDbContext>()
+       .AddDefaultTokenProviders();
+
+
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+           
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            UserManager<MyIdentityUser>userManager,RoleManager<MyIdentityRole>roleManager)
         {
+            //app.UseAuthentication();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,11 +70,12 @@ namespace AdmissionSystem
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            MyIdentityDataInitializer.SeedData(userManager, roleManager);//
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
+
         }
     }
 }

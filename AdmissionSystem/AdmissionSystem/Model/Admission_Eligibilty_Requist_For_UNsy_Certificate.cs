@@ -23,9 +23,9 @@ namespace AdmissionSystem.Model
         public string Subscription_number { get; set; }
         public int course_number { get; set; }
        
-        public Department_relation_Type wish1 { get; set; }//Modifid AB////one_to_one relationship
-        public Department_relation_Type wish2 { get; set; }//Modifid AB////one_to_one relationship
-        public Department_relation_Type wish3 { get; set; }//Modifid AB////one_to_one relationship
+        public Department_relation_Type wish1 { get; set; }//Modifid AB////
+        public Department_relation_Type wish2 { get; set; }//Modifid AB////
+        public Department_relation_Type wish3 { get; set; }//Modifid AB////
 
         public int FK_student_InfoId { get; set; } //(FK)//AB//sorry i modify it ^_^ 
         public Student FK_student_Info { get; set; }//sorry i modify it ^_^ 
