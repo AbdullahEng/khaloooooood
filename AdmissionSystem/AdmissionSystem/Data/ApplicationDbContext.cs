@@ -38,7 +38,7 @@ namespace AdmissionSystem.Data
 
         }
         public DbSet<Accabtable_config> Accabtable_config { get; set; }
-        public DbSet<Admission_Eligibilty_Requist_For_UNsy_Certificate> Admission_Eligibilty_Requist_For_UNsy_Certificate { get; set; }
+        public DbSet<Admission_Eligibilty_Certificate> Admission_Eligibilty_Certificate { get; set; }
         public DbSet<Broken_Relationshib_Stat_Dep_Chair> Broken_Relationshib_Stat_Dep_Chair { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Department> Department { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdmissionSystem.Migrations
 {
-    public partial class khaled : Migration
+    public partial class database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -464,7 +464,7 @@ namespace AdmissionSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Admission_Eligibilty_Requist_For_UNsy_Certificate",
+                name: "Admission_Eligibilty_Certificate",
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
@@ -485,33 +485,33 @@ namespace AdmissionSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admission_Eligibilty_Requist_For_UNsy_Certificate", x => x.id);
+                    table.PrimaryKey("PK_Admission_Eligibilty_Certificate", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Admission_Eligibilty_Requist_For_UNsy_Certificate_Type_of_high_school_Cirtificate_FK_Type_of_high_school_CirtificateId",
+                        name: "FK_Admission_Eligibilty_Certificate_Type_of_high_school_Cirtificate_FK_Type_of_high_school_CirtificateId",
                         column: x => x.FK_Type_of_high_school_CirtificateId,
                         principalTable: "Type_of_high_school_Cirtificate",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Admission_Eligibilty_Requist_For_UNsy_Certificate_Student_FK_student_InfoId",
+                        name: "FK_Admission_Eligibilty_Certificate_Student_FK_student_InfoId",
                         column: x => x.FK_student_InfoId,
                         principalTable: "Student",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Admission_Eligibilty_Requist_For_UNsy_Certificate_Department_relation_Type_wish1id",
+                        name: "FK_Admission_Eligibilty_Certificate_Department_relation_Type_wish1id",
                         column: x => x.wish1id,
                         principalTable: "Department_relation_Type",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Admission_Eligibilty_Requist_For_UNsy_Certificate_Department_relation_Type_wish2id",
+                        name: "FK_Admission_Eligibilty_Certificate_Department_relation_Type_wish2id",
                         column: x => x.wish2id,
                         principalTable: "Department_relation_Type",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Admission_Eligibilty_Requist_For_UNsy_Certificate_Department_relation_Type_wish3id",
+                        name: "FK_Admission_Eligibilty_Certificate_Department_relation_Type_wish3id",
                         column: x => x.wish3id,
                         principalTable: "Department_relation_Type",
                         principalColumn: "id",
@@ -530,29 +530,29 @@ namespace AdmissionSystem.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_Eligibilty_Requist_For_UNsy_Certificate_FK_Type_of_high_school_CirtificateId",
-                table: "Admission_Eligibilty_Requist_For_UNsy_Certificate",
+                name: "IX_Admission_Eligibilty_Certificate_FK_Type_of_high_school_CirtificateId",
+                table: "Admission_Eligibilty_Certificate",
                 column: "FK_Type_of_high_school_CirtificateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_Eligibilty_Requist_For_UNsy_Certificate_FK_student_InfoId",
-                table: "Admission_Eligibilty_Requist_For_UNsy_Certificate",
+                name: "IX_Admission_Eligibilty_Certificate_FK_student_InfoId",
+                table: "Admission_Eligibilty_Certificate",
                 column: "FK_student_InfoId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_Eligibilty_Requist_For_UNsy_Certificate_wish1id",
-                table: "Admission_Eligibilty_Requist_For_UNsy_Certificate",
+                name: "IX_Admission_Eligibilty_Certificate_wish1id",
+                table: "Admission_Eligibilty_Certificate",
                 column: "wish1id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_Eligibilty_Requist_For_UNsy_Certificate_wish2id",
-                table: "Admission_Eligibilty_Requist_For_UNsy_Certificate",
+                name: "IX_Admission_Eligibilty_Certificate_wish2id",
+                table: "Admission_Eligibilty_Certificate",
                 column: "wish2id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_Eligibilty_Requist_For_UNsy_Certificate_wish3id",
-                table: "Admission_Eligibilty_Requist_For_UNsy_Certificate",
+                name: "IX_Admission_Eligibilty_Certificate_wish3id",
+                table: "Admission_Eligibilty_Certificate",
                 column: "wish3id");
 
             migrationBuilder.CreateIndex(
@@ -669,7 +669,7 @@ namespace AdmissionSystem.Migrations
                 name: "Accabtable_config");
 
             migrationBuilder.DropTable(
-                name: "Admission_Eligibilty_Requist_For_UNsy_Certificate");
+                name: "Admission_Eligibilty_Certificate");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

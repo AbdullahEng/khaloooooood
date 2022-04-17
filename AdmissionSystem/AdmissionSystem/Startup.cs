@@ -1,5 +1,7 @@
 using AdmissionSystem.Data;
+using AdmissionSystem.Model;
 using AdmissionSystem.Model.Identity_classes;
+using AdmissionSystem.Model.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +38,18 @@ namespace AdmissionSystem
             services.AddIdentity<MyIdentityUser, MyIdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
        .AddEntityFrameworkStores<ApplicationDbContext>()
        .AddDefaultTokenProviders();
+
+            services.AddScoped<CRUD_Operation_Interface<Admission_Eligibilty_Certificate>, Admission_Eligibilty_Certificate_Repo>();
+
+            services.AddScoped<CRUD_Operation_Interface<Employee>, Employee_Repo>();
+
+            services.AddScoped<CRUD_Operation_Interface<Statues_Of_Student>, Statues_Of_Student_Repo>();
+
+            services.AddScoped<CRUD_Operation_Interface<Student>, Student_Repo>();
+
+            services.AddScoped<CRUD_Operation_Interface<Tracking_Rate>, Tracking_Rate_Repo>();
+
+            services.AddScoped<CRUD_Operation_Interface<Type_of_high_school_Cirtificate>, Type_of_high_school_Cirtificate_Repo>();
 
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

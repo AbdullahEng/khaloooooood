@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Model
 {
-    public class Admission_Eligibilty_Requist_For_UNsy_Certificate
+    public class Admission_Eligibilty_Certificate
     {   public int id { get; set; }
         public int The_Rate { get; set; }
         public string city_of_high_school_cirtificate { get; set; }

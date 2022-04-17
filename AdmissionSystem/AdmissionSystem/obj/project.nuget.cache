@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AQM/ULOLokKmoC4a744X2QaUMxVMpB8CVOwQT+bj052c16kVf/BYiNXNt73P8DkaWB8VRhu+UqjVb/QXMXigHw==",
+  "dgSpecHash": "RSQ+Fl2t39xC+PtM74eHg4dKQgzmj6kCO2jWYPckd5WAjnk96O7mxSQTMumT0JUQfsSCC4FFG2AKsC9/7W616A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\planet\\Desktop\\khalooood\\khaloooooood\\AdmissionSystem\\AdmissionSystem\\AdmissionSystem.csproj",
+  "projectFilePath": "C:\\Users\\planet\\Desktop\\final project\\Our_Project_love_you\\AdmissionSystem\\AdmissionSystem\\AdmissionSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\planet\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.19\\microsoft.aspnetcore.cryptography.internal.3.1.19.nupkg.sha512",
     "C:\\Users\\planet\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.19\\microsoft.aspnetcore.cryptography.keyderivation.3.1.19.nupkg.sha512",

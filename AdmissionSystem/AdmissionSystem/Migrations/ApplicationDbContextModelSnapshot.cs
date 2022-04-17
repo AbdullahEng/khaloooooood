@@ -48,7 +48,7 @@ namespace AdmissionSystem.Migrations
                     b.ToTable("Accabtable_config");
                 });
 
-            modelBuilder.Entity("AdmissionSystem.Model.Admission_Eligibilty_Requist_For_UNsy_Certificate", b =>
+            modelBuilder.Entity("AdmissionSystem.Model.Admission_Eligibilty_Certificate", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasIndex("wish3id");
 
-                    b.ToTable("Admission_Eligibilty_Requist_For_UNsy_Certificate");
+                    b.ToTable("Admission_Eligibilty_Certificate");
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Broken_Relationshib_Stat_Dep_Chair", b =>
@@ -677,7 +677,7 @@ namespace AdmissionSystem.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AdmissionSystem.Model.Admission_Eligibilty_Requist_For_UNsy_Certificate", b =>
+            modelBuilder.Entity("AdmissionSystem.Model.Admission_Eligibilty_Certificate", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Type_of_high_school_Cirtificate", "FK_Type_of_high_school_Cirtificate")
                         .WithMany()
@@ -687,7 +687,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasOne("AdmissionSystem.Model.Student", "FK_student_Info")
                         .WithOne("Admission_Eligibilty_Requist_For_UNsy_Certificate")
-                        .HasForeignKey("AdmissionSystem.Model.Admission_Eligibilty_Requist_For_UNsy_Certificate", "FK_student_InfoId")
+                        .HasForeignKey("AdmissionSystem.Model.Admission_Eligibilty_Certificate", "FK_student_InfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
