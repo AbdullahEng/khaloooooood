@@ -9,7 +9,7 @@ namespace AdmissionSystem.Model
     {
         public int id { get; set; }
         public string specialization_name { get; set; }
-        public int FK_facultyId { get; set; }//one_to_many relationship
+        //public int FK_facultyId { get; set; }//one_to_many relationship
         public Faculty FK_faculty { get; set; }//one_to_many relationship
     }
 }

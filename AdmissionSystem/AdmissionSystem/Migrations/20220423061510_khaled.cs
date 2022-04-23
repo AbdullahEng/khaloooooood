@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdmissionSystem.Migrations
 {
-    public partial class database : Migration
+    public partial class khaled : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -230,17 +230,17 @@ namespace AdmissionSystem.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     specialization_name = table.Column<string>(nullable: true),
-                    FK_facultyId = table.Column<int>(nullable: false)
+                    FK_facultyid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Department", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Department_Faculty_FK_facultyId",
-                        column: x => x.FK_facultyId,
+                        name: "FK_Department_Faculty_FK_facultyid",
+                        column: x => x.FK_facultyid,
                         principalTable: "Faculty",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,7 +249,7 @@ namespace AdmissionSystem.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FK_statues_of_admission_eligibiltyId = table.Column<int>(nullable: false),
+                    FK_statues_of_admission_eligibiltyid = table.Column<int>(nullable: true),
                     FK_countryId = table.Column<int>(nullable: false),
                     Rate = table.Column<double>(nullable: false)
                 },
@@ -263,11 +263,11 @@ namespace AdmissionSystem.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Persentage_count_for_each__country_Statues_of_admission_eligibilty_FK_statues_of_admission_eligibiltyId",
-                        column: x => x.FK_statues_of_admission_eligibiltyId,
+                        name: "FK_Persentage_count_for_each__country_Statues_of_admission_eligibilty_FK_statues_of_admission_eligibiltyid",
+                        column: x => x.FK_statues_of_admission_eligibiltyid,
                         principalTable: "Statues_of_admission_eligibilty",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -327,25 +327,25 @@ namespace AdmissionSystem.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FK_statues_Of_Admission_EligibiltyId = table.Column<int>(nullable: false),
-                    Fk_departmentId = table.Column<int>(nullable: false),
+                    FK_statues_Of_Admission_Eligibiltyid = table.Column<int>(nullable: true),
+                    Fk_departmentid = table.Column<int>(nullable: true),
                     Chair_count = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Broken_Relationshib_Stat_Dep_Chair", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Broken_Relationshib_Stat_Dep_Chair_Statues_of_admission_eligibilty_FK_statues_Of_Admission_EligibiltyId",
-                        column: x => x.FK_statues_Of_Admission_EligibiltyId,
+                        name: "FK_Broken_Relationshib_Stat_Dep_Chair_Statues_of_admission_eligibilty_FK_statues_Of_Admission_Eligibiltyid",
+                        column: x => x.FK_statues_Of_Admission_Eligibiltyid,
                         principalTable: "Statues_of_admission_eligibilty",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Broken_Relationshib_Stat_Dep_Chair_Department_Fk_departmentId",
-                        column: x => x.Fk_departmentId,
+                        name: "FK_Broken_Relationshib_Stat_Dep_Chair_Department_Fk_departmentid",
+                        column: x => x.Fk_departmentid,
                         principalTable: "Department",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -354,8 +354,8 @@ namespace AdmissionSystem.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FK_DepartmentId = table.Column<int>(nullable: false),
-                    FK_type_Of_High_School_CirtificateId = table.Column<int>(nullable: false),
+                    FK_Departmentid = table.Column<int>(nullable: true),
+                    FK_type_Of_High_School_Cirtificateid = table.Column<int>(nullable: true),
                     Minemum_of_Rate = table.Column<double>(nullable: false),
                     Rate_of_chaire_count = table.Column<double>(nullable: false)
                 },
@@ -363,17 +363,17 @@ namespace AdmissionSystem.Migrations
                 {
                     table.PrimaryKey("PK_Department_relation_Type", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Department_relation_Type_Department_FK_DepartmentId",
-                        column: x => x.FK_DepartmentId,
+                        name: "FK_Department_relation_Type_Department_FK_Departmentid",
+                        column: x => x.FK_Departmentid,
                         principalTable: "Department",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Department_relation_Type_Type_of_high_school_Cirtificate_FK_type_Of_High_School_CirtificateId",
-                        column: x => x.FK_type_Of_High_School_CirtificateId,
+                        name: "FK_Department_relation_Type_Type_of_high_school_Cirtificate_FK_type_Of_High_School_Cirtificateid",
+                        column: x => x.FK_type_Of_High_School_Cirtificateid,
                         principalTable: "Type_of_high_school_Cirtificate",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -382,7 +382,7 @@ namespace AdmissionSystem.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FK_Statues_of_admission_eligibiltyId = table.Column<int>(nullable: false),
+                    FK_Statues_of_admission_eligibiltyid = table.Column<int>(nullable: true),
                     FK_studentId = table.Column<int>(nullable: false),
                     Accepted_Or_Not = table.Column<bool>(nullable: false),
                     Accepted_wish = table.Column<string>(nullable: true)
@@ -391,11 +391,11 @@ namespace AdmissionSystem.Migrations
                 {
                     table.PrimaryKey("PK_Accabtable_config", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Accabtable_config_Statues_of_admission_eligibilty_FK_Statues_of_admission_eligibiltyId",
-                        column: x => x.FK_Statues_of_admission_eligibiltyId,
+                        name: "FK_Accabtable_config_Statues_of_admission_eligibilty_FK_Statues_of_admission_eligibiltyid",
+                        column: x => x.FK_Statues_of_admission_eligibiltyid,
                         principalTable: "Statues_of_admission_eligibilty",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Accabtable_config_Student_FK_studentId",
                         column: x => x.FK_studentId,
@@ -416,17 +416,17 @@ namespace AdmissionSystem.Migrations
                     Checked_city_certificate = table.Column<bool>(nullable: false),
                     Checked_Rate = table.Column<bool>(nullable: false),
                     FK_Student_InfoId = table.Column<int>(nullable: false),
-                    FK_Employee_InfoId = table.Column<int>(nullable: false)
+                    FK_Employee_Infoid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Statues_Of_Student", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Statues_Of_Student_Employee_FK_Employee_InfoId",
-                        column: x => x.FK_Employee_InfoId,
+                        name: "FK_Statues_Of_Student_Employee_FK_Employee_Infoid",
+                        column: x => x.FK_Employee_Infoid,
                         principalTable: "Employee",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Statues_Of_Student_Student_FK_Student_InfoId",
                         column: x => x.FK_Student_InfoId,
@@ -444,17 +444,17 @@ namespace AdmissionSystem.Migrations
                     old_rate = table.Column<int>(nullable: false),
                     new_rate = table.Column<int>(nullable: false),
                     FK_Student_InfoId = table.Column<int>(nullable: false),
-                    FK_Employee_InfoId = table.Column<int>(nullable: false)
+                    FK_Employee_Infoid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tracking_Rate", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Tracking_Rate_Employee_FK_Employee_InfoId",
-                        column: x => x.FK_Employee_InfoId,
+                        name: "FK_Tracking_Rate_Employee_FK_Employee_Infoid",
+                        column: x => x.FK_Employee_Infoid,
                         principalTable: "Employee",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Tracking_Rate_Student_FK_Student_InfoId",
                         column: x => x.FK_Student_InfoId,
@@ -481,17 +481,17 @@ namespace AdmissionSystem.Migrations
                     wish2id = table.Column<int>(nullable: true),
                     wish3id = table.Column<int>(nullable: true),
                     FK_student_InfoId = table.Column<int>(nullable: false),
-                    FK_Type_of_high_school_CirtificateId = table.Column<int>(nullable: false)
+                    FK_Type_of_high_school_Cirtificateid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Admission_Eligibilty_Certificate", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Admission_Eligibilty_Certificate_Type_of_high_school_Cirtificate_FK_Type_of_high_school_CirtificateId",
-                        column: x => x.FK_Type_of_high_school_CirtificateId,
+                        name: "FK_Admission_Eligibilty_Certificate_Type_of_high_school_Cirtificate_FK_Type_of_high_school_Cirtificateid",
+                        column: x => x.FK_Type_of_high_school_Cirtificateid,
                         principalTable: "Type_of_high_school_Cirtificate",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Admission_Eligibilty_Certificate_Student_FK_student_InfoId",
                         column: x => x.FK_student_InfoId,
@@ -519,9 +519,9 @@ namespace AdmissionSystem.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accabtable_config_FK_Statues_of_admission_eligibiltyId",
+                name: "IX_Accabtable_config_FK_Statues_of_admission_eligibiltyid",
                 table: "Accabtable_config",
-                column: "FK_Statues_of_admission_eligibiltyId");
+                column: "FK_Statues_of_admission_eligibiltyid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accabtable_config_FK_studentId",
@@ -530,9 +530,9 @@ namespace AdmissionSystem.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_Eligibilty_Certificate_FK_Type_of_high_school_CirtificateId",
+                name: "IX_Admission_Eligibilty_Certificate_FK_Type_of_high_school_Cirtificateid",
                 table: "Admission_Eligibilty_Certificate",
-                column: "FK_Type_of_high_school_CirtificateId");
+                column: "FK_Type_of_high_school_Cirtificateid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Admission_Eligibilty_Certificate_FK_student_InfoId",
@@ -595,29 +595,29 @@ namespace AdmissionSystem.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Broken_Relationshib_Stat_Dep_Chair_FK_statues_Of_Admission_EligibiltyId",
+                name: "IX_Broken_Relationshib_Stat_Dep_Chair_FK_statues_Of_Admission_Eligibiltyid",
                 table: "Broken_Relationshib_Stat_Dep_Chair",
-                column: "FK_statues_Of_Admission_EligibiltyId");
+                column: "FK_statues_Of_Admission_Eligibiltyid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Broken_Relationshib_Stat_Dep_Chair_Fk_departmentId",
+                name: "IX_Broken_Relationshib_Stat_Dep_Chair_Fk_departmentid",
                 table: "Broken_Relationshib_Stat_Dep_Chair",
-                column: "Fk_departmentId");
+                column: "Fk_departmentid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_FK_facultyId",
+                name: "IX_Department_FK_facultyid",
                 table: "Department",
-                column: "FK_facultyId");
+                column: "FK_facultyid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_relation_Type_FK_DepartmentId",
+                name: "IX_Department_relation_Type_FK_Departmentid",
                 table: "Department_relation_Type",
-                column: "FK_DepartmentId");
+                column: "FK_Departmentid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_relation_Type_FK_type_Of_High_School_CirtificateId",
+                name: "IX_Department_relation_Type_FK_type_Of_High_School_Cirtificateid",
                 table: "Department_relation_Type",
-                column: "FK_type_Of_High_School_CirtificateId");
+                column: "FK_type_Of_High_School_Cirtificateid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Persentage_count_for_each__country_FK_countryId",
@@ -626,14 +626,14 @@ namespace AdmissionSystem.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Persentage_count_for_each__country_FK_statues_of_admission_eligibiltyId",
+                name: "IX_Persentage_count_for_each__country_FK_statues_of_admission_eligibiltyid",
                 table: "Persentage_count_for_each__country",
-                column: "FK_statues_of_admission_eligibiltyId");
+                column: "FK_statues_of_admission_eligibiltyid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Statues_Of_Student_FK_Employee_InfoId",
+                name: "IX_Statues_Of_Student_FK_Employee_Infoid",
                 table: "Statues_Of_Student",
-                column: "FK_Employee_InfoId");
+                column: "FK_Employee_Infoid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Statues_Of_Student_FK_Student_InfoId",
@@ -652,9 +652,9 @@ namespace AdmissionSystem.Migrations
                 column: "Statues_Of_Admission_Eligibiltyid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tracking_Rate_FK_Employee_InfoId",
+                name: "IX_Tracking_Rate_FK_Employee_Infoid",
                 table: "Tracking_Rate",
-                column: "FK_Employee_InfoId");
+                column: "FK_Employee_Infoid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tracking_Rate_FK_Student_InfoId",

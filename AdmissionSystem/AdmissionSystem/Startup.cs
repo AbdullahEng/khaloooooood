@@ -50,6 +50,7 @@ namespace AdmissionSystem
             services.AddScoped<CRUD_Operation_Interface<Tracking_Rate>, Tracking_Rate_Repo>();
 
             services.AddScoped<CRUD_Operation_Interface<Type_of_high_school_Cirtificate>, Type_of_high_school_Cirtificate_Repo>();
+            services.AddScoped<CRUD_Operation_Interface<Department_relation_Type>, Department_relation_Type_Repo>();
 
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -57,6 +58,7 @@ namespace AdmissionSystem
             services.AddRazorPages();
            
             services.AddMvc();
+          services.AddMvc(option => option.EnableEndpointRouting = false); //åí ÖİÊåÇ ãÔÇä íÔÊÛá ÇáÑÇæÊíäÛ ÇáíÏæí 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +79,7 @@ namespace AdmissionSystem
                 app.UseHsts();
             }
 
+            app.UseMvcWithDefaultRoute();   // åí ÇáÊÚáíãå ãÔÇä ÇŞÏÑ ÇÚãá ÑæÊ ÈÔßá íÏæí áÇäæ ãä ÏæäåÇ ÚØÇäí Çäæ ÇáÕİÍÉ ÊÈÚ ÇáØÇáÈ ÛíÑ ãæÌæÏå 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

@@ -29,7 +29,7 @@ namespace AdmissionSystem.Model
 
         public int FK_student_InfoId { get; set; } //(FK)//AB//sorry i modify it ^_^ 
         public Student FK_student_Info { get; set; }//sorry i modify it ^_^ 
-        public int FK_Type_of_high_school_CirtificateId { get; set; }//Modifid AB//one_to_many relationship
+       // public int FK_Type_of_high_school_CirtificateId { get; set; }//Modifid AB//one_to_many relationship
         public Type_of_high_school_Cirtificate FK_Type_of_high_school_Cirtificate { get; set; }//one_to_many relationship//sorry i modify it ^_^ 
     }
 }

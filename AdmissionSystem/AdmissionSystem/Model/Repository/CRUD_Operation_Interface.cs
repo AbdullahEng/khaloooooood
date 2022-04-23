@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Model.Repository
 {
-    interface CRUD_Operation_Interface<TEntity>
+   public interface CRUD_Operation_Interface<TEntity>
     {
         IList<TEntity> List();
         TEntity Find(int id);

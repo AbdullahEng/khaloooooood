@@ -40,8 +40,9 @@ namespace AdmissionSystem.Model
         public string Identity_back_image { get; set; }
         public Admission_Eligibilty_Certificate Admission_Eligibilty_Requist_For_UNsy_Certificate { get; set; }
         public Statues_Of_Student Statues_Of_Student { get; set; }
-        public Tracking_Rate FK_Tracking_Rate { get; set; }//sorry i modify it ^_^
-         public Statues_of_admission_eligibilty Statues_Of_Admission_Eligibilty { get; set; }//Modifid AB
+     //   public Tracking_Rate FK_Tracking_Rate { get; set; }//sorry i modify it ^_^
+        public Tracking_Rate Tracking_Rate { get; set; }
+        public Statues_of_admission_eligibilty Statues_Of_Admission_Eligibilty { get; set; }//Modifid AB
         public Accabtable_config FK_Accabtable_configInfo { get; set; }//Modifid AB//one_to_one relationship
     }
 }

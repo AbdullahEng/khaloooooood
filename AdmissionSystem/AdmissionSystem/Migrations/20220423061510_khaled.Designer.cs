@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdmissionSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220417152552_database")]
-    partial class database
+    [Migration("20220423061510_khaled")]
+    partial class khaled
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace AdmissionSystem.Migrations
                     b.Property<string>("Accepted_wish")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FK_Statues_of_admission_eligibiltyId")
+                    b.Property<int?>("FK_Statues_of_admission_eligibiltyid")
                         .HasColumnType("int");
 
                     b.Property<int>("FK_studentId")
@@ -42,7 +42,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_Statues_of_admission_eligibiltyId");
+                    b.HasIndex("FK_Statues_of_admission_eligibiltyid");
 
                     b.HasIndex("FK_studentId")
                         .IsUnique();
@@ -57,7 +57,7 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FK_Type_of_high_school_CirtificateId")
+                    b.Property<int?>("FK_Type_of_high_school_Cirtificateid")
                         .HasColumnType("int");
 
                     b.Property<int>("FK_student_InfoId")
@@ -98,7 +98,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_Type_of_high_school_CirtificateId");
+                    b.HasIndex("FK_Type_of_high_school_Cirtificateid");
 
                     b.HasIndex("FK_student_InfoId")
                         .IsUnique();
@@ -122,17 +122,17 @@ namespace AdmissionSystem.Migrations
                     b.Property<int>("Chair_count")
                         .HasColumnType("int");
 
-                    b.Property<int>("FK_statues_Of_Admission_EligibiltyId")
+                    b.Property<int?>("FK_statues_Of_Admission_Eligibiltyid")
                         .HasColumnType("int");
 
-                    b.Property<int>("Fk_departmentId")
+                    b.Property<int?>("Fk_departmentid")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_statues_Of_Admission_EligibiltyId");
+                    b.HasIndex("FK_statues_Of_Admission_Eligibiltyid");
 
-                    b.HasIndex("Fk_departmentId");
+                    b.HasIndex("Fk_departmentid");
 
                     b.ToTable("Broken_Relationshib_Stat_Dep_Chair");
                 });
@@ -159,7 +159,7 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FK_facultyId")
+                    b.Property<int?>("FK_facultyid")
                         .HasColumnType("int");
 
                     b.Property<string>("specialization_name")
@@ -167,7 +167,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_facultyId");
+                    b.HasIndex("FK_facultyid");
 
                     b.ToTable("Department");
                 });
@@ -179,10 +179,10 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FK_DepartmentId")
+                    b.Property<int?>("FK_Departmentid")
                         .HasColumnType("int");
 
-                    b.Property<int>("FK_type_Of_High_School_CirtificateId")
+                    b.Property<int?>("FK_type_Of_High_School_Cirtificateid")
                         .HasColumnType("int");
 
                     b.Property<double>("Minemum_of_Rate")
@@ -193,9 +193,9 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_DepartmentId");
+                    b.HasIndex("FK_Departmentid");
 
-                    b.HasIndex("FK_type_Of_High_School_CirtificateId");
+                    b.HasIndex("FK_type_Of_High_School_Cirtificateid");
 
                     b.ToTable("Department_relation_Type");
                 });
@@ -341,7 +341,7 @@ namespace AdmissionSystem.Migrations
                     b.Property<int>("FK_countryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("FK_statues_of_admission_eligibiltyId")
+                    b.Property<int?>("FK_statues_of_admission_eligibiltyid")
                         .HasColumnType("int");
 
                     b.Property<double>("Rate")
@@ -352,7 +352,7 @@ namespace AdmissionSystem.Migrations
                     b.HasIndex("FK_countryId")
                         .IsUnique();
 
-                    b.HasIndex("FK_statues_of_admission_eligibiltyId");
+                    b.HasIndex("FK_statues_of_admission_eligibiltyid");
 
                     b.ToTable("Persentage_count_for_each__country");
                 });
@@ -379,7 +379,7 @@ namespace AdmissionSystem.Migrations
                     b.Property<DateTime>("Date_of_Acshiving")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FK_Employee_InfoId")
+                    b.Property<int?>("FK_Employee_Infoid")
                         .HasColumnType("int");
 
                     b.Property<int>("FK_Student_InfoId")
@@ -387,7 +387,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_Employee_InfoId");
+                    b.HasIndex("FK_Employee_Infoid");
 
                     b.HasIndex("FK_Student_InfoId")
                         .IsUnique();
@@ -523,7 +523,7 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FK_Employee_InfoId")
+                    b.Property<int?>("FK_Employee_Infoid")
                         .HasColumnType("int");
 
                     b.Property<int>("FK_Student_InfoId")
@@ -537,7 +537,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_Employee_InfoId");
+                    b.HasIndex("FK_Employee_Infoid");
 
                     b.HasIndex("FK_Student_InfoId")
                         .IsUnique();
@@ -668,9 +668,7 @@ namespace AdmissionSystem.Migrations
                 {
                     b.HasOne("AdmissionSystem.Model.Statues_of_admission_eligibilty", "FK_Statues_of_admission_eligibilty")
                         .WithMany()
-                        .HasForeignKey("FK_Statues_of_admission_eligibiltyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_Statues_of_admission_eligibiltyid");
 
                     b.HasOne("AdmissionSystem.Model.Student", "FK_student")
                         .WithOne("FK_Accabtable_configInfo")
@@ -683,9 +681,7 @@ namespace AdmissionSystem.Migrations
                 {
                     b.HasOne("AdmissionSystem.Model.Type_of_high_school_Cirtificate", "FK_Type_of_high_school_Cirtificate")
                         .WithMany()
-                        .HasForeignKey("FK_Type_of_high_school_CirtificateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_Type_of_high_school_Cirtificateid");
 
                     b.HasOne("AdmissionSystem.Model.Student", "FK_student_Info")
                         .WithOne("Admission_Eligibilty_Requist_For_UNsy_Certificate")
@@ -710,39 +706,29 @@ namespace AdmissionSystem.Migrations
                 {
                     b.HasOne("AdmissionSystem.Model.Statues_of_admission_eligibilty", "FK_statues_Of_Admission_Eligibilty")
                         .WithMany()
-                        .HasForeignKey("FK_statues_Of_Admission_EligibiltyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_statues_Of_Admission_Eligibiltyid");
 
                     b.HasOne("AdmissionSystem.Model.Department", "Fk_department")
                         .WithMany()
-                        .HasForeignKey("Fk_departmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Fk_departmentid");
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Department", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Faculty", "FK_faculty")
                         .WithMany()
-                        .HasForeignKey("FK_facultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_facultyid");
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Department_relation_Type", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Department", "FK_Department")
                         .WithMany()
-                        .HasForeignKey("FK_DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_Departmentid");
 
                     b.HasOne("AdmissionSystem.Model.Type_of_high_school_Cirtificate", "FK_type_Of_High_School_Cirtificate")
                         .WithMany()
-                        .HasForeignKey("FK_type_Of_High_School_CirtificateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_type_Of_High_School_Cirtificateid");
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Persentage_count_for_each__country", b =>
@@ -755,18 +741,14 @@ namespace AdmissionSystem.Migrations
 
                     b.HasOne("AdmissionSystem.Model.Statues_of_admission_eligibilty", "FK_statues_of_admission_eligibilty")
                         .WithMany()
-                        .HasForeignKey("FK_statues_of_admission_eligibiltyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_statues_of_admission_eligibiltyid");
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Statues_Of_Student", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Employee", "FK_Employee_Info")
                         .WithMany()
-                        .HasForeignKey("FK_Employee_InfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_Employee_Infoid");
 
                     b.HasOne("AdmissionSystem.Model.Student", "FK_Student_Info")
                         .WithOne("Statues_Of_Student")
@@ -790,12 +772,10 @@ namespace AdmissionSystem.Migrations
                 {
                     b.HasOne("AdmissionSystem.Model.Employee", "FK_Employee_Info")
                         .WithMany()
-                        .HasForeignKey("FK_Employee_InfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FK_Employee_Infoid");
 
                     b.HasOne("AdmissionSystem.Model.Student", "FK_Student_Info")
-                        .WithOne("FK_Tracking_Rate")
+                        .WithOne("Tracking_Rate")
                         .HasForeignKey("AdmissionSystem.Model.Tracking_Rate", "FK_Student_InfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
