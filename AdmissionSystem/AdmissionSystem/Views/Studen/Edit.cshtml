@@ -1,16 +1,16 @@
 ﻿@model AdmissionSystem.View_Model.Student_View_Model
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>Student_View_Model</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="high_school_certificate" class="control-label"></label>
@@ -164,24 +164,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="Image_Of_Crtificat" class="control-label"></label>
-                <input asp-for="Image_Of_Crtificat" class="form-control" />
+                <input type="file" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="form-control" />
                 <span asp-validation-for="Image_Of_Crtificat" class="text-danger"></span>
             </div>
+            <img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="Identity_front_image" class="control-label"></label>
-                <input asp-for="Identity_front_image" class="form-control" />
+                <input type="file" name="Identity_front_image" asp-for="Identity_front_image" class="form-control" />
                 <span asp-validation-for="Identity_front_image" class="text-danger"></span>
             </div>
+            <img src="~/Uploads/@Model.Identity_front_image_URL" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Identity_front_image_URL" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="Identity_back_image" class="control-label"></label>
-                <input asp-for="Identity_back_image" class="form-control" />
+                <input type="file" name="Identity_back_image" asp-for="Identity_back_image" class="form-control" />
                 <span asp-validation-for="Identity_back_image" class="text-danger"></span>
             </div>
+            <img src="~/Uploads/@Model.Identity_back_image_URL" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Identity_back_image_URL" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="check_recipt_image" class="control-label"></label>
-                <input asp-for="check_recipt_image" class="form-control" />
+                <input type="file" name="check_recipt_image" asp-for="check_recipt_image" class="form-control" />
                 <span asp-validation-for="check_recipt_image" class="text-danger"></span>
             </div>
+            <img src="~/Uploads/@Model.Check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Check_recipt_image_URL" class="form-control" />
             <div class="form-group">
                 <label asp-for="wish_Department_Id1" class="control-label"></label>
                 <input asp-for="wish_Department_Id1" class="form-control" />
@@ -198,7 +209,7 @@
                 <span asp-validation-for="wish_Department_Id3" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

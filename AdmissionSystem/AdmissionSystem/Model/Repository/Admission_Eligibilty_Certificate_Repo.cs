@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace AdmissionSystem.Model.Repository
 
         public Admission_Eligibilty_Certificate Find(int id)
         {
-            return DB.Admission_Eligibilty_Certificate.SingleOrDefault(a => a.id == id);
+            return DB.Admission_Eligibilty_Certificate.Include(a => a.FK_Type_of_high_school_Cirtificate).Include(a => a.wish1).Include(a => a.wish2).Include(a => a.wish3).SingleOrDefault(a => a.id == id);
         }
 
         public IList<Admission_Eligibilty_Certificate> List()

@@ -1,0 +1,38 @@
+﻿            <div class="form-group">
+                <label asp-for="Type_Of_Certificat" class="control-label"></label>
+                <select asp-for="Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_certificate,"id","type"))"></select>
+                <span asp-validation-for="Type_Of_Certificat" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Image_Of_Crtificat" class="control-label"></label>
+                <input type="file" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="form-control" />
+                <span asp-validation-for="Image_Of_Crtificat" class="text-danger"></span>
+            </div>
+            <img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="Identity_front_image" class="control-label"></label>
+                <input type="file" name="Identity_front_image" asp-for="Identity_front_image" class="form-control" />
+                <span asp-validation-for="Identity_front_image" class="text-danger"></span>
+            </div>
+            <img src="~/Uploads/@Model.Identity_front_image" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Identity_front_image_URL" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="Identity_back_image" class="control-label"></label>
+                <input type="file" name="Identity_back_image" asp-for="Identity_back_image" class="form-control" />
+                <span asp-validation-for="Identity_back_image" class="text-danger"></span>
+            </div>
+            <img src="~/Uploads/@Model.Identity_back_image" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Identity_back_image_URL" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="check_recipt_image" class="control-label"></label>
+                <input type="file" name="check_recipt_image" asp-for="check_recipt_image" class="form-control" />
+                <span asp-validation-for="check_recipt_image" class="text-danger"></span>
+            </div>
+            <img src="~/Uploads/@Model.Check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
+            <input type="hidden" asp-for="Check_recipt_image_URL" class="form-control" />

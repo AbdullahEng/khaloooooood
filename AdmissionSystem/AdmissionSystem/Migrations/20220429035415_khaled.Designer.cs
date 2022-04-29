@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdmissionSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220423061510_khaled")]
+    [Migration("20220429035415_khaled")]
     partial class khaled
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
