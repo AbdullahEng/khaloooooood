@@ -2415,7 +2415,6 @@ C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\Admis
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewStart.cshtml.g.cs
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Studen\Index.cshtml.g.cs
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\AdmissionSystem.RazorTargetAssemblyInfo.cache
@@ -2426,4 +2425,10 @@ C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\Admis
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\AdmissionSystem.pdb
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\AdmissionSystem.genruntimeconfig.cache
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Studen\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Studen\Index.cshtml.g.cs
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Studen\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index_Status_of_student.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Edit_Status_of_student.cshtml.g.cs

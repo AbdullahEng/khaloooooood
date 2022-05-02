@@ -42,10 +42,11 @@ namespace AdmissionSystem.Controllers
         // GET: StudenController
         public ActionResult Index()
         {
-            var allstudents = studentRepository.List().ToList();
-            return View(allstudents);
+            var allstudents = studentRepository.List();
+                        return View(allstudents);
         }
 
+        
         // GET: StudenController/Details/5
         public ActionResult Details(int id)
         {
@@ -119,6 +120,7 @@ namespace AdmissionSystem.Controllers
         public ActionResult Create(Student_View_Model collection)
         {
             try
+         
             {
                 if (ModelState.IsValid)
                 {
@@ -220,7 +222,7 @@ namespace AdmissionSystem.Controllers
                         Checked_Rate = false,
                         Checked_recipet = false,
                         FK_Student_Info = student,
-
+                        
                     };
                     statues_Of_Student_Repository.Add(status_of_student);
                 }
