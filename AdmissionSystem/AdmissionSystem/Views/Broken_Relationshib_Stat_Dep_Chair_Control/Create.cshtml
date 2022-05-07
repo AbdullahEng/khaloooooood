@@ -1,0 +1,43 @@
+﻿@model AdmissionSystem.View_Model.Broken_Relationshib_Stat_Dep_Chair_View_model
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Broken_Relationshib_Stat_Dep_Chair_View_model</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="status_of_admi_eligi_id" class="control-label"></label>
+                <input asp-for="status_of_admi_eligi_id" class="form-control" />
+                <span asp-validation-for="status_of_admi_eligi_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="department_id" class="control-label"></label>
+                <input asp-for="department_id" class="form-control" />
+                <span asp-validation-for="department_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chair_count" class="control-label"></label>
+                <input asp-for="Chair_count" class="form-control" />
+                <span asp-validation-for="Chair_count" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

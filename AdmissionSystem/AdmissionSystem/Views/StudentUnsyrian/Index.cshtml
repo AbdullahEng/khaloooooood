@@ -1,0 +1,185 @@
+﻿@model IEnumerable<AdmissionSystem.Model.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.high_school_certificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First_Name_AR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Father_Name_AR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grandfather_Name_AR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mother_Name_AR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First_Name_EN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Father_Name_EN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grandfather_Name_EN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mother_Name_EN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nick_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marital_status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Civil_Registriation_City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Civil_Registrition_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Identity_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Full_Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Current_Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile_Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Home_s_Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Identity_front_image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Identity_back_image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.high_school_certificate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Name_AR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Father_Name_AR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grandfather_Name_AR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mother_Name_AR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Name_EN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Father_Name_EN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grandfather_Name_EN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mother_Name_EN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nick_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marital_status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Civil_Registriation_City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Civil_Registrition_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passport_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Identity_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Full_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Current_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile_Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Home_s_Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Identity_front_image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Identity_back_image)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

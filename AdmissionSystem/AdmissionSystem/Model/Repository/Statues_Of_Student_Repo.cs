@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace AdmissionSystem.Model.Repository
 
         public Statues_Of_Student Find(int id)
         {
-            return DB.Statues_Of_Student.Single(a => a.id == id);
+            return DB.Statues_Of_Student.Include(a=>a.FK_Student_Info).Single(a => a.id == id);
         }
 
         public IList<Statues_Of_Student> List()

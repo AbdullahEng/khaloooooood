@@ -53,6 +53,21 @@ namespace AdmissionSystem
             services.AddScoped<CRUD_Operation_Interface<Department_relation_Type>, Department_relation_Type_Repo>();
 
 
+
+
+
+            services.AddScoped<CRUD_Operation_Interface<Faculty>, faculty_Repo>();
+            services.AddScoped<CRUD_Operation_Interface<Department>, Department_Repo>();
+            services.AddScoped<CRUD_Operation_Interface<Broken_Relationshib_Stat_Dep_Chair>, Broken_Relationshib_Stat_Dep_Chair_Repo>();
+            services.AddScoped<CRUD_Operation_Interface<Persentage_count_for_each__country>, percentage_count_for_each_country_Repo>();
+            services.AddScoped<CRUD_Operation_Interface<Statues_of_admission_eligibilty>, statues_of_admission_elgibilty_Repo>();
+            services.AddScoped<CRUD_Operation_Interface<Accabtable_config>, Accabtable_Config_Repo>();
+            services.AddScoped<CRUD_Operation_Interface<Country>, country_Repo>();
+
+
+
+
+
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
@@ -78,11 +93,10 @@ namespace AdmissionSystem
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();   // ÂÌ «· ⁄·Ì„Â „‘«‰ «ﬁœ— «⁄„· —Ê  »‘ﬂ· ÌœÊÌ ·«‰Ê „‰ œÊ‰Â« ⁄ÿ«‰Ì «‰Ê «·’›Õ…  »⁄ «·ÿ«·» €Ì— „ÊÃÊœÂ 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
+            
             app.UseRouting();
 
             app.UseAuthentication();

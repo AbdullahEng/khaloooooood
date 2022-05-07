@@ -43,10 +43,18 @@ namespace AdmissionSystem.Controllers
         public ActionResult Index()
         {
             var allstudents = studentRepository.List();
-                        return View(allstudents);
+            List<Student> lista = new List<Student>();
+            foreach (var x in allstudents)
+            {
+                if (x.high_school_certificate == "Syrian")
+                {
+                    lista.Add(x);
+                }
+            }
+            return View(lista);
         }
 
-        
+
         // GET: StudenController/Details/5
         public ActionResult Details(int id)
         {
@@ -241,7 +249,15 @@ namespace AdmissionSystem.Controllers
         {
             var student = studentRepository.Find(id);
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+            if (certeficat.wish1==null) 
+            {
+                certeficat.wish1 = department_Relation_Type_Repository.Find(1);
 
+                certeficat.wish2 = department_Relation_Type_Repository.Find(1);
+
+                certeficat.wish3 = department_Relation_Type_Repository.Find(1);
+
+            }
             var collection = new Student_View_Model
             {
                 Birth = student.Birth,

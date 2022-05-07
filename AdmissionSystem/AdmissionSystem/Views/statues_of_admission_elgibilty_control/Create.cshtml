@@ -1,0 +1,48 @@
+﻿@model AdmissionSystem.Model.Statues_of_admission_eligibilty
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Statues_of_admission_eligibilty</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Type_of_admission_eligibilty" class="control-label"></label>
+                <input asp-for="Type_of_admission_eligibilty" class="form-control" />
+                <span asp-validation-for="Type_of_admission_eligibilty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Begaining_date_of_the_process" class="control-label"></label>
+                <input asp-for="Begaining_date_of_the_process" class="form-control" />
+                <span asp-validation-for="Begaining_date_of_the_process" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="semester_no" class="control-label"></label>
+                <input asp-for="semester_no" class="form-control" />
+                <span asp-validation-for="semester_no" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="semester_Date" class="control-label"></label>
+                <input asp-for="semester_Date" class="form-control" />
+                <span asp-validation-for="semester_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
