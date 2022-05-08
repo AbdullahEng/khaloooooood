@@ -3386,3 +3386,7 @@ C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionS
 C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Department_relation_type_control\Index.cshtml.g.cs
 C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Department_relation_type_control\Create.cshtml.g.cs
 C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Department_relation_type_control\Edit.cshtml.g.cs
+C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Department_relation_type_control\Delete.cshtml.g.cs
+C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Type_of_high_school_Cirtificate_control\Index.cshtml.g.cs
+C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Type_of_high_school_Cirtificate_control\Create.cshtml.g.cs
+C:\Users\Abdullah Darwish\Desktop\tesss3\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Type_of_high_school_Cirtificate_control\Edit.cshtml.g.cs
