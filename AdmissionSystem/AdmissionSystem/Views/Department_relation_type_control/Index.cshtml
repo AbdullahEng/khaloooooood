@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AdmissionSystem.View_Model.Department_relation_type_view_model>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type_of_high_school_cirtificate_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Minemum_of_Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate_of_chaire_count)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type_of_high_school_cirtificate_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Minemum_of_Rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate_of_chaire_count)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
