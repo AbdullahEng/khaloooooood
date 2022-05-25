@@ -8977,11 +8977,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\planet\\Desktop\\Terminate\\khaloooooood\\AdmissionSystem\\AdmissionSystem\\AdmissionSystem.csproj",
+      "projectUniqueName": "C:\\Users\\planet\\Desktop\\final project\\Our_Project_love_you\\AdmissionSystem\\AdmissionSystem\\AdmissionSystem.csproj",
       "projectName": "AdmissionSystem",
-      "projectPath": "C:\\Users\\planet\\Desktop\\Terminate\\khaloooooood\\AdmissionSystem\\AdmissionSystem\\AdmissionSystem.csproj",
+      "projectPath": "C:\\Users\\planet\\Desktop\\final project\\Our_Project_love_you\\AdmissionSystem\\AdmissionSystem\\AdmissionSystem.csproj",
       "packagesPath": "C:\\Users\\planet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\planet\\Desktop\\Terminate\\khaloooooood\\AdmissionSystem\\AdmissionSystem\\obj\\",
+      "outputPath": "C:\\Users\\planet\\Desktop\\final project\\Our_Project_love_you\\AdmissionSystem\\AdmissionSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\planet\\AppData\\Roaming\\NuGet\\NuGet.Config",

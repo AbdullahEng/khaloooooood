@@ -2912,3 +2912,32 @@ C:\Users\planet\Desktop\Terminate\khaloooooood\AdmissionSystem\AdmissionSystem\o
 C:\Users\planet\Desktop\Terminate\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\statues_of_admission_elgibilty_control\Delete.cshtml.g.cs
 C:\Users\planet\Desktop\Terminate\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\statues_of_admission_elgibilty_control\Edit.cshtml.g.cs
 C:\Users\planet\Desktop\Terminate\khaloooooood\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\statues_of_admission_elgibilty_control\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Broken_Relationshib_Stat_Dep_Chair_Control\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Broken_Relationshib_Stat_Dep_Chair_Control\Delete.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Broken_Relationshib_Stat_Dep_Chair_Control\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Broken_Relationshib_Stat_Dep_Chair_Control\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\CountryControl\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\CountryControl\Delete.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\CountryControl\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\CountryControl\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\DapartmentControl\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\DapartmentControl\Delete.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\DapartmentControl\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\DapartmentControl\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Edit_Status_of_Unsyrian_student.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index_Status_of_Unsyrian_student.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\FacultyControl\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\FacultyControl\Delete.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\FacultyControl\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\FacultyControl\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\percentage_count_for_each_country_Control\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\percentage_count_for_each_country_Control\Delete.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\percentage_count_for_each_country_Control\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\percentage_count_for_each_country_Control\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\statues_of_admission_elgibilty_control\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\statues_of_admission_elgibilty_control\Delete.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\statues_of_admission_elgibilty_control\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\statues_of_admission_elgibilty_control\Index.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\StudentUnsyrian\Create.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\StudentUnsyrian\Edit.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\StudentUnsyrian\Index.cshtml.g.cs

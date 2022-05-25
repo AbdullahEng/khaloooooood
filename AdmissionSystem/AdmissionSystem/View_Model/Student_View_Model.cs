@@ -35,8 +35,9 @@ namespace AdmissionSystem.View_Model
         public string city_of_high_school_cirtificate { get; set; }
         public DateTime date_of_high_school_cirtificate { get; set; }
 
-        public List<Type_of_high_school_Cirtificate> Type_Of_certificate_list { get; set; }
+        public string Addmition_eleigibilty { get; set; }
 
+        public List<Type_of_high_school_Cirtificate> Type_Of_certificate_list { get; set; }
         public int Type_Of_Certificat { get; set; }
         /// for syrian student 
         public string LAnguge_of_the_addmintion { get; set; }
@@ -44,6 +45,8 @@ namespace AdmissionSystem.View_Model
         public int course_number { get; set; }
 
 
+        public List<Country> CountryList { get; set; }
+        public int country { get; set; }
         public IFormFile Image_Of_Crtificat { get; set; }
         public IFormFile Identity_front_image { get; set; }
         public IFormFile Identity_back_image { get; set; }

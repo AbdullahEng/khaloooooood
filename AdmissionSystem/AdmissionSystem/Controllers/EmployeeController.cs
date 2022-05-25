@@ -204,10 +204,17 @@ namespace AdmissionSystem.Controllers
                     
                 };
 
-             
+                Admission_Eligibilty_Certificate certificate = new Admission_Eligibilty_Certificate
+                {
+                    id = id,
+                    The_Rate = collection.The_New_Rate
+                     ,
+                    FK_student_InfoId = id
+                };
+
                 tracking_Rate_Repository.Update(id,traking);
                 statues_Of_Student_Repository.Update(id, status_of_student);
-
+                admission_Eligibilty_Certificate_Repository.Update(id, certificate);
                 return RedirectToAction(nameof(Index_Status_of_student));
             }
             catch
@@ -300,16 +307,24 @@ namespace AdmissionSystem.Controllers
                     FK_Student_InfoId = id,
 
                 };
+                Admission_Eligibilty_Certificate certificate = new Admission_Eligibilty_Certificate
+                {
+                    id = id,
+                    The_Rate = collection.The_New_Rate
+                 ,
+                    FK_student_InfoId = id
+                };
 
 
-                tracking_Rate_Repository.Update(id, traking);
+               tracking_Rate_Repository.Update(id, traking);
                 statues_Of_Student_Repository.Update(id, status_of_student);
+                admission_Eligibilty_Certificate_Repository.Update(id, certificate);
 
                 return RedirectToAction(nameof(Index_Status_of_Unsyrian_student));
             }
-            catch
+            catch(Exception w)
             {
-                return View();
+                return View(w);
             }
         }
 

@@ -21,6 +21,8 @@ namespace AdmissionSystem.Controllers
         private readonly CRUD_Operation_Interface<Statues_Of_Student> statues_Of_Student_Repository;
         private readonly CRUD_Operation_Interface<Tracking_Rate> tracking_Rate_Repository;
         private readonly CRUD_Operation_Interface<Admission_Eligibilty_Certificate> admission_Eligibilty_Certificate_Repository;
+        private readonly CRUD_Operation_Interface<Country> country_Repository;
+        private readonly CRUD_Operation_Interface<Statues_of_admission_eligibilty> statues_Of_Admission_Eligibilty_Repository;
 
         public StudentUnsyrianController(CRUD_Operation_Interface<Student> StudentRepository,
             IHostingEnvironment hosting_,
@@ -28,7 +30,10 @@ namespace AdmissionSystem.Controllers
             CRUD_Operation_Interface<Department_relation_Type> Department_relation_Type_Repository,
             CRUD_Operation_Interface<Statues_Of_Student> Statues_Of_Student_Repository,
              CRUD_Operation_Interface<Tracking_Rate> Tracking_Rate_Repository,
-             CRUD_Operation_Interface<Admission_Eligibilty_Certificate> Admission_Eligibilty_Certificate_Repository
+             CRUD_Operation_Interface<Admission_Eligibilty_Certificate> Admission_Eligibilty_Certificate_Repository,
+               CRUD_Operation_Interface<Country> Country_Repository,
+                CRUD_Operation_Interface<Statues_of_admission_eligibilty> Statues_of_admission_eligibilty_Repository
+        
             )
         {
             studentRepository = StudentRepository;
@@ -38,6 +43,8 @@ namespace AdmissionSystem.Controllers
             statues_Of_Student_Repository = Statues_Of_Student_Repository;
             tracking_Rate_Repository = Tracking_Rate_Repository;
             admission_Eligibilty_Certificate_Repository = Admission_Eligibilty_Certificate_Repository;
+            country_Repository = Country_Repository;
+            statues_Of_Admission_Eligibilty_Repository = Statues_of_admission_eligibilty_Repository;
         }
         // GET: StudenController
         public ActionResult Index()
@@ -117,6 +124,10 @@ namespace AdmissionSystem.Controllers
             {
                 specializtions = FillSelection(),
                 Type_Of_certificate_list = FillSelection2()
+                ,CountryList = FillSelection3()
+                      ,
+                Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
+
             };
             return View(Student_With_Certificate);
         }
@@ -209,7 +220,9 @@ namespace AdmissionSystem.Controllers
                         Marital_status = collection.Marital_status,
                         Mother_Name_EN = collection.Mother_Name_EN,
                         Civil_Registrition_No = collection.Civil_Registrition_No,
-                        Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate
+                        Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate,
+                        Cirtificate_city=country_Repository.Find( collection.country),
+                        Statues_Of_Admission_Eligibilty = statues_Of_Admission_Eligibilty_Repository.List().Last()
 
                     };
 
@@ -299,6 +312,9 @@ namespace AdmissionSystem.Controllers
                 wish_Department_Id2 = certeficat.wish2.id,
                 wish_Department_Id3 = certeficat.wish3.id,
                 Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
+                CountryList=FillSelection3(),
+                country=student.Cirtificate_city.id,
+                Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
 
 
             };
@@ -488,6 +504,8 @@ namespace AdmissionSystem.Controllers
                     Nationality = collection.Nationality,
                     Nick_Name = collection.Nick_Name,
                     Passport_No = collection.Passport_No,
+                    Cirtificate_city=country_Repository.Find(collection.country),
+                    Statues_Of_Admission_Eligibilty = statues_Of_Admission_Eligibilty_Repository.List().Last()
 
 
                 };
@@ -540,5 +558,12 @@ namespace AdmissionSystem.Controllers
 
         }
 
+        List<Country> FillSelection3()
+        {
+            var types = country_Repository.List().ToList();
+            // types.Insert(0, new Department_relation_Type { id = -1, = "-------pleas select auther-------" });
+            return (types);
+
+        }
     }
 }

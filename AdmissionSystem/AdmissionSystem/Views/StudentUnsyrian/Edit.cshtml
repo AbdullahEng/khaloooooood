@@ -147,6 +147,18 @@
                 <select asp-for="Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list,"id","type"))"></select>
                 <span asp-validation-for="Type_Of_Certificat" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="country" class="control-label"></label>
+          s      <select asp-for="country" class="form-control" asp-items="@(new SelectList(Model.CountryList,"id","country_name"))"></select>
+                <span asp-validation-for="country" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Addmition_eleigibilty" class="control-label"></label>
+                <input readonly asp-for="Addmition_eleigibilty" class="form-control" />
+                <span asp-validation-for="Addmition_eleigibilty" class="text-danger"></span>
+            </div>
+
             @*<div class="form-group">
             <label asp-for="LAnguge_of_the_addmintion" class="control-label"></label>
             <input asp-for="LAnguge_of_the_addmintion" class="form-control" />
@@ -167,7 +179,11 @@
                 <input type="file" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="form-control" />
                 <span asp-validation-for="Image_Of_Crtificat" class="text-danger"></span>
             </div>
-            <img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />
+            @{if (@Model.Identity_back_image_URL != "")
+                {
+                    <img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />
+                }
+            }
             <input type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" />
 
             <div class="form-group">
@@ -175,7 +191,12 @@
                 <input type="file" name="Identity_front_image" asp-for="Identity_front_image" class="form-control" />
                 <span asp-validation-for="Identity_front_image" class="text-danger"></span>
             </div>
-            <img src="~/Uploads/@Model.Identity_front_image_URL" style="width:124px;" class="img-thumbnail" />
+            @{if (@Model.Identity_back_image_URL != "")
+                {
+
+                    <img src="~/Uploads/@Model.Identity_front_image_URL" style="width:124px;" class="img-thumbnail" />
+                }
+            }
             <input type="hidden" asp-for="Identity_front_image_URL" class="form-control" />
 
             <div class="form-group">
@@ -183,7 +204,12 @@
                 <input type="file" name="Identity_back_image" asp-for="Identity_back_image" class="form-control" />
                 <span asp-validation-for="Identity_back_image" class="text-danger"></span>
             </div>
-            <img src="~/Uploads/@Model.Identity_back_image_URL" style="width:124px;" class="img-thumbnail" />
+            @{if (@Model.Identity_back_image_URL != "")
+                {
+
+                    <img src="~/Uploads/@Model.Identity_back_image_URL" style="width:124px;" class="img-thumbnail" />
+                }
+            }
             <input type="hidden" asp-for="Identity_back_image_URL" class="form-control" />
 
             <div class="form-group">
@@ -191,7 +217,12 @@
                 <input type="file" name="check_recipt_image" asp-for="check_recipt_image" class="form-control" />
                 <span asp-validation-for="check_recipt_image" class="text-danger"></span>
             </div>
-            <img src="~/Uploads/@Model.Check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
+            @{if (@Model.Identity_back_image_URL != "")
+                {
+                    <img src="~/Uploads/@Model.Check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
+                }
+            }
+
             <input type="hidden" asp-for="Check_recipt_image_URL" class="form-control" />
             <div class="form-group">
                 <label asp-for="wish_Department_Id1" class="control-label"></label>

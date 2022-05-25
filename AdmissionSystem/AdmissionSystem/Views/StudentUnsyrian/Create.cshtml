@@ -147,6 +147,18 @@
                 <select asp-for="Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list,"id","type"))"></select>
                 <span asp-validation-for="Type_Of_Certificat" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="country" class="control-label"></label>
+                <select asp-for="country" class="form-control" asp-items="@(new SelectList(Model.CountryList,"id","country_name"))"></select>
+                <span asp-validation-for="country" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Addmition_eleigibilty" class="control-label"></label>
+                <input readonly asp-for="Addmition_eleigibilty" class="form-control" />
+                <span asp-validation-for="Addmition_eleigibilty" class="text-danger"></span>
+            </div>
+
             @*<div class="form-group">
             <label asp-for="LAnguge_of_the_addmintion" class="control-label"></label>
             <input asp-for="LAnguge_of_the_addmintion" class="form-control" />
