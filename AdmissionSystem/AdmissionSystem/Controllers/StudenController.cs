@@ -23,6 +23,7 @@ namespace AdmissionSystem.Controllers
         private readonly CRUD_Operation_Interface<Admission_Eligibilty_Certificate> admission_Eligibilty_Certificate_Repository;
         private readonly CRUD_Operation_Interface<Country> country_Repository;
         private readonly CRUD_Operation_Interface<Statues_of_admission_eligibilty> statues_Of_Admission_Eligibilty_Repository;
+        private readonly CRUD_Operation_Interface<Department> department_Repository;
 
         public StudenController(CRUD_Operation_Interface<Student> StudentRepository,
             IHostingEnvironment hosting_,
@@ -32,7 +33,8 @@ namespace AdmissionSystem.Controllers
              CRUD_Operation_Interface<Tracking_Rate> Tracking_Rate_Repository,
              CRUD_Operation_Interface<Admission_Eligibilty_Certificate> Admission_Eligibilty_Certificate_Repository
           , CRUD_Operation_Interface<Country> Country_Repository,
-             CRUD_Operation_Interface<Statues_of_admission_eligibilty> Statues_of_admission_eligibilty_Repository)
+             CRUD_Operation_Interface<Statues_of_admission_eligibilty> Statues_of_admission_eligibilty_Repository,
+              CRUD_Operation_Interface<Department> Department_Repository)
         {
             studentRepository = StudentRepository;
             this.hosting_ = hosting_;
@@ -43,6 +45,7 @@ namespace AdmissionSystem.Controllers
             admission_Eligibilty_Certificate_Repository = Admission_Eligibilty_Certificate_Repository;
             country_Repository = Country_Repository;
             statues_Of_Admission_Eligibilty_Repository = Statues_of_admission_eligibilty_Repository;
+            department_Repository = Department_Repository;
         }
         // GET: StudenController
         public ActionResult Index()
@@ -121,7 +124,7 @@ namespace AdmissionSystem.Controllers
         public ActionResult Create()
         {
             var Student_With_Certificate = new Student_View_Model { 
-                specializtions= FillSelection(),
+                //specializtions= FillSelection(),
                 Type_Of_certificate_list = FillSelection2()
               , CountryList= FillSelection3()
               ,Addmition_eleigibilty=statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
@@ -258,15 +261,15 @@ namespace AdmissionSystem.Controllers
         {
             var student = studentRepository.Find(id);
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
-            if (certeficat.wish1==null) 
-            {
-                certeficat.wish1 = department_Relation_Type_Repository.Find(1);
+            //if (certeficat.wish1==null) 
+            //{
+            //    certeficat.wish1 = department_Relation_Type_Repository.Find(1);
 
-                certeficat.wish2 = department_Relation_Type_Repository.Find(1);
+            //    certeficat.wish2 = department_Relation_Type_Repository.Find(1);
 
-                certeficat.wish3 = department_Relation_Type_Repository.Find(1);
+            //    certeficat.wish3 = department_Relation_Type_Repository.Find(1);
 
-            }
+            //}
             var collection = new Student_View_Model
             {
                 Birth = student.Birth,
@@ -304,9 +307,9 @@ namespace AdmissionSystem.Controllers
                 course_number = certeficat.course_number,
                 Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
                 Type_Of_certificate_list = FillSelection2(),
-                wish_Department_Id1 = certeficat.wish1.id,
-                wish_Department_Id2 = certeficat.wish2.id,
-                wish_Department_Id3 = certeficat.wish3.id,
+                //wish_Department_Id1 = certeficat.wish1.id,
+                //wish_Department_Id2 = certeficat.wish2.id,
+                //wish_Department_Id3 = certeficat.wish3.id,
                 Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
                 CountryList = FillSelection3()
                 ,country=student.Cirtificate_city.id
@@ -460,9 +463,9 @@ namespace AdmissionSystem.Controllers
                     LAnguge_of_the_addmintion = collection.LAnguge_of_the_addmintion,
                     Subscription_number = collection.Subscription_number,
                     The_Rate = collection.The_Rate,
-                    wish1 = department_Relation_Type_Repository.Find(collection.wish_Department_Id1),
-                    wish2 = department_Relation_Type_Repository.Find(collection.wish_Department_Id2),
-                    wish3 = department_Relation_Type_Repository.Find(collection.wish_Department_Id3),
+                    //wish1 = department_Relation_Type_Repository.Find(collection.wish_Department_Id1),
+                    //wish2 = department_Relation_Type_Repository.Find(collection.wish_Department_Id2),
+                    //wish3 = department_Relation_Type_Repository.Find(collection.wish_Department_Id3),
                     FK_Type_of_high_school_Cirtificate = type_Of_High_School_Cirtificate_Repository.Find(collection.Type_Of_Certificat)
 
                 };
@@ -524,6 +527,81 @@ namespace AdmissionSystem.Controllers
         {
             try
             {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //for selecting wishs
+
+        // GET: StudenController
+        public ActionResult WishesSelection(int id)
+        {
+            List<Wishes> lista_of_wishes = new List<Wishes>();
+            
+            foreach (var x in FillSelection())
+            {
+                Wishes y=new Wishes { id = x.id,
+                FK_Department = x.FK_Department,
+                DepartmentName = department_Repository.Find(x.FK_Department.id).specialization_name,
+                FK_type_Of_High_School_Cirtificate = x.FK_type_Of_High_School_Cirtificate,
+                Minemum_of_Rate = x.Minemum_of_Rate
+            };
+                
+                lista_of_wishes.Add(y);
+            }
+
+            Student st = studentRepository.Find(id);
+            Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+            var CertificatRate = certificate.The_Rate;
+            var CertificatType = certificate.FK_Type_of_high_school_Cirtificate;
+            List<Wishes> lista_of_the_student = new List<Wishes>();
+            foreach (var x in lista_of_wishes)
+            {
+                if (x.Minemum_of_Rate <= CertificatRate && x.FK_type_Of_High_School_Cirtificate == CertificatType)
+                    lista_of_the_student.Add(x);
+            }
+
+
+            if (certificate.wish1 == null|| certificate.wish2 == null || certificate.wish3 == null )
+            {
+                var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                {
+                    specializtions = lista_of_the_student
+
+                };
+                return View(Student_Wishes_View_Model);
+            }
+            else
+            {
+                var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                {
+                    specializtions = lista_of_the_student,
+                    wish_Department_Id1 = certificate.wish1.id,
+                    wish_Department_Id2 = certificate.wish2.id,
+                    wish_Department_Id3 = certificate.wish3.id
+                };
+                return View(Student_Wishes_View_Model);
+            }
+        }
+
+        // POST: StudenController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult WishesSelection(int id, Student_Wishes_View_Model collection)
+        {
+            try
+            {  
+                Student st = studentRepository.Find(id);
+                Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.Id);
+                certificate.wish1 = department_Relation_Type_Repository.Find(collection.wish_Department_Id1);
+                certificate.wish2 = department_Relation_Type_Repository.Find(collection.wish_Department_Id2);
+                certificate.wish3 = department_Relation_Type_Repository.Find(collection.wish_Department_Id3);
+
+                admission_Eligibilty_Certificate_Repository.Update(id, certificate);
                 return RedirectToAction(nameof(Index));
             }
             catch

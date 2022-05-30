@@ -57,7 +57,7 @@ namespace AdmissionSystem.View_Model
         public string Check_recipt_image_URL { get; set; }
 
 
-        public List<Department_relation_Type> specializtions { get; set; }
+        public List<Wishes> specializtions { get; set; }
         public int wish_Department_Id1 { get; set; }
         public int wish_Department_Id2 { get; set; }
         public int wish_Department_Id3 { get; set; }

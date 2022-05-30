@@ -1,0 +1,72 @@
+﻿@model AdmissionSystem.View_Model.Student_Wishes_View_Model
+
+@{
+    ViewData["Title"] = "WishesSelection";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<h1>WishesSelection</h1>
+
+<h4>Student_Wishes_View_Model</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="WishesSelection">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="wish_Department_Id1" class="control-label"></label>
+                <select  class="products-combo form-control" asp-for="wish_Department_Id1"  asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 1</option> </select>
+                <span asp-validation-for="wish_Department_Id1" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="wish_Department_Id2" class="control-label"></label>
+                <select class="products-combo form-control" asp-for="wish_Department_Id2"  asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 2</option> </select>
+                <span asp-validation-for="wish_Department_Id2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="wish_Department_Id3" class="control-label"></label>
+                <select class="products-combo form-control" asp-for="wish_Department_Id3" asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 3</option> </select>
+                <span asp-validation-for="wish_Department_Id3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @*@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+    
+<script>const $selects = $(".products-combo");
+$selects.on('change', function(evt) {
+    // create empty array to store the selected values
+    const selectedValue = [];
+    // get all selected options and filter them to get only options with value attr (to skip the default options). After that push the values to the array.
+    $selects.find(':selected').filter(function(idx, el) {
+        return $(el).attr('value');
+    }).each(function(idx, el) {
+        selectedValue.push($(el).attr('value'));
+    });
+    // loop all the options
+    $selects.find('option').each(function(idx, option) { 
+        // if the array contains the current option value otherwise we re-enable it.
+        if (selectedValue.indexOf($(option).attr('value')) > -1) {
+            // if the current option is the selected option, we skip it otherwise we disable it.
+            if ($(option).is(':checked')) {
+                return;
+            } else {
+                $(this).attr('disabled', true);
+            }
+        } else {
+            $(this).attr('disabled', false);
+        }
+    });
+});
+
+    </script>
+}

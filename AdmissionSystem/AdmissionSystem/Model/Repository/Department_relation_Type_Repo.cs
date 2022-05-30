@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Department_relation_Type> List()
         {
-            return DB.Department_relation_Type.ToList();
+            return DB.Department_relation_Type.Include(a=>a.FK_Department).Include(b=>b.FK_type_Of_High_School_Cirtificate).ToList();
         }
 
         public void Update(int id, Department_relation_Type entity)
