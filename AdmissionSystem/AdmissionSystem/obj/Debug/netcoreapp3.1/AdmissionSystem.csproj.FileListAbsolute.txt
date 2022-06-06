@@ -479,3 +479,4 @@ C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\Admis
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\AdmissionSystem.genruntimeconfig.cache
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\Studen\WishesSelection.cshtml.g.cs
 C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\obj\Debug\netcoreapp3.1\Razor\Views\StudentUnsyrian\WishesSelection.cshtml.g.cs
+C:\Users\planet\Desktop\final project\Our_Project_love_you\AdmissionSystem\AdmissionSystem\bin\Debug\netcoreapp3.1\libman.json
