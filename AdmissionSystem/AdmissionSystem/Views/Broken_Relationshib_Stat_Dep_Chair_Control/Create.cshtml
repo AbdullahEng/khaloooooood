@@ -14,12 +14,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="status_of_admi_eligi_id" class="control-label"></label>
-                <input asp-for="status_of_admi_eligi_id" class="form-control" />
+                <select asp-for="status_of_admi_eligi_id" class="form-control" asp-items="@(new SelectList(Model.FK_statues_Of_Admission_Eligibilty,"id","Type_of_admission_eligibilty"))">
+                </select>
                 <span asp-validation-for="status_of_admi_eligi_id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="department_id" class="control-label"></label>
-                <input asp-for="department_id" class="form-control" />
+                <select asp-for="status_of_admi_eligi_id" class="form-control" asp-items="@(new SelectList(Model.Fk_department,"id","specialization_name"))">
+                </select>
                 <span asp-validation-for="department_id" class="text-danger"></span>
             </div>
             <div class="form-group">

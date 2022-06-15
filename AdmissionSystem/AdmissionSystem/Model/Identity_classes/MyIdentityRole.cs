@@ -8,6 +8,6 @@ namespace AdmissionSystem.Model.Identity_classes
 {
     public class MyIdentityRole:IdentityRole
     {
-       // public string  Description { get; set; }
+        public string Description { get; set; }
     }
 }

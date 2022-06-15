@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers
 {
+    
     public class StudenController : Controller
     {
         private readonly CRUD_Operation_Interface<Student> studentRepository;
@@ -228,23 +229,23 @@ namespace AdmissionSystem.Controllers
 
                     studentRepository.Add(student);
 
-                    var Tracking = new Tracking_Rate
-                    {
-                        FK_Student_Info = student,
-                        old_rate = collection.The_Rate,
+                //    var Tracking = new Tracking_Rate
+                //    {
+                //        FK_Student_Info = student,
+                //        old_rate = collection.The_Rate,
 
-                    };
-                    tracking_Rate_Repository.Add(Tracking);
-                    var status_of_student = new Statues_Of_Student
-                    {
-                        Checked_city_certificate = false,
-                        Checked_Identity = false,
-                        Checked_Rate = false,
-                        Checked_recipet = false,
-                        FK_Student_Info = student,
+                //    };
+                //    tracking_Rate_Repository.Add(Tracking);
+                //    var status_of_student = new Statues_Of_Student
+                //    {
+                //        Checked_city_certificate = false,
+                //        Checked_Identity = false,
+                //        Checked_Rate = false,
+                //        Checked_recipet = false,
+                //        FK_Student_Info = student,
                         
-                    };
-                    statues_Of_Student_Repository.Add(status_of_student);
+                //    };
+                //    statues_Of_Student_Repository.Add(status_of_student);
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -259,63 +260,93 @@ namespace AdmissionSystem.Controllers
         // GET: StudenController/Edit/5
         public ActionResult Edit(int id)
         {
+        
+            
+            
+            
             var student = studentRepository.Find(id);
-            var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
-            //if (certeficat.wish1==null) 
-            //{
-            //    certeficat.wish1 = department_Relation_Type_Repository.Find(1);
 
-            //    certeficat.wish2 = department_Relation_Type_Repository.Find(1);
-
-            //    certeficat.wish3 = department_Relation_Type_Repository.Find(1);
-
-            //}
-            var collection = new Student_View_Model
+            var Student_With_Certificate = new Student_View_Model
             {
-                Birth = student.Birth,
-                Civil_Registriation_City = student.Civil_Registriation_City,
-                Email = student.Email,
-                Current_Address = student.Current_Address,
-                Father_Name_AR = student.Father_Name_AR,
-                Father_Name_EN = student.Father_Name_EN,
-                First_Name_AR = student.First_Name_AR,
-                Nick_Name = student.Nick_Name,
-                Marital_status = student.Marital_status,
-                high_school_certificate = student.high_school_certificate,
-                Home_s_Phone = student.Home_s_Phone,
-                Passport_No = student.Passport_No,
-                Mobile_Phone = student.Mobile_Phone,
-                First_Name_EN = student.First_Name_EN,
-                gender = student.gender,
-                Full_Address = student.Full_Address,
-                Grandfather_Name_AR = student.Grandfather_Name_AR,
-                Grandfather_Name_EN = student.Grandfather_Name_EN,
-                Civil_Registrition_No = student.Civil_Registrition_No,
-                Nationality = student.Nationality,
-                Mother_Name_AR = student.Mother_Name_AR,
-                Mother_Name_EN = student.Mother_Name_EN,
-                Identity_No = student.Identity_No,
-                Identity_back_image_URL = student.Identity_back_image,
-                Identity_front_image_URL = student.Identity_front_image,
-
-                LAnguge_of_the_addmintion = certeficat.LAnguge_of_the_addmintion,
-                Check_recipt_image_URL = certeficat.check_recipt_image_URL,
-                date_of_high_school_cirtificate = certeficat.date_of_high_school_cirtificate,
-                Subscription_number = certeficat.Subscription_number,
-                The_Rate = student.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
-                city_of_high_school_cirtificate = certeficat.city_of_high_school_cirtificate,
-                course_number = certeficat.course_number,
-                Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
-                Type_Of_certificate_list = FillSelection2(),
-                //wish_Department_Id1 = certeficat.wish1.id,
-                //wish_Department_Id2 = certeficat.wish2.id,
-                //wish_Department_Id3 = certeficat.wish3.id,
-                Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
+                //specializtions= FillSelection(),
+                Type_Of_certificate_list = FillSelection2()
+             ,
                 CountryList = FillSelection3()
-                ,country=student.Cirtificate_city.id
-                ,Addmition_eleigibilty=statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty           };
+             ,
+                Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
+           
+            ,Birth=student.Birth,
+                gender=student.gender,
+                Email=student.Email,
+                Identity_No=student.Identity_No,
+                First_Name_EN=student.First_Name_EN,
+                Nick_Name=student.Nick_Name,
+                Mobile_Phone=student.Mobile_Phone,
+                high_school_certificate=student.high_school_certificate,
 
-            return View(collection);
+            };
+            return View(Student_With_Certificate);
+
+
+
+
+
+            //    var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+            //    if (certeficat.wish1==null) 
+            //    {
+            //        certeficat.wish1 = department_Relation_Type_Repository.Find(1);
+
+            //        certeficat.wish2 = department_Relation_Type_Repository.Find(1);
+
+            //        certeficat.wish3 = department_Relation_Type_Repository.Find(1);
+
+            //    }
+            //    var collection = new Student_View_Model
+            //    {
+            //        Birth = student.Birth,
+            //        Civil_Registriation_City = student.Civil_Registriation_City,
+            //        Email = student.Email,
+            //        Current_Address = student.Current_Address,
+            //        Father_Name_AR = student.Father_Name_AR,
+            //        Father_Name_EN = student.Father_Name_EN,
+            //        First_Name_AR = student.First_Name_AR,
+            //        Nick_Name = student.Nick_Name,
+            //        Marital_status = student.Marital_status,
+            //        high_school_certificate = student.high_school_certificate,
+            //        Home_s_Phone = student.Home_s_Phone,
+            //        Passport_No = student.Passport_No,
+            //        Mobile_Phone = student.Mobile_Phone,
+            //        First_Name_EN = student.First_Name_EN,
+            //        gender = student.gender,
+            //        Full_Address = student.Full_Address,
+            //        Grandfather_Name_AR = student.Grandfather_Name_AR,
+            //        Grandfather_Name_EN = student.Grandfather_Name_EN,
+            //        Civil_Registrition_No = student.Civil_Registrition_No,
+            //        Nationality = student.Nationality,
+            //        Mother_Name_AR = student.Mother_Name_AR,
+            //        Mother_Name_EN = student.Mother_Name_EN,
+            //        Identity_No = student.Identity_No,
+            //        Identity_back_image_URL = student.Identity_back_image,
+            //        Identity_front_image_URL = student.Identity_front_image,
+
+            //        LAnguge_of_the_addmintion = certeficat.LAnguge_of_the_addmintion,
+            //        Check_recipt_image_URL = certeficat.check_recipt_image_URL,
+            //        date_of_high_school_cirtificate = certeficat.date_of_high_school_cirtificate,
+            //        Subscription_number = certeficat.Subscription_number,
+            //        The_Rate = student.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
+            //        city_of_high_school_cirtificate = certeficat.city_of_high_school_cirtificate,
+            //        course_number = certeficat.course_number,
+            //        Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
+            //        Type_Of_certificate_list = FillSelection2(),
+            //        wish_Department_Id1 = certeficat.wish1.id,
+            //        wish_Department_Id2 = certeficat.wish2.id,
+            //        wish_Department_Id3 = certeficat.wish3.id,
+            //        Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
+            //        CountryList = FillSelection3()
+            //        ,country=student.Cirtificate_city.id
+            //        ,Addmition_eleigibilty=statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty           };
+
+            //    return View(collection);
         }
 
         // POST: StudenController/Edit/5
@@ -501,10 +532,11 @@ namespace AdmissionSystem.Controllers
                     Passport_No = collection.Passport_No,
                     Cirtificate_city = country_Repository.Find(collection.country)
                     ,Statues_Of_Admission_Eligibilty=statues_Of_Admission_Eligibilty_Repository.List().Last()
+                   
                 };
-
+                studentRepository.Update(id, student);
                 admission_Eligibilty_Certificate_Repository.Update(id, certificate_);
-                studentRepository.Update(id, student); 
+                 
 
                 return RedirectToAction(nameof(Index));
             }

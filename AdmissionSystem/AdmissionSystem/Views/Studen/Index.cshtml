@@ -1,4 +1,8 @@
-﻿@model IEnumerable<AdmissionSystem.Model.Student>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
+
+@model IEnumerable<AdmissionSystem.Model.Student>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +11,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@localizer["Create New"]</a>
 </p>
 <table class="table">
     <thead>
@@ -94,93 +98,94 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.high_school_certificate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.First_Name_AR)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Father_Name_AR)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Grandfather_Name_AR)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mother_Name_AR)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.First_Name_EN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Father_Name_EN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Grandfather_Name_EN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mother_Name_EN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nick_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nationality)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marital_status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Civil_Registriation_City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Civil_Registrition_No)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passport_No)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Identity_No)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Full_Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Current_Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile_Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Home_s_Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Identity_front_image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Identity_back_image)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
-                @Html.ActionLink("WishesSelection", "WishesSelection", new { id = item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.high_school_certificate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.First_Name_AR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Father_Name_AR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grandfather_Name_AR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mother_Name_AR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.First_Name_EN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Father_Name_EN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grandfather_Name_EN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mother_Name_EN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nick_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nationality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marital_status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Civil_Registriation_City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Civil_Registrition_No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passport_No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identity_No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Full_Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Current_Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile_Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Home_s_Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identity_front_image)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identity_back_image)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
+                    @Html.ActionLink("WishesSelection", "WishesSelection", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

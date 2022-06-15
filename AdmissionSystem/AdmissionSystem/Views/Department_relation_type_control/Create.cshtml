@@ -12,21 +12,23 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="id" class="control-label"></label>
                 <input asp-for="id" class="form-control" />
                 <span asp-validation-for="id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Department_id" class="control-label"></label>
-                <input asp-for="Department_id" class="form-control" />
-                <span asp-validation-for="Department_id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type_of_high_school_cirtificate_id" class="control-label"></label>
-                <input asp-for="Type_of_high_school_cirtificate_id" class="form-control" />
-                <span asp-validation-for="Type_of_high_school_cirtificate_id" class="text-danger"></span>
-            </div>
+            </div>*@
+        <div class="form-group">
+            <label asp-for="Department_id" class="control-label"></label>
+            <select asp-for="Department_id" class="form-control" asp-items="@(new SelectList(Model.FK_Department,"id","specialization_name"))">
+            </select>
+            <span asp-validation-for="Department_id" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type_of_high_school_cirtificate_id" class="control-label"></label>
+            <select asp-for="Type_of_high_school_cirtificate_id" class="form-control" asp-items="@(new SelectList(Model.FK_type_Of_High_School_Cirtificate,"id","type"))">
+            </select>
+            <span asp-validation-for="Type_of_high_school_cirtificate_id" class="text-danger"></span>
+        </div>
             <div class="form-group">
                 <label asp-for="Minemum_of_Rate" class="control-label"></label>
                 <input asp-for="Minemum_of_Rate" class="form-control" />
@@ -48,6 +50,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@*@section Scripts {
+@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+}

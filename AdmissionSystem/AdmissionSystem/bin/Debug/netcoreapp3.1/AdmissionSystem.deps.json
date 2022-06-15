@@ -304,6 +304,14 @@
         "runtime": {
           "AdmissionSystem.dll": {}
         },
+        "resources": {
+          "ar/AdmissionSystem.resources.dll": {
+            "locale": "ar"
+          },
+          "en/AdmissionSystem.resources.dll": {
+            "locale": "en"
+          }
+        },
         "compile": {
           "AdmissionSystem.dll": {}
         }

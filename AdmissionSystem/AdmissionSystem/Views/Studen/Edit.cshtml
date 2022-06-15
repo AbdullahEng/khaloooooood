@@ -1,30 +1,42 @@
 ﻿@model AdmissionSystem.View_Model.Student_View_Model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Edit";
 }
 <link href="~/Desighn/3StepsForm.css" rel="stylesheet" />
+<link href="~/Desighn/openimage.css" rel="stylesheet" />
+<body>
 
-<body  >
+    @{
+        if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+        {
+<h1 hidden id="khaled">khaled</h1>
+} 
+    else {<h1 hidden id="khaled">nokhaled</h1>
+    }
+    }
 
-
-    <form id="regForm" asp-action="Edit" enctype="multipart/form-data" class="ContainerRegForm">
+    <form id="regForm" asp-action="Edit" enctype="multipart/form-data" class="ContainerRegForm ">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row form-group border-bottom border-warning ">
             <div class="col-11">
-            <h2 class="text-warning">Register:</h2>
-                <label class="text-primary" >@Model.Addmition_eleigibilty</label>
-                </div>
-            <img src="~/Desighn/kalamoon logo.png"  width="80" height="90"  />
+                <h2 class="text-warning">@localizer["Register"] </h2>
+                <label class="text-primary">@Model.Addmition_eleigibilty</label>
+            </div>
+            <img src="~/Desighn/kalamoon logo.png" width="80" height="90" />
         </div>
         <!-- One "tab" for each step in the form: -->
         <div class="tab">
-            <h5 class="alert alert-primary" role="alert">family and identity information</h5>
+            <h5 class="alert alert-primary" role="alert">@localizer["family and identity information"] </h5>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="First_Name_AR">First Name in Arbic</label>
+                            <label asp-for="First_Name_AR">@localizer["First Name in Arbic"]</label>
                             <input asp-for="First_Name_AR" class="form-control" />
                             <span asp-validation-for="First_Name_AR" class="text-danger"></span>
                         </div>
@@ -32,7 +44,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Father_Name_AR">Father Name in Arabic</label>
+                            <label asp-for="Father_Name_AR">@localizer["Father Name in Arabic"]</label>
                             <input asp-for="Father_Name_AR" class="form-control" />
                             <span asp-validation-for="Father_Name_AR" class="text-danger"></span>
                         </div>
@@ -40,13 +52,13 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Mother_Name_AR">Mother Name in Arabic</label>
+                            <label asp-for="Mother_Name_AR">@localizer["Mother Name in Arabic"]</label>
                             <input asp-for="Mother_Name_AR" class="form-control" />
                             <span asp-validation-for="Mother_Name_AR" class="text-danger"></span>
                         </div>
                     </div> <div class="col">
                         <div class="form-group">
-                            <label asp-for="Grandfather_Name_AR">Grand Father name in Arabic</label>
+                            <label asp-for="Grandfather_Name_AR">@localizer["Grand Father name in Arabic"]</label>
                             <input asp-for="Grandfather_Name_AR" class="form-control" />
                             <span asp-validation-for="Grandfather_Name_AR" class="text-danger"></span>
                         </div>
@@ -57,28 +69,28 @@
 
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="First_Name_EN">First Name in English</label>
+                            <label asp-for="First_Name_EN">@localizer["First Name in English"]</label>
                             <input asp-for="First_Name_EN" class="form-control" />
                             <span asp-validation-for="First_Name_EN" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Father_Name_EN">Father Name in English</label>
+                            <label asp-for="Father_Name_EN">@localizer["Father Name in English"]</label>
                             <input asp-for="Father_Name_EN" class="form-control" />
                             <span asp-validation-for="Father_Name_EN" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Mother_Name_EN">Mother Name in English</label>
+                            <label asp-for="Mother_Name_EN">@localizer["Mother Name in English"]</label>
                             <input asp-for="Mother_Name_EN" class="form-control" />
                             <span asp-validation-for="Mother_Name_EN" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Grandfather_Name_EN">Grand FAther Name in English</label>
+                            <label asp-for="Grandfather_Name_EN">@localizer["Grand FAther Name in English"]</label>
                             <input asp-for="Grandfather_Name_EN" class="form-control" />
                             <span asp-validation-for="Grandfather_Name_EN" class="text-danger"></span>
                         </div>
@@ -88,7 +100,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Nick_Name">Nick name </label>
+                            <label asp-for="Nick_Name">@localizer["Nick name"] </label>
                             <input asp-for="Nick_Name" class="form-control" />
                             <span asp-validation-for="Nick_Name" class="text-danger"></span>
                         </div>
@@ -96,7 +108,7 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="Birth">Birth</label>
+                            <label asp-for="Birth">@localizer["Birth"]</label>
                             <input asp-for="Birth" class="form-control" />
                             <span asp-validation-for="Birth" class="text-danger"></span>
                         </div>
@@ -105,7 +117,7 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="Nationality">Nationality</label>
+                            <label asp-for="Nationality">@localizer["Nationality"]</label>
                             <input asp-for="Nationality" class="form-control" />
                             <span asp-validation-for="Nationality" class="text-danger"></span>
                         </div>
@@ -117,14 +129,14 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="form-check-inline">
-                                <label asp-for="Marital_status" class="control-label">Marital status</label><br />
-                                <label asp-for="Marital_status" for="abd" class="form-check-label">Single</label>
+                                <label asp-for="Marital_status" class="control-label">@localizer["Marital status"]</label><br />
+                                <label asp-for="Marital_status" for="abd" class="form-check-label">@localizer["Single"]</label>
                                 <input type="radio" id="abd" class="form-check-input" name="Marital_status" value="Single" asp-for="Marital_status" />
-                                <label asp-for="Marital_status" for="abd1" class="form-check-label">Married</label>
+                                <label asp-for="Marital_status" for="abd1" class="form-check-label">@localizer["Married"]</label>
                                 <input type="radio" id="abd1" class="form-check-input" name="Marital_status" value="Married" asp-for="Marital_status" />
-                                <label asp-for="Marital_status" for="abd2" class="form-check-label">Widowed</label>
+                                <label asp-for="Marital_status" for="abd2" class="form-check-label">@localizer["Widowed"]</label>
                                 <input type="radio" id="abd2" class="form-check-input" name="Marital_status" value="Widowed" asp-for="Marital_status" />
-                                <label asp-for="Marital_status" for="abd3" class="form-check-label">Divorced</label>
+                                <label asp-for="Marital_status" for="abd3" class="form-check-label">@localizer["Divorced"]</label>
                                 <input type="radio" id="abd3" class="form-check-input" name="Marital_status" value="Divorced" asp-for="Marital_status" />
                                 <span asp-validation-for="Marital_status" class="text-danger"></span>
 
@@ -133,10 +145,10 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="gender" class="control-label">Gender</label> <br />
-                            <label asp-for="gender" for="kh" class="control-label">Male</label>
+                            <label asp-for="gender" class="control-label">@localizer["Gender"]</label> <br />
+                            <label asp-for="gender" for="kh" class="control-label">@localizer["Male"]</label>
                             <input type="radio" id="kh" name="gender" value="Male" asp-for="gender" />
-                            <label asp-for="gender" for="kh1" class="control-label">femal</label>
+                            <label asp-for="gender" for="kh1" class="control-label">@localizer["femal"]</label>
                             <input type="radio" id="kh1" name="gender" value="femal" asp-for="gender" />
                             <span asp-validation-for="gender" class="text-danger"></span>
                         </div>
@@ -153,13 +165,13 @@
 
 
         <div class="tab">
-            <h5 class="alert alert-primary" role="alert">informaion part 1</h5>
+            <h5 class="alert alert-primary" role="alert">@localizer["informaion part 1"] </h5>
             <div class="container">
                 <div class="row">
 
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Civil_Registriation_City" class="control-label">Civil Registriation City</label>
+                            <label asp-for="Civil_Registriation_City" class="control-label">@localizer["Civil Registriation City"]</label>
                             <input asp-for="Civil_Registriation_City" class="form-control" />
                             <span asp-validation-for="Civil_Registriation_City" class="text-danger"></span>
                         </div>
@@ -167,7 +179,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Civil_Registrition_No" class="control-label">Civil Registrition No</label>
+                            <label asp-for="Civil_Registrition_No" class="control-label">@localizer["Civil Registrition No"]</label>
                             <input asp-for="Civil_Registrition_No" class="form-control" />
                             <span asp-validation-for="Civil_Registrition_No" class="text-danger"></span>
                         </div>
@@ -176,14 +188,14 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Passport_No" class="control-label">Passport No</label>
+                            <label asp-for="Passport_No" class="control-label">@localizer["Passport No"]</label>
                             <input asp-for="Passport_No" class="form-control" />
                             <span asp-validation-for="Passport_No" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Identity_No" class="control-label">Identity No</label>
+                            <label asp-for="Identity_No" class="control-label">@localizer["Identity No"]</label>
                             <input asp-for="Identity_No" class="form-control" />
                             <span asp-validation-for="Identity_No" class="text-danger"></span>
                         </div>
@@ -191,7 +203,7 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="Full_Address" class="control-label">Full Address</label>
+                            <label asp-for="Full_Address" class="control-label">@localizer["Full Address"]</label>
                             <input asp-for="Full_Address" class="form-control" />
                             <span asp-validation-for="Full_Address" class="text-danger"></span>
                         </div>
@@ -202,7 +214,7 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="Email" class="control-label"></label>
+                            <label asp-for="Email" class="control-label">@localizer["Email"]</label>
                             <input asp-for="Email" class="form-control" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
@@ -210,14 +222,14 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="Current_Address" class="control-label">Current Address</label>
+                            <label asp-for="Current_Address" class="control-label">@localizer["Current Address"]</label>
                             <input asp-for="Current_Address" class="form-control" />
                             <span asp-validation-for="Current_Address" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Mobile_Phone" class="control-label">Mobile Phone</label>
+                            <label asp-for="Mobile_Phone" class="control-label">@localizer["Mobile Phone"]</label>
                             <input asp-for="Mobile_Phone" class="form-control" />
                             <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
                         </div>
@@ -227,7 +239,7 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="Home_s_Phone" class="control-label">Home Phone</label>
+                            <label asp-for="Home_s_Phone" class="control-label">@localizer["Home Phone"]</label>
                             <input asp-for="Home_s_Phone" class="form-control" />
                             <span asp-validation-for="Home_s_Phone" class="text-danger"></span>
                         </div>
@@ -235,14 +247,14 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="The_Rate" class="control-label">The Rate</label>
+                            <label asp-for="The_Rate" class="control-label">@localizer["The Rate"]</label>
                             <input asp-for="The_Rate" class="form-control" />
                             <span asp-validation-for="The_Rate" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="city_of_high_school_cirtificate" class="control-label">City of High School Cirtificate</label>
+                            <label asp-for="city_of_high_school_cirtificate" class="control-label">@localizer["City of High School Cirtificate"]</label>
                             <input asp-for="city_of_high_school_cirtificate" class="form-control" />
                             <span asp-validation-for="city_of_high_school_cirtificate" class="text-danger"></span>
                         </div>
@@ -253,26 +265,26 @@
         </div>
 
         <div class="tab">
-            <h5 class="alert alert-primary" role="alert">informaion part 2</h5>
+            <h5 class="alert alert-primary" role="alert">@localizer["informaion part 2"] </h5>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="high_school_certificate" class="control-label">high school certificate</label>
+                            <label asp-for="high_school_certificate" class="control-label">@localizer["high school certificate"]</label>
                             <input asp-for="high_school_certificate" class="form-control" value="Syrian" />
                             <span asp-validation-for="high_school_certificate" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="course_number" class="control-label">course number </label>
+                            <label asp-for="course_number" class="control-label">@localizer["course number"] </label>
                             <input asp-for="course_number" class="form-control" />
                             <span asp-validation-for="course_number" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Subscription_number" class="control-label">Subscription Number</label>
+                            <label asp-for="Subscription_number" class="control-label">@localizer["Subscription Number"]</label>
                             <input asp-for="Subscription_number" class="form-control" />
                             <span asp-validation-for="Subscription_number" class="text-danger"></span>
                         </div>
@@ -280,14 +292,14 @@
                 </div> <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="LAnguge_of_the_addmintion" class="control-label">LAnguge of the addmintion</label>
+                            <label asp-for="LAnguge_of_the_addmintion" class="control-label">@localizer["LAnguge of the addmintion"]</label>
                             <input asp-for="LAnguge_of_the_addmintion" class="form-control" />
                             <span asp-validation-for="LAnguge_of_the_addmintion" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Addmition_eleigibilty" class="control-label">Addmition eleigibilty</label>
+                            <label asp-for="Addmition_eleigibilty" class="control-label">@localizer["Addmition eleigibilty"]</label>
                             <input readonly asp-for="Addmition_eleigibilty" class="form-control" />
                             <span asp-validation-for="Addmition_eleigibilty" class="text-danger"></span>
                         </div>
@@ -295,7 +307,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="country" class="control-label">Country of Certificate</label>
+                            <label asp-for="country" class="control-label">@localizer["Country of Certificate"]</label>
                             <select asp-for="country" class="form-control" asp-items="@(new SelectList(Model.CountryList, "id", "country_name"))"></select>
                             <span asp-validation-for="country" class="text-danger"></span>
                         </div>
@@ -303,7 +315,7 @@
                 </div> <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Type_Of_Certificat" class="control-label">Type Of Certificat</label>
+                            <label asp-for="Type_Of_Certificat" class="control-label">@localizer["Type Of Certificat"]</label>
                             <select asp-for="Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
                             <span asp-validation-for="Type_Of_Certificat" class="text-danger"></span>
                         </div>
@@ -311,7 +323,7 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="date_of_high_school_cirtificate" class="control-label">Date of High School Cirtificate</label>
+                            <label asp-for="date_of_high_school_cirtificate" class="control-label">@localizer["Date of High School Cirtificate"]</label>
                             <input asp-for="date_of_high_school_cirtificate" class="form-control" />
                             <span asp-validation-for="date_of_high_school_cirtificate" class="text-danger"></span>
                         </div>
@@ -344,33 +356,50 @@
         </div>
 
         <div class="tab">
-            <h5 class="alert alert-primary" role="alert">Uploading file</h5>
+            <h5 class="alert alert-primary" role="alert">@localizer["Uploading file"] </h5>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Image_Of_Crtificat" class="control-label">Image Of Crtificat</label>
+                            <label asp-for="Image_Of_Crtificat" class="control-label">@localizer["Image Of Crtificat"]</label>
                             <input type="file" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="form-control-file" />
                             <span asp-validation-for="Image_Of_Crtificat" class="text-danger"></span>
                         </div>
                         @{ if (Model.Image_of_crtificat_URL != "")
-                            { <img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />}
-                        }
+                            { <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL"class="rounded" style="object-fit: contain;width:150px;height:150px" />}
+                       
+<!-- The Modal -->
+<div id="myModal4" class="modal">
+  <span class="close4">&times;</span>
+  <img class="modal-content" id="img014">
+  <div id="caption4"></div>
+</div>
+           
+                            }
                         @*<img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />*@
                         <input type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" />
 
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Identity_front_image" class="control-label">Identity front image</label>
+                            <label asp-for="Identity_front_image" class="control-label">@localizer["Identity front image"]</label>
                             <input type="file" name="Identity_front_image" asp-for="Identity_front_image" class="form-control-file" />
                             <span asp-validation-for="Identity_front_image" class="text-danger"></span>
                         </div>
                         @{if (@Model.Identity_front_image_URL != "")
                             {
-                                <img src="~/Uploads/@Model.Identity_front_image_URL" style="width:124px;" class="img-thumbnail" />
+                                @*<img src="~/Uploads/@Model.Identity_front_image_URL" style="width:124px;" class="img-thumbnail" />*@
+
+<img id="myImg" src="~/Uploads/@Model.Identity_front_image_URL" alt="Northern Lights, Norway"class="rounded" style="object-fit: contain;width:150px;height:150px">
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+                                }
                             }
-                        }
                         <input type="hidden" asp-for="Identity_front_image_URL" class="form-control" />
 
                     </div>
@@ -378,13 +407,23 @@
                     <div class="col">
 
                         <div class="form-group">
-                            <label asp-for="Identity_back_image" class="control-label">Identity back image</label>
+                            <label asp-for="Identity_back_image" class="control-label">@localizer["Identity back image"]</label>
                             <input type="file" name="Identity_back_image" asp-for="Identity_back_image" class="form-control-file" />
                             <span asp-validation-for="Identity_back_image" class="text-danger"></span>
                         </div>
                         @{if (@Model.Identity_back_image_URL != "")
-                            { <img src="~/Uploads/@Model.Identity_back_image_URL" style="width:124px;" class="img-thumbnail" />
-                            }
+                            {
+                               
+                                <img id="myImg2"  src="~/Uploads/@Model.Identity_back_image_URL" class="rounded" style="object-fit: contain;width:150px;height:150px"/>
+                           
+                                
+<!-- The Modal -->
+<div id="myModal2" class="modal">
+  <span class="close2">&times;</span>
+  <img class="modal-content" id="img012">
+  <div id="caption2"></div>
+</div>
+                                }
                         }
                         <input type="hidden" asp-for="Identity_back_image_URL" class="form-control" />
 
@@ -392,14 +431,23 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="check_recipt_image" class="control-label">check recipt image</label>
+                            <label asp-for="check_recipt_image" class="control-label">@localizer["check recipt image"]</label>
                             <input type="file" name="check_recipt_image" asp-for="check_recipt_image" class="form-control-file" />
                             <span asp-validation-for="check_recipt_image" class="text-danger"></span>
                         </div>
                         @{if (@Model.Check_recipt_image_URL != "")
-                            { <img src="~/Uploads/@Model.Check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
-                            } }
-                        <input type="hidden" asp-for="Check_recipt_image_URL" class="form-control" />
+                            {
+                                <img id="myImg3" src="~/Uploads/@Model.Check_recipt_image_URL" style="object-fit: contain;width:150px;height:150px" />
+                            
+<!-- The Modal -->
+<div id="myModal3" class="modal">
+  <span class="close3">&times;</span>
+  <img class="modal-content" id="img013">
+  <div id="caption3"></div>
+</div>
+           
+                                } }
+                        <input type="hidden" asp-for="Check_recipt_image_URL"width="300" height="200" />
                     </div>
 
                 </div>
@@ -408,8 +456,8 @@
 
         <div style="overflow:auto;">
             <div style="float:right;">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary">Previous</button>
-                <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary">Next</button>
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary position-relative">@localizer["Previous"]</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary position-relative">@localizer["Next"]</button>
             </div>
         </div>
 
@@ -429,15 +477,17 @@
 
 
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-    </body>
+</body>
+<script src="~/Desighn/openimage.js"></script>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script>
+    <script>
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -451,10 +501,20 @@ function showTab(n) {
   } else {
     document.getElementById("prevBtn").style.display = "inline";
   }
-  if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
+    if (n == (x.length - 1)) {
+        if (document.getElementById("khaled").textContent == "khaled") {
+            document.getElementById("nextBtn").innerHTML = "تسليم";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+ }
+  }
+  else {
+      if (document.getElementById("khaled").textContent == "khaled") {
+          document.getElementById("nextBtn").innerHTML = "التالي";
+      } else {
+          document.getElementById("nextBtn").innerHTML = "Next";
+      }
+       
   }
   // ... and run a function that displays the correct step indicator:
   fixStepIndicator(n)
@@ -510,7 +570,7 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
-</script>
+    </script>
 
 
 }

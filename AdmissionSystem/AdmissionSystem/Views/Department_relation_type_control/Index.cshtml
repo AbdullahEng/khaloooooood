@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AdmissionSystem.View_Model.Department_relation_type_view_model>
+﻿@model IEnumerable<AdmissionSystem.Model.Department_relation_Type>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,12 +16,6 @@
                 @Html.DisplayNameFor(model => model.id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Department_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type_of_high_school_cirtificate_id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Minemum_of_Rate)
             </th>
             <th>
@@ -35,12 +29,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type_of_high_school_cirtificate_id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Minemum_of_Rate)

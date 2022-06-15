@@ -1,10 +1,16 @@
-﻿@page
+﻿
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
+
+
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
-
+<link href="~/Desighn/openimage.css" rel="stylesheet" />
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">@localizer["Welcome"]</h1>
+    <p>@localizer["Learn about"]<br><a href="https://docs.microsoft.com/aspnet/core">@localizer["building Web apps with ASP.NET Core"]</a>.</p>
 </div>

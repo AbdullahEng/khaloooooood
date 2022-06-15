@@ -1,9 +1,10 @@
 ﻿@model AdmissionSystem.View_Model.Status_Of_Student_View_Model
 
+
 @{
     ViewData["Title"] = "Edit_Status_of_student";
 }
-
+<link href="~/Desighn/openimage.css" rel="stylesheet" />
 <h1>Edit_Status_of_student</h1>
 
 <h4>Status_Of_Student_View_Model</h4>
@@ -78,10 +79,22 @@
                 <span asp-validation-for="Full_Address" class="text-danger"></span>
             </div>
 
-            <img src="~/Uploads/@Model.Identity_front_image " style="width:124px;" class="img-thumbnail" />
-
-            <img src="~/Uploads/@Model.Identity_back_image" style="width:124px;" class="img-thumbnail" />
-
+            <img  id="myImg" src="~/Uploads/@Model.Identity_front_image " style="object-fit: contain;width:150px;height:150px" />
+            
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+            <img id="myImg2" src="~/Uploads/@Model.Identity_back_image" style="object-fit: contain;width:150px;height:150px" />
+                           
+<!-- The Modal -->
+<div id="myModal2" class="modal">
+  <span class="close2">&times;</span>
+  <img class="modal-content" id="img012">
+  <div id="caption2"></div>
+</div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -145,12 +158,26 @@
                 <input asp-for="date_of_high_school_cirtificate" class="form-control" />
                 <span asp-validation-for="date_of_high_school_cirtificate" class="text-danger"></span>
             </div>
+            @{
+                string alt = "الرقم الوطني " + Model.Identity_No.ToString() + "<br>" + "khaled";
+             }
 
-
-            <img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />
-
-            <img src="~/Uploads/@Model.check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
-
+            <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL"style="object-fit: contain;width:150px;height:150px" />
+                   
+<!-- The Modal -->
+<div id="myModal4" class="modal">
+  <span class="close4">&times;</span>
+  <img class="modal-content" id="img014">
+  <div id="caption4"></div>
+</div>
+            <img id="myImg3" src="~/Uploads/@Model.check_recipt_image_URL" alt=@alt style="object-fit: contain;width:150px;height:150px" />
+                         
+<!-- The Modal -->
+<div id="myModal3" class="modal">
+  <span class="close3">&times;</span>
+  <img class="modal-content" id="img013">
+  <div id="caption3"></div>
+</div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Checking_city_Certificate" /> @Html.DisplayNameFor(model => model.Checking_city_Certificate)
@@ -182,3 +209,4 @@
     <a asp-action="Index_Status_of_student">Back to List</a>
 </div>
 
+<script src="~/Desighn/openimage.js"></script>

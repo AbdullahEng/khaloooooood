@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace AdmissionSystem.Model.Identity_classes
 {
     public class MyIdentityUser:IdentityUser
     {
-        //public string FullName { get; set; }
-        //public DateTime BirhtDate { get; set; }
+        public int TheIDnumber { get; set; }
+      //  public DateTime birhtdate { get; set; }
     }
 }

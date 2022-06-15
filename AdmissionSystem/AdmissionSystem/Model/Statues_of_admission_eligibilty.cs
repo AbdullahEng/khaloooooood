@@ -13,6 +13,9 @@ namespace AdmissionSystem.Model
         public DateTime Begaining_date_of_the_process { get; set; }
         public int semester_no { get; set; }
         public DateTime semester_Date { get; set; }
+        // we have to add this prop to controller
+        // للعدد الطلاب المسموح قبولهم من قبل الوزارة 
+        public int Number_Student  { get; set; }
 
     }
 }

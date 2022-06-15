@@ -62,7 +62,7 @@ namespace AdmissionSystem.Model.Identity_classes
             if (!roleManager.RoleExistsAsync("Admin").Result) {
                 MyIdentityRole role = new MyIdentityRole();
                 role.Name = "Admin";
-                //role.Description = "perform normal operation.";
+                role.Description = "perform normal operation.";
                 IdentityResult roleresult = roleManager.CreateAsync(role).Result;
             }
             //role for Employee
@@ -70,7 +70,7 @@ namespace AdmissionSystem.Model.Identity_classes
             {
                 MyIdentityRole role = new MyIdentityRole();
                 role.Name = "Employee";
-                //role.Description = "perform normal operation.";
+                role.Description = "perform normal operation.";
                 IdentityResult roleresult = roleManager.CreateAsync(role).Result;
             }
             //role for Student
@@ -78,7 +78,7 @@ namespace AdmissionSystem.Model.Identity_classes
             {
                 MyIdentityRole role = new MyIdentityRole();
                 role.Name = "Student";
-              //  role.Description = "perform normal operation.";
+                role.Description = "perform normal operation.";
                 IdentityResult roleresult = roleManager.CreateAsync(role).Result;
             }
 

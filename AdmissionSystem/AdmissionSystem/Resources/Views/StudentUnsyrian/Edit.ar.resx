@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Addmition eleigibilty" xml:space="preserve">
+    <value>مفاضلة</value>
+  </data>
+  <data name="Birth" xml:space="preserve">
+    <value>المواليد</value>
+  </data>
+  <data name="check recipt image" xml:space="preserve">
+    <value>صورة عن الوصل المالي</value>
+  </data>
+  <data name="City of High School Cirtificate" xml:space="preserve">
+    <value>مدينة الثانوية العامة</value>
+  </data>
+  <data name="Civil Registriation City" xml:space="preserve">
+    <value>القيد</value>
+  </data>
+  <data name="Civil Registrition No" xml:space="preserve">
+    <value>رقم القيد</value>
+  </data>
+  <data name="Country of Certificate" xml:space="preserve">
+    <value>بلد الشهادة</value>
+  </data>
+  <data name="course number" xml:space="preserve">
+    <value>رقم الدورة</value>
+  </data>
+  <data name="Current Address" xml:space="preserve">
+    <value>العنوان الحالي</value>
+  </data>
+  <data name="Date of High School Cirtificate" xml:space="preserve">
+    <value>تاريخ الشهادة الثانوية</value>
+  </data>
+  <data name="Divorced" xml:space="preserve">
+    <value>مطلق</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكترومي</value>
+  </data>
+  <data name="family and identity information" xml:space="preserve">
+    <value>المعلومات الشخصية و العائلية</value>
+  </data>
+  <data name="Father Name in Arabic" xml:space="preserve">
+    <value>اسم الأب</value>
+  </data>
+  <data name="Father Name in English" xml:space="preserve">
+    <value>اسم الأب بالإنجليزية  </value>
+  </data>
+  <data name="femal" xml:space="preserve">
+    <value>انثى </value>
+  </data>
+  <data name="First Name in Arbic" xml:space="preserve">
+    <value>الإسم الأول</value>
+  </data>
+  <data name="First Name in English" xml:space="preserve">
+    <value>الإسم الأول بالإنجليزية</value>
+  </data>
+  <data name="Full Address" xml:space="preserve">
+    <value>العنوان كاملا</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+  <data name="Grand Father name in Arabic" xml:space="preserve">
+    <value>اسم الجد(والد الأب)</value>
+  </data>
+  <data name="Grand FAther Name in English" xml:space="preserve">
+    <value>اسم الجد بالإنجليزية</value>
+  </data>
+  <data name="high school certificate" xml:space="preserve">
+    <value>منشأ الشهادة الثانوية</value>
+  </data>
+  <data name="Home Phone" xml:space="preserve">
+    <value>رقم المنزل</value>
+  </data>
+  <data name="Identity back image" xml:space="preserve">
+    <value>الصورة الخلفية للهوية</value>
+  </data>
+  <data name="Identity front image" xml:space="preserve">
+    <value>الصورة الأمامية للهوية</value>
+  </data>
+  <data name="Identity No" xml:space="preserve">
+    <value>الرقم الوطني</value>
+  </data>
+  <data name="Image Of Crtificat" xml:space="preserve">
+    <value>صورة الشهادة</value>
+  </data>
+  <data name="informaion part 1" xml:space="preserve">
+    <value>معلومات عن الشهادة</value>
+  </data>
+  <data name="informaion part 2" xml:space="preserve">
+    <value>معلومات عن الشهادة</value>
+  </data>
+  <data name="LAnguge of the addmintion" xml:space="preserve">
+    <value>لغة التفاضل</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>ذكر</value>
+  </data>
+  <data name="Marital status" xml:space="preserve">
+    <value>الحالة الزوجية</value>
+  </data>
+  <data name="Married" xml:space="preserve">
+    <value>متزوج</value>
+  </data>
+  <data name="Mobile Phone" xml:space="preserve">
+    <value>رقم الجوال</value>
+  </data>
+  <data name="Mother Name in Arabic" xml:space="preserve">
+    <value>اسم الأم</value>
+  </data>
+  <data name="Mother Name in English" xml:space="preserve">
+    <value>اسم الأم بالإنجليزية</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>الجنسية</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="Nick name" xml:space="preserve">
+    <value>الكنية </value>
+  </data>
+  <data name="Passport No" xml:space="preserve">
+    <value>رقم الجواز</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>التسجيل</value>
+  </data>
+  <data name="Single" xml:space="preserve">
+    <value>عازب</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>تسليم الطلب</value>
+  </data>
+  <data name="Subscription Number" xml:space="preserve">
+    <value>رقم الإكتتاب</value>
+  </data>
+  <data name="The Rate" xml:space="preserve">
+    <value>العدل</value>
+  </data>
+  <data name="Type Of Certificat" xml:space="preserve">
+    <value>نوع الشهادة</value>
+  </data>
+  <data name="Uploading file" xml:space="preserve">
+    <value>تحميل الملفات</value>
+  </data>
+  <data name="Widowed" xml:space="preserve">
+    <value>أرمل</value>
+  </data>
+</root>
