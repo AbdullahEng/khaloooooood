@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdmissionSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220612103255_abd_and_khaled")]
-    partial class abd_and_khaled
+    [Migration("20220622094205_f22")]
+    partial class f22
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace AdmissionSystem.Migrations
                     b.Property<int?>("FK_Type_of_high_school_Cirtificateid")
                         .HasColumnType("int");
 
-                    b.Property<int>("FK_student_InfoId")
+                    b.Property<int>("FK_studentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image_of_crtificat_URL")
@@ -100,7 +100,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasIndex("FK_Type_of_high_school_Cirtificateid");
 
-                    b.HasIndex("FK_student_InfoId")
+                    b.HasIndex("FK_studentId")
                         .IsUnique();
 
                     b.HasIndex("wish1id");
@@ -423,6 +423,9 @@ namespace AdmissionSystem.Migrations
                     b.Property<DateTime>("Begaining_date_of_the_process")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Number_Student")
+                        .HasColumnType("int");
+
                     b.Property<string>("Type_of_admission_eligibilty")
                         .HasColumnType("nvarchar(max)");
 
@@ -701,9 +704,9 @@ namespace AdmissionSystem.Migrations
                         .WithMany()
                         .HasForeignKey("FK_Type_of_high_school_Cirtificateid");
 
-                    b.HasOne("AdmissionSystem.Model.Student", "FK_student_Info")
-                        .WithOne("Admission_Eligibilty_Requist_For_UNsy_Certificate")
-                        .HasForeignKey("AdmissionSystem.Model.Admission_Eligibilty_Certificate", "FK_student_InfoId")
+                    b.HasOne("AdmissionSystem.Model.Student", "FK_student")
+                        .WithOne("FK_Admission_Eligibilty_Requist_For_UNsy_Certificate")
+                        .HasForeignKey("AdmissionSystem.Model.Admission_Eligibilty_Certificate", "FK_studentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

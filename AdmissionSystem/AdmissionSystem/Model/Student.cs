@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,7 +39,9 @@ namespace AdmissionSystem.Model
         public int Home_s_Phone { get; set; }
         public string Identity_front_image { get; set; }
         public string Identity_back_image { get; set; }
-        public Admission_Eligibilty_Certificate Admission_Eligibilty_Requist_For_UNsy_Certificate { get; set; }
+        //public int FK_admitionid { get; set; }
+        //[ForeignKey("FK_admitionid")]
+        public Admission_Eligibilty_Certificate FK_Admission_Eligibilty_Requist_For_UNsy_Certificate { get; set; }
         public Statues_Of_Student Statues_Of_Student { get; set; }
      //   public Tracking_Rate FK_Tracking_Rate { get; set; }//sorry i modify it ^_^
         public Tracking_Rate Tracking_Rate { get; set; }

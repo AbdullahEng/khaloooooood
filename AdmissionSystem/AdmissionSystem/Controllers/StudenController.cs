@@ -1,4 +1,5 @@
-﻿using AdmissionSystem.Model;
+﻿using AdmissionSystem.Data;
+using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,7 @@ namespace AdmissionSystem.Controllers
     
     public class StudenController : Controller
     {
+        private readonly ApplicationDbContext DB;
         private readonly CRUD_Operation_Interface<Student> studentRepository;
         private readonly IHostingEnvironment hosting_;
         private readonly CRUD_Operation_Interface<Type_of_high_school_Cirtificate> type_Of_High_School_Cirtificate_Repository;
@@ -26,7 +28,8 @@ namespace AdmissionSystem.Controllers
         private readonly CRUD_Operation_Interface<Statues_of_admission_eligibilty> statues_Of_Admission_Eligibilty_Repository;
         private readonly CRUD_Operation_Interface<Department> department_Repository;
 
-        public StudenController(CRUD_Operation_Interface<Student> StudentRepository,
+        public StudenController(ApplicationDbContext DB,
+        CRUD_Operation_Interface<Student> StudentRepository,
             IHostingEnvironment hosting_,
             CRUD_Operation_Interface<Type_of_high_school_Cirtificate> Type_of_high_school_Cirtificate_Repository,
             CRUD_Operation_Interface<Department_relation_Type> Department_relation_Type_Repository,
@@ -37,6 +40,7 @@ namespace AdmissionSystem.Controllers
              CRUD_Operation_Interface<Statues_of_admission_eligibilty> Statues_of_admission_eligibilty_Repository,
               CRUD_Operation_Interface<Department> Department_Repository)
         {
+            this.DB = DB;
             studentRepository = StudentRepository;
             this.hosting_ = hosting_;
             type_Of_High_School_Cirtificate_Repository = Type_of_high_school_Cirtificate_Repository;
@@ -69,7 +73,7 @@ namespace AdmissionSystem.Controllers
         {
 
             var student = studentRepository.Find(id);
-            var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+            var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
 
             var collection = new Student_View_Model
             {
@@ -103,7 +107,7 @@ namespace AdmissionSystem.Controllers
                 Check_recipt_image_URL = certeficat.check_recipt_image_URL,
                 date_of_high_school_cirtificate = certeficat.date_of_high_school_cirtificate,
                 Subscription_number = certeficat.Subscription_number,
-                The_Rate = student.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
+                The_Rate = student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
                 city_of_high_school_cirtificate = certeficat.city_of_high_school_cirtificate,
                 course_number = certeficat.course_number,
                 Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
@@ -221,7 +225,7 @@ namespace AdmissionSystem.Controllers
                         Marital_status = collection.Marital_status,
                         Mother_Name_EN = collection.Mother_Name_EN,
                         Civil_Registrition_No = collection.Civil_Registrition_No,
-                        Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate
+                        FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate
                         ,Cirtificate_city=country_Repository.Find(collection.country),
                         Statues_Of_Admission_Eligibilty = statues_Of_Admission_Eligibilty_Repository.List().Last()
 
@@ -283,6 +287,7 @@ namespace AdmissionSystem.Controllers
                 Nick_Name=student.Nick_Name,
                 Mobile_Phone=student.Mobile_Phone,
                 high_school_certificate=student.high_school_certificate,
+                 
 
             };
             return View(Student_With_Certificate);
@@ -357,7 +362,7 @@ namespace AdmissionSystem.Controllers
             try
             {
 
-
+                //var stu = studentRepository.Find(id);
                 string filenameIMa = string.Empty;
                 string filenameFront = string.Empty;
                 string filenameBack = string.Empty;
@@ -482,10 +487,19 @@ namespace AdmissionSystem.Controllers
 
                 }
 
+                
+
+
+
+
+
                 var certificate_ = new Admission_Eligibilty_Certificate
                 {
-                    id = id,
-                    FK_student_InfoId = id,
+                     //id=student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id,
+                     id=id,
+                    // id = stu.Admission_Eligibilty_Requist_For_UNsy_Certificate.id,
+                    FK_studentId = id,
+                   //  FK_student =student ,
                     check_recipt_image_URL = collection.Check_recipt_image_URL,
                     city_of_high_school_cirtificate = collection.city_of_high_school_cirtificate,
                     course_number = collection.course_number,
@@ -531,13 +545,21 @@ namespace AdmissionSystem.Controllers
                     Nick_Name = collection.Nick_Name,
                     Passport_No = collection.Passport_No,
                     Cirtificate_city = country_Repository.Find(collection.country)
-                    ,Statues_Of_Admission_Eligibilty=statues_Of_Admission_Eligibilty_Repository.List().Last()
-                   
+                    ,
+                    Statues_Of_Admission_Eligibilty = statues_Of_Admission_Eligibilty_Repository.List().Last()
+                    //, FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate_
                 };
-                studentRepository.Update(id, student);
-                admission_Eligibilty_Certificate_Repository.Update(id, certificate_);
-                 
 
+
+                // var cerid = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+
+
+                //  studentRepository.Update(id, student);
+                //admission_Eligibilty_Certificate_Repository.Update(stu.Admission_Eligibilty_Requist_For_UNsy_Certificate.id, certificate_);
+                // admission_Eligibilty_Certificate_Repository.Update(id, certificate_);
+                DB.Admission_Eligibilty_Certificate.Update(certificate_);
+                DB.Student.Update(student);
+                DB.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch(Exception e)
@@ -587,7 +609,7 @@ namespace AdmissionSystem.Controllers
             }
 
             Student st = studentRepository.Find(id);
-            Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+            Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             var CertificatRate = certificate.The_Rate;
             var CertificatType = certificate.FK_Type_of_high_school_Cirtificate;
             List<Wishes> lista_of_the_student = new List<Wishes>();

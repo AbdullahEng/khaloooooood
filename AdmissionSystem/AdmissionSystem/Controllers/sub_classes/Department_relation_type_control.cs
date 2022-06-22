@@ -89,7 +89,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
           Rate_of_chaire_count=deprtfind.Rate_of_chaire_count,   
             
             };
-            return View(deprtfind);
+            return View(depview);
         }
 
         // POST: Department_relation_type_control/Edit/5

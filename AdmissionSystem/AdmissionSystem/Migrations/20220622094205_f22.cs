@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdmissionSystem.Migrations
 {
-    public partial class abd_and_khaled : Migration
+    public partial class f22 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,7 +103,8 @@ namespace AdmissionSystem.Migrations
                     Type_of_admission_eligibilty = table.Column<string>(nullable: true),
                     Begaining_date_of_the_process = table.Column<DateTime>(nullable: false),
                     semester_no = table.Column<int>(nullable: false),
-                    semester_Date = table.Column<DateTime>(nullable: false)
+                    semester_Date = table.Column<DateTime>(nullable: false),
+                    Number_Student = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -486,7 +487,7 @@ namespace AdmissionSystem.Migrations
                     wish1id = table.Column<int>(nullable: true),
                     wish2id = table.Column<int>(nullable: true),
                     wish3id = table.Column<int>(nullable: true),
-                    FK_student_InfoId = table.Column<int>(nullable: false),
+                    FK_studentId = table.Column<int>(nullable: false),
                     FK_Type_of_high_school_Cirtificateid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -499,8 +500,8 @@ namespace AdmissionSystem.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Admission_Eligibilty_Certificate_Student_FK_student_InfoId",
-                        column: x => x.FK_student_InfoId,
+                        name: "FK_Admission_Eligibilty_Certificate_Student_FK_studentId",
+                        column: x => x.FK_studentId,
                         principalTable: "Student",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -541,9 +542,9 @@ namespace AdmissionSystem.Migrations
                 column: "FK_Type_of_high_school_Cirtificateid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_Eligibilty_Certificate_FK_student_InfoId",
+                name: "IX_Admission_Eligibilty_Certificate_FK_studentId",
                 table: "Admission_Eligibilty_Certificate",
-                column: "FK_student_InfoId",
+                column: "FK_studentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

@@ -143,7 +143,7 @@ namespace AdmissionSystem.Controllers
         public ActionResult Edit_Status_of_student(int id)
         {
             var student = student_Repository.Find(id);
-            var certificate = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+            var certificate = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             var Status_of_student = new Status_Of_Student_View_Model {
             Birth=student.Birth,
             Email=student.Email,
@@ -209,7 +209,7 @@ namespace AdmissionSystem.Controllers
                     id = id,
                     The_Rate = collection.The_New_Rate
                      ,
-                    FK_student_InfoId = id
+                    //FK_student_InfoId = id
                 };
 
                 tracking_Rate_Repository.Update(id,traking);
@@ -245,7 +245,7 @@ namespace AdmissionSystem.Controllers
         public ActionResult Edit_Status_of_Unsyrian_student(int id)
         {
             var student = student_Repository.Find(id);
-            var certificate = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+            var certificate = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             var Status_of_student = new Status_Of_Student_View_Model
             {
                 Birth = student.Birth,
@@ -312,7 +312,7 @@ namespace AdmissionSystem.Controllers
                     id = id,
                     The_Rate = collection.The_New_Rate
                  ,
-                    FK_student_InfoId = id
+                    FK_studentId = id
                 };
 
 

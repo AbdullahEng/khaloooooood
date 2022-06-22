@@ -131,7 +131,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
         public List<Algorithm> Algorithm()
         {
-            var stlist = studentRepository.List().OrderByDescending(s=>s.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate).ToList();
+            var stlist = studentRepository.List().OrderByDescending(s=>s.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate).ToList();
 
             List<Algorithm> lista = new List<Algorithm>();
 
@@ -144,19 +144,19 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     //if for all student that must be accepted by minster of eduction
                     if (count <= all_student_syrian)
                     {
-                        if (st.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate >= admission_Eligibilty_Certificate_Repository.Find(st.Admission_Eligibilty_Requist_For_UNsy_Certificate.id).wish1.Minemum_of_Rate )
+                        if (st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate >= admission_Eligibilty_Certificate_Repository.Find(st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id).wish1.Minemum_of_Rate )
                         {
                             //if (count2< st.Admission_Eligibilty_Requist_For_UNsy_Certificate.wish1.chaircount)
                             //{
                             //accepted
                             //}
 
-                            Algorithm studentd = new Algorithm() { name = st.First_Name_EN, mark = st.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate.ToString()
+                            Algorithm studentd = new Algorithm() { name = st.First_Name_EN, mark = st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate.ToString()
                             , Accepted = true, Counter = count + 1,WishNumber=1
                             };
                             lista.Add(studentd);
                         }
-                        else if (st.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate >= admission_Eligibilty_Certificate_Repository.Find(st.Admission_Eligibilty_Requist_For_UNsy_Certificate.id).wish2.Minemum_of_Rate)
+                        else if (st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate >= admission_Eligibilty_Certificate_Repository.Find(st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id).wish2.Minemum_of_Rate)
                         {
                             //if (count2< st.Admission_Eligibilty_Requist_For_UNsy_Certificate.wish1.chaircount)
                             //{
@@ -166,7 +166,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             Algorithm studentd = new Algorithm()
                             {
                                 name = st.First_Name_EN,
-                                mark = st.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate.ToString()
+                                mark = st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate.ToString()
                             ,
                                 Accepted = true,
                                 Counter = count + 1,
@@ -174,7 +174,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             };
                             lista.Add(studentd);
                         }
-                        else if (st.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate >= admission_Eligibilty_Certificate_Repository.Find(st.Admission_Eligibilty_Requist_For_UNsy_Certificate.id).wish3.Minemum_of_Rate)
+                        else if (st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate >= admission_Eligibilty_Certificate_Repository.Find(st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id).wish3.Minemum_of_Rate)
                         {
 
                             //if (count2< st.Admission_Eligibilty_Requist_For_UNsy_Certificate.wish1.chaircount)
@@ -185,7 +185,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             Algorithm studentd = new Algorithm()
                             {
                                 name = st.First_Name_EN,
-                                mark = st.Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate.ToString()
+                                mark = st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate.ToString()
                             ,
                                 Accepted = true,
                                 Counter = count + 1,

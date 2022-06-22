@@ -35,6 +35,9 @@ namespace AdmissionSystem.Data
             //        .WithOne(a_d => a_d.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate3)
             //        .HasForeignKey<Department_relation_Type>(a_d_id => a_d_id.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate3Id);
 
+            //modelBuilder.Entity<Student>()
+            //  . (s => s.) // Mark Address property optional in Student entity
+            //  .WithRequired(ad => ad.Student); // mark Student property as required in StudentAddress entity. Cannot save StudentAddress without Student
 
         }
         public DbSet<Accabtable_config> Accabtable_config { get; set; }

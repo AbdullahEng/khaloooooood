@@ -106,6 +106,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                 user.TheIDnumber = obj.TheIDnumber;
                 IdentityResult result = userManager.CreateAsync
                     (user, obj.password).Result;
+                var certificate = new Admission_Eligibilty_Certificate() ;
                 var student = new Student() {
                     Nick_Name = obj.Nick_Name,//
                     Birth = obj.Birth,//
@@ -116,7 +117,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                     Mobile_Phone = obj.Mobile_Phone,//
                     Identity_No = obj.TheIDnumber//
                 
-                   // ,Admission_Eligibilty_Requist_For_UNsy_Certificate
+                    ,FK_Admission_Eligibilty_Requist_For_UNsy_Certificate=certificate
                 };
                 if (result.Succeeded )
                 {
