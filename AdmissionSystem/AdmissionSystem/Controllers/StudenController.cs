@@ -264,34 +264,92 @@ namespace AdmissionSystem.Controllers
         // GET: StudenController/Edit/5
         public ActionResult Edit(int id)
         {
-        
-            
-            
-            
+      
             var student = studentRepository.Find(id);
-
-            var Student_With_Certificate = new Student_View_Model
-            {
-                //specializtions= FillSelection(),
-                Type_Of_certificate_list = FillSelection2()
-             ,
-                CountryList = FillSelection3()
-             ,
-                Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
+            var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
            
-            ,Birth=student.Birth,
-                gender=student.gender,
-                Email=student.Email,
-                Identity_No=student.Identity_No,
-                First_Name_EN=student.First_Name_EN,
-                Nick_Name=student.Nick_Name,
-                Mobile_Phone=student.Mobile_Phone,
-                high_school_certificate=student.high_school_certificate,
-                 
+            if (student.Mother_Name_AR == null)
+            {
 
-            };
-            return View(Student_With_Certificate);
+                var Student_With_Certificate = new Student_View_Model
+                {
+                    //specializtions= FillSelection(),
+                    Type_Of_certificate_list = FillSelection2()
+                 ,
+                    CountryList = FillSelection3()
+                 ,
+                    Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
 
+                ,
+                    Birth = student.Birth,
+                    gender = student.gender,
+                    Email = student.Email,
+                    Identity_No = student.Identity_No,
+                    First_Name_EN = student.First_Name_EN,
+                    Nick_Name = student.Nick_Name,
+                    Mobile_Phone = student.Mobile_Phone,
+                    high_school_certificate = student.high_school_certificate,
+
+
+                };
+                return View(Student_With_Certificate);
+
+            }
+            else {
+
+                var Student_With_Certificate = new Student_View_Model
+                {
+                    //specializtions= FillSelection(),
+                    Type_Of_certificate_list = FillSelection2()
+                 ,
+                    CountryList = FillSelection3()
+                 ,
+                    Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
+
+                ,
+                    Birth = student.Birth,
+                    gender = student.gender,
+                    Email = student.Email,
+                    Identity_No = student.Identity_No,
+                    First_Name_EN = student.First_Name_EN,
+                    Nick_Name = student.Nick_Name,
+                    Mobile_Phone = student.Mobile_Phone,
+                    high_school_certificate = student.high_school_certificate,
+                    Civil_Registriation_City = student.Civil_Registriation_City,
+                    Current_Address = student.Current_Address,
+                    Father_Name_AR = student.Father_Name_AR,
+                    Father_Name_EN = student.Father_Name_EN,
+                    First_Name_AR = student.First_Name_AR,
+                    Marital_status = student.Marital_status,
+                    Home_s_Phone = student.Home_s_Phone,
+                    Passport_No = student.Passport_No,
+                    Full_Address = student.Full_Address,
+                    Grandfather_Name_AR = student.Grandfather_Name_AR,
+                    Grandfather_Name_EN = student.Grandfather_Name_EN,
+                    Civil_Registrition_No = student.Civil_Registrition_No,
+                    Nationality = student.Nationality,
+                    Mother_Name_AR = student.Mother_Name_AR,
+                    Mother_Name_EN = student.Mother_Name_EN,
+                    Identity_back_image_URL = student.Identity_back_image,
+                    Identity_front_image_URL = student.Identity_front_image,
+
+                    LAnguge_of_the_addmintion = certeficat.LAnguge_of_the_addmintion,
+                    Check_recipt_image_URL = certeficat.check_recipt_image_URL,
+                    date_of_high_school_cirtificate = certeficat.date_of_high_school_cirtificate,
+                    Subscription_number = certeficat.Subscription_number,
+                    The_Rate = student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
+                    city_of_high_school_cirtificate = certeficat.city_of_high_school_cirtificate,
+                    course_number = certeficat.course_number,
+                    Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
+                   
+                    Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
+                    country = student.Cirtificate_city.id
+                };
+
+
+            
+                return View(Student_With_Certificate);
+            }
 
 
 
