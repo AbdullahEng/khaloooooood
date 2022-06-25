@@ -15,6 +15,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.specialization_name)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FK_faculty.Faculty_name)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -25,6 +29,10 @@
                 @Html.DisplayFor(modelItem => item.specialization_name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.FK_faculty.Faculty_name)
+            </td>
+
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
@@ -33,3 +41,5 @@
 }
     </tbody>
 </table>
+
+

@@ -17,6 +17,7 @@ namespace AdmissionSystem.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.seed();
             //modelBuilder.Entity<Admission_Eligibilty_Requist_For_UNsy_Certificate>()//one_to_one relationship
             //        .HasOne<Department_relation_Type>(w => w.wish1)
             //        .WithOne(a_d => a_d.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate1)

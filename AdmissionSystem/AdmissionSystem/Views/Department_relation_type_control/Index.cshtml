@@ -16,12 +16,18 @@
                 @Html.DisplayNameFor(model => model.id)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FK_Department.specialization_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FK_type_Of_High_School_Cirtificate.type)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Minemum_of_Rate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rate_of_chaire_count)
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
@@ -31,13 +37,20 @@
                 @Html.DisplayFor(modelItem => item.id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Minemum_of_Rate)
+                @Html.DisplayFor(modelItem => item.FK_Department.specialization_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FK_type_Of_High_School_Cirtificate.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Minemum_of_Rate)%
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rate_of_chaire_count)
             </td>
+         
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
