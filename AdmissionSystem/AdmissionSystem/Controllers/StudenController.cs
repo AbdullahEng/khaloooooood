@@ -233,23 +233,23 @@ namespace AdmissionSystem.Controllers
 
                     studentRepository.Add(student);
 
-                //    var Tracking = new Tracking_Rate
-                //    {
-                //        FK_Student_Info = student,
-                //        old_rate = collection.The_Rate,
+                    var Tracking = new Tracking_Rate
+                    {
+                        FK_Student_Info = student,
+                        //old_rate = collection.The_Rate,
 
-                //    };
-                //    tracking_Rate_Repository.Add(Tracking);
-                //    var status_of_student = new Statues_Of_Student
-                //    {
-                //        Checked_city_certificate = false,
-                //        Checked_Identity = false,
-                //        Checked_Rate = false,
-                //        Checked_recipet = false,
-                //        FK_Student_Info = student,
-                        
-                //    };
-                //    statues_Of_Student_Repository.Add(status_of_student);
+                    };
+                    tracking_Rate_Repository.Add(Tracking);
+                    var status_of_student = new Statues_Of_Student
+                    {
+                        Checked_city_certificate = false,
+                        Checked_Identity = false,
+                        Checked_Rate = false,
+                        Checked_recipet = false,
+                        FK_Student_Info = student,
+
+                    };
+                    statues_Of_Student_Repository.Add(status_of_student);
                 }
 
                 return RedirectToAction(nameof(Index));

@@ -13,7 +13,7 @@ namespace AdmissionSystem.Model
         //[ForeignKey("FK_student_Info")]
      
         public int id { get; set; }
-        public int The_Rate { get; set; }
+        public float The_Rate { get; set; }
         public string city_of_high_school_cirtificate { get; set; }
         public DateTime date_of_high_school_cirtificate { get; set; }
         public string Image_of_crtificat_URL { get; set; }//ما العمل اذا كانت الشهادة من اكثر من صورة 

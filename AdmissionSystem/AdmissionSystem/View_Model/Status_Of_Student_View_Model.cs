@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmissionSystem.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,21 @@ namespace AdmissionSystem.View_Model
     {
 
         public string high_school_certificate { get; set; }//syrian or not syrian certificate.
-        public string Country { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Country> CountryList { get; set; }
+        public int Old_Country { get; set; }
+        public int New_Country { get; set; }
+
+        public List<Type_of_high_school_Cirtificate> Type_Of_certificate_list { get; set; }
+        public int Old_Type_Of_Certificat { get; set; }
+        public int New_Type_Of_Certificat { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+
         public string First_Name_AR { get; set; }
         public string Father_Name_AR { get; set; }
         public string Mother_Name_AR { get; set; }
@@ -36,13 +51,13 @@ namespace AdmissionSystem.View_Model
 
 
 
-        public int The_New_Rate { get; set; }
+        public float The_New_Rate { get; set; }
 
-        public int The_Old_Rate { get; set; }
+        public float The_Old_Rate { get; set; }
 
         public string city_of_high_school_cirtificate { get; set; }
         public DateTime date_of_high_school_cirtificate { get; set; }
-        public bool Checking_city_Certificate{ get; set; }
+        public bool Checking_city_Certificate { get; set; }
         public bool Checking_Identity_Image { get; set; }
         public bool Checking_Rate_Image { get; set; }
         public bool Checking_Recipte_Image { get; set; }

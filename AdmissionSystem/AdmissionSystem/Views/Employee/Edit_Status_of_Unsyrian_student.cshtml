@@ -18,10 +18,20 @@
                 <span asp-validation-for="high_school_certificate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
+                <label asp-for="New_Country" class="control-label">Country of Certificate"</label>
+                <select asp-for="New_Country" class="form-control" asp-items="@(new SelectList(Model.CountryList, "id", "country_name"))"></select>
+                <span asp-validation-for="New_Country" class="text-danger"></span>
             </div>
+
+            <input type="hidden" asp-for="Old_Country" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="New_Type_Of_Certificat" class="control-label">Type Of Certificat</label>
+                <select asp-for="New_Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
+                <span asp-validation-for="New_Type_Of_Certificat" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Old_Type_Of_Certificat" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="First_Name_AR" class="control-label"></label>
                 <input asp-for="First_Name_AR" class="form-control" />
@@ -93,47 +103,47 @@
                 <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-            <label asp-for="Identity_front_image" class="control-label"></label>
-            <input asp-for="Identity_front_image" class="form-control" />
-            <span asp-validation-for="Identity_front_image" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Identity_back_image" class="control-label"></label>
-            <input asp-for="Identity_back_image" class="form-control" />
-            <span asp-validation-for="Identity_back_image" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Image_of_crtificat_URL" class="control-label"></label>
-            <input asp-for="Image_of_crtificat_URL" class="form-control" />
-            <span asp-validation-for="Image_of_crtificat_URL" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="check_recipt_image_URL" class="control-label"></label>
-            <input asp-for="check_recipt_image_URL" class="form-control" />
-            <span asp-validation-for="check_recipt_image_URL" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="LAnguge_of_the_addmintion" class="control-label"></label>
-            <input asp-for="LAnguge_of_the_addmintion" class="form-control" />
-            <span asp-validation-for="LAnguge_of_the_addmintion" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Subscription_number" class="control-label"></label>
-            <input asp-for="Subscription_number" class="form-control" />
-            <span asp-validation-for="Subscription_number" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="course_number" class="control-label"></label>
-            <input asp-for="course_number" class="form-control" />
-            <span asp-validation-for="course_number" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="Identity_front_image" class="control-label"></label>
+                    <input asp-for="Identity_front_image" class="form-control" />
+                    <span asp-validation-for="Identity_front_image" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Identity_back_image" class="control-label"></label>
+                    <input asp-for="Identity_back_image" class="form-control" />
+                    <span asp-validation-for="Identity_back_image" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Image_of_crtificat_URL" class="control-label"></label>
+                    <input asp-for="Image_of_crtificat_URL" class="form-control" />
+                    <span asp-validation-for="Image_of_crtificat_URL" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="check_recipt_image_URL" class="control-label"></label>
+                    <input asp-for="check_recipt_image_URL" class="form-control" />
+                    <span asp-validation-for="check_recipt_image_URL" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LAnguge_of_the_addmintion" class="control-label"></label>
+                    <input asp-for="LAnguge_of_the_addmintion" class="form-control" />
+                    <span asp-validation-for="LAnguge_of_the_addmintion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Subscription_number" class="control-label"></label>
+                    <input asp-for="Subscription_number" class="form-control" />
+                    <span asp-validation-for="Subscription_number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="course_number" class="control-label"></label>
+                    <input asp-for="course_number" class="form-control" />
+                    <span asp-validation-for="course_number" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="The_New_Rate" class="control-label"></label>
                 <input asp-for="The_New_Rate" class="form-control" value="@Model.The_Old_Rate" />
                 <span asp-validation-for="The_New_Rate" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="The_Old_Rate" class="form-control" />
-                    <div class="form-group">
+            <div class="form-group">
                 <label asp-for="city_of_high_school_cirtificate" class="control-label"></label>
                 <input asp-for="city_of_high_school_cirtificate" class="form-control" />
                 <span asp-validation-for="city_of_high_school_cirtificate" class="text-danger"></span>
@@ -146,7 +156,7 @@
 
             <img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />
 
-        <img src="~/Uploads/@Model.check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
+            <img src="~/Uploads/@Model.check_recipt_image_URL" style="width:124px;" class="img-thumbnail" />
 
             <div class="form-group form-check">
                 <label class="form-check-label">

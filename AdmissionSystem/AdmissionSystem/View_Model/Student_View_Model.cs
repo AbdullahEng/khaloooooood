@@ -31,7 +31,7 @@ namespace AdmissionSystem.View_Model
         public string Current_Address { get; set; }//address after the acciption
         public int Mobile_Phone { get; set; }
         public int Home_s_Phone { get; set; }
-         public int The_Rate { get; set; }
+         public float The_Rate { get; set; }
         public string city_of_high_school_cirtificate { get; set; }
         public DateTime date_of_high_school_cirtificate { get; set; }
 
