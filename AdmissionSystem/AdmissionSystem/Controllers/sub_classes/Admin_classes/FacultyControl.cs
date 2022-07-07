@@ -35,6 +35,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         public ActionResult Create()
         {
 
+           
             return View();
         }
 
@@ -45,13 +46,38 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         {
             try
             {
+                var facultylist = faculty_Repo.List();
+               bool facultyExists = false;
+                foreach (var item in facultylist)
+                {
+                    if (item.Faculty_name == collection.Faculty_name)
+                    {
+                        facultyExists = true;
+
+                    }
+                   
+                }
                 //Faculty faculty = new Faculty
                 //{
                 //    Faculty_name = collection.Faculty_name
 
                 //};
-                faculty_Repo.Add(collection);
-                return RedirectToAction(nameof(Index));
+                if (!facultyExists)
+                {
+
+                    faculty_Repo.Add(collection);
+                  
+                    ViewBag.StatusMessageSuccess = "Add Faculty Success";
+                    return View();
+
+                }
+                else {
+                    ViewBag.StatusMessageFails = "The Faculty Already Exists";
+                    return View();
+                    //return RedirectToAction(nameof(Create));
+                }
+               // return RedirectToAction(nameof(Index));
+               // ViewBag.StatusMessage = "The Faculty Already Exists";
             }
             catch
             {

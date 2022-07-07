@@ -4,16 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center active">All faculty</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-warning">Create New</a>
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Faculty_name)
+               <h5>Name</h5>
+                @*@Html.DisplayNameFor(model => model.Faculty_name)*@
             </th>
             <th></th>
         </tr>
@@ -25,9 +26,21 @@
                 @Html.DisplayFor(modelItem => item.Faculty_name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+
+                @*<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+  </label>
+</div>*@
+                <a  asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>   
+                @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
             </td>
         </tr>
 }
