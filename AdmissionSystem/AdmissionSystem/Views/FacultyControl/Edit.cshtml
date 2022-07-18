@@ -4,29 +4,48 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Faculty</h4>
+<h1 class="text-center">Edit</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.sameName != null)
+            {
+                <div class="alert alert-danger border-danger" role="alert">
+                    @ViewBag.sameName
+                </div>
+            }
+            @if (ViewBag.differentName != null)
+            {
+                <div class="alert alert-success border-success " role="alert">
+                    @ViewBag.differentName
+                </div>
+            }
+            @if (ViewBag.identical != null) {
+        <div class="alert alert-warning border-warning" role="alert">
+            @ViewBag.identical
+        </div>
+          
+            }
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="Faculty_name" class="control-label"></label>
-                <input asp-for="Faculty_name" class="form-control" />
+               @* <label asp-for="Faculty_name" class="control-label"></label>*@
+                <h4>Name faculty</h4>
+                <input asp-for="Faculty_name" class="form-control"  required="required" />
                 <span asp-validation-for="Faculty_name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-outline-primary" />
             </div>
         </form>
+     @*   <input type="hidden" asp-for="id" class="form-control" />*@
+
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
 @*@section Scripts {

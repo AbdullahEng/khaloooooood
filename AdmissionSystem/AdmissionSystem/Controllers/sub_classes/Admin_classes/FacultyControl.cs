@@ -1,7 +1,9 @@
-﻿using AdmissionSystem.Model;
+﻿using AdmissionSystem.Data;
+using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,16 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
     {
 
         private readonly CRUD_Operation_Interface<Faculty> faculty_Repo;
-
-        public FacultyControl(CRUD_Operation_Interface<Faculty> Faculty_Repo)
+        private readonly CRUD_Operation_Interface<Department> department_Repo;
+        private readonly ApplicationDbContext _DB;
+        public FacultyControl(CRUD_Operation_Interface<Faculty> Faculty_Repo
+            , CRUD_Operation_Interface<Department> department_Repo
+            , ApplicationDbContext DB
+            )
         {
+            _DB = DB;
             faculty_Repo = Faculty_Repo;
+            this.department_Repo = department_Repo;
         }
         // GET: Faculty_controller
         public ActionResult Index()
@@ -72,7 +80,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
                 }
                 else {
-                    ViewBag.StatusMessageFails = "The Faculty Already Exists";
+                    ViewBag.StatusMessageFails = "The Faculty is Already Exists";
                     return View();
                     //return RedirectToAction(nameof(Create));
                 }
@@ -99,20 +107,85 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         {
             try
             {
-                faculty_Repo.Update(id, collection);
-                return RedirectToAction(nameof(Index));
+
+
+                var result = _DB.Faculty.Where(fac_name => fac_name.Faculty_name == collection.Faculty_name).AsNoTracking().ToList();
+
+                //var fac_list = faculty_Repo.List().ToList();
+                //bool same_Faculty_name = false;
+                //foreach (var fac in fac_list)
+                //{
+                //    if (fac.id != id)
+                //    {
+                //        if (fac.Faculty_name == collection.Faculty_name)
+                //        {
+
+                //            same_Faculty_name = true;
+                //            break;
+                //        }
+                //    }
+                //}
+
+                //if (!same_Faculty_name)
+                //{
+                //    faculty_Repo.Update(id, collection);
+                //    ViewBag.differentName = "Edit succeeded";
+
+                //    return View();
+                //}
+                //else {
+                //    ViewBag.sameName = "plese Change the name ";
+                //       return View();
+                //}
+                //   bool s_f=  ff(id,collection.Faculty_name);
+                if (result.Count == 1)
+                {
+                    ViewBag.identical = "This name idnetical ";
+                    return View();
+                }
+                else if (result.Count == 0)
+                {
+                    faculty_Repo.Update(id, collection);
+                    ViewBag.differentName = "Edit succeeded";
+                    return View();
+                }
+                else
+                {
+
+                    ViewBag.sameName = "plese Change the name ";
+                    return View();
+                }
+
+                //return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }
         }
+        //public bool ff(int id,string facultyname) {
+
+        //    var fac_list = faculty_Repo.List();
+        //    bool same_Faculty_name = false;
+        //    foreach (var fac in fac_list)
+        //    {
+        //        if (fac.id != id)
+        //        {
+        //            if (fac.Faculty_name == facultyname)
+        //            {
+        //                same_Faculty_name = true;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return same_Faculty_name;
+        //}
 
         // GET: Faculty_controller/Delete/5
         public ActionResult Delete(int id)
         {
-            faculty_Repo.Find(id);
-            return View();
+           var fac= faculty_Repo.Find(id);
+            return View(fac);
         }
 
         // POST: Faculty_controller/Delete/5
@@ -122,10 +195,34 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         {
             try
             {
-                faculty_Repo.Delete(id);
-                return RedirectToAction(nameof(Index));
+                var fac = faculty_Repo.Find(id);
+                if (fac == null) {
+                    ViewBag.WasDeleted = "This faculty is already deleted";
+                    return View();
+                }
+                var dep_list = department_Repo.List();
+                bool faculty_Is_lisked = false;
+                foreach (var dep in dep_list)
+                {
+                    if (dep.FK_facultyId == id)
+                    {
+                        faculty_Is_lisked = true;
+                        break;
+                    }
+                   
+                  
+                }
+
+                if (!faculty_Is_lisked ) { 
+                    
+                    faculty_Repo.Delete(id);
+                    ViewBag.freeFaculty = "Delete the '" + fac.Faculty_name + "' succeeded";
+                    return View(fac); }
+                else { ViewBag.linkedFaculty = "you can't delete The faculty because it is related with departments";  return View(fac); }
+                
+                //return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }
