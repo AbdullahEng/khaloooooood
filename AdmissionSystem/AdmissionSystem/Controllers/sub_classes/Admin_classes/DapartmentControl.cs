@@ -15,13 +15,16 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
         private readonly CRUD_Operation_Interface<Department> deprt_Repo;
         private readonly CRUD_Operation_Interface<Faculty> faculty_Repo;
+        private readonly CRUD_Operation_Interface<Department_relation_Type> department_Relation_Repo;
 
         public DapartmentControl(CRUD_Operation_Interface<Department> deprt_repo
             , CRUD_Operation_Interface<Faculty> faculty_repo
+            ,CRUD_Operation_Interface<Department_relation_Type>department_relation_Repo
             )
         {
             deprt_Repo = deprt_repo;
             faculty_Repo = faculty_repo;
+            department_Relation_Repo = department_relation_Repo;
         }
         // GET: Department_Controller
         public ActionResult Index()
@@ -59,6 +62,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 if (collection.facultyid == -1)
                 {
                     ViewBag.Message = "Please Select an Faculty";
+                    ViewBag.MessageArabic = "الرجاء تحديد الكلية";
+
                     return View(GetAllDepartemnet());
                 }
                 var fac = faculty_Repo.Find(collection.facultyid);
@@ -66,11 +71,30 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 {
                     FK_faculty = fac,
                     specialization_name = collection.specialization_name
-
-
                 };
-                deprt_Repo.Add(dep);
-                return RedirectToAction(nameof(Index));
+                var deplist = deprt_Repo.List().Where(t=>t.FK_faculty==fac && t.specialization_name==collection.specialization_name).ToList();
+
+                if (collection.specialization_name == null) { return View(GetAllDepartemnet()); }
+                else
+                {
+                    if (deplist.Count == 0)
+                    {
+                        deprt_Repo.Add(dep);
+                        ViewBag.AddSuccess = "The addition succeeded";
+                        ViewBag.AddSuccessArabic = "نجحت الإضافة";
+
+                        return View(GetAllDepartemnet());
+                    }
+                    else
+                    {
+                        ViewBag.Addfails = "The addition fails";
+                        ViewBag.AddfailsArabic = "فشل الإضافة";
+
+                        return View(GetAllDepartemnet());
+
+                    }
+                }
+                //return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -82,10 +106,12 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         public ActionResult Edit(int id)
         {
             var dep = deprt_Repo.Find(id);
+            var facu = faculty_Repo.Find(dep.FK_facultyId);
             var depvi = new Department_faculty_view_model
             {
                 
-                facultylist = FillSelliction(),
+                facultylist =FillSelliction_faculty_name(facu),
+  
                 specialization_name = dep.specialization_name
 
 
@@ -107,10 +133,65 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     FK_faculty = fac,
                     specialization_name = collection.specialization_name
                 };
-                deprt_Repo.Update(collection.id, dep);
-                return RedirectToAction(nameof(Index));
+             
+
+                if (collection.facultyid == -1)
+                {
+                    ViewBag.Message = "Please Select a Faculty";
+                    ViewBag.MessageArabic = "الرجاء تحديد الكلية";
+
+                    return View(GetAllDepartemnet());
+                }
+                //var fac = faculty_Repo.Find(collection.facultyid);
+                //Department dep = new Department
+                //{
+                //    FK_faculty = fac,
+                //    specialization_name = collection.specialization_name
+                //};
+                //var deplist = deprt_Repo.List().Where(t => t.FK_faculty == fac && t.specialization_name == collection.specialization_name).ToList();
+                var deplist = deprt_Repo.List().Where(t =>   t.FK_facultyId == fac.id && t.specialization_name == collection.specialization_name).ToList();
+                if (collection.specialization_name == null) { return View(GetAllDepartemnet_with_faculty_name(fac)); }
+                else
+                {
+                    if (deplist.Count == 0)
+                    {
+                        deprt_Repo.Update(collection.id, dep);
+                        ViewBag.UpdateSuccess = "Editing success";
+                        ViewBag.UpdateSuccessArabic = "نجاح التحرير";
+
+                        return View(GetAllDepartemnet_with_faculty_name(fac));
+                    }
+                    else if (deplist.Count == 1)
+                    {
+                        ViewBag.sameEdit = "Same Edit";
+                        ViewBag.sameEditArabic = "نفس التحرير";
+
+                        return View(GetAllDepartemnet_with_faculty_name(fac));
+
+                    }
+                    else {
+
+                        ViewBag.updatefails = "Editing failed";
+                        ViewBag.updatefailsArabic = "فشل التحرير";
+
+                        return View(GetAllDepartemnet_with_faculty_name(fac));
+
+                    }
+
+                }
+
+
+
+
+
+
+
+
+
+
+                //return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }
@@ -120,9 +201,11 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         public ActionResult Delete(int id)
         {
             var dep = deprt_Repo.Find(id);
-            var depvi = new Department_faculty_view_model
+            var facu = faculty_Repo.Find(dep.FK_facultyId);
+            var depvi = new Department
             {
-                facultylist = FillSelliction(),
+                FK_faculty=facu,
+                //facultylist = FillSelliction(),
                 specialization_name = dep.specialization_name
 
 
@@ -137,10 +220,42 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         {
             try
             {
-                deprt_Repo.Delete(id);
-                return RedirectToAction(nameof(Index));
+                var dep = deprt_Repo.Find(id);
+                if (dep == null)
+                {
+                    ViewBag.WasDeleted = "This department is already deleted";
+                    ViewBag.WasDeletedArabic= "تم حذف هذا القسم بالفعل";
+
+                    return View();
+                }
+                var facu = faculty_Repo.Find(dep.FK_facultyId);
+                var dep_relation = department_Relation_Repo.List();
+                bool department_Is_linked = false;
+                foreach (var item in dep_relation)
+                {
+                    if (item.FK_DepartmentId == id)
+                    {
+                        department_Is_linked  = true;
+                        break;
+                    }
+                }
+                if (!department_Is_linked)
+                {
+                    deprt_Repo.Delete(id);
+                    ViewBag.freeDepartment = "Delete the '" + dep.specialization_name + "'with faculty' " + facu.Faculty_name + "' succeeded";
+                    ViewBag.freeDepartmentArabic = "حذف ال '" + dep.specialization_name + "'مع الكليه' " + facu.Faculty_name + "' تم بنجاح";
+
+                    return View();
+                }
+                else {
+                    ViewBag.linkedDepartment = "you can't delete This department because it is related with Others"; 
+                    ViewBag.linkedDepartmentArabic = "لا يمكنك حذف هذا القسم لأنه مرتبط بالآخرين"; return View(dep);
+
+                }
+
+                //return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }
@@ -152,11 +267,34 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             return fac;
 
         }
+
+        public List<Faculty> FillSelliction_faculty_name(Faculty f )
+        {
+            var fac = faculty_Repo.List().ToList();
+            var listt = new List<Faculty>();
+            listt.Insert(0,f);
+            fac.Remove(f);
+           
+           
+            listt.Insert(1, new Faculty { id = -1, Faculty_name = "please Enter The Faculty" });
+            listt.InsertRange(2, fac);
+            return listt;
+
+        }
         public Department_faculty_view_model GetAllDepartemnet()
         {
             var model = new Department_faculty_view_model
             {
                 facultylist = FillSelliction()
+
+            };
+            return model;
+        }
+        public Department_faculty_view_model GetAllDepartemnet_with_faculty_name( Faculty f)
+        {
+            var model = new Department_faculty_view_model
+            {
+                facultylist = FillSelliction_faculty_name(f)
 
             };
             return model;

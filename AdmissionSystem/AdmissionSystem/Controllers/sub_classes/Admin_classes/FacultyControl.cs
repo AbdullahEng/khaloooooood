@@ -75,12 +75,18 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
                     faculty_Repo.Add(collection);
                   
-                    ViewBag.StatusMessageSuccess = "Add Faculty Success";
+                                
+                    ViewBag.StatusMessageSuccess = "Faculty has been added successfully";
+                    ViewBag.StatusMessageSuccessArabic = "تم اضافه الكليه بنجاح ";     
+
                     return View();
 
                 }
                 else {
+                    
                     ViewBag.StatusMessageFails = "The Faculty is Already Exists";
+                    ViewBag.StatusMessageFailsArabic = "الكلية موجودة بالفعل";
+
                     return View();
                     //return RedirectToAction(nameof(Create));
                 }
@@ -140,19 +146,24 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 //   bool s_f=  ff(id,collection.Faculty_name);
                 if (result.Count == 1)
                 {
-                    ViewBag.identical = "This name idnetical ";
+                    ViewBag.identical = "This name identical ";
+                    ViewBag.identicalArabic = "هذا الاسم متطابق ";
+
                     return View();
                 }
                 else if (result.Count == 0)
                 {
                     faculty_Repo.Update(id, collection);
                     ViewBag.differentName = "Edit succeeded";
+                    ViewBag.differentNameArabic = "نجح التحرير";
+
                     return View();
                 }
                 else
                 {
 
-                    ViewBag.sameName = "plese Change the name ";
+                    ViewBag.sameName = "please Change the name ";
+                    ViewBag.sameNameArabic = "الرجاء تغيير الاسم";
                     return View();
                 }
 
@@ -198,27 +209,33 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 var fac = faculty_Repo.Find(id);
                 if (fac == null) {
                     ViewBag.WasDeleted = "This faculty is already deleted";
+                    ViewBag.WasDeletedArabic = "تم حذف هذه الكلية بالفعل";
                     return View();
                 }
                 var dep_list = department_Repo.List();
-                bool faculty_Is_lisked = false;
+                bool faculty_Is_linked = false;
                 foreach (var dep in dep_list)
                 {
                     if (dep.FK_facultyId == id)
                     {
-                        faculty_Is_lisked = true;
+                        faculty_Is_linked = true;
                         break;
                     }
                    
                   
                 }
 
-                if (!faculty_Is_lisked ) { 
+                if (!faculty_Is_linked ) { 
                     
                     faculty_Repo.Delete(id);
                     ViewBag.freeFaculty = "Delete the '" + fac.Faculty_name + "' succeeded";
+                    ViewBag.freeFacultyArabic = "تم حذف  '" + fac.Faculty_name + "' بنجاح";
                     return View(fac); }
-                else { ViewBag.linkedFaculty = "you can't delete The faculty because it is related with departments";  return View(fac); }
+                else {
+                    ViewBag.linkedFaculty = "you can't delete This faculty because it is related with departments";
+                 ViewBag.linkedFacultyArabic = "لا يمكنك حذف هذه الكلية لأنها مرتبطة بأقسام";  return View(fac); 
+                
+                }
                 
                 //return RedirectToAction(nameof(Index));
             }

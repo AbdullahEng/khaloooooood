@@ -4,35 +4,112 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Create</h1>
 
-<h4>Department_faculty_view_model</h4>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
+<div class="row  ">
+    <div class="col-md-4 content">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*English*@
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-warning border-warning">@ViewBag.Message</div>
+            }
+            @if (ViewBag.AddSuccess != null)
+            {
+
+                <div class="alert alert-success border-success " role="alert">
+                    @ViewBag.AddSuccess
+                </div>
+            }
+
+            @if (ViewBag.Addfails != null)
+            {
+
+                <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                    @ViewBag.Addfails
+                </div>
+
+            }
+
+            @*Arabic*@ 
+
+
+            @*@if (ViewBag.MessageArabic != null)
+            {
+                <div class="alert alert-warning border-warning">@ViewBag.MessageArabic</div>
+            }
+            @if (ViewBag.AddSuccessArabic != null)
+            {
+
+                <div class="alert alert-success border-successArabic " role="alert">
+                    @ViewBag.AddSuccessArabic
+                </div>
+            }
+
+            @if (ViewBag.AddfailsArabic != null)
+            {
+
+                <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                    @ViewBag.AddfailsArabic
+                </div>
+
+            }*@
+
+
+
             <div class="form-group">
-                <label asp-for="specialization_name" class="control-label"></label>
-                <input asp-for="specialization_name" class="form-control" />
-                <span asp-validation-for="specialization_name" class="text-danger"></span>
+                <h5>Facultes</h5>
+                <select asp-for="facultyid" class="form-control" asp-items="@(new SelectList(Model.facultylist,"id","Faculty_name"))"></select>
+                <span asp-validation-for="facultyid" class="text-danger"></span>
             </div>
 
-        <div class="form-group">
-            <label asp-for="facultyid" class="control-label"></label>
-            <select asp-for="facultyid" class="form-control" asp-items="@(new SelectList(Model.facultylist,"id","Faculty_name"))"></select>
-            <span asp-validation-for="facultyid" class="text-danger"></span>
-        </div>
+
+
+            @*<div class="maindiv ">
+
+            <div class="fields">
+                <div class="Fieldset">
+                    <input asp-for="specialization_name" class="Before-FS" />
+                    <h1 class="FS-H"><span>Facultes</span></h1>
+                    <label class="placeholder">Facultes</label>
+                </div>
+            </div>
+
+        </div>*@
+
+
+
+
+
+
+            <div class="form-group ">
+                <h5 data-toggle="tooltip" data-placement="bottom" title="specialization like(IT,comunicatio, Arcitict,and so on........)">specialization name</h5>
+                <input asp-for="specialization_name" class="form-control" />
+
+                <span asp-validation-for="specialization_name" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-primary " />
+            </div>
+            <div>
+                <a asp-action="Index" class="btn btn-secondary ">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

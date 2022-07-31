@@ -35,12 +35,12 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Department> List()
         {
-            return DB.Department.Include(a=>a.FK_faculty).ToList();
+            return DB.Department.Include(a=>a.FK_faculty).AsNoTracking().ToList();
         }
 
         public void Update(int id, Department entity)
         {
-            DB.Department.Update(entity);
+            DB.Department.Update (entity);
             DB.SaveChanges();
         }
     }

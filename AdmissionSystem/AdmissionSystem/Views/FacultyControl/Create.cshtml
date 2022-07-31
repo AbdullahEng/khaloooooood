@@ -7,12 +7,17 @@
 <h1 class="text-center">Create faculty</h1>
 
 <hr/>
-
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" >
+    <div class="col-md-4 content">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            @*Englis*@
             @if (ViewBag.StatusMessageFails != null)
             {
                 <div class="alert alert-danger border-danger" role="alert">
@@ -29,22 +34,42 @@
 
             }
 
+
+            @*Arabic*@
+
+            @*@if (ViewBag.StatusMessageFailsArabic != null)
+                {
+                    <div class="alert alert-danger border-danger" role="alert">
+                        @ViewBag.StatusMessageFailsArabic
+                    </div>
+                }
+                @if (ViewBag.StatusMessageSuccessArabic != null)
+                {
+                    <div class="alert alert-success border-success " role="alert">
+                        @ViewBag.StatusMessageSuccessArabic
+                    </div>
+
+
+
+                }*@
+
             <div class="form-group">
-                <label  class="control-label"> Name</label>
-                <input asp-for="Faculty_name" class="form-control "  required="required"/>
+                <label class="control-label"> Name</label>
+                <input asp-for="Faculty_name" class="form-control " required="required" />
                 <span asp-validation-for="Faculty_name" class="text-danger"></span>
             </div>
 
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-outline-warning" />
-        </div>
-        </form>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-outline-primary" />
+            </div>
+            <div>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
     </div>
+    </form>
+</div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</div>
+
 
 @*@section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

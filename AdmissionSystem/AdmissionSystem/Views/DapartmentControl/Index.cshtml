@@ -4,19 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center active" data-toggle="tooltip" data-placement="bottom" title="It contains specialization like(IT,comunicaatio, Arcitict,and so on........)" >Departments</h1>
 
+@*<h6 class="text-center active">It contains specialization like(IT,comunicaatio, Arcitict,and so on........) </h6>*@
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.specialization_name)
+               <h5>Spicialization name</h5>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_faculty.Faculty_name)
+                <h5>Faculty name</h5>
             </th>
 
             <th></th>
@@ -33,9 +34,9 @@
             </td>
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a> 
+                @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
             </td>
         </tr>
 }
