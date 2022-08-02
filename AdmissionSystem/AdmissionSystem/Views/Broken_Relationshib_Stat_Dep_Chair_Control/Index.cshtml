@@ -4,16 +4,28 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h3 class="text-center">Chair count and kind of Admission and department related with their</h3>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table  class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Chair_count)
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th data-toggle="tooltip" data-placement="bottom" title="That main Normal Admition or extended Admition and so on">
+                @*@Html.DisplayNameFor(model => model.FK_statues_Of_Admission_EligibiltyId)*@
+                Type Of admission elgibilty
+            </th>
+            <th>
+                @*  @Html.DisplayNameFor(model => model.Fk_departmentId)*@
+                The department
+            </th>
+            <th data-toggle="tooltip" data-placement="bottom" title="As number of chair  not as percent">
+               @* @Html.DisplayNameFor(model => model.Chair_count)*@
+                Chair count
             </th>
             <th></th>
         </tr>
@@ -22,12 +34,27 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FK_statues_Of_Admission_Eligibilty.Type_of_admission_eligibilty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fk_department.specialization_name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Chair_count)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
+                @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+
+
             </td>
         </tr>
 }
