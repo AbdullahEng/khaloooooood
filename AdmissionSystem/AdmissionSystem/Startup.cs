@@ -68,13 +68,26 @@ namespace AdmissionSystem
 
 
 
+
+
+
+
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+
+
+
+
+
+
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddRazorPages();
 
             //  services.AddMvc();
             //services.AddMvc(option => option.EnableEndpointRouting = false); //åí ÖÝÊåÇ ãÔÇä íÔÊÛá ÇáÑÇæÊíäÛ ÇáíÏæí 
-           
+
 
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");

@@ -4,14 +4,87 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Create</h1>
 
-<h4>Statues_of_admission_eligibilty</h4>
+<h4>Statues of admission eligibilty</h4>
 <hr />
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 content">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            @*English*@
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-warning border-warning">@ViewBag.Message</div>
+            }
+            @if (ViewBag.AddSuccess != null)
+            {
+
+                <div class="alert alert-success border-success " role="alert">
+                    @ViewBag.AddSuccess
+                </div>
+            }
+
+            @if (ViewBag.Addfails != null)
+            {
+
+                <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                    @ViewBag.Addfails
+                </div>
+
+            }
+            @if (ViewBag.sameEdit != null)
+            {
+
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEdit
+                </div>
+            }
+
+            @*Arabic*@
+
+
+            @*@if (ViewBag.MessageArabic != null)
+        {
+            <div class="alert alert-warning border-warning">@ViewBag.MessageArabic</div>
+        }
+        @if (ViewBag.AddSuccessArabic != null)
+        {
+
+            <div class="alert alert-success border-successArabic " role="alert">
+                @ViewBag.AddSuccessArabic
+            </div>
+        }
+
+        @if (ViewBag.AddfailsArabic != null)
+        {
+
+            <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                @ViewBag.AddfailsArabic
+            </div>
+
+        }
+
+                 @if (ViewBag.sameEditArabic != null)
+            {
+
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEditArabic
+                </div>
+            }
+            *@
+
+
             <div class="form-group">
                 <label asp-for="Type_of_admission_eligibilty" class="control-label"></label>
                 <input asp-for="Type_of_admission_eligibilty" class="form-control" />
@@ -19,29 +92,43 @@
             </div>
             <div class="form-group">
                 <label asp-for="Begaining_date_of_the_process" class="control-label"></label>
-                <input asp-for="Begaining_date_of_the_process" class="form-control" />
+                <input asp-for="Begaining_date_of_the_process" type="date" class="form-control "
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="Begaining_date_of_the_process" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="semester_no" class="control-label"></label>
-                <input asp-for="semester_no" class="form-control" />
+                <select asp-for="semester_no" class="form-control">
+                    <option value="1">First semester</option>
+                    <option value="2">Secound semester </option>
+                    <option value="3">Summer semester</option>
+                </select>
                 <span asp-validation-for="semester_no" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="semester_Date" class="control-label"></label>
-                <input asp-for="semester_Date" class="form-control" />
+                <input asp-for="semester_Date" class="form-control" type="date"
+                       min="@DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" />
+
                 <span asp-validation-for="semester_Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Number_Student" class="control-label"></label>
+                <input asp-for="Number_Student" class="form-control" />
+                <span asp-validation-for="Number_Student" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-outline-primary" />
+            </div>
+
+            <div>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
