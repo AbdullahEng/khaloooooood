@@ -16,15 +16,19 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         private readonly CRUD_Operation_Interface<Department> deprt_Repo;
         private readonly CRUD_Operation_Interface<Faculty> faculty_Repo;
         private readonly CRUD_Operation_Interface<Department_relation_Type> department_Relation_Repo;
+        private readonly CRUD_Operation_Interface<Broken_Relationshib_Stat_Dep_Chair> broken_Repo;
 
         public DapartmentControl(CRUD_Operation_Interface<Department> deprt_repo
             , CRUD_Operation_Interface<Faculty> faculty_repo
             ,CRUD_Operation_Interface<Department_relation_Type>department_relation_Repo
+            , CRUD_Operation_Interface<Broken_Relationshib_Stat_Dep_Chair> Broken_Repo
+            
             )
         {
             deprt_Repo = deprt_repo;
             faculty_Repo = faculty_repo;
             department_Relation_Repo = department_relation_Repo;
+            broken_Repo = Broken_Repo;
         }
         // GET: Department_Controller
         public ActionResult Index()
@@ -72,7 +76,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     FK_faculty = fac,
                     specialization_name = collection.specialization_name
                 };
-                var deplist = deprt_Repo.List().Where(t=>t.FK_faculty==fac && t.specialization_name==collection.specialization_name).ToList();
+                var deplist = deprt_Repo.List().Where(t => t.FK_facultyId == fac.id && t.specialization_name == collection.specialization_name).ToList();
 
                 if (collection.specialization_name == null) { return View(GetAllDepartemnet()); }
                 else
@@ -84,6 +88,14 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                         ViewBag.AddSuccessArabic = "نجحت الإضافة";
 
                         return View(GetAllDepartemnet());
+                    }
+                    else if (deplist.Count == 1)
+                    {
+                        ViewBag.sameEdit = "Already Exists";
+                        ViewBag.sameEditArabic = "موجود بالفعل";
+
+                        return View(GetAllDepartemnet());
+
                     }
                     else
                     {
@@ -228,18 +240,21 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
                     return View();
                 }
+                var brokenList = broken_Repo.List().Where(d=>d.Fk_departmentId==dep.id).ToList();
+                var Dep_relation_Ty_list = department_Relation_Repo.List().Where(d => d.FK_DepartmentId == dep.id).ToList();
                 var facu = faculty_Repo.Find(dep.FK_facultyId);
-                var dep_relation = department_Relation_Repo.List();
-                bool department_Is_linked = false;
-                foreach (var item in dep_relation)
-                {
-                    if (item.FK_DepartmentId == id)
-                    {
-                        department_Is_linked  = true;
-                        break;
-                    }
-                }
-                if (!department_Is_linked)
+                //var dep_relation = department_Relation_Repo.List();
+                //bool department_Is_linked = false;
+                //foreach (var item in dep_relation)
+                //{
+                //    if (item.FK_DepartmentId == id)
+                //    {
+                //        department_Is_linked  = true;
+                //        break;
+                //    }
+                //}
+
+                if (brokenList.Count==0 && Dep_relation_Ty_list.Count==0)
                 {
                     deprt_Repo.Delete(id);
                     ViewBag.freeDepartment = "Delete the '" + dep.specialization_name + "'with faculty' " + facu.Faculty_name + "' succeeded";
@@ -248,8 +263,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     return View();
                 }
                 else {
-                    ViewBag.linkedDepartment = "you can't delete This department because it is related with Others"; 
-                    ViewBag.linkedDepartmentArabic = "لا يمكنك حذف هذا القسم لأنه مرتبط بالآخرين"; return View(dep);
+                    ViewBag.linkedDepartment = "you can't delete This item because it is related with Others(may broken relation or Department type)"; 
+                    ViewBag.linkedDepartmentArabic = "لا يمكنك حذف هذا القسم لأنه مرتبط بالآخرين "; return View(dep);
 
                 }
 
@@ -274,8 +289,6 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             var listt = new List<Faculty>();
             listt.Insert(0,f);
             fac.Remove(f);
-           
-           
             listt.Insert(1, new Faculty { id = -1, Faculty_name = "please Enter The Faculty" });
             listt.InsertRange(2, fac);
             return listt;

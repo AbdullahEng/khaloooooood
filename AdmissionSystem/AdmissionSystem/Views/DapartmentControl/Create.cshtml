@@ -18,7 +18,9 @@
     <div class="col-md-4 content">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*English*@
+         
+            
+    @*English*@
             @if (ViewBag.Message != null)
             {
                 <div class="alert alert-warning border-warning">@ViewBag.Message</div>
@@ -40,31 +42,47 @@
                 </div>
 
             }
+            @if (ViewBag.sameEdit != null)
+            {
 
-            @*Arabic*@ 
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEdit
+                </div>
+            }
+
+            @*Arabic*@
 
 
             @*@if (ViewBag.MessageArabic != null)
-            {
-                <div class="alert alert-warning border-warning">@ViewBag.MessageArabic</div>
-            }
-            @if (ViewBag.AddSuccessArabic != null)
+        {
+            <div class="alert alert-warning border-warning">@ViewBag.MessageArabic</div>
+        }
+        @if (ViewBag.AddSuccessArabic != null)
+        {
+
+            <div class="alert alert-success border-successArabic " role="alert">
+                @ViewBag.AddSuccessArabic
+            </div>
+        }
+
+        @if (ViewBag.AddfailsArabic != null)
+        {
+
+            <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                @ViewBag.AddfailsArabic
+            </div>
+
+        }
+
+                 @if (ViewBag.sameEditArabic != null)
             {
 
-                <div class="alert alert-success border-successArabic " role="alert">
-                    @ViewBag.AddSuccessArabic
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEditArabic
                 </div>
             }
-
-            @if (ViewBag.AddfailsArabic != null)
-            {
-
-                <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
-
-                    @ViewBag.AddfailsArabic
-                </div>
-
-            }*@
+            *@
 
 
 

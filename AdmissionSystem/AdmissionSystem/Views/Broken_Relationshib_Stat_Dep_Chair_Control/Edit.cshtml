@@ -4,40 +4,117 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center">Edit</h1>
 
-<h4>Broken_Relationshib_Stat_Dep_Chair_View_model</h4>
+@*<h4>Broken_Relationshib_Stat_Dep_Chair_View_model</h4>*@
 <hr />
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 content">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*English*@
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-dark border-dark">
+                    @ViewBag.Message
+
+                </div>
+            }
+            @if (ViewBag.UpdateSuccess != null)
+            {
+
+                <div class="alert alert-success border-success">
+
+                    @ViewBag.UpdateSuccess
+                </div>
+            }
+            @if (ViewBag.sameEdit != null)
+            {
+
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEdit
+                </div>
+            }
+            @if (ViewBag.updatefails != null)
+            {
+
+                <div class="alert alert-danger border-dark">
+
+                    @ViewBag.updatefails
+                </div>
+            }
+
+
+            @*Arabic*@
+
+
+            @*@if (ViewBag.MessageArabic != null)
+        {
+            <div class="alert alert-dark border-dark">
+                @ViewBag.MessageArabic
+
+            </div>
+        }
+        @if (ViewBag.UpdateSuccessArabic != null)
+        {
+
+            <div class="alert alert-success border-success">
+
+                @ViewBag.UpdateSuccessArabic
+            </div>
+        }
+        @if (ViewBag.sameEditArabic != null)
+        {
+
+            <div class="alert alert-warning border-warning">
+                @ViewBag.sameEditArabic
+            </div>
+        }
+        @if (ViewBag.updatefailsArabic != null)
+        {
+
+            <div class="alert alert-danger border-dark">
+
+                @ViewBag.updatefailsArabic
+            </div>
+        }*@
+
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="status_of_admi_eligi_id" class="control-label"></label>
-                <input asp-for="status_of_admi_eligi_id" class="form-control" />
+                <label class="control-label"> Type Of Admission</label>
+                <select asp-for="status_of_admi_eligi_id" class="form-control" asp-items="@(new SelectList(Model.FK_statues_Of_Admission_Eligibilty,"id","Type_of_admission_eligibilty"))">
+                </select>
                 <span asp-validation-for="status_of_admi_eligi_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="department_id" class="control-label"></label>
-                <input asp-for="department_id" class="form-control" />
+                <label class="control-label"> Department </label>
+                <select asp-for="department_id" class="form-control" asp-items="@(new SelectList(Model.Fk_department,"id","specialization_name"))">
+                </select>
                 <span asp-validation-for="department_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Chair_count" class="control-label"></label>
+                <label class="control-label"> Cahir count</label>
                 <input asp-for="Chair_count" class="form-control" />
                 <span asp-validation-for="Chair_count" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-outline-primary" />
+            </div>
+            <div>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

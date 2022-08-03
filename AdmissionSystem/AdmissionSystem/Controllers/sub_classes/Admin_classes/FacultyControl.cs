@@ -76,7 +76,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     faculty_Repo.Add(collection);
                   
                                 
-                    ViewBag.StatusMessageSuccess = "Faculty has been added successfully";
+                    ViewBag.StatusMessageSuccess = "Faculty ' "+collection.Faculty_name+" ' has been added successfully";
                     ViewBag.StatusMessageSuccessArabic = "تم اضافه الكليه بنجاح ";     
 
                     return View();

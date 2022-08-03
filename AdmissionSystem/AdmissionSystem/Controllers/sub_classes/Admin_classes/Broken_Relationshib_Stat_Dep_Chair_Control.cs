@@ -29,8 +29,28 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         // GET: Broken_Relationshib_Stat_Dep_Chair_Controller
         public ActionResult Index()
         {
-            var broke = broken_R_S_D_C_Repo.List().ToList();
-            return View(broke);
+
+           var broke = broken_R_S_D_C_Repo.List().ToList();
+            var broklist = new List<Broken_Relationshib_Stat_Dep_Chair>();
+            foreach (var item in broke)
+            {
+                if (broke != null) {
+                    var status = status_Of_Adm_Eligi_Repo.Find(item.FK_statues_Of_Admission_EligibiltyId);
+                    var dep = department_Repo.Find(item.Fk_departmentId);
+                    var broktoAdd = new Broken_Relationshib_Stat_Dep_Chair {
+                    Chair_count=item.Chair_count,
+                     id=item.id,
+                      Fk_department=dep,
+                      Fk_departmentId=item.Fk_departmentId,
+                      FK_statues_Of_Admission_Eligibilty=status,
+                      FK_statues_Of_Admission_EligibiltyId=item.FK_statues_Of_Admission_EligibiltyId
+                    
+                    };
+
+                    broklist.Add(broktoAdd);
+                }
+            }
+                return View(broklist);
         }
 
         // GET: Broken_Relationshib_Stat_Dep_Chair_Controller/Details/5
@@ -72,8 +92,37 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     Chair_count = collection.Chair_count
 
                 };
-                broken_R_S_D_C_Repo.Add(broken);
-                return RedirectToAction(nameof(Index));
+
+
+                var ff = broken_R_S_D_C_Repo.List()
+                    .Where(f => (f.FK_statues_Of_Admission_EligibiltyId == collection.status_of_admi_eligi_id)
+                    && (f.Fk_departmentId == collection.department_id )
+                    &&( f.Chair_count == collection.Chair_count)).ToList();
+
+
+                if (ff.Count == 0)
+                {
+                    broken_R_S_D_C_Repo.Add(broken);
+                    ViewBag.AddSuccess = "The addition succeeded";
+                    ViewBag.AddSuccessArabic = "نجحت الإضافة";
+                    return View(GetAll());
+
+                }
+                else if (ff.Count == 1)
+                {
+                    ViewBag.sameEdit = "Already Exists";
+                    ViewBag.sameEditArabic = "موجود بالفعل";
+                    return View(GetAll());
+
+
+                }
+                else {
+                    ViewBag.Addfails = "The addition fails";
+                    ViewBag.AddfailsArabic = "فشل الإضافة";
+                    return View(GetAll());
+
+                }
+                //return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -85,10 +134,12 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         public ActionResult Edit(int id)
         {
             var brokenfind = broken_R_S_D_C_Repo.Find(id);
+            var depart = department_Repo.Find(brokenfind.Fk_departmentId);
+            var status = status_Of_Adm_Eligi_Repo.Find(brokenfind.FK_statues_Of_Admission_EligibiltyId);
             var brokenView = new Broken_Relationshib_Stat_Dep_Chair_View_model
             {
-                FK_statues_Of_Admission_Eligibilty = FillSellectionStatus_of_admi_eligi(),
-                Fk_department = FillSellectionDepartment(),
+                FK_statues_Of_Admission_Eligibilty = FillSellectionStatus_of_admi_eligi_with_TYpe_of_Admission_Brok_Edit(status),
+                Fk_department = FillSellectionDepartment_Brok_Edit(depart),
                 Chair_count = brokenfind.Chair_count
             };
             return View(brokenView);
@@ -103,14 +154,57 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             {
                 var depart = department_Repo.Find(collection.department_id);
                 var status = status_Of_Adm_Eligi_Repo.Find(collection.status_of_admi_eligi_id);
+                if (collection.department_id == -1 || collection.status_of_admi_eligi_id == -1)
+                {
+                    ViewBag.Message = "The Department or Type of Admition is empty";
+                    return View(GetAll());
+                }
+               
                 var broken = new Broken_Relationshib_Stat_Dep_Chair
                 {
                     Chair_count = collection.Chair_count,
                     Fk_department = depart,
                     FK_statues_Of_Admission_Eligibilty = status
                 };
-                broken_R_S_D_C_Repo.Update(id, broken);
-                return RedirectToAction(nameof(Index));
+
+
+
+                var ff = broken_R_S_D_C_Repo.List()
+                 .Where(f => (f.FK_statues_Of_Admission_EligibiltyId == collection.status_of_admi_eligi_id)
+                 && (f.Fk_departmentId == collection.department_id)
+                 && (f.Chair_count == collection.Chair_count)).ToList();
+
+
+                if (ff.Count == 0)
+                {
+                    broken_R_S_D_C_Repo.Update(id, broken);
+                    ViewBag.UpdateSuccess = "Editing success";
+                    ViewBag.UpdateSuccessArabic = "نجاح التحرير";
+                    return View(GetAll_Brok_Edit(status, depart));
+
+                }
+                else if (ff.Count == 1)
+                {
+                    ViewBag.sameEdit = "Same Edit";
+                    ViewBag.sameEditArabic = "نفس التحرير";
+                    return View(GetAll_Brok_Edit(status, depart));
+
+
+                }
+                else
+                {
+
+                    ViewBag.updatefails = "Editing failed";
+                    ViewBag.updatefailsArabic = "فشل التحرير";
+                    return View(GetAll_Brok_Edit(status, depart));
+
+                }
+
+
+
+
+
+                //return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -121,14 +215,23 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         // GET: Broken_Relationshib_Stat_Dep_Chair_Controller/Delete/5
         public ActionResult Delete(int id)
         {
-            var broken = broken_R_S_D_C_Repo.Find(id);
-            var brokenview = new Broken_Relationshib_Stat_Dep_Chair_View_model
-            {
-                FK_statues_Of_Admission_Eligibilty = FillSellectionStatus_of_admi_eligi(),
-                Fk_department = FillSellectionDepartment(),
-                Chair_count = broken.Chair_count
+            var brokenfind = broken_R_S_D_C_Repo.Find(id);
+            var depart = department_Repo.Find(brokenfind.Fk_departmentId);
+            var status = status_Of_Adm_Eligi_Repo.Find(brokenfind.FK_statues_Of_Admission_EligibiltyId);
+            //var brokenView = new Broken_Relationshib_Stat_Dep_Chair_View_model
+            //{
+            //    FK_statues_Of_Admission_Eligibilty = FillSellectionStatus_of_admi_eligi_with_TYpe_of_Admission_Brok_Edit(status),
+            //    Fk_department = FillSellectionDepartment_Brok_Edit(depart),
+            //    Chair_count = brokenfind.Chair_count
+            //};
+            var borkenView = new Broken_Relationshib_Stat_Dep_Chair { 
+            Fk_department=brokenfind.Fk_department,
+            Chair_count=brokenfind.Chair_count,
+            Fk_departmentId=brokenfind.Fk_departmentId,
+            FK_statues_Of_Admission_Eligibilty=brokenfind.FK_statues_Of_Admission_Eligibilty,
+            FK_statues_Of_Admission_EligibiltyId=brokenfind.FK_statues_Of_Admission_EligibiltyId
             };
-            return View(brokenview);
+            return View(borkenView);
         }
 
         // POST: Broken_Relationshib_Stat_Dep_Chair_Controller/Delete/5
@@ -138,8 +241,36 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         {
             try
             {
-                broken_R_S_D_C_Repo.Delete(id);
-                return RedirectToAction(nameof(Index));
+                var brokeFind = broken_R_S_D_C_Repo.Find(id);
+               
+                if (brokeFind == null)
+                {
+                    ViewBag.WasDeleted = "This Item is already deleted";
+                    ViewBag.WasDeletedArabic = "تم حذف هذاالعنصر بالفعل";
+                    return View();
+                }
+                else {
+                    var depart = department_Repo.Find(brokeFind.Fk_departmentId);
+                    var status = status_Of_Adm_Eligi_Repo.Find(brokeFind.FK_statues_Of_Admission_EligibiltyId);
+
+                    broken_R_S_D_C_Repo.Delete(id);
+
+                    ViewBag.freeDepartment = "Delete the '" + status.Type_of_admission_eligibilty
+                                             + "'with Department' " + depart.specialization_name 
+                                             +"'with Chair count '"+brokeFind.Chair_count
+                                             + "' succeeded";
+                    ViewBag.freeDepartmentArabic = "حذف ال '" + status.Type_of_admission_eligibilty
+                                                   + "'مع القسم' " + depart.specialization_name 
+                                                   +"مع عدد كراسي"+ brokeFind.Chair_count 
+                                                   + "' تم بنجاح";
+                    return View();
+
+                }
+                //var ff = broken_R_S_D_C_Repo.List().Where(f => f.Fk_departmentId == brokeFind.Fk_departmentId 
+                //|| f.FK_statues_Of_Admission_EligibiltyId==brokeFind.FK_statues_Of_Admission_EligibiltyId);
+               
+                
+                //return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -152,12 +283,33 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             deprt.Insert(0, new Department { id = -1, specialization_name = "_-_-_-_-please Enter Department------" });
             return deprt;
         }
+        List<Department> FillSellectionDepartment_Brok_Edit(Department dep)
+        {
+            var deprt = department_Repo.List().ToList();
+            var list = new List<Department>();
+            list.Insert(0,dep);
+            deprt.Remove(dep);
+            list.Insert(1, new Department { id = -1, specialization_name = "_-_-_-_-please Enter Department------" });
+            list.InsertRange(2,deprt);
+            return list;
+        }
         List<Statues_of_admission_eligibilty> FillSellectionStatus_of_admi_eligi()
         {
             var status = status_Of_Adm_Eligi_Repo.List().ToList();
             status.Insert(0, new Statues_of_admission_eligibilty { id = -1, Type_of_admission_eligibilty = "_-_-_-_-please Enter Type of Admition------" });
             return status;
         }
+        List<Statues_of_admission_eligibilty> FillSellectionStatus_of_admi_eligi_with_TYpe_of_Admission_Brok_Edit(Statues_of_admission_eligibilty Type)
+        {
+            var status = status_Of_Adm_Eligi_Repo.List().ToList();
+            var list = new List<Statues_of_admission_eligibilty>();
+            list.Insert(0,Type);
+            status.Remove(Type);
+            list.Insert(1, new Statues_of_admission_eligibilty { id = -1, Type_of_admission_eligibilty = "_-_-_-_-please Enter Type of Admition------" });
+            list.InsertRange(2,status);
+            return list;
+        }
+
         Broken_Relationshib_Stat_Dep_Chair_View_model GetAll()
         {
             var broken = new Broken_Relationshib_Stat_Dep_Chair_View_model
@@ -168,5 +320,17 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             };
             return broken;
         }
+
+        Broken_Relationshib_Stat_Dep_Chair_View_model GetAll_Brok_Edit(Statues_of_admission_eligibilty type,Department dep)
+        {
+            var broken = new Broken_Relationshib_Stat_Dep_Chair_View_model
+            {
+                Fk_department = FillSellectionDepartment_Brok_Edit(dep),
+                FK_statues_Of_Admission_Eligibilty = FillSellectionStatus_of_admi_eligi_with_TYpe_of_Admission_Brok_Edit(type)
+
+            };
+            return broken;
+        }
+
     }
 }
