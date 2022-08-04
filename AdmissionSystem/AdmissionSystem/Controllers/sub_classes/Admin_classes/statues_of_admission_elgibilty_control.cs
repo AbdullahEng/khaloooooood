@@ -18,12 +18,12 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         private readonly CRUD_Operation_Interface<Accabtable_config> accabtable_Config_Repooo;
 
         public statues_of_admission_elgibilty_control(CRUD_Operation_Interface<Statues_of_admission_eligibilty> statues_o_a_e_repo
-                                                     ,CRUD_Operation_Interface<Persentage_count_for_each__country> Persentage_c_f_e_Repo          
-                                                     ,CRUD_Operation_Interface<Broken_Relationshib_Stat_Dep_Chair> broken_relation_Stat_Dep_Chair_REpo
-                                                      ,CRUD_Operation_Interface<Accabtable_config> Accabtable_config_Repooo
+                                                     , CRUD_Operation_Interface<Persentage_count_for_each__country> Persentage_c_f_e_Repo
+                                                     , CRUD_Operation_Interface<Broken_Relationshib_Stat_Dep_Chair> broken_relation_Stat_Dep_Chair_REpo
+                                                      , CRUD_Operation_Interface<Accabtable_config> Accabtable_config_Repooo
        )
-            
-            {
+
+        {
             statues_O_A_E_Repo = statues_o_a_e_repo;
             persentage_C_F_E_Repo = Persentage_c_f_e_Repo;
             broken_Relation_Stat_Dep_Chair_REpo = broken_relation_Stat_Dep_Chair_REpo;
@@ -55,19 +55,19 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         {
             try
             {
-                var ss = statues_O_A_E_Repo.List().Where(s=>s.Number_Student==collection.Number_Student &&
-                                                            s.Type_of_admission_eligibilty==collection.Type_of_admission_eligibilty&&
-                                                            s.semester_no==collection.semester_no&&
-                                                            s.semester_Date==collection.semester_Date&&
-                                                            s.Begaining_date_of_the_process==collection.Begaining_date_of_the_process                                
+                var ss = statues_O_A_E_Repo.List().Where(s => s.Number_Student == collection.Number_Student &&
+                                                            s.Type_of_admission_eligibilty == collection.Type_of_admission_eligibilty &&
+                                                            s.semester_no == collection.semester_no &&
+                                                            s.semester_Date == collection.semester_Date &&
+                                                            s.Begaining_date_of_the_process == collection.Begaining_date_of_the_process
                      ).ToList();
 
 
 
                 if (ss.Count == 0)
                 {
-                statues_O_A_E_Repo.Add(collection);
-                  ViewBag.AddSuccess = "The addition succeeded";
+                    statues_O_A_E_Repo.Add(collection);
+                    ViewBag.AddSuccess = "The addition succeeded";
                     ViewBag.AddSuccessArabic = "نجحت الإضافة";
 
                     return View();
@@ -126,7 +126,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
                 if (ss.Count == 0)
                 {
-                statues_O_A_E_Repo.Update(id, collection);
+                    statues_O_A_E_Repo.Update(id, collection);
                     ViewBag.UpdateSuccess = "Editing success";
                     ViewBag.UpdateSuccessArabic = "نجاح التحرير";
 
@@ -177,15 +177,16 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             try
             {
                 var st = statues_O_A_E_Repo.Find(id);
-                if (st == null) { 
+                if (st == null)
+                {
                     ViewBag.WasDeleted = "This department is already deleted";
                     ViewBag.WasDeletedArabic = "تم حذف هذا القسم بالفعل";
 
                     return View();
                 }
-                var parcentlist = persentage_C_F_E_Repo.List().Where(p=>p.FK_statues_of_admission_eligibiltyId==id).ToList();
-                var brokenlist = broken_Relation_Stat_Dep_Chair_REpo.List().Where(b=>b.FK_statues_Of_Admission_EligibiltyId==id).ToList();
-                var acclist = accabtable_Config_Repooo.List().Where(a=>a.FK_Statues_of_admission_eligibiltyId==id).ToList();
+                var parcentlist = persentage_C_F_E_Repo.List().Where(p => p.FK_statues_of_admission_eligibiltyId == id).ToList();
+                var brokenlist = broken_Relation_Stat_Dep_Chair_REpo.List().Where(b => b.FK_statues_Of_Admission_EligibiltyId == id).ToList();
+                var acclist = accabtable_Config_Repooo.List().Where(a => a.FK_Statues_of_admission_eligibiltyId == id).ToList();
                 if (parcentlist.Count == 0 && brokenlist.Count == 0 && acclist.Count == 0)
                 {
                     statues_O_A_E_Repo.Delete(id);
