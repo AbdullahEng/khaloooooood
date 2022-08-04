@@ -9,8 +9,8 @@ namespace AdmissionSystem.Model
     public class Student
     {  public int Id { get; set; }
         public string high_school_certificate { get; set; }//syrian or not syrian certificate.
-      
-         public Country Cirtificate_city  { get; set; }// هل هذا يتصل بجدول البلاد ؟؟؟؟؟؟؟وسؤال تاني انو براي هذا الفيتشر لازم تكون موجوده بجدول الشهاده بحيث اذا كان الشهاده اجنبية لازم يعبي منين اخدها واذا كانت الشهاده سورية لازم ينحط باي ديفولت انو البلد سوري  
+        public int Fk_Cirtificate_cityId { get; set; }
+        public Country Cirtificate_city  { get; set; }// هل هذا يتصل بجدول البلاد ؟؟؟؟؟؟؟وسؤال تاني انو براي هذا الفيتشر لازم تكون موجوده بجدول الشهاده بحيث اذا كان الشهاده اجنبية لازم يعبي منين اخدها واذا كانت الشهاده سورية لازم ينحط باي ديفولت انو البلد سوري  
         /// <summary>
         /// إي المفروض يرتبط بجدول البلاد 1
         /// 2اذا كان هون ولا بجدول الشهاده نفس الشي  مو العلاقه واحد ل واحد 

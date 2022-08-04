@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Country> List()
         {
-            return DB.Country.ToList();
+            return DB.Country.AsNoTracking().ToList();
         }
 
         public void Update(int id, Country entity)
