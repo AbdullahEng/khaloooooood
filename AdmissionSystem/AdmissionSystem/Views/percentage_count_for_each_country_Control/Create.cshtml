@@ -4,14 +4,86 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class=" text-center">Create percentage count for each country</h1>
 
-<h4>percentage_count_for_each_country_view_model</h4>
+@*<h4>percentage_count_for_each_country_view_model</h4>*@
 <hr />
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 content">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            @*English*@
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-warning border-warning">@ViewBag.Message</div>
+            }
+            @if (ViewBag.AddSuccess != null)
+            {
+
+                <div class="alert alert-success border-success " role="alert">
+                    @ViewBag.AddSuccess
+                </div>
+            }
+
+            @if (ViewBag.Addfails != null)
+            {
+
+                <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                    @ViewBag.Addfails
+                </div>
+
+            }
+            @if (ViewBag.sameEdit != null)
+            {
+
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEdit
+                </div>
+            }
+
+            @*Arabic*@
+
+
+            @*@if (ViewBag.MessageArabic != null)
+        {
+            <div class="alert alert-warning border-warning">@ViewBag.MessageArabic</div>
+        }
+        @if (ViewBag.AddSuccessArabic != null)
+        {
+
+            <div class="alert alert-success border-successArabic " role="alert">
+                @ViewBag.AddSuccessArabic
+            </div>
+        }
+
+        @if (ViewBag.AddfailsArabic != null)
+        {
+
+            <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                @ViewBag.AddfailsArabic
+            </div>
+
+        }
+
+                 @if (ViewBag.sameEditArabic != null)
+            {
+
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEditArabic
+                </div>
+            }
+            *@
+
             <div class="form-group">
                 <label asp-for="statues_of_adm_eli_ID" class="control-label"></label>
                 <select asp-for="statues_of_adm_eli_ID" class="form-control" asp-items="@(new SelectList(Model.FK_statues_of_admission_eligibilty,"id","Type_of_admission_eligibilty"))">
@@ -21,25 +93,26 @@
             <div class="form-group">
                 <label asp-for="countryId" class="control-label"></label>
                 <select asp-for="countryId" class="form-control" asp-items="@(new SelectList(Model.FK_country,"id","country_name"))">
-                </select>    
+                </select>
                 <span asp-validation-for="countryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rate" class="control-label"></label>
-                <input asp-for="Rate" class="form-control" />
-                <span asp-validation-for="Rate" class="text-danger"></span>
+                <input asp-for="Rate" class="form-control"  data-toggle="tooltip" data-placement="bottom" title="As a percent" />
+                <span asp-validation-for="Rate" class="text-danger"  ></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-primary" />
+            </div>
+
+            <div>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@*@section Scripts {
+@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+}

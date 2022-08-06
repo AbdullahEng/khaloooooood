@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +29,13 @@ namespace AdmissionSystem.Model.Repository
 
         public Persentage_count_for_each__country Find(int id)
         {
-            var pers = DB.Persentage_count_for_each__country.SingleOrDefault(p=>p.id==id);
+            var pers = DB.Persentage_count_for_each__country.AsNoTracking().SingleOrDefault(p=>p.id==id);
             return pers;
         }
 
         public IList<Persentage_count_for_each__country> List()
         {
-            return DB.Persentage_count_for_each__country.ToList();
+            return DB.Persentage_count_for_each__country.AsNoTracking().Include(c=>c.FK_country).Include(s=>s.FK_statues_of_admission_eligibilty).ToList();
         }
 
         public void Update(int id, Persentage_count_for_each__country entity)
