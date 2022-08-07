@@ -29,12 +29,12 @@ namespace AdmissionSystem.Model.Repository
 
         public Department_relation_Type Find(int id)
         {
-            return DB.Department_relation_Type.SingleOrDefault(a => a.id == id);
+            return DB.Department_relation_Type.Include(a => a.FK_Department).Include(b => b.FK_type_Of_High_School_Cirtificate).SingleOrDefault(a => a.id == id);
         }
 
         public IList<Department_relation_Type> List()
         {
-            return DB.Department_relation_Type.Include(a=>a.FK_Department).Include(b=>b.FK_type_Of_High_School_Cirtificate).ToList();
+            return DB.Department_relation_Type.AsNoTracking().Include(a=>a.FK_Department).Include(b=>b.FK_type_Of_High_School_Cirtificate).ToList();
         }
 
         public void Update(int id, Department_relation_Type entity)

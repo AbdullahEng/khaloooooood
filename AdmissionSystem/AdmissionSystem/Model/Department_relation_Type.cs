@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,11 +10,15 @@ namespace AdmissionSystem.Model
     public class Department_relation_Type
     {
         public int id { get; set; }
+        [Display(Name ="Department")]
         public int FK_DepartmentId { get; set; }//one_to_many relationship
         public Department FK_Department { get; set; }//one_to_many relationship
-       public int FK_type_Of_High_School_CirtificateId { get; set; }//one_to_many relationship
+        [Display(Name = "Type of high school cirtificate")]
+        public int FK_type_Of_High_School_CirtificateId { get; set; }//one_to_many relationship
         public Type_of_high_school_Cirtificate FK_type_Of_High_School_Cirtificate { get; set; }//one_to_many relationship
+        [Display(Name = "Minemum rate")]
         public double Minemum_of_Rate  { get; set; }
+        [Display(Name = "rate of chaire count")]
         public double Rate_of_chaire_count { get; set; } 
 
       ////  [ForeignKey("Admission_Eligibilty_Requist_For_UNsy_Certificate")]
