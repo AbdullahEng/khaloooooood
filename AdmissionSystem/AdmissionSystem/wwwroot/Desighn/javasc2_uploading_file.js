@@ -2,7 +2,7 @@
 // - https://dribbble.com/shots/13992184-File-Uploader-Drag-Drop
 
 // Select Upload-Area
-const uploadArea2 = document.querySelector('#uploadArea2')
+const uploadArea2 = document.querySelector('#uploadArea2');
 
 // Select Drop-Zoon Area
 const dropZoon2 = document.querySelector('#dropZoon2');
@@ -200,10 +200,24 @@ function fileValidate2(fileType2, fileSize2) {
     if (fileSize2 <= 2000000) { // 2MB :)
       return true;
     } else { // Else File Size
-      return alert('Please Your File Should be 2 Megabytes or Less');
+     // return alert('Please Your File Should be 2 Megabytes or Less');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please Your File Should be 2 Megabytes or Less',
+
+        })
+        document.getElementsByClassName("hide_bar2")[0].hidden = true;
     };
-  } else { // Else File Type 
-    return alert('Please make sure to upload An Image File Type');
+  } else { // Else File Type
+      /*return alert('Please make sure to upload An Image File Type');*/
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please make sure to upload An Image File Type',
+
+      })
+      document.getElementsByClassName("hide_bar2")[0].hidden = true;
   };
 };
 

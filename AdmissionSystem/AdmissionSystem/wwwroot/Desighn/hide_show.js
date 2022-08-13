@@ -90,4 +90,24 @@ function showbar2() {
 function showbar1() {
     document.getElementsByClassName("hide_bar1")[0].hidden = false;
 }
-        
+
+
+function hideimageandbar1() {
+    document.getElementsByClassName("hide_bar1")[0].hidden = true;
+    document.getElementById("previewImage").src = "#";
+}
+
+function hideimageandbar2() {
+    document.getElementsByClassName("hide_bar2")[0].hidden = true;
+    document.getElementById("previewImage2").src = "#";
+}
+
+function hideimageandbar3() {
+    document.getElementsByClassName("hide_bar3")[0].hidden = true;
+    document.getElementById("previewImage3").src = "#";
+}
+
+function hideimageandbar4() {
+    document.getElementsByClassName("hide_bar4")[0].hidden = true;
+    document.getElementById("previewImage4").src = "#";
+}

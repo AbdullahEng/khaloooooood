@@ -29,7 +29,7 @@ namespace AdmissionSystem.Model.Repository
 
         public Student Find(int id)
         {
-            var Student_f = DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).SingleOrDefault(a => a.Id == id);
+            var Student_f = DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).Include(a=>a.Cirtificate_city).SingleOrDefault(a => a.Id == id);
             return Student_f;
 
         }

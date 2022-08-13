@@ -12,7 +12,6 @@
 <link href="~/Desighn/css_uploading_file.css" rel="stylesheet" />
 
 
-
     @{
         if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
         {
@@ -21,34 +20,38 @@
     else {<h1 hidden id="khaled">nokhaled</h1>
     }
     }
-
+  @if(ViewBag.Erroremessage!=null){<div class="alert alert-danger border-danger" role="alert">
+                    @ViewBag.Erroremessage
+                </div>
+   }
     <form id="regForm" asp-action="Edit" enctype="multipart/form-data" class="ContainerRegForm ">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="row form-group border-bottom border-warning ">
             <div class="col-11">
-                <h2 class="text-warning">@localizer["Register"] </h2>
+                <h2 class="text-warning">@localizer["Registeration"] </h2>
                 <label class="text-primary">@Model.Addmition_eleigibilty</label>
             </div>
             <img src="~/Desighn/kalamoon logo.png" width="80" height="90" />
         </div>
         <!-- One "tab" for each step in the form: -->
         <div class="tab">
-            <h5 class="alert alert-primary text-center font-weight-bold" role="alert">@localizer["family and identity information"] </h5>
+            <h2 class="alert alert-primary text-center " role="alert">@localizer["family and identity information"] </h2>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="First_Name_AR">@localizer["First Name in Arbic"]</label>
                             <input asp-for="First_Name_AR" class="form-control" />
-                            <span asp-validation-for="First_Name_AR" class="text-danger"></span>
+                            <span asp-validation-for="First_Name_AR" class="text-danger small"></span>
                         </div>
 
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Father_Name_AR">@localizer["Father Name in Arabic"]</label>
-                            <input asp-for="Father_Name_AR" class="form-control" />
-                            <span asp-validation-for="Father_Name_AR" class="text-danger"></span>
+                            <input asp-for="Father_Name_AR" class="form-control" required />
+                            <span asp-validation-for="Father_Name_AR" class="text-danger small"></span>
                         </div>
 
                     </div>
@@ -56,13 +59,13 @@
                         <div class="form-group">
                             <label asp-for="Mother_Name_AR">@localizer["Mother Name in Arabic"]</label>
                             <input asp-for="Mother_Name_AR" class="form-control" />
-                            <span asp-validation-for="Mother_Name_AR" class="text-danger"></span>
+                            <span asp-validation-for="Mother_Name_AR" class="text-danger small"></span>
                         </div>
                     </div> <div class="col">
                         <div class="form-group">
                             <label asp-for="Grandfather_Name_AR">@localizer["Grand Father name in Arabic"]</label>
                             <input asp-for="Grandfather_Name_AR" class="form-control" />
-                            <span asp-validation-for="Grandfather_Name_AR" class="text-danger"></span>
+                            <span asp-validation-for="Grandfather_Name_AR" class="text-danger small"></span>
                         </div>
 
                     </div>
@@ -73,28 +76,28 @@
                         <div class="form-group">
                             <label asp-for="First_Name_EN">@localizer["First Name in English"]</label>
                             <input asp-for="First_Name_EN" class="form-control" />
-                            <span asp-validation-for="First_Name_EN" class="text-danger"></span>
+                            <span asp-validation-for="First_Name_EN" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Father_Name_EN">@localizer["Father Name in English"]</label>
                             <input asp-for="Father_Name_EN" class="form-control" />
-                            <span asp-validation-for="Father_Name_EN" class="text-danger"></span>
+                            <span asp-validation-for="Father_Name_EN" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Mother_Name_EN">@localizer["Mother Name in English"]</label>
                             <input asp-for="Mother_Name_EN" class="form-control" />
-                            <span asp-validation-for="Mother_Name_EN" class="text-danger"></span>
+                            <span asp-validation-for="Mother_Name_EN" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Grandfather_Name_EN">@localizer["Grand FAther Name in English"]</label>
                             <input asp-for="Grandfather_Name_EN" class="form-control" />
-                            <span asp-validation-for="Grandfather_Name_EN" class="text-danger"></span>
+                            <span asp-validation-for="Grandfather_Name_EN" class="text-danger small"></span>
                         </div>
                     </div>
 
@@ -103,16 +106,16 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Nick_Name">@localizer["Nick name"] </label>
-                            <input asp-for="Nick_Name" class="form-control" />
-                            <span asp-validation-for="Nick_Name" class="text-danger"></span>
+                            <input required asp-for="Nick_Name" class="form-control" />
+                            <span asp-validation-for="Nick_Name" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
 
                         <div class="form-group">
                             <label asp-for="Birth">@localizer["Birth"]</label>
-                            <input asp-for="Birth" class="form-control" />
-                            <span asp-validation-for="Birth" class="text-danger"></span>
+                            <input type="date" asp-for="Birth" class="form-control" />
+                            <span asp-validation-for="Birth" class="text-danger small"></span>
                         </div>
 
                     </div>
@@ -121,7 +124,7 @@
                         <div class="form-group">
                             <label asp-for="Nationality">@localizer["Nationality"]</label>
                             <input placeholder="عربي سوري" asp-for="Nationality" class="form-control" />
-                            <span asp-validation-for="Nationality" class="text-danger"></span>
+                            <span asp-validation-for="Nationality" class="text-danger small"></span>
                         </div>
                     </div>
 
@@ -161,6 +164,8 @@
                          <input asp-for="Marital_status" type="radio" name="Marital_status" id="Marital_status4" value="Divorced" autocomplete="off" > @localizer["Divorced"]
                         </label>
                         </div>
+                        <br>
+                         <span asp-validation-for="Marital_status" class="text-danger small"></span>
                     </div>
 
                     <div class="col">
@@ -174,19 +179,20 @@
                          <input asp-for="gender" type="radio" name="gender" id="option2" value="femal" autocomplete="off">Femal
                         </label>
                         </div>
-
+                        <br>
+                       <span asp-validation-for="gender" class="text-danger small"></span>
                     </div>
 
                 </div>
 
             </div>
-            @*  <label asp-for="gender" class="control-label">@localizer["gender"]</label>
+@*              <label asp-for="gender" class="control-label">@localizer["gender"]</label>
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label for="option1" asp-for="gender" class="btn btn-outline-primary active">
-    <input asp-for="gender" type="radio" name="gender" value="male" id="option1" autocomplete="off" > Male
+  <label for="option1" asp-for="gender" class="btn btn-outline-primary" >
+    <input asp-for="gender" type="radio" name="gender" value="male" id="option1"  checked> Male
   </label>
   <label for="option2" asp-for="gender" class="btn btn-outline-primary">
-    <input asp-for="gender" type="radio" name="gneder" value="femal" id="option2" autocomplete="off" checked> Female
+    <input asp-for="gender" type="radio" name="gneder" value="femal" id="option2" checked > Female
   </label>
   
 </div>*@
@@ -198,7 +204,7 @@
 
 
         <div class="tab">
-            <h5 class="alert alert-primary text-center font-weight-bold" role="alert">@localizer["informaion part 1"] </h5>
+            <h2 class="alert alert-primary text-center " role="alert">@localizer["informaion part 1"] </h2>
             <div class="container">
                 <div class="row">
 
@@ -206,7 +212,7 @@
                         <div class="form-group">
                             <label asp-for="Civil_Registriation_City" class="control-label">@localizer["Civil Registriation City"]</label>
                             <input placeholder="حمص الحميدية" asp-for="Civil_Registriation_City" class="form-control" />
-                            <span asp-validation-for="Civil_Registriation_City" class="text-danger"></span>
+                            <span asp-validation-for="Civil_Registriation_City" class="text-danger small"></span>
                         </div>
 
                     </div>
@@ -214,7 +220,7 @@
                         <div class="form-group">
                             <label asp-for="Civil_Registrition_No" class="control-label">@localizer["Civil Registrition No"]</label>
                             <input asp-for="Civil_Registrition_No" class="form-control" />
-                            <span asp-validation-for="Civil_Registrition_No" class="text-danger"></span>
+                            <span asp-validation-for="Civil_Registrition_No" class="text-danger small"></span>
                         </div>
                     </div>
                 </div>
@@ -222,15 +228,15 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Passport_No" class="control-label">@localizer["Passport No"]</label>
-                            <input asp-for="Passport_No" class="form-control" />
-                            <span asp-validation-for="Passport_No" class="text-danger"></span>
+                            <input asp-for="Passport_No" class="form-control"  />
+                            <span asp-validation-for="Passport_No" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Identity_No" class="control-label">@localizer["Identity No"]</label>
-                            <input asp-for="Identity_No" class="form-control" />
-                            <span asp-validation-for="Identity_No" class="text-danger"></span>
+                            <input asp-for="Identity_No" class="form-control"  />
+                            <span asp-validation-for="Identity_No" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
@@ -238,7 +244,7 @@
                         <div class="form-group">
                             <label asp-for="Full_Address" class="control-label">@localizer["Full Address"]</label>
                             <input placeholder="حمص الإنشائات شارع الوفائي" asp-for="Full_Address" class="form-control" />
-                            <span asp-validation-for="Full_Address" class="text-danger"></span>
+                            <span asp-validation-for="Full_Address" class="text-danger small"></span>
                         </div>
                     </div>
                 </div>
@@ -249,7 +255,7 @@
                         <div class="form-group">
                             <label asp-for="Email" class="control-label">@localizer["Email"]</label>
                             <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
@@ -257,14 +263,14 @@
                         <div class="form-group">
                             <label asp-for="Current_Address" class="control-label">@localizer["Current Address"]</label>
                             <input placeholder="حمص الإنشائات" asp-for="Current_Address" class="form-control" />
-                            <span asp-validation-for="Current_Address" class="text-danger"></span>
+                            <span asp-validation-for="Current_Address" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Mobile_Phone" class="control-label">@localizer["Mobile Phone"]</label>
                             <input asp-for="Mobile_Phone" class="form-control" />
-                            <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
+                            <span asp-validation-for="Mobile_Phone" class="text-danger small" ></span>
                         </div>
                     </div>
                 </div>
@@ -274,7 +280,7 @@
                         <div class="form-group">
                             <label asp-for="Home_s_Phone" class="control-label">@localizer["Home Phone"]</label>
                             <input asp-for="Home_s_Phone" class="form-control" />
-                            <span asp-validation-for="Home_s_Phone" class="text-danger"></span>
+                            <span asp-validation-for="Home_s_Phone" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
@@ -282,14 +288,14 @@
                         <div class="form-group">
                             <label asp-for="The_Rate" class="control-label">@localizer["The Rate"]</label>
                             <input asp-for="The_Rate" class="form-control" />
-                            <span asp-validation-for="The_Rate" class="text-danger"></span>
+                            <span asp-validation-for="The_Rate" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="city_of_high_school_cirtificate" class="control-label">@localizer["City of High School Cirtificate"]</label>
                             <input asp-for="city_of_high_school_cirtificate" class="form-control" />
-                            <span asp-validation-for="city_of_high_school_cirtificate" class="text-danger"></span>
+                            <span asp-validation-for="city_of_high_school_cirtificate" class="text-danger small"></span>
                         </div>
                     </div>
                 </div>
@@ -298,54 +304,55 @@
         </div>
 
         <div class="tab">
-            <h5 class="alert alert-primary text-center font-weight-bold" role="alert">@localizer["informaion part 2"] </h5>
+            <h2 class="alert alert-primary text-center " role="alert">@localizer["informaion part 2"] </h2>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="high_school_certificate" class="control-label">@localizer["high school certificate"]</label>
                             <input asp-for="high_school_certificate" class="form-control" value="Syrian" />
-                            <span asp-validation-for="high_school_certificate" class="text-danger"></span>
+                            <span asp-validation-for="high_school_certificate" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="course_number" class="control-label">@localizer["course number"] </label>
                             <input asp-for="course_number" class="form-control" />
-                            <span asp-validation-for="course_number" class="text-danger"></span>
+                            <span asp-validation-for="course_number" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Subscription_number" class="control-label">@localizer["Subscription Number"]</label>
                             <input asp-for="Subscription_number" class="form-control" />
-                            <span asp-validation-for="Subscription_number" class="text-danger"></span>
+                            <span asp-validation-for="Subscription_number" class="text-danger small"></span>
                         </div>
                     </div>
                 </div> <div class="row">
                     <div class="col">
                          <label asp-for="LAnguge_of_the_addmintion" class="control-label">@localizer["LAnguge of the addmintion"]</label>
-                           
-                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                         <label for="kh"  asp-for="LAnguge_of_the_addmintion" class="btn btn-outline-primary">
-                         <input asp-for="LAnguge_of_the_addmintion" type="radio" name="LAnguge_of_the_addmintion" id="kh" value="English" autocomplete="off" checked> @localizer["English"]
+                         <div class="btn-group btn-group-toggle"  data-toggle="buttons">
+                         <label  for="kh"  asp-for="LAnguge_of_the_addmintion" class="btn btn-outline-primary " >
+                         <input  asp-for="LAnguge_of_the_addmintion" type="radio" name="LAnguge_of_the_addmintion" id="kh" value="English" autocomplete="off"> @localizer["English"]
                         </label>
                          <label for="kh1"  asp-for="LAnguge_of_the_addmintion" class="btn btn-outline-primary">
-                         <input asp-for="LAnguge_of_the_addmintion" type="radio" name="LAnguge_of_the_addmintion" id="kh1" value="Fransh" autocomplete="off">@localizer["Franch"]
+                         <input  asp-for="LAnguge_of_the_addmintion" type="radio" name="LAnguge_of_the_addmintion" id="kh1" value="Fransh" autocomplete="off">@localizer["Franch"]
                         </label>
                         </div>
+                        <br>
+                         <span asp-validation-for="LAnguge_of_the_addmintion" class="text-danger small"></span>
 
-                        @*<div class="form-group">
+                       @* <div class="form-group">
                             <label asp-for="LAnguge_of_the_addmintion" class="control-label">@localizer["LAnguge of the addmintion"]</label>
                             <input asp-for="LAnguge_of_the_addmintion" class="form-control" />
                             <span asp-validation-for="LAnguge_of_the_addmintion" class="text-danger"></span>
-                        </div>
-                   *@ </div>
+                        </div>*@
+                    </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Addmition_eleigibilty" class="control-label">@localizer["Addmition eleigibilty"]</label>
                             <input readonly asp-for="Addmition_eleigibilty" class="form-control" />
-                            <span asp-validation-for="Addmition_eleigibilty" class="text-danger"></span>
+                            <span asp-validation-for="Addmition_eleigibilty" class="text-danger small"></span>
                         </div>
 
                     </div>
@@ -354,25 +361,27 @@
                             <label asp-for="country" class="control-label">@localizer["Country of Certificate"]</label>
                             <input readonly asp-for="CountryList" class="form-control"  value=@Model.CountryList[0].country_name/>
                             <input hidden asp-for="country" class="form-control"  value=@Model.CountryList[0].id/>
-                            <span asp-validation-for="country" class="text-danger"></span>
+                            <span asp-validation-for="country" class="text-danger small"></span>
                         </div>
                        @* <select asp-for="country" class="form-control" asp-items="@(new SelectList(Model.CountryList, "id", "country_name"))" value=@Model.CountryList[2].country_name></select>
                        *@     
                     </div>
-                </div> <div class="row  ">
+                </div> 
+               
+                <div class="row  ">
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Type_Of_Certificat" class="control-label">@localizer["Type Of Certificat"]</label>
                             <select asp-for="Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
-                            <span asp-validation-for="Type_Of_Certificat" class="text-danger"></span>
+                            <span asp-validation-for="Type_Of_Certificat" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col">
 
                         <div class="form-group">
                             <label asp-for="date_of_high_school_cirtificate" class="control-label">@localizer["Date of High School Cirtificate"]</label>
-                            <input asp-for="date_of_high_school_cirtificate" class="form-control" />
-                            <span asp-validation-for="date_of_high_school_cirtificate" class="text-danger"></span>
+                            <input type="date" asp-for="date_of_high_school_cirtificate" class="form-control"/>
+                            <span asp-validation-for="date_of_high_school_cirtificate" class="text-danger small"></span>
                         </div>
 
                     </div>
@@ -383,14 +392,18 @@
         </div>
        @* this script to hide images template that is transparent and has 4 edge
       *@  @{
-                                                                             @if (Model.Image_of_crtificat_URL!=null)
+                                                                                                                                                                 @if (Model.Image_of_crtificat_URL!=null)
          {<h1 hidden id="hideornot">hidechoos</h1>
            
           }else{<h1 hidden  id="hideornot">hideimage</h1>}
                 
         }
-        <div class="tab">
-            <h5 class="alert alert-primary text-center font-weight-bold" role="alert">@localizer["Uploading file"] </h5>
+        @if(Model.check_recipt_image!=null)
+    {
+               <h1 hidden id="images_file" >fill_image</h1>        
+    }
+    <div class="tab">
+            <h2 class="alert alert-primary text-center " role="alert">@localizer["Uploading file"] </h2>
             <div class="container">
                  <div class="row">
                     <div class="col ">
@@ -440,7 +453,7 @@
                                                                            <div id="caption4"></div>
                                                                            </div>
                                                                            </div>
-                                                                           <input type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" />
+                                                                           <input id="Image_of_crtificat_URL" type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" value="@Model.Image_of_crtificat_URL"/>
                                                                                  
     <!-- Drop Zoon --><div class="ChooseImage">
     <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
@@ -462,7 +475,7 @@
 *@
          
      
-      <input type="file" id="fileInput" ondragover="    showbar1();" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="drop-zoon__file-input" accept="image/*">
+      <input type="file" id="fileInput" onchange="    showbar1();" onclick="    hideimageandbar1();" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="drop-zoon__file-input" accept="image/*">
     </div>
     <!-- End Drop Zoon -->
   
@@ -489,7 +502,8 @@
   <!-- End Upload Area -->
 </div>
 
-
+     <span asp-validation-for="Image_Of_Crtificat" class="text-danger"></span>
+                      
                     </div>
                     <div class="col ">
                          
@@ -527,7 +541,7 @@
                                                                                                   <div id="caption"></div>
                                                                                                 </div>
                                
-                        <input type="hidden" asp-for="Identity_front_image_URL" class="form-control" />
+                        <input type="hidden" id="Identity_front_image_URL" asp-for="Identity_front_image_URL" class="form-control" value="@Model.Identity_front_image_URL"/>
                         </div> 
     <!-- Drop Zoon --><div class="ChooseImage2">
     <div id="dropZoon2" class="upload-area__drop-zoon drop-zoon">
@@ -537,7 +551,7 @@
       <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
       <span id="loadingText2" class="drop-zoon__loading-text">Please Wait</span>
       <img src="" alt="Preview Image" id="previewImage2" class="drop-zoon__preview-image" draggable="false">
-      <input type="file" id="fileInput2" onchange="    showbar2();" name="Identity_front_image" asp-for="Identity_front_image" class="drop-zoon__file-input" accept="image/*">
+      <input type="file" id="fileInput2" onchange="    showbar2();" onclick="    hideimageandbar2();" name="Identity_front_image" asp-for="Identity_front_image" class="drop-zoon__file-input" accept="image/*">
     </div>
     <!-- End Drop Zoon -->
   </div>
@@ -565,7 +579,8 @@
 
 
 
-
+     <span asp-validation-for="Identity_front_image" class="text-danger"></span>
+                      
                     </div>
                     
                 </div> 
@@ -621,7 +636,9 @@
                                                                                                                                                       <img class="modal-content" id="img012">
                                                                                                                                                       <div id="caption2"></div>
                                                                                                                                                     </div>
-                        <input type="hidden" asp-for="Identity_back_image_URL" class="form-control" />
+
+
+                        <input type="hidden" id="Identity_back_image_URL" asp-for="Identity_back_image_URL" class="form-control" value="@Model.Identity_back_image_URL" />
                         </div> 
     <!-- Drop Zoon --><div class="ChooseImage3">
     <div id="dropZoon3" class="upload-area__drop-zoon drop-zoon">
@@ -631,7 +648,7 @@
       <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
       <span id="loadingText3" class="drop-zoon__loading-text">Please Wait</span>
          <img src="" alt="Preview Image" id="previewImage3"  class="drop-zoon__preview-image" draggable="false">
-      <input type="file" id="fileInput3" onchange="    showbar3();"  name="Identity_back_image" asp-for="Identity_back_image"  class="drop-zoon__file-input" accept="image/*">
+      <input type="file" id="fileInput3" onchange="    showbar3();" onclick="    hideimageandbar3();"  name="Identity_back_image" asp-for="Identity_back_image"  class="drop-zoon__file-input" accept="image/*">
     </div>
     <!-- End Drop Zoon -->
   
@@ -665,7 +682,8 @@
 
 
 
-
+     <span asp-validation-for="Identity_back_image" class="text-danger"></span>
+                      
                     </div>
 
                     <div class="col ">
@@ -707,7 +725,7 @@
                                                                                                                                                     </div>
            
                                 
-                                                                                                                               <input type="hidden" asp-for="Check_recipt_image_URL"width="300" height="200" />
+                                                                                                                               <input type="hidden" id="Check_recipt_image_URL" asp-for="Check_recipt_image_URL"width="300" height="200" value="@Model.Check_recipt_image_URL" />
                                                                                                                                </div>
 
   <!-- Drop Zoon --><div class="ChooseImage4">
@@ -718,7 +736,7 @@
     <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
     <span id="loadingText4" class="drop-zoon__loading-text">Please Wait</span>
     <img src="" alt="Preview Image" id="previewImage4" class="drop-zoon__preview-image" draggable="false">
-    <input type="file" id="fileInput4" onchange="    showbar4();" name="check_recipt_image" asp-for="check_recipt_image" class="drop-zoon__file-input" accept="image/*">
+    <input type="file" id="fileInput4" onchange="    showbar4();" onclick="    hideimageandbar4();"  name="check_recipt_image" asp-for="check_recipt_image" class="drop-zoon__file-input" accept="image/*">
   </div>
   <!-- End Drop Zoon -->
   
@@ -743,12 +761,8 @@
 </div>
 <!-- End Upload Area -->
 </div>
-
-
-
-
-
-
+     <span asp-validation-for="check_recipt_image" class="text-danger"></span>
+                      
                     </div>
 
                 </div>
@@ -771,39 +785,33 @@
         </div>
 
     </form>
-
-
-
-
-
-
-
+    
     <div>
         <a asp-action="Index">Back to List</a>
     </div>
 
-
+<script src="~/limonte-sweetalert2/sweetalert2.all.js"></script>
 <script src="~/Desighn/openimage.js"></script>
 <script src="~/Desighn/javasc_uploading_file.js"></script>
 <script src="~/Desighn/javasc2_uploading_file.js"></script>
 <script src="~/Desighn/javasc3_uploading_file.js"></script>
 <script src="~/Desighn/javasc4_uploading_file.js"></script>
 <script src="~/Desighn/hide_show.js"></script>
-
+<script src="~/Desighn/TestREchoosingPhoto.js"></script>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    
-
-
-    
-    
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); 
     }}
-   
+   <script>
+function sumbitfunction(){
+    //document.getElementById("requireed2").value = document.getElementById("requireed1").value;
+    document.getElementById("requireed").type = "submit";
+ document.getElementById("requireed").submit();
+}
+   </script>
 <script>
 window.onload = function() {
-    //alert("hi it is me ponokio");
-     if (document.getElementById("hideornot").textContent == "hidechoos") 
+        if (document.getElementById("hideornot").textContent == "hidechoos") 
     {//document.getElementById("hideornot").textContent = "hi it is me";
      document.getElementsByClassName("ChooseImage")[0].hidden = true;
       document.getElementsByClassName("ChooseImage2")[0].hidden = true;
@@ -822,7 +830,7 @@ window.onload = function() {
         document.getElementsByClassName("ButtonToggel4")[0].hidden = true;
     
     }
-}
+   }
  </script>
   
     <script>  
@@ -833,16 +841,8 @@ window.onload = function() {
   //         document.getElementsByClassName("controling2")[0].style.visibility = 'hidden';
   //         document.getElementsByClassName("controling3")[0].style.visibility = 'hidden';
   //         document.getElementsByClassName("controling4")[0].style.visibility = 'hidden';
-           
-  //    }
-   
   //}</script>
-   
-
     <script>
-  
-   
-
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -859,8 +859,10 @@ function showTab(n) {
     if (n == (x.length - 1)) {
         if (document.getElementById("khaled").textContent == "khaled") {
             document.getElementById("nextBtn").innerHTML = "تسليم";
+            //me document.getElementById("nextBtn").type = "submit";
         } else {
             document.getElementById("nextBtn").innerHTML = "Submit";
+            //me document.getElementById("nextBtn").type = "submit";
  }
   }
   else {
@@ -887,8 +889,79 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
+      if (document.getElementById("Image_of_crtificat_URL").value == "" &&
+          document.getElementById("Identity_front_image_URL").value == "" &&
+          document.getElementById("Identity_back_image_URL").value == "" &&
+          document.getElementById("Check_recipt_image_URL").value == "") {
+          if (document.getElementById("fileInput").value != '' &&
+              document.getElementById("fileInput2").value != '' &&
+              document.getElementById("fileInput3").value != '' &&
+              document.getElementById("fileInput4").value != '') {
+              if (SimilarImageTest('fileInput', 'fileInput2', 'fileInput3', 'fileInput4') == 1 &&
+                  SimilarImageTest('fileInput2', 'fileInput', 'fileInput3', 'fileInput4') == 1 &&
+                  SimilarImageTest('fileInput3', 'fileInput', 'fileInput2', 'fileInput4') == 1 &&
+                  SimilarImageTest('fileInput4', 'fileInput', 'fileInput2', 'fileInput3') == 1) {
+                  document.getElementById("regForm").submit();
+
+              } else {
+                   currentTab = currentTab - 1;
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'you have choosed similar image',
+
+              })
+              }
+              }
+
+          else {
+              currentTab = currentTab - 1;
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'you have to choose and fill all images....this else from big if',
+
+              })
+
+          }
+
+      } else if (document.getElementById("Image_of_crtificat_URL").value != "" &&
+          document.getElementById("Identity_front_image_URL").value != "" &&
+          document.getElementById("Identity_back_image_URL").value != "" &&
+          document.getElementById("Check_recipt_image_URL").value != "") 
+          {
+          if (SimilarImageTest3('fileInput', 'fileInput2', 'fileInput3', 'fileInput4') == 1 &&
+              SimilarImageTest3('fileInput2', 'fileInput', 'fileInput3', 'fileInput4') == 1 &&
+              SimilarImageTest3('fileInput3', 'fileInput', 'fileInput2', 'fileInput4') == 1 &&
+              SimilarImageTest3('fileInput4', 'fileInput', 'fileInput2', 'fileInput3') == 1) {
+
+              document.getElementById("regForm").submit();
+
+          }
+          else {
+               currentTab = currentTab - 1;
+          Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'you rechoosed a similar image',
+ 
+})
+
+          }
+          }
+      else {
+          currentTab = currentTab - 1;
+          Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'make sure that you choosed all images...this is big else',
+ 
+})
+         
+      }
+     //showTab(currentTab-1);
+    //document.getElementById("regForm").submit();
+    //return false;
   }
   // Otherwise, display the correct tab:
   showTab(currentTab);
@@ -925,6 +998,44 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
+let result=0;
+function SimilarImageTest(x,y,z,d){
+
+    
+    if(document.getElementById(x).files[0].size!=document.getElementById(y).files[0].size&&
+        document.getElementById(x).files[0].size!=document.getElementById(z).files[0].size&&
+        document.getElementById(x).files[0].size!=document.getElementById(d).files[0].size){
+        result=1;
+       
+    }else{
+         
+    result=0;
+}     
+       
+  return result;
+  
+}
+//let results=1;
+//function SimilarImageTest2(x,y,z,d){
+
+//    if(document.getElementById(x).value!=''){
+//    if(document.getElementById(x).value!=document.getElementById(y).value&&
+//        document.getElementById(x).value!=document.getElementById(z).value&&
+//        document.getElementById(x).value!=document.getElementById(d).value){
+//        results=1;
+       
+//    }else{
+       
+//    results=0;
+//}     
+//    }else if(document.getElementById(x).value=='')
+//    {
+        
+//        results=1;
+//    }
+       
+//  return results;
+//}
     </script>
 
 

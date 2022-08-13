@@ -420,14 +420,16 @@ namespace AdmissionSystem.Controllers
             try
             {
 
-                //var stu = studentRepository.Find(id);
-                string filenameIMa = string.Empty;
+                    //var stu = studentRepository.Find(id);
+                    string filenameIMa = string.Empty;
                 string filenameFront = string.Empty;
                 string filenameBack = string.Empty;
                 string filenameCheck = string.Empty;
 
                 if (collection.Check_recipt_image_URL!=null  || collection.Identity_front_image_URL!=null || collection.Identity_back_image_URL!=null ||  collection.Image_of_crtificat_URL !=null)
                 {
+                    System.GC.Collect();
+                    System.GC.WaitForPendingFinalizers();
                     if (collection.Image_Of_Crtificat != null)
                     {
                         string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
@@ -439,8 +441,11 @@ namespace AdmissionSystem.Controllers
                         string fullOldPath = Path.Combine(uploads, oldFileName);
                         if (fullpath != fullOldPath)
                         {
+                            
+
                             System.IO.File.Delete(fullOldPath);
-                            //save new image
+                            
+                        //save new image
                             collection.Image_of_crtificat_URL = filenameIMa;
                             collection.Image_Of_Crtificat.CopyTo(new FileStream(fullpath, FileMode.Create));
                         }
@@ -456,6 +461,8 @@ namespace AdmissionSystem.Controllers
                         string fullOldPath = Path.Combine(uploads, oldFileName);
                         if (fullpath != fullOldPath)
                         {
+                           
+
                             System.IO.File.Delete(fullOldPath);
                             //save new image
                             collection.Identity_front_image_URL = filenameFront;
@@ -504,121 +511,182 @@ namespace AdmissionSystem.Controllers
                     }
                 }
                 else {
+
                     if (collection.Image_Of_Crtificat != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameIMa = collection.Identity_No.ToString() + collection.Image_Of_Crtificat.FileName;
-                        string fullpath = Path.Combine(uploads, filenameIMa);
-                        collection.Image_of_crtificat_URL = filenameIMa;
+                        if (collection.Image_Of_Crtificat.Length != collection.Identity_front_image.Length && collection.Image_Of_Crtificat.Length != collection.Identity_back_image.Length && collection.Image_Of_Crtificat.Length != collection.check_recipt_image.Length)
+                        {
+                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
+                            filenameIMa = collection.Identity_No.ToString() + collection.Image_Of_Crtificat.FileName;
+                            string fullpath = Path.Combine(uploads, filenameIMa);
+                            collection.Image_of_crtificat_URL = filenameIMa;
 
-                        collection.Image_Of_Crtificat.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            collection.Image_Of_Crtificat.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        }
                     }
-                    
+
                     if (collection.Identity_front_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameFront = collection.Identity_No.ToString() + collection.Identity_front_image.FileName;
-                        string fullpath = Path.Combine(uploads, filenameFront);
-                        collection.Identity_front_image_URL = filenameFront;
+                        if (collection.Identity_front_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_front_image.Length != collection.Identity_back_image.Length && collection.Identity_front_image.Length != collection.check_recipt_image.Length)
+                        {
+                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
+                            filenameFront = collection.Identity_No.ToString() + collection.Identity_front_image.FileName;
+                            string fullpath = Path.Combine(uploads, filenameFront);
+                            collection.Identity_front_image_URL = filenameFront;
 
-                        collection.Identity_front_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            collection.Identity_front_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        }
                     }
-                    
+
                     if (collection.Identity_back_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameBack = collection.Identity_No.ToString() + collection.Identity_back_image.FileName;
-                        string fullpath = Path.Combine(uploads, filenameBack);
-                        collection.Identity_back_image_URL = filenameBack;
-                        collection.Identity_back_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        if (collection.Identity_back_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Identity_front_image.Length && collection.Identity_back_image.Length != collection.check_recipt_image.Length)
+                        {
+                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
+                            filenameBack = collection.Identity_No.ToString() + collection.Identity_back_image.FileName;
+                            string fullpath = Path.Combine(uploads, filenameBack);
+                            collection.Identity_back_image_URL = filenameBack;
+                            collection.Identity_back_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        }
                     }
 
-                    
+
                     if (collection.check_recipt_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameCheck = collection.Identity_No.ToString() + collection.check_recipt_image.FileName;
-                        string fullpath = Path.Combine(uploads, filenameCheck);
-                        collection.Check_recipt_image_URL = filenameCheck;
-                        collection.check_recipt_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        if (collection.check_recipt_image.Length != collection.Identity_front_image.Length && collection.check_recipt_image.Length != collection.Identity_back_image.Length && collection.check_recipt_image.Length != collection.Image_Of_Crtificat.Length&& collection.Identity_back_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Identity_front_image.Length && collection.Identity_back_image.Length != collection.check_recipt_image.Length)
+                        {
+                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
+                            filenameCheck = collection.Identity_No.ToString() + collection.check_recipt_image.FileName;
+                            string fullpath = Path.Combine(uploads, filenameCheck);
+                            collection.Check_recipt_image_URL = filenameCheck;
+                            collection.check_recipt_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        }
                     }
 
                 }
-
-                
-
+               
 
 
 
 
-                var certificate_ = new Admission_Eligibilty_Certificate
-                {
-                     //id=student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id,
-                     id=id,
-                    // id = stu.Admission_Eligibilty_Requist_For_UNsy_Certificate.id,
-                    FK_studentId = id,
-                   //  FK_student =student ,
-                    check_recipt_image_URL = collection.Check_recipt_image_URL,
-                    city_of_high_school_cirtificate = collection.city_of_high_school_cirtificate,
-                    course_number = collection.course_number,
-                    date_of_high_school_cirtificate = collection.date_of_high_school_cirtificate,
-                    Image_of_crtificat_URL = collection.Image_of_crtificat_URL,
-                    LAnguge_of_the_addmintion = collection.LAnguge_of_the_addmintion,
-                    Subscription_number = collection.Subscription_number,
-                    The_Rate = collection.The_Rate,
-                    //wish1 = department_Relation_Type_Repository.Find(collection.wish_Department_Id1),
-                    //wish2 = department_Relation_Type_Repository.Find(collection.wish_Department_Id2),
-                    //wish3 = department_Relation_Type_Repository.Find(collection.wish_Department_Id3),
-                    FK_Type_of_high_school_Cirtificate = type_Of_High_School_Cirtificate_Repository.Find(collection.Type_Of_Certificat)
-
-                };
-
-                var student = new Student
+                if (ModelState.IsValid)
                 {
 
-                    Id = id,
-                    Birth = collection.Birth,
-                    Civil_Registriation_City = collection.Civil_Registriation_City,
-                    Civil_Registrition_No = collection.Civil_Registrition_No,
-                    Current_Address = collection.Current_Address,
-                    Email = collection.Email,
-                    Father_Name_AR = collection.Father_Name_AR,
-                    Father_Name_EN = collection.Father_Name_EN,
-                    Grandfather_Name_AR = collection.Grandfather_Name_AR,
-                    Grandfather_Name_EN = collection.Grandfather_Name_EN,
-                    Identity_back_image = collection.Identity_back_image_URL,
-                    Identity_front_image = collection.Identity_front_image_URL,
-                    First_Name_AR = collection.First_Name_AR,
-                    First_Name_EN = collection.First_Name_EN,
-                    Full_Address = collection.Full_Address,
-                    gender = collection.gender,
-                    high_school_certificate = collection.high_school_certificate,
-                    Home_s_Phone = collection.Home_s_Phone,
-                    Identity_No = collection.Identity_No,
-                    Marital_status = collection.Marital_status,
-                    Mobile_Phone = collection.Mobile_Phone,
-                    Mother_Name_AR = collection.Mother_Name_AR,
-                    Mother_Name_EN = collection.Mother_Name_EN,
-                    Nationality = collection.Nationality,
-                    Nick_Name = collection.Nick_Name,
-                    Passport_No = collection.Passport_No,
-                    Cirtificate_city = country_Repository.Find(collection.country)
-                    ,
-                    Statues_Of_Admission_Eligibilty = statues_Of_Admission_Eligibilty_Repository.List().Last()
-                    //, FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate_
-                };
+
+                    var certificate_ = new Admission_Eligibilty_Certificate
+                    {
+                        //id=student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id,
+                        id = id,
+                        // id = stu.Admission_Eligibilty_Requist_For_UNsy_Certificate.id,
+                        FK_studentId = id,
+                        //  FK_student =student ,
+                        check_recipt_image_URL = collection.Check_recipt_image_URL,
+                        city_of_high_school_cirtificate = collection.city_of_high_school_cirtificate,
+                        course_number = collection.course_number,
+                        date_of_high_school_cirtificate = collection.date_of_high_school_cirtificate,
+                        Image_of_crtificat_URL = collection.Image_of_crtificat_URL,
+                        LAnguge_of_the_addmintion = collection.LAnguge_of_the_addmintion,
+                        Subscription_number = collection.Subscription_number,
+                        The_Rate = collection.The_Rate,
+                        //wish1 = department_Relation_Type_Repository.Find(collection.wish_Department_Id1),
+                        //wish2 = department_Relation_Type_Repository.Find(collection.wish_Department_Id2),
+                        //wish3 = department_Relation_Type_Repository.Find(collection.wish_Department_Id3),
+                        FK_Type_of_high_school_Cirtificate = type_Of_High_School_Cirtificate_Repository.Find(collection.Type_Of_Certificat)
+
+                    };
+
+                    var student = new Student
+                    {
+
+                        Id = id,
+                        Birth = collection.Birth,
+                        Civil_Registriation_City = collection.Civil_Registriation_City,
+                        Civil_Registrition_No = collection.Civil_Registrition_No,
+                        Current_Address = collection.Current_Address,
+                        Email = collection.Email,
+                        Father_Name_AR = collection.Father_Name_AR,
+                        Father_Name_EN = collection.Father_Name_EN,
+                        Grandfather_Name_AR = collection.Grandfather_Name_AR,
+                        Grandfather_Name_EN = collection.Grandfather_Name_EN,
+                        Identity_back_image = collection.Identity_back_image_URL,
+                        Identity_front_image = collection.Identity_front_image_URL,
+                        First_Name_AR = collection.First_Name_AR,
+                        First_Name_EN = collection.First_Name_EN,
+                        Full_Address = collection.Full_Address,
+                        gender = collection.gender,
+                        high_school_certificate = collection.high_school_certificate,
+                        Home_s_Phone = collection.Home_s_Phone,
+                        Identity_No = collection.Identity_No,
+                        Marital_status = collection.Marital_status,
+                        Mobile_Phone = collection.Mobile_Phone,
+                        Mother_Name_AR = collection.Mother_Name_AR,
+                        Mother_Name_EN = collection.Mother_Name_EN,
+                        Nationality = collection.Nationality,
+                        Nick_Name = collection.Nick_Name,
+                        Passport_No = collection.Passport_No,
+                        Cirtificate_city = country_Repository.Find(collection.country)
+                        ,
+                        Statues_Of_Admission_Eligibilty = statues_Of_Admission_Eligibilty_Repository.List().Last()
+                        //, FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate_
+                    };
 
 
-                // var cerid = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+                    // var cerid = admission_Eligibilty_Certificate_Repository.Find(student.Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
 
 
-                //  studentRepository.Update(id, student);
-                //admission_Eligibilty_Certificate_Repository.Update(stu.Admission_Eligibilty_Requist_For_UNsy_Certificate.id, certificate_);
-                // admission_Eligibilty_Certificate_Repository.Update(id, certificate_);
-                DB.Admission_Eligibilty_Certificate.Update(certificate_);
-                DB.Student.Update(student);
-                DB.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                    //  studentRepository.Update(id, student);
+                    //admission_Eligibilty_Certificate_Repository.Update(stu.Admission_Eligibilty_Requist_For_UNsy_Certificate.id, certificate_);
+                    // admission_Eligibilty_Certificate_Repository.Update(id, certificate_);
+                   
+                    DB.Admission_Eligibilty_Certificate.Update(certificate_);
+                    DB.Student.Update(student);
+                    DB.SaveChanges();
+                    ViewBag.succeed = "succeed";
+                   
+                   return RedirectToAction(nameof(Index));
+                }
+                else {
+
+                    if (collection.check_recipt_image != null || collection.Identity_front_image != null || collection.Identity_back_image != null || collection.Image_Of_Crtificat != null)
+                    {
+                        //if (collection.check_recipt_image.Length != collection.Identity_front_image.Length && collection.check_recipt_image.Length != collection.Identity_back_image.Length &&collection.check_recipt_image.Length != collection.Image_Of_Crtificat.Length
+                        //    &&collection.Identity_front_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_front_image.Length != collection.Identity_back_image.Length && collection.Identity_front_image.Length != collection.check_recipt_image.Length
+                        //    && collection.Image_Of_Crtificat.Length != collection.Identity_front_image.Length && collection.Image_Of_Crtificat.Length != collection.Identity_back_image.Length && collection.Image_Of_Crtificat.Length != collection.check_recipt_image.Length)
+                        //{
+                            var certificate_2 = new Admission_Eligibilty_Certificate
+                            {
+                                id = id,
+                                check_recipt_image_URL = collection.Check_recipt_image_URL,
+                                Image_of_crtificat_URL = collection.Image_of_crtificat_URL
+                            };
+                            var student_2 = new Student
+                            {
+                                Id = id,
+                                Identity_back_image = collection.Identity_back_image_URL,
+                                Identity_front_image = collection.Identity_front_image_URL,
+                                FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate_2
+                            };
+                            DB.Admission_Eligibilty_Certificate.Update(certificate_2);
+                            //admission_Eligibilty_Certificate_Repository.Update(id, certificate_2);
+                            studentRepository.Update(id, student_2);
+                        }/* }*/
+
+                    ModelState.AddModelError("", "");
+                    ViewBag.Erroremessage = "please cheack and reach all requirments";
+                    Student_View_Model collection2=collection;
+                    collection2.CountryList = FillSelection3();
+                    collection2.Type_Of_certificate_list = FillSelection2();
+                    collection2.Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty;
+                    //collection2.Identity_front_image = collection.Identity_front_image;
+                    //collection2.Identity_back_image_URL = collection.Identity_back_image_URL;
+                    //collection2.Image_Of_Crtificat = collection.Image_Of_Crtificat;
+                    //collection2.check_recipt_image = collection.check_recipt_image;
+                    //collection2.Identity_back_image_URL = collection.Identity_back_image_URL;
+                    //collection2.Identity_front_image_URL = collection.Identity_front_image_URL;
+                    //collection2.Image_Of_Crtificat = collection.Image_Of_Crtificat;
+                    //collection2.Check_recipt_image_URL = collection.Check_recipt_image_URL;
+                    return View (collection2);
+                }
             }
             catch(Exception e)
             {

@@ -200,10 +200,24 @@ function fileValidate4(fileType4, fileSize4) {
     if (fileSize4 <= 2000000) { // 2MB :)
       return true;
     } else { // Else File Size
-      return alert('Please Your File Should be 2 Megabytes or Less');
+      //return alert('Please Your File Should be 2 Megabytes or Less');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please Your File Should be 2 Megabytes or Less',
+
+        })
+        document.getElementsByClassName("hide_bar4")[0].hidden = true;
     };
-  } else { // Else File Type 
-    return alert('Please make sure to upload An Image File Type');
+  } else { // Else File Type
+    //return alert('Please make sure to upload An Image File Type');
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please make sure to upload An Image File Type',
+
+      })
+      document.getElementsByClassName("hide_bar4")[0].hidden = true;
   };
 };
 

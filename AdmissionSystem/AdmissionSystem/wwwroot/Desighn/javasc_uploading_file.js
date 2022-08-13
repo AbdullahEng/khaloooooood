@@ -88,7 +88,7 @@ dropZoon.addEventListener('click', function (event) {
 fileInput.addEventListener('change', function (event) {
   // Select The Chosen File
   const file = event.target.files[0];
-
+    //document.getElementsByClassName("hide_bar1")[0].hidden = false;
   // Call Function uploadFile(), And Send To Her The Chosen File :)
   uploadFile(file);
 });
@@ -200,10 +200,25 @@ function fileValidate(fileType, fileSize) {
     if (fileSize <= 2000000) { // 2MB :)
       return true;
     } else { // Else File Size
-      return alert('Please Your File Should be 2 Megabytes or Less');
-    };
-  } else { // Else File Type 
-    return alert('Please make sure to upload An Image File Type');
+        //return alert('Please Your File Should be 2 Megabytes or Less');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please Your File Should be 2 Megabytes or Le',
+
+        })
+        document.getElementsByClassName("hide_bar1")[0].hidden = true;
+
+        };
+  } else { // Else File Type
+      //return alert('Please make sure to upload An Image File Type');
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please Your File Should be 2 Megabytes or Less',
+
+      })
+      document.getElementsByClassName("hide_bar1")[0].hidden = true;
   };
 };
 
