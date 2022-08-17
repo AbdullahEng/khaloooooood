@@ -76,6 +76,7 @@ namespace AdmissionSystem.View_Model
         [Required(ErrorMessage = "Rate is required")]
         [Range(960, 2300,ErrorMessage ="value shoud be between 960 and 2300")]
         public float The_Rate { get; set; }
+        public float old_Rate { get; set; }
         [Required(ErrorMessage = "City of Certificate is required")]
         [StringLength(20, ErrorMessage = "no more than 20 charecter")]
         public string city_of_high_school_cirtificate { get; set; }
@@ -88,10 +89,11 @@ namespace AdmissionSystem.View_Model
         public List<Type_of_high_school_Cirtificate> Type_Of_certificate_list { get; set; }
         [Required(ErrorMessage = "Type of your Certificate is required")]
         public int Type_Of_Certificat { get; set; }
+        public int oldType_Of_Certificat { get; set; }
         /// for syrian student  <summary>
         /// for syrian student 
         /// </summary>
-        
+
         [Required(ErrorMessage = "preffered Language is required")]
         public string LAnguge_of_the_addmintion { get; set; }
         [Required(ErrorMessage = "Subscription_number is required")]
@@ -119,9 +121,9 @@ namespace AdmissionSystem.View_Model
 
 
         public List<Wishes> specializtions { get; set; }
-        public int wish_Department_Id1 { get; set; }
-        public int wish_Department_Id2 { get; set; }
-        public int wish_Department_Id3 { get; set; }
+        public int ?wish_Department_Id1 { get; set; }
+        public int ?wish_Department_Id2 { get; set; }
+        public int ?wish_Department_Id3 { get; set; }
 
     }
 }

@@ -26,7 +26,13 @@
    }
     <form id="regForm" asp-action="Edit" enctype="multipart/form-data" class="ContainerRegForm ">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+        <input hidden asp-for="wish_Department_Id1" value="@Model.wish_Department_Id1"/>
+        <input hidden asp-for="wish_Department_Id2"value="@Model.wish_Department_Id2"/>
+        <input hidden asp-for="wish_Department_Id3"value="@Model.wish_Department_Id3"/>
+        <input hidden asp-for="old_Rate" value="@Model.old_Rate"/>
+        <input hidden asp-for="oldType_Of_Certificat" value="@Model.oldType_Of_Certificat"/>
+       
+   
         <div class="row form-group border-bottom border-warning ">
             <div class="col-11">
                 <h2 class="text-warning">@localizer["Registeration"] </h2>

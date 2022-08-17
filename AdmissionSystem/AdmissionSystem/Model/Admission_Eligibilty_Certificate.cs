@@ -28,9 +28,12 @@ namespace AdmissionSystem.Model
         public string LAnguge_of_the_addmintion { get; set; }
         public string Subscription_number { get; set; }
         public int course_number { get; set; }
-       
+       public int ? wish1ID { get; set; }
         public Department_relation_Type wish1 { get; set; }//Modifid AB////
+        public int? wish2ID { get; set; }
         public Department_relation_Type wish2 { get; set; }//Modifid AB////
+        public int? wish3ID { get; set; }
+
         public Department_relation_Type wish3 { get; set; }//Modifid AB////
 
        // public int FK_student_InfoId { get; set; } //(FK)//AB//sorry i modify it ^_^ 
