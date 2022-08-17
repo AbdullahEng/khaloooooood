@@ -31,7 +31,7 @@ namespace AdmissionSystem.Model
         public string Civil_Registriation_City { get; set; }
         public int Civil_Registrition_No { get; set; }
         public int Passport_No { get; set; }
-        public int Identity_No { get; set; }
+        public int  Identity_No { get; set; }
         public string Full_Address { get; set; }
         public string Email { get; set; }
         public string Current_Address { get; set; }//address after the acciption

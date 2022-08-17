@@ -1,10 +1,12 @@
 ﻿using AdmissionSystem.Model;
+using AdmissionSystem.Model.GoogleCaptcha;
 using AdmissionSystem.Model.Identity_classes;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model.Identity_view_model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,16 +23,22 @@ namespace AdmissionSystem.Controllers.Identity_control
         private readonly CRUD_Operation_Interface<Student> studentRepo;
         private readonly CRUD_Operation_Interface<Statues_Of_Student> statues_Of_Student_Repository;
         private readonly CRUD_Operation_Interface<Tracking_Rate> tracking_Rate_Repository;
-
-        public AccountController(UserManager<MyIdentityUser> userManager,
+        private readonly GoogleCaptcahService googleCaptcahServiceeee;
+        private readonly CRUD_Operation_Interface<Statues_of_admission_eligibilty> statusofAdmissionREpo;
+        private readonly CRUD_Operation_Interface<Accabtable_config> accRepo;
+        private readonly IOptions<GoogleCaptchaConfig> config;
+       
+       public AccountController(UserManager<MyIdentityUser> userManager,
             SignInManager<MyIdentityUser> LogInManager,
             RoleManager<MyIdentityRole> roleManager,
              CRUD_Operation_Interface<Employee> EmployeeRepo,
              CRUD_Operation_Interface<Student> StudentRepo,
               CRUD_Operation_Interface<Statues_Of_Student> Statues_Of_Student_Repository,
              CRUD_Operation_Interface<Tracking_Rate> Tracking_Rate_Repository
-
-
+            //,GoogleCaptcahService googleCaptcahServiceeee
+            ,CRUD_Operation_Interface<Statues_of_admission_eligibilty>statusofAdmissionREpo
+            ,CRUD_Operation_Interface<Accabtable_config>accRepo
+            ,IOptions<GoogleCaptchaConfig> config
             )
         {
             this.userManager = userManager;
@@ -40,6 +48,10 @@ namespace AdmissionSystem.Controllers.Identity_control
             studentRepo = StudentRepo;
             statues_Of_Student_Repository = Statues_Of_Student_Repository;
             tracking_Rate_Repository = Tracking_Rate_Repository;
+            this.statusofAdmissionREpo = statusofAdmissionREpo;
+            this.accRepo = accRepo;
+            this.config = config;
+            this.googleCaptcahServiceeee = new GoogleCaptcahService(config);
         }
 
 
@@ -92,75 +104,135 @@ namespace AdmissionSystem.Controllers.Identity_control
 
         public IActionResult Register_Student()
         {
-            return View();
+            var model = new RegisteerStudentViweModel
+            {
+                sitkey = config.Value.SiteKey
+
+            };
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register_Student(RegisteerStudentViweModel obj)
         {
+
+            string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
+            var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
+            if (!validate.success)
+            {
+                var merror = validate.Message.ToArray();
+                foreach (var item in merror)
+                {
+                    ViewBag.captchMessage = item + "    ";
+                }
+                //  =validate.Message.ToArray();
+                //  return RedirectToAction("Login",obj);
+                return View();
+            }
             if (ModelState.IsValid)
             {
-                MyIdentityUser user = new MyIdentityUser();
-                user.UserName = obj.UserName;
-                user.Email = obj.Email;
-                user.TheIDnumber = obj.TheIDnumber;
-                IdentityResult result = userManager.CreateAsync
-                    (user, obj.password).Result;
-                var certificate = new Admission_Eligibilty_Certificate() ;
-                var student = new Student() {
-                    Nick_Name = obj.Nick_Name,//
-                    Birth = obj.Birth,//
-                    Email = obj.Email,//
-                    First_Name_EN = obj.UserName,//
-                    gender = obj.Gender,//
-                    high_school_certificate = obj.high_school_certificate,//
-                    Mobile_Phone = obj.Mobile_Phone,//
-                    Identity_No = obj.TheIDnumber//
-                
-                    ,FK_Admission_Eligibilty_Requist_For_UNsy_Certificate=certificate
-                };
-                if (result.Succeeded )
+                var studentWhere = studentRepo.List().Where(s => s.First_Name_EN == obj.UserName
+                                                            && s.Email == obj.Email
+                                                            && s.Identity_No == obj.TheIDnumber
+                                                            && s.Nick_Name == obj.Nick_Name
+                                                            && s.Birth == obj.Birth
+                                                            && s.gender == obj.Gender
+                                                            && s.high_school_certificate == obj.high_school_certificate
+                                                            // && s.Mobile_Phone = obj.Mobile_Phone
+                                                            ).ToList();
+
+                if (studentWhere.Count == 0)
                 {
-                    if (!roleManager.RoleExistsAsync("Student").Result)
+                    MyIdentityUser user = new MyIdentityUser();
+                    user.UserName = obj.UserName;
+                    user.Email = obj.Email;
+                    user.TheIDnumber = obj.TheIDnumber;
+                    IdentityResult result = userManager.CreateAsync
+                        (user, obj.password).Result;
+                    var certificate = new Admission_Eligibilty_Certificate();
+                    var student = new Student()
                     {
-                        MyIdentityRole role = new MyIdentityRole();
-                        role.Name = "Student";
-                        role.Description = "perform Student operatoins";
-                        IdentityResult roleResult = roleManager.CreateAsync(role).Result;
-                        if (!roleResult.Succeeded)
+                        Nick_Name = obj.Nick_Name,//
+                        Birth = obj.Birth,//
+                        Email = obj.Email,//
+                        First_Name_EN = obj.UserName,//
+                        gender = obj.Gender,//
+                        high_school_certificate = obj.high_school_certificate,//
+                        Mobile_Phone = obj.Mobile_Phone,//
+                        Identity_No = obj.TheIDnumber//
+                        ,
+                        FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate
+                    };
+                    if (result.Succeeded)
+                    {
+                        if (!roleManager.RoleExistsAsync("Student").Result)
                         {
-                            ModelState.AddModelError("", "Error while creatin");
-                            return View(obj);
+                            MyIdentityRole role = new MyIdentityRole();
+                            role.Name = "Student";
+                            role.Description = "perform Student operatoins";
+                            IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+                            if (!roleResult.Succeeded)
+                            {
+                                ModelState.AddModelError("", "Error while creatin");
+                                return View(obj);
+                            }
+
                         }
+                        userManager.AddToRoleAsync(user, "Student").Wait();
+                        studentRepo.Add(student);
+                        var Tracking = new Tracking_Rate
+                        {
+                            FK_Student_Info = student
+                            //  old_rate = collection.The_Rate,
 
+                        };
+                        tracking_Rate_Repository.Add(Tracking);
+                        var status_of_student = new Statues_Of_Student
+                        {
+                            Checked_city_certificate = false,
+                            Checked_Identity = false,
+                            Checked_Rate = false,
+                            Checked_recipet = false,
+                            FK_Student_Info = student,
+
+                        };
+                        //remember to add accebted table and status..........
+                        statues_Of_Student_Repository.Add(status_of_student);
+                        var stauts = statusofAdmissionREpo.List().Last();
+
+
+
+                        var accept = new Accabtable_config {
+                           // Accepted_Or_Not = false,
+                           // Accepted_wish = "" ,
+                            FK_studentId= student.Id,
+                            FK_Statues_of_admission_eligibiltyId= stauts.id
+                           
+
+                        };
+                        accRepo.Add(accept);
+
+                        return RedirectToAction("login", "Account");
                     }
-                    userManager.AddToRoleAsync(user, "Student").Wait();
-                    studentRepo.Add(student);
-                    var Tracking = new Tracking_Rate
-                    {
-                        FK_Student_Info = student,
-                      //  old_rate = collection.The_Rate,
-
-                    };
-                    tracking_Rate_Repository.Add(Tracking);
-                    var status_of_student = new Statues_Of_Student
-                    {
-                        Checked_city_certificate = false,
-                        Checked_Identity = false,
-                        Checked_Rate = false,
-                        Checked_recipet = false,
-                        FK_Student_Info = student,
-
-                    };
-                    statues_Of_Student_Repository.Add(status_of_student);
-
-
-
-
-                    return RedirectToAction("login", "Account");
+                    else {
+                        var disc= result.Errors.Select(e => e.Description).ToArray();
+                        foreach (var item in disc)
+                        {
+                            ViewBag.errorinfo += item + "  ";
+                        }
+                    
+                        return View(obj);
+                    }
                 }
+                else
+                {
+
+                    ViewBag.message = "Registration fails becouse there is another student with  the same info ";
+                    return View(obj);
+                }
+              //  return View(obj);
             }
-            return View(obj);
+            return View();
         }
 
 
@@ -174,12 +246,33 @@ namespace AdmissionSystem.Controllers.Identity_control
 
         public IActionResult Register_Employee()
         {
-            return View();
+            var model = new RegisterViewModel
+            {
+                sitkey = config.Value.SiteKey
+
+            };
+
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register_Employee(RegisterViewModel obj)
         {
+
+
+            string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
+            var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
+            if (!validate.success)
+            {
+                var merror = validate.Message.ToArray();
+                foreach (var item in merror)
+                {
+                    ViewBag.captchMessage = item + "    ";
+                }
+                //  =validate.Message.ToArray();
+                //  return RedirectToAction("Login",obj);
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 MyIdentityUser user = new MyIdentityUser();
@@ -232,7 +325,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                             }
                         }
                     }
-                    if (obj.Type == "Emplyee")
+                    if (obj.Type == "Employee")
                     {
                         userManager.AddToRoleAsync(user, "Employee").Wait();
                        
@@ -246,96 +339,142 @@ namespace AdmissionSystem.Controllers.Identity_control
                     employeeRepo.Add(Employee);
                     return RedirectToAction("login", "Account");
                 }
+
+                else
+                {
+                    var disc = result.Errors.Select(e => e.Description).ToArray();
+                    foreach (var item in disc)
+                    {
+                        ViewBag.errorinfo += item + "  ";
+                    }
+
+                    return View(obj);
+                }
             }
             return View(obj);
         }
 
 
 
-        public IActionResult Login() { return View(); }
+        public IActionResult Login() {
+            var model = new LoginViewModle { 
+            sitkey= config.Value.SiteKey
+
+            };
+            
+            return View(model); }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginViewModle obj)
+        public IActionResult Login (LoginViewModle obj)
         {
-            if (ModelState.IsValid)
-            {
-                var Allstudent = studentRepo.List();
-                var AllEmployee = employeeRepo.List();
-                var AllUsers = userManager.Users.ToList();
-                var AllRoles = roleManager.Roles.ToList();
-               // var usersAndRoles = new List<UserRoleModel>();
-                // var allRolesUsers=
-                // var studnetFind = studentRepo.Find();
-                var result = LoginInManager.PasswordSignInAsync
-                    (obj.UserName, obj.password,
-                    obj.RememberMe, false).Result;
-
-                if (result.Succeeded)
+            //var s = Request.;
+            string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
+            //if (captchaREsponse != "")
+            //{
+                var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
+                if (!validate.success)
                 {
+                    var merror = validate.Message.ToArray();
+                    foreach (var item in merror)
+                    {
+                        ViewBag.captchMessage = item + "    ";
+                    }
+                    //  =validate.Message.ToArray();
+                    //  return RedirectToAction("Login",obj);
+                    return View();
+                }
+                //var capatchservice = await googleCaptcahServiceeee.Vefytoken(obj.token);
+                //if (!capatchservice)
+                //{
+                //    return View();
+                //}
+                if (ModelState.IsValid)
+                {
+                    var Allstudent = studentRepo.List();
+                    var AllEmployee = employeeRepo.List();
+                    var AllUsers = userManager.Users.ToList();
+                    var AllRoles = roleManager.Roles.ToList();
+                    // var usersAndRoles = new List<UserRoleModel>();
+                    // var allRolesUsers=
+                    // var studnetFind = studentRepo.Find();
+                    var result = LoginInManager.PasswordSignInAsync
+                        (obj.UserName, obj.password,
+                        obj.RememberMe, false).Result;
 
-                    //foreach (var role in AllRoles)
-                    //{
+                    if (result.Succeeded)
+                    {
+
+                        //foreach (var role in AllRoles)
+                        //{
 
 
                         foreach (var user in AllUsers)
                         {
 
                             //if (role.Name == "Employee" || role.Name == "Admin")
-                                foreach (var Employee in AllEmployee)
+                            foreach (var Employee in AllEmployee)
+                            {
+                                if (obj.UserName == Employee.name &&
+                                    user.Email == Employee.Email &&
+                                    user.TheIDnumber == Employee.The_ID_Number
+                                    )
                                 {
-                                    if (obj.UserName == Employee.name &&
-                                        user.Email == Employee.Email &&
-                                        user.TheIDnumber == Employee.The_ID_Number
-                                        )
+                                    if (Employee.Type == "Admin")
                                     {
-                                             if (Employee.Type == "Admin") {
-                                                     return RedirectToAction("Edit", "Employee", new { id = Employee.id });
-
-                                             }
-                                            else if (Employee.Type == "Employee") {
-                                                     return RedirectToAction("Edit", "Employee", new { id = Employee.id });
-
-                                            }
-
-
-                                //return RedirectToAction("Edit", "Employee", new { id = Employee.id });
+                                        return RedirectToAction("Edit", "Employee", new { id = Employee.id });
 
                                     }
+                                    else if (Employee.Type == "Employee")
+                                    {
+                                        return RedirectToAction("Edit", "Employee", new { id = Employee.id });
+
+                                    }
+
+
+                                    //return RedirectToAction("Edit", "Employee", new { id = Employee.id });
+
                                 }
+                            }
 
                             //else if (role.Name == "Student")
                             //{
 
 
 
-                                foreach (var student in Allstudent)
+                            foreach (var student in Allstudent)
+                            {
+                                // var studnetFind = studentRepo.Find(student.Id);
+                                if (obj.UserName == student.First_Name_EN &&
+                                    user.Email == student.Email &&
+                                    user.TheIDnumber == student.Identity_No
+                                    )
                                 {
-                                    // var studnetFind = studentRepo.Find(student.Id);
-                                    if (obj.UserName == student.First_Name_EN &&
-                                        user.Email == student.Email &&
-                                        user.TheIDnumber == student.Identity_No
-                                        )
-                                    {
 
-                                        return RedirectToAction("Edit", "Studen", new { id = student.Id });
+                                    return RedirectToAction("Edit", "Studen", new { id = student.Id });
 
-                                    }
                                 }
-                           // }
+                            }
+                            // }
 
                         }
-                   /// }
+                        /// }
 
 
 
 
-                   
-                    return RedirectToAction("Index", "Home");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    ModelState.AddModelError("", "Invalid login!!");
+
                 }
-                ModelState.AddModelError("", "Invalid login!!");
+            //}
+            //else {
+            //    ViewBag.norecaptcha = "please check out your internet connection";
 
-            }
+
+            //}
             return View(obj);
         }
 

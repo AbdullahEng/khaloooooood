@@ -741,7 +741,7 @@ namespace AdmissionSystem.Controllers
             List<Wishes> lista_of_the_student = new List<Wishes>();
             foreach (var x in lista_of_wishes)
             {
-                if (x.Minemum_of_Rate <= CertificatRate && x.FK_type_Of_High_School_Cirtificate == CertificatType)
+                if (x.Minemum_of_Rate <= CertificatRate && x.FK_type_Of_High_School_Cirtificate.id == CertificatType.id)
                     lista_of_the_student.Add(x);
             }
 

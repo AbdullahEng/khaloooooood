@@ -15,6 +15,10 @@ namespace AdmissionSystem.View_Model.Identity_view_model
         public string password { get; set; }
         [Required]
         public bool RememberMe { get; set; }
+        public string sitkey { get; set; }
+       // public string Error { get; set; }
+        //[Required]
+        //public string token { get; set; }
 
     }
 }

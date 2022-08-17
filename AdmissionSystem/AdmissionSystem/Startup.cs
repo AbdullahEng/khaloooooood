@@ -1,5 +1,6 @@
 using AdmissionSystem.Data;
 using AdmissionSystem.Model;
+using AdmissionSystem.Model.GoogleCaptcha;
 using AdmissionSystem.Model.Identity_classes;
 using AdmissionSystem.Model.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -20,12 +21,13 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace AdmissionSystem
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
+        { 
             Configuration = configuration;
         }
 
@@ -34,9 +36,12 @@ namespace AdmissionSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           // var builder=webapplication
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.Configure<GoogleCaptchaConfig>(Configuration.GetSection("GoogleReCaptcha"));
+            services.AddTransient(typeof(GoogleCaptcahService));
 
 
             services.AddIdentity<MyIdentityUser, MyIdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
