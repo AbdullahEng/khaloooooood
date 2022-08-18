@@ -181,12 +181,13 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 listDeaprtmentsCahir.Add(number);
 
             }
-            var listOfCheckedStudent = studentRepository.List().Where(s => s.Statues_Of_Student.Checked_city_certificate == true
-                                                                      && s.Statues_Of_Student.Checked_Identity == true
-                                                                      && s.Statues_Of_Student.Checked_Rate == true
-                                                                      && s.Statues_Of_Student.Checked_recipet == true
-                                                                      && s.Fk_Cirtificate_cityId == country.countryId).ToList();
-
+            var listOfCheckedStudent = studentRepository.List().Where(s => statues_Of_Student_Repository.Find(s.Id).Checked_city_certificate == true
+                                                                       && statues_Of_Student_Repository.Find(s.Id).Checked_Identity == true
+                                                                       && statues_Of_Student_Repository.Find(s.Id).Checked_Rate == true
+                                                                       && statues_Of_Student_Repository.Find(s.Id).Checked_recipet == true
+                                                                       // && s.Fk_Cirtificate_cityId == country.countryId
+                                                                       && s.high_school_certificate == "UNSyrian"
+                                                                       ).ToList();
             var sortedListOfcheckedstudent = listOfCheckedStudent.OrderByDescending(s => s.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate).ToList();
 
 
@@ -195,23 +196,34 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
             foreach (var student in sortedListOfcheckedstudent)
             {
+                var admissioncirtificate = dB.Admission_Eligibilty_Certificate.AsNoTracking().Include(a => a.FK_Type_of_high_school_Cirtificate).Include(a => a.wish1).Include(a => a.wish2).Include(a => a.wish3).SingleOrDefault(a => a.id == student.Id);
+                NumberoStuentsForEachDepartment NumberofstudentinDepartmentREAlTIME=new NumberoStuentsForEachDepartment {chaircount=0 } ;
+                NumberoStuentsForEachDepartment NumberofstudentinSECOUNDDepartmentREAlTIME=new NumberoStuentsForEachDepartment { chaircount=0};
+                NumberoStuentsForEachDepartment NumberofstudentinTHEREDDepartmentREAlTIME =new NumberoStuentsForEachDepartment {chaircount=0 };
                 //  if (student.high_school_certificate=="Syrian")
-                var NumberofstudentinDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                               student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish1.FK_DepartmentId);
-                var NumberofstudentinSECOUNDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                                 student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish2.FK_DepartmentId);
-                var NumberofstudentinTHEREDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                                              student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish3.FK_DepartmentId);
-
-                if (NumberofstudentinDepartmentREAlTIME.chaircount != 0)
+                if (admissioncirtificate.wish1 != null)
                 {
-                    //  accepted
-                    var stuAccconfig = acceptedREpo.Find(student.Id);
+                     NumberofstudentinDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
+                                  admissioncirtificate.wish1.FK_DepartmentId);
+                }
+                if (admissioncirtificate.wish2 != null)
+                {
+                   NumberofstudentinSECOUNDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
+                                 admissioncirtificate.wish2.FK_DepartmentId);
 
-                    stuAccconfig.Accepted_wish = stuAccconfig.Accepted_wish;
+                }
+                if (admissioncirtificate.wish3 != null)
+                {
+                    NumberofstudentinTHEREDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
+                                             admissioncirtificate.wish3.FK_DepartmentId);
+                }
+              
+                if (NumberofstudentinDepartmentREAlTIME.chaircount != 0 )
+                {
+                    var stuAccconfig = dB.Accabtable_config.AsNoTracking().SingleOrDefault(a => a.id == student.Id);
+                    var departmentrealtion = dB.Department.AsNoTracking().SingleOrDefault(d => d.id == admissioncirtificate.wish1.FK_DepartmentId);
+                    stuAccconfig.Accepted_wish = departmentrealtion.specialization_name;
                     stuAccconfig.Accepted_Or_Not = true;
-
-
                     stuAccconfig.FK_Statues_of_admission_eligibilty = student.Statues_Of_Admission_Eligibilty;
                     //  var acc = new Accabtable_config
                     //  {
@@ -224,19 +236,25 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
                     //  };
                     //UpdateAcceptTable
-                    acceptedREpo.Update(stuAccconfig.id, stuAccconfig);//remmber you want to bring database
+                    dB.Accabtable_config.Update(stuAccconfig);
+                    // dB.Student.Update( student );//remmber you want to bring database
+
+
+
+                    dB.SaveChanges();//remmber you want to bring database
                     listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                                 student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish1.FK_DepartmentId).chaircount = NumberofstudentinDepartmentREAlTIME.chaircount - 1;
+                                 admissioncirtificate.wish1.FK_DepartmentId).chaircount = NumberofstudentinDepartmentREAlTIME.chaircount - 1;
                
                 }
-                else if (NumberofstudentinSECOUNDDepartmentREAlTIME.chaircount != 0)
+                else
+               // if(NumberofstudentinSECOUNDDepartmentREAlTIME.chaircount!=null) to memorize  And or not And *-*
+                if (NumberofstudentinSECOUNDDepartmentREAlTIME.chaircount != 0 )
                 {
                     //  accepted
-                    var stuAccconfig = acceptedREpo.Find(student.Id);
-                    stuAccconfig.Accepted_wish = stuAccconfig.Accepted_wish;
+                    var stuAccconfig = dB.Accabtable_config.AsNoTracking().SingleOrDefault(a => a.id == student.Id);
+                    var departmentrealtion = dB.Department.AsNoTracking().SingleOrDefault(d => d.id == admissioncirtificate.wish2.FK_DepartmentId);
+                    stuAccconfig.Accepted_wish = departmentrealtion.specialization_name;
                     stuAccconfig.Accepted_Or_Not = true;
-
-
                     stuAccconfig.FK_Statues_of_admission_eligibilty = student.Statues_Of_Admission_Eligibilty;
                     //  var acc = new Accabtable_config
                     //  {
@@ -251,17 +269,16 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     //UpdateAcceptTable
                     acceptedREpo.Update(stuAccconfig.id, stuAccconfig);//remmber you want to bring database
                     listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                                 student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish2.FK_DepartmentId).chaircount = NumberofstudentinSECOUNDDepartmentREAlTIME.chaircount - 1;
+                                admissioncirtificate.wish2.FK_DepartmentId).chaircount = NumberofstudentinSECOUNDDepartmentREAlTIME.chaircount - 1;
 
                 }
-                else if (NumberofstudentinTHEREDDepartmentREAlTIME.chaircount != 0)
+                else if (NumberofstudentinTHEREDDepartmentREAlTIME.chaircount != 0 )
                 {
                     //  accepted
-                    var stuAccconfig = acceptedREpo.Find(student.Id);
-                    stuAccconfig.Accepted_wish = stuAccconfig.Accepted_wish;
+                    var stuAccconfig = dB.Accabtable_config.AsNoTracking().SingleOrDefault(a => a.id == student.Id);
+                    var departmentrealtion = dB.Department.AsNoTracking().SingleOrDefault(d => d.id == admissioncirtificate.wish3.FK_DepartmentId);
+                    stuAccconfig.Accepted_wish = departmentrealtion.specialization_name;
                     stuAccconfig.Accepted_Or_Not = true;
-
-
                     stuAccconfig.FK_Statues_of_admission_eligibilty = student.Statues_Of_Admission_Eligibilty;
                     //  var acc = new Accabtable_config
                     //  {
@@ -274,9 +291,14 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
                     //  };
                     //UpdateAcceptTable
-                    acceptedREpo.Update(stuAccconfig.id, stuAccconfig);//remmber you want to bring database
+                    dB.Accabtable_config.Update(stuAccconfig);
+                    // dB.Student.Update( student );//remmber you want to bring database
+
+
+
+                    dB.SaveChanges();//remmber you want to bring database
                     listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                                 student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish3.FK_DepartmentId).chaircount = NumberofstudentinTHEREDDepartmentREAlTIME.chaircount - 1;
+                                admissioncirtificate.wish3.FK_DepartmentId).chaircount = NumberofstudentinTHEREDDepartmentREAlTIME.chaircount - 1;
 
                 }
                 //else { 
@@ -441,21 +463,36 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             foreach (var student in sortedListOfcheckedstudent)
             {
                 //  if (student.high_school_certificate=="Syrian")
+
+
+                NumberoStuentsForEachDepartment NumberofstudentinDepartmentREAlTIME = new NumberoStuentsForEachDepartment { chaircount = 0 };
+                NumberoStuentsForEachDepartment NumberofstudentinSECOUNDDepartmentREAlTIME = new NumberoStuentsForEachDepartment { chaircount = 0 };
+                NumberoStuentsForEachDepartment NumberofstudentinTHEREDDepartmentREAlTIME = new NumberoStuentsForEachDepartment { chaircount = 0 };
+
+
+
                 var admissioncirtificate = dB.Admission_Eligibilty_Certificate.AsNoTracking().Include(a => a.FK_Type_of_high_school_Cirtificate).Include(a => a.wish1).Include(a => a.wish2).Include(a => a.wish3).SingleOrDefault(a => a.id == student.Id);
-                
-                var NumberofstudentinDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
+                if (admissioncirtificate.wish1 != null)
+                {
+                    NumberofstudentinDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
                                admissioncirtificate.wish1.FK_DepartmentId
                             && d.type_of_highschool_Id ==
                            admissioncirtificate.wish1.FK_type_Of_High_School_CirtificateId);
-                var NumberofstudentinSECOUNDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                               admissioncirtificate.wish2.FK_DepartmentId
-                                    && d.type_of_highschool_Id ==
-                           admissioncirtificate.wish2.FK_type_Of_High_School_CirtificateId);
-                var NumberofstudentinTHEREDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
+                }
+                if (admissioncirtificate.wish2 != null)
+                {
+                    NumberofstudentinSECOUNDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
+                              admissioncirtificate.wish2.FK_DepartmentId
+                                   && d.type_of_highschool_Id ==
+                          admissioncirtificate.wish2.FK_type_Of_High_School_CirtificateId);
+                }
+                if (admissioncirtificate.wish3 != null)
+                {
+                    NumberofstudentinTHEREDDepartmentREAlTIME = listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
                                                admissioncirtificate.wish3.FK_DepartmentId
                                                  && d.type_of_highschool_Id ==
                             admissioncirtificate.wish3.FK_type_Of_High_School_CirtificateId);
-
+                }
                 if (NumberofstudentinDepartmentREAlTIME.chaircount != 0)
                 {
                     //  accepted
