@@ -412,7 +412,7 @@ namespace AdmissionSystem.Controllers
             foreach (var x in Status_of_student_list)
             {
                 y = student_Repository.Find(x.FK_Student_InfoId);
-                if (y.high_school_certificate == "UnSyrian")
+                if (y.high_school_certificate == "UNSyrian")
                     lista.Add(x);
             }
 

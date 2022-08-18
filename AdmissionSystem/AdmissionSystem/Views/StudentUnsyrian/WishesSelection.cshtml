@@ -1,48 +1,74 @@
 ﻿@model AdmissionSystem.View_Model.Student_Wishes_View_Model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "WishesSelection";
 }
 
-<h1>WishesSelection</h1>
+<link href="~/Desighn/3StepsForm.css"  rel="stylesheet"/>
+<link href="~/Desighn/"  rel="stylesheet"/>
 
-<h4>Student_Wishes_View_Model</h4>
+<h1 id="wishscount" hidden>@Model.specializtions.Count()</h1>
+
+<h1 id="wish1" hidden>@Model.wish_Department_Id1</h1>
+<h1 id="wish2" hidden>@Model.wish_Department_Id2</h1>
+<h1 id="wish3" hidden>@Model.wish_Department_Id3</h1>
+ 
+<div class="ContainerRegForm">
+        <div class="row form-group border-bottom border-warning ">
+             <img src="~/Desighn/kalamoon logo.png" width="80" height="90" />
+            <div class="col-11">
+               @* <h2 class="text-warning">@localizer["Registeration"] </h2>*@
+               
+            </div>
+           
+        </div>
+<h2 class="alert alert-primary text-center">@localizer["Wishes Selection"]</h2>
+<hr />
+
+
+<div class="d-flex justify-content-center">
+<button id="changewishes" onclick="    switchfunction();" class="btn btn-outline-danger">@localizer["Select wishes agine"] </button>
+</div>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="WishesSelection">
+    <div class="col-md-12">
+        <form asp-action="WishesSelection" id="wishform">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="wish_Department_Id1" class="control-label"></label>
-                <select class="products-combo form-control" asp-for="wish_Department_Id1" asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 1</option> </select>
-                <span asp-validation-for="wish_Department_Id1" class="text-danger"></span>
+                <label style="font-size:130%" class="control-label">@localizer["the first wish"]</label>
+                <select id="selectwish1" onchange="    makechanges1();" class="products-combo form-control" asp-for="wish_Department_Id1"  asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 1</option> </select>
+               <span asp-validation-for="wish_Department_Id1" class="text-danger"></span>
+                </div>          
+            <div class="form-group">
+                <label style="font-size:130%" class="control-label">@localizer["the secound wish"]</label>
+                <select disabled id="selectwish2" onchange="    makechanges2();" class="products-combo form-control" asp-for="wish_Department_Id2"  asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 2</option> </select>
+
+                    <span asp-validation-for="wish_Department_Id2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="wish_Department_Id2" class="control-label"></label>
-                <select class="products-combo form-control" asp-for="wish_Department_Id2" asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 1</option> </select>
-                <span asp-validation-for="wish_Department_Id2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="wish_Department_Id3" class="control-label"></label>
-                <select class="products-combo form-control" asp-for="wish_Department_Id3" asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 1</option> </select>
+                <label style="font-size:130%" class="control-label">@localizer["the third wish"]</label>
+                <select disabled id="selectwish3" onchange="    makechanges3();" class="products-combo form-control" asp-for="wish_Department_Id3" asp-items="@(new SelectList(Model.specializtions,"id","DepartmentName"))"><option>Select 3</option> </select> 
                 <span asp-validation-for="wish_Department_Id3" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="button" onclick="    submitFunction();" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<script src="~/limonte-sweetalert2/sweetalert2.all.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script>
-const $selects = $(".products-combo");
+<script>const $selects = $(".products-combo");
 $selects.on('change', function(evt) {
     // create empty array to store the selected values
     const selectedValue = [];
@@ -53,7 +79,7 @@ $selects.on('change', function(evt) {
         selectedValue.push($(el).attr('value'));
     });
     // loop all the options
-    $selects.find('option').each(function(idx, option) {
+    $selects.find('option').each(function(idx, option) { 
         // if the array contains the current option value otherwise we re-enable it.
         if (selectedValue.indexOf($(option).attr('value')) > -1) {
             // if the current option is the selected option, we skip it otherwise we disable it.
@@ -69,5 +95,222 @@ $selects.on('change', function(evt) {
 });
 
     </script>
+     <script>
+window.onload = function() {
+    if (parseInt(document.getElementById("wish1").textContent) != 0 ) {
+         document.getElementById("selectwish1").disabled = true;
+          document.getElementById("changewishes").style.display = "block";
+    }
+     if (parseInt(document.getElementById("wish1").textContent) == 0 && parseInt(document.getElementById("wishscount").textContent) == 0) {
+                document.getElementById("selectwish1").disabled = true;
+         document.getElementById("changewishes").hidden = true;
+    }
+    if (parseInt(document.getElementById("wish1").textContent) == 0) {
+          document.getElementById("changewishes").hidden = true;
+    }
+   
+     if (parseInt(document.getElementById("wishscount").textContent) == 0) {
+        Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'we are sorry, you are not able to choose any wish',
+  footer: '<a href="http://www.uok.edu.sy/%D8%A5%D8%B9%D9%84%D8%A7%D9%86-%D9%85%D9%81%D8%A7%D8%B6%D9%84%D8%A9-%D8%A7%D9%84%D9%82%D8%A8%D9%88%D9%84-%D9%81%D9%8A-%D8%AC%D8%A7%D9%85%D8%B9%D8%A9-%D8%A7%D9%84%D9%82%D9%84%D9%85%D9%88%D9%86-%D8%A7/">Please Rereview the Admission Eligibility Instructions </a>'
+})
+    }
+    else if (parseInt(document.getElementById("wishscount").textContent) == 1) {
+        Swal.fire({
+            icon: 'info',
+            title: 'we are sorry, you are not able to choose more than one wishe',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+    }
+    else if (parseInt(document.getElementById("wishscount").textContent) == 2) {
+        Swal.fire({
+            icon: 'info',
+            title: 'we are sorry, you are not able to choose more than two wishes',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+    }
+}
+    </script>
 
+    <script>
+
+function submitFunction() {
+   
+    if (parseInt(document.getElementById("wish1").textContent) == 0 || document.getElementById("wish1").textContent == "Select 1") {
+        if (parseInt(document.getElementById("wishscount").textContent) != 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'you have to choose one wish at least',
+
+            })
+        }
+        else {
+            document.getElementById("wishform").submit();
+        }
+      }
+    else if (parseInt(document.getElementById("wishscount").textContent) >= 2) {
+        if (parseInt(document.getElementById("wish2").textContent) == 0 || document.getElementById("wish2").textContent == "Select 2"
+            || parseInt(document.getElementById("wish3").textContent) == 0 || document.getElementById("wish3").textContent == "Select 3") {
+            Swal.fire({
+                icon: 'info',
+                title: "Note",
+                html: "<label style=font-size:160%;><b>There are more wishes to choose</b></label> <br><label>?Do you want to save changes</label>",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    document.getElementById("selectwish1").disabled=false;
+                       document.getElementById("selectwish2").disabled=false;
+                        document.getElementById("selectwish3").disabled=false;
+                         document.getElementById("selectwish1").value = document.getElementById("wish1").textContent;
+                    document.getElementById("selectwish2").value = document.getElementById("wish2").textContent;
+                        document.getElementById("selectwish3").value = document.getElementById("wish3").textContent;
+                
+                    document.getElementById("wishform").submit();
+                } else if (result.isDenied) {
+                      document.getElementById("selectwish2").disabled=true;
+                        document.getElementById("selectwish3").disabled=true;
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+        }else {
+            Swal.fire({
+                    icon: 'question',
+                    title:"Note",
+                    html:"<label style=font-size:160%;><b>Do you want to save the changes</b></label>",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    denyButtonText: `Don't save`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        document.getElementById("selectwish1").disabled=false;
+                        document.getElementById("selectwish2").disabled=false;
+                        document.getElementById("selectwish3").disabled=false;
+                        document.getElementById("selectwish1").value = document.getElementById("wish1").textContent;
+                       document.getElementById("selectwish2").value = document.getElementById("wish2").textContent;
+                        document.getElementById("selectwish3").value = document.getElementById("wish3").textContent;
+                        document.getElementById("wishform").submit();
+                    } else if (result.isDenied) {
+                          document.getElementById("selectwish2").disabled=true;
+                        document.getElementById("selectwish3").disabled=true;
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+        }
+    }
+    else {
+            Swal.fire({
+                    icon: 'question',
+                    title:"Note",
+                    html:"<label style=font-size:160%;><b>Do you want to save the changes</b></label>",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    denyButtonText: `Don't save`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                         document.getElementById("selectwish1").disabled=false;
+                          document.getElementById("selectwish2").disabled=false;
+                        document.getElementById("selectwish3").disabled=false;
+                         document.getElementById("selectwish1").value = document.getElementById("wish1").textContent;
+                         document.getElementById("selectwish2").value = document.getElementById("wish2").textContent;
+                        document.getElementById("selectwish3").value = document.getElementById("wish3").textContent;
+                        document.getElementById("wishform").submit();
+                    } else if (result.isDenied) {
+                          document.getElementById("selectwish2").disabled=true;
+                        document.getElementById("selectwish3").disabled=true;
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+        }
+}
+    </script>
+    <script>
+function makechanges1() {
+    document.getElementById("wish1").textContent = document.getElementById("selectwish1").value;
+     if (parseInt(document.getElementById("wish1").textContent) !=0 && document.getElementById("wish1").textContent!="Select 1") 
+     {
+         document.getElementById("selectwish2").disabled=false;
+          Swal.fire(
+  'Good job!',
+  'first wish has selected successfully',
+  'success'
+)
+     }
+      else if (parseInt(document.getElementById("wish1").textContent) ==0 || document.getElementById("wish1").textContent=="Select 1") 
+     {
+         document.getElementById("selectwish2").disabled=true;
+         document.getElementById("selectwish2").value = "Select 2";
+          document.getElementById("selectwish3").disabled=true;
+         document.getElementById("selectwish3").value = "Select 3";
+          document.getElementById("wish2").textContent = document.getElementById("selectwish2").value;      
+          document.getElementById("wish3").textContent = document.getElementById("selectwish3").value;
+     }
+}
+function makechanges2() {
+    document.getElementById("wish2").textContent = document.getElementById("selectwish2").value;
+     if (parseInt(document.getElementById("wish1").textContent) !=0 && document.getElementById("wish1").textContent!="Select 1"&&
+     parseInt(document.getElementById("wish2").textContent) !=0 && document.getElementById("wish2").textContent!="Select 2") 
+     {
+         document.getElementById("selectwish3").disabled=false;
+          Swal.fire(
+  'Good job!',
+  'secound wish has selected successfully',
+  'success'
+)
+     }
+      else if (parseInt(document.getElementById("wish1").textContent) ==0 || document.getElementById("wish1").textContent=="Select 1"
+      ||parseInt(document.getElementById("wish2").textContent) ==0 || document.getElementById("wish2").textContent=="Select 2"
+      ) 
+     {
+          document.getElementById("selectwish3").disabled=true;
+         document.getElementById("selectwish3").value = "Select 3";
+          document.getElementById("wish3").textContent = document.getElementById("selectwish3").value;          
+     }
+}
+
+function makechanges3() {
+     document.getElementById("wish3").textContent = document.getElementById("selectwish3").value;
+    if (parseInt(document.getElementById("wish3").textContent) != 0 && document.getElementById("wish3").textContent != "Select 3") 
+    {
+          Swal.fire(
+  'Good job!',
+  'Third wish has selected successfully',
+  'success'
+)
+    }
+}
+    </script>
+   <script>
+var switcher = 0;
+function switchfunction(){
+    document.getElementById("changewishes").style.visibility = "hidden";
+     document.getElementById("selectwish1").disabled = false;
+        document.getElementById("selectwish1").value = "Select 1";
+        document.getElementById("selectwish2").value = "Select 2";
+        document.getElementById("selectwish3").value = "Select 3";
+    document.getElementById("wish1").textContent= document.getElementById("selectwish1").value = "Select 1";
+    document.getElementById("wish2").textContent= document.getElementById("selectwish2").value = "Select 2";
+    document.getElementById("wish3").textContent= document.getElementById("selectwish3").value = "Select 3";
+}
+   </script>
 }
