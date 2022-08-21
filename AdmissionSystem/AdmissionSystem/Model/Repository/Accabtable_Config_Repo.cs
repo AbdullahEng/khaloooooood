@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Accabtable_config> List()
         {
-            return DB.Accabtable_config.ToList();
+            return DB.Accabtable_config.Include(a=>a.FK_student).ThenInclude(a=>a.Cirtificate_city).ToList();
         }
 
         public void Update(int id, Accabtable_config entity)

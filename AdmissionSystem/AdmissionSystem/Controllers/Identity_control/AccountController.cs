@@ -450,11 +450,13 @@ namespace AdmissionSystem.Controllers.Identity_control
                                     user.TheIDnumber == student.Identity_No
                                     )
                                 {
-
+                                if(student.high_school_certificate == "Syrian")
                                     return RedirectToAction("Edit", "Studen", new { id = student.Id });
+                               else if(student.high_school_certificate=="UNSyrian")
+                                return RedirectToAction("Edit", "StudentUnsyrian", new { id = student.Id });
 
-                                }
                             }
+                        }
                             // }
 
                         }

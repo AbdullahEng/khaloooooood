@@ -12,6 +12,8 @@ namespace AdmissionSystem.View_Model
         public List<Country> CountryList { get; set; }
         [Required]
         public int countryId { get; set; }
-
+        public List<Department> departmentList { get; set; }
+        public int DepartmentId { get; set; }
+        public List<AcceptebleIformationAnd_Details> Accinfo{ get; set; }
     }
 }
