@@ -1,159 +1,286 @@
-﻿@model AdmissionSystem.View_Model.Identity_view_model.LoginViewModle
+﻿
+@model AdmissionSystem.View_Model.Identity_view_model.LoginViewModle
 
 @{
     ViewData["Title"] = "Login";
+    Layout = "";
 }
 @using Microsoft.Extensions.Options
-    @using AdmissionSystem.Model.GoogleCaptcha
-    @inject IOptions<GoogleCaptchaConfig> GoogleRecaptchaconfig
+@using AdmissionSystem.Model.GoogleCaptcha
+@inject IOptions<GoogleCaptchaConfig> GoogleRecaptchaconfig
 
-<script type="text/javascript" src="quform/js/scripts.js"></script>
-<h1>Login</h1>
+<!--<style>
+    dl {
+        width: 120%;
+        overflow: hidden;
+        /*background: #ff0;*/
+        padding: 0;
+        margin: 0
+    }
 
-<h4>LoginViewModle</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    dt {
+        float: left;
+        width: 20%;
+        /* adjust the width; make sure the total of both is 100% */
+        /*background: #f00;*/
+        padding: 0;
+        margin: 0
+    }
 
-            @if (ViewBag.norecaptcha != null) {
+    dd {
+        float: right;
+        width: 80%;
+        /* adjust the width; make sure the total of both is 100% */
+        /*background: #dd0;*/
+        padding: 0;
+        margin: 0;
+    }
+</style>
 
-                <div class="alert alert-danger">
-                @ViewBag.norecaptcha
+
+<html>
+
+<head>
+
+    <link href="~/loginLip/css/login_rigi.css" rel="stylesheet" />
+    <script type="text/javascript" src="quform/js/scripts.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>-->
+    @* <script src="~/js/site.js"></script>*@
 
 
-                </div>
+<!--</head>
+<body>-->
+    @*<h1>Login</h1>
+
+        <h4>LoginViewModle</h4>*@
+
+    @*<div class="row">
+        <div class="col-md-4">*@
+
+
+
+
+    <!--<div id="advice">Click on Sign Up button<i id="cross" class="fas fa-times"></i></div>
+    <div id="container">
+        <div id="leftSide">
+            <div class="title">One of us?</div>
+            <div class="text">If you already have an account you can log in.</div>
+        </div>
+        <div id="rightSide">
+            <div class="title">New here?</div>
+            <div class="text">You can create your own account right now!</div>
+        </div>
+        <div id="loginBlock">-->
+            @*@{IHtml.RenderPartial("_LoginPartia")}*@
+            <div id="loginContent">
+                <form id="loginForm" name="loginForm" asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    @if (ViewBag.norecaptcha != null)
+                    {
+
+                        <div class="alert alert-danger">
+                            @ViewBag.norecaptcha
+
+
+                        </div>
                     }
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+
+                    <div class="wrapper">
+                        <input type="text" id="username" asp-for="UserName  " required />
+                        <label for="username" class="loginlabel">User name</label>
+                      
+
+ 
+                    </div>
+                    <div class="wrapper">
+                        <input type="password" id="password" asp-for="password" required/>
+
+                        <label for="password"  class="loginlabel">Password</label>
+                   
+                    </div>
+                  
+                    <div class="wrapper ">
+                        <label for="Rememperme"  class="loginlabel">
+                            <dl>
+
+                                <dt>
+                                    <input name="Rememperme" asp-for="RememberMe" id="Rememperme" />
+                                </dt>
+                              
+                                <dd>
+                                    Remember Me
+                                </dd>
+
+                            </dl>
+                        </label>
+                        <br />
+
+                        <div class="g-recaptcha" data-sitekey=" @GoogleRecaptchaconfig.Value.SiteKey"></div>
+                        <br />
+
+
+                        @if (ViewBag.captchMessage != null)
+                        {
+                            <div class=" text-danger">
+                                @ViewBag.captchMessage
+                            </div>
+
+                        }
+                        <br />
+                        <div class="submit">
+
+                            <input type="submit" value="Log In" />
+
+                        </div>
+
+
+
+
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="password" class="control-label"></label>
-                <input asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
+       
+
+
+
+ @*</div>
+
+
+
+
+        <div id="bar">
+            <div id="mask">
+                <div id="toggle"><div class="dot">.</div><div id="loginText">Log&nbsp;In</div><div id="signupText">Sign&nbsp;Up</div></div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
-                </label>
+        </div>
+
+
+
+
+        <div id="signupBlock">
+            <div id="signupContent">
+                <form id="signupForm" name="signupForm">
+                    <div class="wrapper">
+                        <input type="text" id="name" minlength="2" required />
+                        <label for="name">Name</label>
+                        <i class="far fa-check-square"></i>
+                    </div>
+                    <div class="wrapper">
+                        <input type="text" id="username" minlength="4" required />
+                        <label for="username">Username</label>
+                        <i class="far fa-check-square"></i>
+                    </div>
+                    <div class="wrapper">
+                        <input type="email" id="email" required />
+                        <label for="email">Email</label>
+                        <i class="far fa-check-square"></i>
+                    </div>
+                    <div class="wrapper">
+                        <input type="password" id="password" minlength="6" required />
+                        <label for="password">Password</label>
+                        <i class="far fa-check-square"></i>
+                    </div>
+                    <input type="button" value="Sign up" />
+                </form>
             </div>
-            @*<div class="form-group">
+        </div>
+    </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*</div>
+        </div>*@
+
+    @*<script>
+        window.QuformRecaptchaLoaded = function () {
+            if (window.grecaptcha && window.jQuery) {
+                jQuery('.g-recaptcha').each(function () {
+                    var $recaptcha = jQuery(this);
+
+                    if ($recaptcha.is(':empty')) {
+                        $recaptcha.data('recaptcha-id', grecaptcha.render($recaptcha[0]));
+                    }
+                });
+            }
+        };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>
+    <script src="~/loginLip/js/login_regi.js"></script>
+
+    <script>
+        const myForm = document.getElementById("loginForm");
+        document.querySelector(".submit").addEventListener("click", function () {
+
+            myForm.submit();
+
+        });
+
+    </script>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<div class="form-group">
+        <label asp-for="UserName" class="control-label"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="password" class="control-label"></label>
+        <input asp-for="password" class="form-control" />
+        <span asp-validation-for="password" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="RememberMe" /> @@Html.DisplayNameFor(model => model.RememberMe)
+        </label>
+    </div>-->
+    @*<div class="form-group">
             <div class="g-recaptcha" data-sitkey="6LeSM3chAAAAACpQ1uEJQYjxwYsOYqqCV7lw5lYX">
 
             </div>
 
         </div>*@
-            @* <input type="hidden" id="LoginViweModeltoken" asp-for="token" />*@
-            <div class="form-group">
+    @* <input type="hidden" id="LoginViweModeltoken" asp-for="token" />*@
+    <!--<div class="form-group">
 
-                <div class="g-recaptcha" data-sitekey=" @GoogleRecaptchaconfig.Value.SiteKey"></div>
+        <div class="g-recaptcha" data-sitekey=" @@GoogleRecaptchaconfig.Value.SiteKey"></div>
 
 
-            </div>
-            <div class="form-group">
-
-                @if (ViewBag.captchMessage != null)
-                {
-                    <div class=" text-danger">
-                        @ViewBag.captchMessage
-                    </div>
-
-                        }
-                </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
     </div>
-</div>
+    <div class="form-group">
 
-<script>
-    window.QuformRecaptchaLoaded = function () {
-        if (window.grecaptcha && window.jQuery) {
-            jQuery('.g-recaptcha').each(function () {
-                var $recaptcha = jQuery(this);
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Login" class="btn btn-primary" />
+    </div>-->
+@*</body>
 
-                if ($recaptcha.is(':empty')) {
-                    $recaptcha.data('recaptcha-id', grecaptcha.render($recaptcha[0]));
-                }
-            });
-        }
-    };
-</script>
-<script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>
-
-
-
-@*<div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-@* <script src="https://www.google.com/recaptcha/api.js?@GoogleRecaptchaconfig.Value.SiteKey"></script>*@
-
-@*<script type="text/javascript">
-        var onloadCallback = function () {
-            grecaptcha.render('html_element', {
-                'sitekey': '@GoogleRecaptchaconfig.Value.SiteKey'
-            });
-        };
-    </script>*@
-
-
-@*<script>
-
-        $(function () {
-        grecaptcha.ready(function () {
-            grecaptcha.execute('@GoogleRecaptchaconfig.Value.SiteKey', { action: 'submit' }).then(function (token) {
-                // Add your logic to submit to your backend server here.
-                console.log(token);
-            });
-        });
-        });
-    </script>*@
-
-
-
-
-
-
-
-@*<script>
-        //function onClick(e) {
-        //    e.preventDefault();
-        grecaptcha.ready(function () {
-            grecaptcha.execute('@GoogleRecaptchaconfig.Value.SiteKey', { action: 'submit' }).then(function (token) {
-                // Add your logic to submit to your backend server here.
-                console.log(token);
-            });
-        });
-           /* }*/
-    </script>*@
-
-@*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
-
-
-
-
-@*<script>
-
-
-       grecaptcha.ready(function () {
-           grecaptcha.execute('@GoogleRecaptchaconfig.Value.SiteKey', { action: 'submit' }).then(function (token) {
-               // Add your logic to submit to your backend server here.
-               console.log(token);
-               // document.getElementById("LoginViweModeltoken").value = token;
-
-
-           });
-       });
-
-    //  setInterval(gettoken, 115000);
-      //$(function{
-      //    gettoken();
-      //});
-      </script>*@
-
-@*  *@
+</html>*@

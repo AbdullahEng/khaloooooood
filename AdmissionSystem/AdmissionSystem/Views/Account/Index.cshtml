@@ -1,0 +1,137 @@
+﻿@{ 
+
+    Layout = "";
+}
+
+
+@using Microsoft.Extensions.Options
+@using AdmissionSystem.Model.GoogleCaptcha
+@inject IOptions<GoogleCaptchaConfig> GoogleRecaptchaconfig
+<style>
+    dl {
+        width: 120%;
+        overflow: hidden;
+        /*background: #ff0;*/
+        padding: 0;
+        margin: 0
+    }
+
+    dt {
+        float: left;
+        width: 20%;
+        /* adjust the width; make sure the total of both is 100% */
+        /*background: #f00;*/
+        padding: 0;
+        margin: 0
+    }
+
+    dd {
+        float: right;
+        width: 80%;
+        /* adjust the width; make sure the total of both is 100% */
+        /*background: #dd0;*/
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+
+<html>
+
+<head>
+
+    <link href="~/loginLip/css/login_rigi.css" rel="stylesheet" />
+    <script type="text/javascript" src="quform/js/scripts.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+
+
+</head>
+<body>
+    @*<h1>Login</h1>
+
+        <h4>LoginViewModle</h4>
+
+        <div class="row">
+            <div class="col-md-4">*@
+
+
+
+
+    <div id="advice">Click on Sign Up button<i id="cross" class="fas fa-times"></i></div>
+    <div id="container">
+        <div id="leftSide">
+            <div class="title">One of us?</div>
+            <div class="text">If you already have an account you can log in.</div>
+        </div>
+        <div id="rightSide">
+            <div class="title">New here?</div>
+            <div class="text">You can create your own account right now!</div>
+        </div>
+        <div id="loginBlock">
+            <partial name="Login" />
+        </div>
+
+
+
+
+        <div id="bar">
+            <div id="mask">
+                <div id="toggle"><div class="dot">.</div><div id="loginText">Log&nbsp;In</div><div id="signupText">Sign&nbsp;Up</div></div>
+            </div>
+        </div>
+
+
+
+
+        <div id="signupBlock">
+            <div id="signupContent" class="scrollingDiv">
+                <partial name="Register_Student" />
+            </div>
+        </div>
+    </div>
+
+    @*</div>*@
+    @*</div>*@
+
+    <script>
+        window.QuformRecaptchaLoaded = function () {
+            if (window.grecaptcha && window.jQuery) {
+                jQuery('.g-recaptcha').each(function () {
+                    var $recaptcha = jQuery(this);
+
+                    if ($recaptcha.is(':empty')) {
+                        $recaptcha.data('recaptcha-id', grecaptcha.render($recaptcha[0]));
+                    }
+                });
+            }
+        };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>
+    <script src="~/loginLip/js/login_regi.js"></script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+    @*<script>
+            const myForm = document.getElementById("loginForm");
+            document.querySelector(".submit").addEventListener("click", function () {
+
+                myForm.submit();
+
+            });
+
+        </script>*@
+    @*<script>
+            const myForm = document.getElementById("signupForm");
+            document.querySelector(".submit").addEventListener("click", function () {
+
+                myForm.submit();
+
+            });
+
+        </script>*@
+
+</body>
+
+</html>

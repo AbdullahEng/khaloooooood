@@ -2,23 +2,56 @@
 
 @{
     ViewData["Title"] = "Register_Student";
+    Layout = "";
 }
 @using Microsoft.Extensions.Options
 @using AdmissionSystem.Model.GoogleCaptcha
 @inject IOptions<GoogleCaptchaConfig> GoogleRecaptchaconfig
-<h1 class="text-center">Register Student</h1>
 
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+@*<link rel="stylesheet" href="~/css/site.css" />*@
+<!--<h1 class="text-center">Register Student</h1>-->
 @*<h4>RegisteerStudentViweModel</h4>*@
-<hr />
+<!--<hr />
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>-->
+
+
+<style>
+    div.scrollingDiv {
+        overflow: auto;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+</style>
+
 <style>
     .content {
         max-width: 500px;
         margin: auto;
     }
 </style>
+
+@*<link href="~/loginLip/css/radio_male_femal.css" rel="stylesheet" />*@
+
+
+
+
+
+
+
+
+
+
+
 <div class="row">
-    <div class="col-md-4 content">
-        <form asp-action="Register_Student">
+    <div class="col-md-4 content ">
+
+        <form asp-action="Register_Student" id="signupForm" name="signupForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @if (ViewBag.norecaptcha != null)
@@ -81,7 +114,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="high_school_certificate" class="control-label"></label>
-                @*<input asp-for="high_school_certificate" class="form-control" />*@
+               
                 <select asp-for="high_school_certificate" class="form-control">
                     <option value="Syrian">Syrian</option>
                     <option value="UNSyrian">UNSyrian </option>
@@ -91,13 +124,17 @@
             </div>
             <div class="form-group">
 
-                <label asp-for="Gender" class="control-label">@*@localizer["gender"]*@</label>
+                <label asp-for="Gender" class="control-label">
+
+                </label>
+
+
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label asp-for="Gender" class="btn btn-outline-primary">
-                        <input asp-for="Gender" type="radio" name="gender" id="option1" value="male" autocomplete="off" spellcheck="true"> Male
+                        <input asp-for="Gender" type="radio" name="gender" id="option1" value="male" autocomplete="off" spellcheck="true" class="radioRegi"> Male
                     </label>
                     <label asp-for="Gender" class="btn btn-outline-primary">
-                        <input asp-for="Gender" type="radio" name="gender" id="option2" value="femal" autocomplete="off">Femal
+                        <input asp-for="Gender" type="radio" name="gender" id="option2" value="femal" autocomplete="off" class="radioRegi">Femal
                     </label>
                 </div>
 
@@ -111,7 +148,7 @@
             <div class="form-group">
                 <label asp-for="Birth" class="control-label"></label>
                 <input asp-for="Birth" class="form-control" type="date"
-                       min="@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")" />
+                       min=" @DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")" />
 
                 <span asp-validation-for="Birth" class="text-danger"></span>
             </div>
@@ -130,10 +167,305 @@
             </div>
             <div class="form-group">
 
-                @if (ViewBag.captchMessage != null)
+                @if (ViewBag.captchMessageregi != null)
                 {
                     <div class=" text-danger">
-                        @ViewBag.captchMessage
+                        @ViewBag.captchMessageregi
+                    </div>
+
+                }
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-outline-primary" />
+            </div>
+            @*<div>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>*@
+        </form>
+
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/site.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+
+
+
+<!--<form id="signupForm" name="signupForm" asp-action="Register_Student">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @@if (ViewBag.norecaptcha != null)
+    {
+
+        <div class="alert alert-danger">
+           @@ViewBag.norecaptcha
+
+
+        </div>
+    }
+    @@if (ViewBag.message != null)
+    {
+
+        <div class="alert alert-danger border-danger" role="alert">
+
+            @@ViewBag.message
+
+        </div>
+    }
+    @@if (ViewBag.errorinfo != null)
+    {
+
+        <div class="alert alert-danger border-danger" role="alert">
+
+            @@ViewBag.errorinfo
+
+        </div>
+    }
+
+    <div class="wrapper">
+        <input  id="UserName"  asp-for="UserName" />
+        <label for="UserName" asp-for="UserName"></label>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <input  id="Nick_Name" minlength="4" asp-for="Nick_Name" />
+        <label for="Nick_Name" asp-for="Nick_Name"></label>
+        <span asp-validation-for="Nick_Name" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <input id="password" asp-for="password" />
+        <label for="password" asp-for="password"></label>
+        <span asp-validation-for="password" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <input  id="ConfirmPassword"  asp-for="ConfirmPassword" />
+        <label for="ConfirmPassword" asp-for="ConfirmPassword"></label>
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <input  id="Email"  asp-for="Email" />
+        <label for="Email" asp-for="Email"></label>
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <input type="text" id="TheIDnumber" asp-for="TheIDnumber" />
+        <label for="TheIDnumber" asp-for="TheIDnumber"></label>
+        <span asp-validation-for="TheIDnumber" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <select asp-for="high_school_certificate"  id="high_school_certificate" >
+            <option value="Syrian">Syrian</option>
+            <option value="UNSyrian">UNSyrian </option>
+
+        </select>
+        <label for="high_school_certificate" asp-for="high_school_certificate"></label>
+        <span asp-validation-for="high_school_certificate" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+
+        <dl>
+
+            <dt>
+                <input asp-for="Gender" type="radio" id="GenderM" value="Male" checked>
+            </dt>
+
+            <dd>
+                <label for="GenderM">Male</label><br>
+            </dd>
+            <dt>
+                <input asp-for="Gender" type="radio" id="GenderF" value="Female">
+            </dt>
+
+            <dd>
+                <label for="GenderF">Female</label><br>
+            </dd>
+
+        </dl>
+@*<label asp-for="Gender" class="btn btn-outline-primary">
+            <input asp-for="Gender" type="radio" name="gender" id="Gender" value="male" autocomplete="off" spellcheck="true"> Male
+        </label>
+        <label asp-for="Gender" class="btn btn-outline-primary">
+            <input asp-for="Gender" type="radio" name="gender" id="Gender" value="femal" autocomplete="off">Femal
+        </label>
+    </div>*@
+
+
+
+@*<label for="Gender" asp-for="Gender"></label>*@
+<!--<span asp-validation-for="Gender" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <input asp-for="Mobile_Phone" type="password" id="Mobile_Phone"  />
+        <label for="Mobile_Phone" asp-for="Mobile_Phone" ></label>
+        <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+    <div class="wrapper">
+        <input id="Birth" asp-for="Birth" type="date"
+               min=" @@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" max="@@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")" />
+        <label for="Birth" asp-for="Birth" >Password</label>
+        <span asp-validation-for="Birth" class="text-danger"></span>
+        <i class="far fa-check-square"></i>
+    </div>
+
+    <div class="g-recaptcha" data-sitekey=" @@GoogleRecaptchaconfig.Value.SiteKey"></div>
+
+
+
+    @@if (ViewBag.captchMessage != null)
+    {
+        <div class=" text-danger">
+            @@ViewBag.captchMessage
+        </div>
+
+    }
+
+    <input type="submit" value="Sign up" />
+</form>-->
+<!--<div class="row">
+    <div class="col-md-4 content">
+        <form asp-action="Register_Student">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @@if (ViewBag.norecaptcha != null)
+            {
+
+                <div class="alert alert-danger">
+                   @@ViewBag.norecaptcha
+
+
+                </div>
+            }
+           @@if (ViewBag.message != null)
+            {
+
+                <div class="alert alert-danger border-danger" role="alert">
+
+                    @@ViewBag.message
+
+                </div>
+            }
+            @@if (ViewBag.errorinfo != null)
+            {
+
+                <div class="alert alert-danger border-danger" role="alert">
+
+                    @@ViewBag.errorinfo
+
+                </div>
+            }
+
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nick_Name" class="control-label"></label>
+                <input asp-for="Nick_Name" class="form-control" />
+                <span asp-validation-for="Nick_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheIDnumber" class="control-label"></label>
+                <input asp-for="TheIDnumber" class="form-control" />
+                <span asp-validation-for="TheIDnumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="high_school_certificate" class="control-label"></label>
+<input asp-for="high_school_certificate" class="form-control" />
+<select asp-for="high_school_certificate" class="form-control">
+        <option value="Syrian">Syrian</option>
+        <option value="UNSyrian">UNSyrian </option>
+
+    </select>
+    <span asp-validation-for="high_school_certificate" class="text-danger"></span>
+</div>
+            <div class="form-group">
+
+                <label asp-for="Gender" class="control-label">-->
+@*@localizer["gender"]*@
+<!--</label>
+
+
+
+@*<div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label asp-for="Gender" class="btn btn-outline-primary">
+            <input asp-for="Gender" type="radio" name="gender" id="option1" value="male" autocomplete="off" spellcheck="true"> Male
+        </label>
+        <label asp-for="Gender" class="btn btn-outline-primary">
+            <input asp-for="Gender" type="radio" name="gender" id="option2" value="femal" autocomplete="off">Femal
+        </label>
+    </div>*@
+
+<!--<span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mobile_Phone" class="control-label"></label>
+                <input asp-for="Mobile_Phone" class="form-control" />
+                <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birth" class="control-label"></label>
+                <input asp-for="Birth" class="form-control" type="date"
+                       min=" @@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" max="@@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")" />
+
+                <span asp-validation-for="Birth" class="text-danger"></span>
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group">
+
+                <div class="g-recaptcha" data-sitekey=" @@GoogleRecaptchaconfig.Value.SiteKey"></div>
+
+
+            </div>
+            <div class="form-group">
+
+                @@if (ViewBag.captchMessage != null)
+                {
+                    <div class=" text-danger">
+                        @@@@ViewBag.captchMessage
                     </div>
 
                 }
@@ -151,27 +483,27 @@
             </div>
         </form>
     </div>
-</div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+</div>-->
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 
 
 
 
 
-<script>
-    window.QuformRecaptchaLoaded = function () {
-        if (window.grecaptcha && window.jQuery) {
-            jQuery('.g-recaptcha').each(function () {
-                var $recaptcha = jQuery(this);
+    <script>
+        window.QuformRecaptchaLoaded = function () {
+            if (window.grecaptcha && window.jQuery) {
+                jQuery('.g-recaptcha').each(function () {
+                    var $recaptcha = jQuery(this);
 
-                if ($recaptcha.is(':empty')) {
-                    $recaptcha.data('recaptcha-id', grecaptcha.render($recaptcha[0]));
-                }
-            });
-        }
-    };
-</script>
-<script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>
+                    if ($recaptcha.is(':empty')) {
+                        $recaptcha.data('recaptcha-id', grecaptcha.render($recaptcha[0]));
+                    }
+                });
+            }
+        };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>*@
 

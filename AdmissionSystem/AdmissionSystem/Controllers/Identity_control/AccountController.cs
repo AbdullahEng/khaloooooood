@@ -54,7 +54,11 @@ namespace AdmissionSystem.Controllers.Identity_control
             this.googleCaptcahServiceeee = new GoogleCaptcahService(config);
         }
 
-
+        public ActionResult Index()
+        {
+            // Department_faculty_view_model
+            return View();
+        }
 
         /// ////////////////////////////////////////////////////////////////////////
         // //// /////////// Admin
@@ -94,7 +98,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         //    }
         //    return View(obj);
         //}
-      
+
 
 
 
@@ -102,18 +106,21 @@ namespace AdmissionSystem.Controllers.Identity_control
         ///  // Studnet
 
 
-        public IActionResult Register_Student()
+        public PartialViewResult Register_Student()
         {
             var model = new RegisteerStudentViweModel
             {
                 sitkey = config.Value.SiteKey
 
             };
-            return View(model);
+            //var login = new LoginViewModle();
+            //var tuple = new Tuple<LoginViewModle, RegisteerStudentViweModel>(login, model);
+            //return View(tuple);
+            return PartialView("Index", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register_Student(RegisteerStudentViweModel obj)
+        public PartialViewResult Register_Student(RegisteerStudentViweModel obj)
         {
 
             string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
@@ -123,11 +130,11 @@ namespace AdmissionSystem.Controllers.Identity_control
                 var merror = validate.Message.ToArray();
                 foreach (var item in merror)
                 {
-                    ViewBag.captchMessage = item + "    ";
+                    ViewBag.captchMessageregi = item + "    ";
                 }
                 //  =validate.Message.ToArray();
                 //  return RedirectToAction("Login",obj);
-                return View();
+                return PartialView("Index");
             }
             if (ModelState.IsValid)
             {
@@ -174,7 +181,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                             if (!roleResult.Succeeded)
                             {
                                 ModelState.AddModelError("", "Error while creatin");
-                                return View(obj);
+                                return PartialView("Index", obj);
                             }
 
                         }
@@ -212,7 +219,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                         };
                         accRepo.Add(accept);
 
-                        return RedirectToAction("login", "Account");
+                        return PartialView("Index");
                     }
                     else {
                         var disc= result.Errors.Select(e => e.Description).ToArray();
@@ -220,19 +227,20 @@ namespace AdmissionSystem.Controllers.Identity_control
                         {
                             ViewBag.errorinfo += item + "  ";
                         }
-                    
-                        return View(obj);
+
+                        return PartialView("Index", obj);
                     }
                 }
                 else
                 {
 
                     ViewBag.message = "Registration fails becouse there is another student with  the same info ";
-                    return View(obj);
+
+                    return PartialView("Index", obj);
                 }
               //  return View(obj);
             }
-            return View();
+            return PartialView("Index");
         }
 
 
@@ -356,13 +364,16 @@ namespace AdmissionSystem.Controllers.Identity_control
 
 
 
-        public IActionResult Login() {
+        public PartialViewResult Login() {
             var model = new LoginViewModle { 
             sitkey= config.Value.SiteKey
 
             };
-            
-            return View(model); }
+            //var rige = new RegisteerStudentViweModel();
+            //var tuple = new Tuple<LoginViewModle, RegisteerStudentViweModel>(model, rige);
+            //return View(tuple);
+            return PartialView("Index", model);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -380,10 +391,10 @@ namespace AdmissionSystem.Controllers.Identity_control
                     {
                         ViewBag.captchMessage = item + "    ";
                     }
-                    //  =validate.Message.ToArray();
-                    //  return RedirectToAction("Login",obj);
-                    return View();
-                }
+                //  =validate.Message.ToArray();
+                //  return RedirectToAction("Login",obj);
+                return View("Index");
+            }
                 //var capatchservice = await googleCaptcahServiceeee.Vefytoken(obj.token);
                 //if (!capatchservice)
                 //{
@@ -422,7 +433,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                                 {
                                     if (Employee.Type == "Admin")
                                     {
-                                        return RedirectToAction("Edit", "Employee", new { id = Employee.id });
+                                        return RedirectToAction("Edit" , "Employee" , new { id = Employee.id });
 
                                     }
                                     else if (Employee.Type == "Employee")
@@ -460,14 +471,14 @@ namespace AdmissionSystem.Controllers.Identity_control
                             // }
 
                         }
-                        /// }
+                    /// }
 
 
 
 
 
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return View("Index");
+                }
                     ModelState.AddModelError("", "Invalid login!!");
 
                 }
@@ -477,7 +488,7 @@ namespace AdmissionSystem.Controllers.Identity_control
 
 
             //}
-            return View(obj);
+            return View("Index" ,obj);
         }
 
 
@@ -487,7 +498,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         public IActionResult LogOff()
         {
             LoginInManager.SignOutAsync().Wait();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Account");
         }
 
 

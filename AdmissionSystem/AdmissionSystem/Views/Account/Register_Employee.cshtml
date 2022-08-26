@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Register_Employee";
+    Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 @using Microsoft.Extensions.Options
 @using AdmissionSystem.Model.GoogleCaptcha
 @inject IOptions<GoogleCaptchaConfig> GoogleRecaptchaconfig
-<h1 class="text-center">Register_Employee</h1>
+<h1 class="text-center">Register Employee</h1>
 
 @*<h4>RegisterViewModel</h4>*@
 <hr />
