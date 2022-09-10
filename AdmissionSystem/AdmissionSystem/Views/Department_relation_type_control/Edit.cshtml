@@ -26,6 +26,14 @@
         </div>*@
             @*English*@
 
+            @if (ViewBag.messageOverRate != null)
+            {
+                <div class="alert alert-danger border-danger">
+
+                    @ViewBag.messageOverRate
+
+                </div>
+            }
             @if (ViewBag.Message != null)
             {
                 <div class="alert alert-dark border-dark">
@@ -96,13 +104,13 @@
 
             <div class="form-group">
                 <label asp-for="Department_id" class="control-label"></label>
-                <select asp-for="Department_id" class="form-control" asp-items="@(new SelectList(Model.FK_Department,"id","specialization_name"))">
+                <select asp-for="Department_id" class="form-control" disabled asp-items="@(new SelectList(Model.FK_Department,"id","specialization_name"))">
                 </select>
                 <span asp-validation-for="Department_id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Type_of_high_school_cirtificate_id" class="control-label"></label>
-                <select asp-for="Type_of_high_school_cirtificate_id" class="form-control" asp-items="@(new SelectList(Model.FK_type_Of_High_School_Cirtificate,"id","type"))">
+                <select asp-for="Type_of_high_school_cirtificate_id" class="form-control" disabled asp-items="@(new SelectList(Model.FK_type_Of_High_School_Cirtificate,"id","type"))">
                 </select>
                 <span asp-validation-for="Type_of_high_school_cirtificate_id" class="text-danger"></span>
             </div>

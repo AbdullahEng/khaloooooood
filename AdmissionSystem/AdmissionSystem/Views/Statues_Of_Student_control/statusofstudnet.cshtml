@@ -1,0 +1,96 @@
+﻿@model IEnumerable<AdmissionSystem.Model.Statues_Of_Student>
+
+
+@{
+
+    Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
+}
+
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
+<h2 class="text-center">Status of Studnet</h2>
+<br />
+<br />
+<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" asp-action="statusofstudnet">
+    <div class="input-group">
+        <input type="search" class="form-control bg-light border-0 small" name="term" placeholder="Student Name..."
+               aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<br />
+<br />
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_of_Acshiving)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checked_recipet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checked_Identity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checked_city_certificate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checked_Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FK_Student_Info.First_Name_EN)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_of_Acshiving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Checked_recipet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Checked_Identity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Checked_city_certificate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Checked_Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FK_Student_Info.First_Name_EN)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

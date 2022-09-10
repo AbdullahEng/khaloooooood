@@ -14,19 +14,20 @@
         <form asp-action="AlgorithmUNSyrain">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @if (ViewBag.message != null) {
-            
-            <div class="alert alert-danger border-danger">
-                @ViewBag.message
+            @if (ViewBag.message != null)
+            {
+
+                <div class="alert alert-danger border-danger">
+                    @ViewBag.message
 
 
-            </div>
+                </div>
 
             }
             <div class="form-group">
                 <label asp-for="countryId" class="control-label"></label>
                 <select asp-for="countryId" class="form-control"
-                        asp-items="@(new SelectList(Model.CountryList,"id","country_name"))" ></select>
+                        asp-items="@(new SelectList(Model.CountryList,"id","country_name"))"></select>
 
                 <span asp-validation-for="countryId" class="text-danger"></span>
             </div>
@@ -34,13 +35,20 @@
             <div class="form-group">
                 <label asp-for="DepartmentId" class="control-label"></label>
                 <select asp-for="DepartmentId" class="form-control"
-                        asp-items="@(new SelectList(Model.departmentList,"id","specialization_name"))" onchange="this.form.submit()"></select>
+                        asp-items="@(new SelectList(Model.departmentList,"id","specialization_name"))" ></select>
 
                 <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @*  <input type="submit" value="Save" class="btn btn-primary" />*@
-                <input type="submit" value="Export Excel sheet" class="btn btn-primary" formaction="ExcelsheetAdmissionUNSrian" />
+                <label asp-for="statusofAdmissionId" class="control-label"></label>
+                <select asp-for="statusofAdmissionId" class="form-control"
+                        asp-items="@(new SelectList(Model.statues_Of_Admission_Eligibiltieslist,"id","Type_of_admission_eligibilty")) "></select>
+                @*onchange="this.form.submit()"*@
+                <span asp-validation-for="statusofAdmissionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                  <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Export Excel sheet" class="btn btn-primary " formaction="ExcelsheetAdmissionUNSrian" />
 
 
             </div>
@@ -82,34 +90,46 @@
             <th>
                 <label class="control-label">Status of Admission elgibility</label>
             </th>
+            <th>
+                <label class="control-label">begining date of Admission</label>
+            </th>
+            <th>
+                <label class="control-label">semester NO</label>
+            </th>
             @*<th>
-                    @Html.DisplayNameFor(model => model.)
-                </th>*@
+            @Html.DisplayNameFor(model => model.)
+        </th>*@
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Accinfo)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.studnet_name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Accepted_wish)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cuntry)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.The_rate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status_of_Admission_elgibility)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.studnet_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accepted_wish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cuntry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.The_rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status_of_Admission_elgibility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.beganing_date_of_Admission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.semester_NO)
+            </td>
 
-                <td>
-                </td>
-            </tr>
+            <td>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

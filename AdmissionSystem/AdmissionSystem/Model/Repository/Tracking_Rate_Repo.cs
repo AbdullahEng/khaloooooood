@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Tracking_Rate> List()
         {
-            return DB.Tracking_Rate.ToList();
+            return DB.Tracking_Rate.Include(a=>a.FK_Employee_Info).Include(a=>a.FK_Student_Info).ToList();
         }
 
         public void Update(int id, Tracking_Rate entity)

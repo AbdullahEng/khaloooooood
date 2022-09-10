@@ -14,6 +14,8 @@ namespace AdmissionSystem.View_Model
         public int countryId { get; set; }
         public List<Department> departmentList { get; set; }
         public int DepartmentId { get; set; }
+        public List<Statues_of_admission_eligibilty> statues_Of_Admission_Eligibiltieslist{ get; set; }
+        public int statusofAdmissionId { get; set; }
         public List<AcceptebleIformationAnd_Details> Accinfo{ get; set; }
     }
 }

@@ -5,34 +5,111 @@
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1>Create</h1>
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
+<h1 class="text-center">Create Type of high school Cirtificate</h1>
 
-<h4>Type_of_high_school_Cirtificate</h4>
+@*<h4>Type_of_high_school_Cirtificate</h4>*@
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 content">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="id" class="control-label"></label>
-                <input asp-for="id" class="form-control" />
-                <span asp-validation-for="id" class="text-danger"></span>
+
+
+
+            @*English*@
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-warning border-warning">@ViewBag.Message</div>
+            }
+            @if (ViewBag.AddSuccess != null)
+            {
+
+                <div class="alert alert-success border-success " role="alert">
+                    @ViewBag.AddSuccess
+                </div>
+            }
+
+            @if (ViewBag.Addfails != null)
+            {
+
+                <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                    @ViewBag.Addfails
+                </div>
+
+            }
+            @if (ViewBag.sameEdit != null)
+            {
+
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEdit
+                </div>
+            }
+
+            @*Arabic*@
+
+
+            @*@if (ViewBag.MessageArabic != null)
+        {
+            <div class="alert alert-warning border-warning">@ViewBag.MessageArabic</div>
+        }
+        @if (ViewBag.AddSuccessArabic != null)
+        {
+
+            <div class="alert alert-success border-successArabic " role="alert">
+                @ViewBag.AddSuccessArabic
             </div>
+        }
+
+        @if (ViewBag.AddfailsArabic != null)
+        {
+
+            <div class="alert alert-danger border-danger" role="alert" data-toggle="tooltip" data-placement="bottom" title="Because it was added before">
+
+                @ViewBag.AddfailsArabic
+            </div>
+
+        }
+
+                 @if (ViewBag.sameEditArabic != null)
+            {
+
+                <div class="alert alert-warning border-warning">
+                    @ViewBag.sameEditArabic
+                </div>
+            }
+            *@
+
+
+
+
+
             <div class="form-group">
                 <label asp-for="type" class="control-label"></label>
                 <input asp-for="type" class="form-control" />
                 <span asp-validation-for="type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-primary" />
+            </div>
+            <div>
+                <a asp-action="Index" class="btn btn-secondary btn-circle  ">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
+@*<div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

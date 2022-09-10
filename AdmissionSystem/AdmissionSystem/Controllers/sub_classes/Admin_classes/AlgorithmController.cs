@@ -162,6 +162,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 Accinfo = accinfolist
                 ,
                 departmentList =FillDepartment()
+                ,statues_Of_Admission_Eligibiltieslist= fillstatusAdmsissionUnSyrian()
             };
             return View(alogviewmodel);
 
@@ -175,6 +176,13 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             listcountry.Insert(0,new Country {id=-1 ,country_name="please Enter hte country" });
             listcountry.InsertRange(1,cont);
             return listcountry;
+        }
+        public List<Statues_of_admission_eligibilty> fillstatusAdmsissionUnSyrian()
+        {
+
+            var status = dB.Statues_of_admission_eligibilty.ToList();
+            status.Insert(0, new Statues_of_admission_eligibilty { id = -1, Type_of_admission_eligibilty = "please Enter hte status" });
+           return status;
         }
         public List<Department> FillDepartment() {
             var dep = department_Repository.List().ToList();
@@ -198,6 +206,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     Accinfo = accinfolist1
                     ,
                     departmentList = FillDepartment()
+                     ,
+                    statues_Of_Admission_Eligibiltieslist = fillstatusAdmsissionUnSyrian()
                 };
                 return View(alogviewmodel);
             }
@@ -220,12 +230,14 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 listDeaprtmentsCahir.Add(number);
 
             }
+            //var findstauts =;
             var listOfCheckedStudent = studentRepository.List().Where(s => statues_Of_Student_Repository.Find(s.Id).Checked_city_certificate == true
                                                                        && statues_Of_Student_Repository.Find(s.Id).Checked_Identity == true
                                                                        && statues_Of_Student_Repository.Find(s.Id).Checked_Rate == true
                                                                        && statues_Of_Student_Repository.Find(s.Id).Checked_recipet == true
                                                                        // && s.Fk_Cirtificate_cityId == country.countryId
                                                                        && s.high_school_certificate == "UNSyrian"
+                                                                       && s.Statues_Of_Admission_Eligibilty.id==modelAlgo.statusofAdmissionId
                                                                        ).ToList();
             var sortedListOfcheckedstudent = listOfCheckedStudent.OrderByDescending(s => s.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate).ToList();
 
@@ -357,9 +369,9 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
             var viewwithCountry = acceptedREpo.List().Where(a =>
                                                                         countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
-
-
-                                                                          == modelAlgo.countryId).ToList();
+                                                                          == modelAlgo.countryId
+                                                                          && a.FK_Statues_of_admission_eligibilty.id ==modelAlgo.statusofAdmissionId
+                                                                          ).ToList();
             var departments = department_Repository.List().SingleOrDefault(a => a.id == modelAlgo.DepartmentId);
             var accinfolist = new List<AcceptebleIformationAnd_Details>();
 
@@ -378,6 +390,11 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             Accepted_wish = item.Accepted_wish,
                             cuntry = country11.country_name,
                             Status_of_Admission_elgibility = statusof.Type_of_admission_eligibilty,
+                            beganing_date_of_Admission=statusof.Begaining_date_of_the_process.ToString()
+                            ,
+                            semester_NO=statusof.semester_no
+                            ,
+
                             studnet_name = item.FK_student.Father_Name_EN,
                             The_rate = Admission.The_Rate
 
@@ -394,6 +411,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 Accinfo = accinfolist
                ,
                 departmentList = FillDepartment()
+                ,statues_Of_Admission_Eligibiltieslist=fillstatusAdmsissionUnSyrian()
             };
 
 
@@ -510,6 +528,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 Accinfo = accinfolist
                 ,
                 departmentList = FillDepartment()
+                , statues_Of_Admission_Eligibiltieslist = fillstatusAdmsissionUnSyrian()
             };
             return View(alogviewmodel);
 
@@ -528,7 +547,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             listcountry.InsertRange(1, cont);
             return listcountry;
         }
-
+        ///    /////    ////////////////////////////////////////////////////////////////////////////////////////////----------SY-------------//////////////////////////////////////////////////////////////////////////////
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AlgorithmSyrain(AlgorithemViewModel modelAlgo)
@@ -546,6 +565,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     Accinfo = accinfolist1
                     ,
                     departmentList = FillDepartment()
+                     ,
+                    statues_Of_Admission_Eligibiltieslist = fillstatusAdmsissionUnSyrian()
                 };
                 return View(alogviewmodel);
                 //    ViewBag.message = "Please Select All Info";
@@ -593,6 +614,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                                                                       && statues_Of_Student_Repository.Find(s.Id).Checked_recipet == true
                                                                       // && s.Fk_Cirtificate_cityId == country.countryId
                                                                       && s.high_school_certificate == "Syrian"
+                                                                       && s.Statues_Of_Admission_Eligibilty.id == modelAlgo.statusofAdmissionId
                                                                       ).ToList();
 
             //var listOfCheckedStudent = studentRepository.List().Where(s =>
@@ -743,11 +765,12 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             }
 
             //  var country = countryRepoooooo.Find();
+
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                              countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
-
-
-                                                                == modelAlgo.countryId).ToList();
+                                                                        countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                          == modelAlgo.countryId
+                                                                          && a.FK_Statues_of_admission_eligibilty.id == modelAlgo.statusofAdmissionId
+                                                                          ).ToList();
             var departments = department_Repository.List().SingleOrDefault(a => a.id == modelAlgo.DepartmentId);
             var accinfolist = new List<AcceptebleIformationAnd_Details>();
 
@@ -766,6 +789,10 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             Accepted_wish = item.Accepted_wish,
                             cuntry = country11.country_name,
                             Status_of_Admission_elgibility = statusof.Type_of_admission_eligibilty,
+                            beganing_date_of_Admission = statusof.Begaining_date_of_the_process.ToString()
+                            ,
+                            semester_NO = statusof.semester_no
+                            ,
                             studnet_name = item.FK_student.Father_Name_EN,
                             The_rate = Admission.The_Rate
 
@@ -782,6 +809,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 Accinfo = accinfolist
                ,
                 departmentList = FillDepartment()
+                 ,
+                statues_Of_Admission_Eligibiltieslist = fillstatusAdmsissionUnSyrian()
             };
 
 
@@ -847,7 +876,10 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                                                                  countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
 
 
-                                                                   == modelalgo.countryId).ToList();
+                                                                   == modelalgo.countryId
+                                                                      && a.FK_Statues_of_admission_eligibilty.id == modelalgo.statusofAdmissionId
+
+                                                                   ).ToList();
             var departments = department_Repository.List().SingleOrDefault(a => a.id == modelalgo.DepartmentId);
             var accinfolist = new List<AcceptebleIformationAnd_Details>();
 
@@ -866,6 +898,10 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             Accepted_wish = item.Accepted_wish,
                             cuntry = country11.country_name,
                             Status_of_Admission_elgibility = statusof.Type_of_admission_eligibilty,
+                            beganing_date_of_Admission = statusof.Begaining_date_of_the_process.ToString()
+                            ,
+                            semester_NO = statusof.semester_no
+                            ,
                             studnet_name = item.FK_student.Father_Name_EN,
                             The_rate = Admission.The_Rate
 
@@ -882,6 +918,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 Accinfo = accinfolist
                ,
                 departmentList = dep
+
             };
 
 
@@ -905,6 +942,9 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 worksheet.Cell(currentRow, 3).Value = "country";
                 worksheet.Cell(currentRow, 4).Value = "Rate";
                 worksheet.Cell(currentRow, 5).Value = "Status of Admission elgibility";
+                worksheet.Cell(currentRow, 6).Value = "beginning date of Admission";
+                worksheet.Cell(currentRow, 7).Value = "semester NO";
+
 
 
 
@@ -918,6 +958,9 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     worksheet.Cell(currentRow, 3).Value = item.cuntry;
                     worksheet.Cell(currentRow, 4).Value = item.The_rate;
                     worksheet.Cell(currentRow, 5).Value = item.Status_of_Admission_elgibility;
+                    worksheet.Cell(currentRow, 6).Value = item.beganing_date_of_Admission;
+                    worksheet.Cell(currentRow, 7).Value = item.semester_NO;
+
                 }
                 using (var stream = new MemoryStream())
                 {
@@ -947,12 +990,12 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         public ActionResult ExcelsheetAdmissionUNSrian(AlgorithemViewModel modelalgo)
         {
 
-           // var countryfindsy = countryRepoooooo.Find(1);
+            // var countryfindsy = countryRepoooooo.Find(1);
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                                 countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
-
-
-                                                                   == modelalgo.countryId).ToList();
+                                                                         countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                           == modelalgo.countryId
+                                                                           && a.FK_Statues_of_admission_eligibilty.id == modelalgo.statusofAdmissionId
+                                                                           ).ToList();
             var departments = department_Repository.List().SingleOrDefault(a => a.id == modelalgo.DepartmentId);
             var accinfolist = new List<AcceptebleIformationAnd_Details>();
 
@@ -971,6 +1014,10 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             Accepted_wish = item.Accepted_wish,
                             cuntry = country11.country_name,
                             Status_of_Admission_elgibility = statusof.Type_of_admission_eligibilty,
+                            beganing_date_of_Admission = statusof.Begaining_date_of_the_process.ToString()
+                            ,
+                            semester_NO = statusof.semester_no
+                            ,
                             studnet_name = item.FK_student.Father_Name_EN,
                             The_rate = Admission.The_Rate
 
@@ -979,15 +1026,15 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     }
                 }
             }
-            var cont = countryRepoooooo.List().ToList();
-            var dep = department_Repository.List().ToList();
-            var algo = new AlgorithemViewModel
-            {
-                CountryList = cont,
-                Accinfo = accinfolist
-               ,
-                departmentList = dep
-            };
+            //var cont = countryRepoooooo.List().ToList();
+            //var dep = department_Repository.List().ToList();
+            //var algo = new AlgorithemViewModel
+            //{
+            //    CountryList = cont,
+            //    Accinfo = accinfolist
+            //   ,
+            //    departmentList = dep
+            //};
 
 
 
@@ -1010,8 +1057,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 worksheet.Cell(currentRow, 3).Value = "country";
                 worksheet.Cell(currentRow, 4).Value = "Rate";
                 worksheet.Cell(currentRow, 5).Value = "Status of Admission elgibility";
-
-
+                worksheet.Cell(currentRow, 6).Value = "beginning date of Admission";
+                worksheet.Cell(currentRow, 7).Value = "semester NO";
 
 
 
@@ -1023,6 +1070,9 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     worksheet.Cell(currentRow, 3).Value = item.cuntry;
                     worksheet.Cell(currentRow, 4).Value = item.The_rate;
                     worksheet.Cell(currentRow, 5).Value = item.Status_of_Admission_elgibility;
+                    worksheet.Cell(currentRow, 6).Value = item.beganing_date_of_Admission;
+                    worksheet.Cell(currentRow, 7).Value = item.semester_NO;
+
                 }
                 using (var stream = new MemoryStream())
                 {

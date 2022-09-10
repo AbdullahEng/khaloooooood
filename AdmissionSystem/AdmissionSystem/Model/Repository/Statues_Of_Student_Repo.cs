@@ -34,7 +34,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Statues_Of_Student> List()
         {
-            return DB.Statues_Of_Student.ToList();
+            return DB.Statues_Of_Student.Include(s=>s.FK_Student_Info).ToList();
         }
 
         public void Update(int id, Statues_Of_Student entity)

@@ -1,4 +1,5 @@
 ﻿using AdmissionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Type_of_high_school_Cirtificate> List()
         {
-            return DB.Type_of_high_school_Cirtificate.ToList();
+            return DB.Type_of_high_school_Cirtificate.AsNoTracking().ToList();
         }
 
         public void Update(int id, Type_of_high_school_Cirtificate entity)

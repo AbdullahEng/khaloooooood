@@ -32,7 +32,7 @@ namespace AdmissionSystem.Migrations
                     b.Property<string>("Accepted_wish")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FK_Statues_of_admission_eligibiltyid")
+                    b.Property<int>("FK_Statues_of_admission_eligibiltyId")
                         .HasColumnType("int");
 
                     b.Property<int>("FK_studentId")
@@ -40,7 +40,7 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_Statues_of_admission_eligibiltyid");
+                    b.HasIndex("FK_Statues_of_admission_eligibiltyId");
 
                     b.HasIndex("FK_studentId")
                         .IsUnique();
@@ -70,8 +70,8 @@ namespace AdmissionSystem.Migrations
                     b.Property<string>("Subscription_number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("The_Rate")
-                        .HasColumnType("int");
+                    b.Property<float>("The_Rate")
+                        .HasColumnType("real");
 
                     b.Property<string>("check_recipt_image_URL")
                         .HasColumnType("nvarchar(max)");
@@ -85,13 +85,13 @@ namespace AdmissionSystem.Migrations
                     b.Property<DateTime>("date_of_high_school_cirtificate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("wish1id")
+                    b.Property<int?>("wish1ID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("wish2id")
+                    b.Property<int?>("wish2ID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("wish3id")
+                    b.Property<int?>("wish3ID")
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -101,11 +101,11 @@ namespace AdmissionSystem.Migrations
                     b.HasIndex("FK_studentId")
                         .IsUnique();
 
-                    b.HasIndex("wish1id");
+                    b.HasIndex("wish1ID");
 
-                    b.HasIndex("wish2id");
+                    b.HasIndex("wish2ID");
 
-                    b.HasIndex("wish3id");
+                    b.HasIndex("wish3ID");
 
                     b.ToTable("Admission_Eligibilty_Certificate");
                 });
@@ -120,17 +120,17 @@ namespace AdmissionSystem.Migrations
                     b.Property<int>("Chair_count")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FK_statues_Of_Admission_Eligibiltyid")
+                    b.Property<int>("FK_statues_Of_Admission_EligibiltyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Fk_departmentid")
+                    b.Property<int>("Fk_departmentId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_statues_Of_Admission_Eligibiltyid");
+                    b.HasIndex("FK_statues_Of_Admission_EligibiltyId");
 
-                    b.HasIndex("Fk_departmentid");
+                    b.HasIndex("Fk_departmentId");
 
                     b.ToTable("Broken_Relationshib_Stat_Dep_Chair");
                 });
@@ -143,11 +143,35 @@ namespace AdmissionSystem.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("country_name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("id");
 
                     b.ToTable("Country");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            country_name = "سوريا"
+                        },
+                        new
+                        {
+                            id = 2,
+                            country_name = "الإمارات"
+                        },
+                        new
+                        {
+                            id = 3,
+                            country_name = "الكويت"
+                        },
+                        new
+                        {
+                            id = 4,
+                            country_name = "السعودية"
+                        });
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Department", b =>
@@ -157,7 +181,7 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FK_facultyid")
+                    b.Property<int>("FK_facultyId")
                         .HasColumnType("int");
 
                     b.Property<string>("specialization_name")
@@ -165,9 +189,83 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_facultyid");
+                    b.HasIndex("FK_facultyId");
 
                     b.ToTable("Department");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            FK_facultyId = 1,
+                            specialization_name = "الطب"
+                        },
+                        new
+                        {
+                            id = 2,
+                            FK_facultyId = 1,
+                            specialization_name = "طب الأسنان"
+                        },
+                        new
+                        {
+                            id = 3,
+                            FK_facultyId = 1,
+                            specialization_name = "الصيدلة"
+                        },
+                        new
+                        {
+                            id = 4,
+                            FK_facultyId = 2,
+                            specialization_name = "الهندسة المعمارية"
+                        },
+                        new
+                        {
+                            id = 5,
+                            FK_facultyId = 2,
+                            specialization_name = "الهندسة المدنية"
+                        },
+                        new
+                        {
+                            id = 6,
+                            FK_facultyId = 3,
+                            specialization_name = "هندسة تقانة المعلومات"
+                        },
+                        new
+                        {
+                            id = 7,
+                            FK_facultyId = 3,
+                            specialization_name = "هندسة الميكاترونيكس"
+                        },
+                        new
+                        {
+                            id = 8,
+                            FK_facultyId = 4,
+                            specialization_name = "إدارة"
+                        },
+                        new
+                        {
+                            id = 9,
+                            FK_facultyId = 4,
+                            specialization_name = "تمويل بنوك"
+                        },
+                        new
+                        {
+                            id = 10,
+                            FK_facultyId = 5,
+                            specialization_name = "التصميم الداخلي"
+                        },
+                        new
+                        {
+                            id = 11,
+                            FK_facultyId = 5,
+                            specialization_name = "التصميم الغرافيكي"
+                        },
+                        new
+                        {
+                            id = 12,
+                            FK_facultyId = 6,
+                            specialization_name = "الحقوق"
+                        });
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Department_relation_Type", b =>
@@ -177,10 +275,10 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FK_Departmentid")
+                    b.Property<int>("FK_DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FK_type_Of_High_School_Cirtificateid")
+                    b.Property<int>("FK_type_Of_High_School_CirtificateId")
                         .HasColumnType("int");
 
                     b.Property<double>("Minemum_of_Rate")
@@ -191,11 +289,181 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_Departmentid");
+                    b.HasIndex("FK_DepartmentId");
 
-                    b.HasIndex("FK_type_Of_High_School_Cirtificateid");
+                    b.HasIndex("FK_type_Of_High_School_CirtificateId");
 
                     b.ToTable("Department_relation_Type");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            FK_DepartmentId = 1,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 83.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 2,
+                            FK_DepartmentId = 2,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 78.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 3,
+                            FK_DepartmentId = 3,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 78.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 4,
+                            FK_DepartmentId = 4,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 68.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 5,
+                            FK_DepartmentId = 5,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 68.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 6,
+                            FK_DepartmentId = 6,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 68.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 7,
+                            FK_DepartmentId = 6,
+                            FK_type_Of_High_School_CirtificateId = 4,
+                            Minemum_of_Rate = 83.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 8,
+                            FK_DepartmentId = 7,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 68.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 9,
+                            FK_DepartmentId = 7,
+                            FK_type_Of_High_School_CirtificateId = 4,
+                            Minemum_of_Rate = 83.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 10,
+                            FK_DepartmentId = 8,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 11,
+                            FK_DepartmentId = 8,
+                            FK_type_Of_High_School_CirtificateId = 2,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 12,
+                            FK_DepartmentId = 8,
+                            FK_type_Of_High_School_CirtificateId = 3,
+                            Minemum_of_Rate = 63.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 13,
+                            FK_DepartmentId = 9,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 14,
+                            FK_DepartmentId = 9,
+                            FK_type_Of_High_School_CirtificateId = 2,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 15,
+                            FK_DepartmentId = 9,
+                            FK_type_Of_High_School_CirtificateId = 3,
+                            Minemum_of_Rate = 63.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 16,
+                            FK_DepartmentId = 10,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 17,
+                            FK_DepartmentId = 10,
+                            FK_type_Of_High_School_CirtificateId = 2,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 18,
+                            FK_DepartmentId = 10,
+                            FK_type_Of_High_School_CirtificateId = 5,
+                            Minemum_of_Rate = 63.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 19,
+                            FK_DepartmentId = 11,
+                            FK_type_Of_High_School_CirtificateId = 1,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 20,
+                            FK_DepartmentId = 11,
+                            FK_type_Of_High_School_CirtificateId = 2,
+                            Minemum_of_Rate = 56.0,
+                            Rate_of_chaire_count = 0.0
+                        },
+                        new
+                        {
+                            id = 21,
+                            FK_DepartmentId = 11,
+                            FK_type_Of_High_School_CirtificateId = 5,
+                            Minemum_of_Rate = 63.0,
+                            Rate_of_chaire_count = 0.0
+                        });
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Employee", b =>
@@ -247,6 +515,38 @@ namespace AdmissionSystem.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Faculty");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            Faculty_name = "كلية طبية"
+                        },
+                        new
+                        {
+                            id = 2,
+                            Faculty_name = "كلية الهندسة المدنية والمعمارية"
+                        },
+                        new
+                        {
+                            id = 3,
+                            Faculty_name = "كلية الهندسة"
+                        },
+                        new
+                        {
+                            id = 4,
+                            Faculty_name = "كليةالأعمال والإدارة"
+                        },
+                        new
+                        {
+                            id = 5,
+                            Faculty_name = "كليةالفنون والإعلام"
+                        },
+                        new
+                        {
+                            id = 6,
+                            Faculty_name = "كليةالحقوق والعلوم الإنسانية"
+                        });
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Identity_classes.MyIdentityRole", b =>
@@ -357,7 +657,7 @@ namespace AdmissionSystem.Migrations
                     b.Property<int>("FK_countryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FK_statues_of_admission_eligibiltyid")
+                    b.Property<int>("FK_statues_of_admission_eligibiltyId")
                         .HasColumnType("int");
 
                     b.Property<double>("Rate")
@@ -365,10 +665,9 @@ namespace AdmissionSystem.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("FK_countryId")
-                        .IsUnique();
+                    b.HasIndex("FK_countryId");
 
-                    b.HasIndex("FK_statues_of_admission_eligibiltyid");
+                    b.HasIndex("FK_statues_of_admission_eligibiltyId");
 
                     b.ToTable("Persentage_count_for_each__country");
                 });
@@ -425,7 +724,9 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Type_of_admission_eligibilty")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<DateTime>("semester_Date")
                         .HasColumnType("datetime2");
@@ -474,6 +775,9 @@ namespace AdmissionSystem.Migrations
 
                     b.Property<string>("First_Name_EN")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Fk_Cirtificate_cityId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Full_Address")
                         .HasColumnType("nvarchar(max)");
@@ -542,17 +846,32 @@ namespace AdmissionSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Date_Of_Modification")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("FK_Employee_Infoid")
                         .HasColumnType("int");
 
                     b.Property<int>("FK_Student_InfoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("new_rate")
-                        .HasColumnType("int");
+                    b.Property<string>("new_country")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("old_rate")
-                        .HasColumnType("int");
+                    b.Property<float>("new_rate")
+                        .HasColumnType("real");
+
+                    b.Property<string>("new_typeofcertificate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("old_country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("old_rate")
+                        .HasColumnType("real");
+
+                    b.Property<string>("old_typeofcertificate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
@@ -577,6 +896,33 @@ namespace AdmissionSystem.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Type_of_high_school_Cirtificate");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            type = "علمي"
+                        },
+                        new
+                        {
+                            id = 2,
+                            type = "أدبي"
+                        },
+                        new
+                        {
+                            id = 3,
+                            type = "تجارة"
+                        },
+                        new
+                        {
+                            id = 4,
+                            type = "مهني حاسوب"
+                        },
+                        new
+                        {
+                            id = 5,
+                            type = "مهني فنون"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -687,7 +1033,9 @@ namespace AdmissionSystem.Migrations
                 {
                     b.HasOne("AdmissionSystem.Model.Statues_of_admission_eligibilty", "FK_Statues_of_admission_eligibilty")
                         .WithMany()
-                        .HasForeignKey("FK_Statues_of_admission_eligibiltyid");
+                        .HasForeignKey("FK_Statues_of_admission_eligibiltyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AdmissionSystem.Model.Student", "FK_student")
                         .WithOne("FK_Accabtable_configInfo")
@@ -710,57 +1058,69 @@ namespace AdmissionSystem.Migrations
 
                     b.HasOne("AdmissionSystem.Model.Department_relation_Type", "wish1")
                         .WithMany()
-                        .HasForeignKey("wish1id");
+                        .HasForeignKey("wish1ID");
 
                     b.HasOne("AdmissionSystem.Model.Department_relation_Type", "wish2")
                         .WithMany()
-                        .HasForeignKey("wish2id");
+                        .HasForeignKey("wish2ID");
 
                     b.HasOne("AdmissionSystem.Model.Department_relation_Type", "wish3")
                         .WithMany()
-                        .HasForeignKey("wish3id");
+                        .HasForeignKey("wish3ID");
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Broken_Relationshib_Stat_Dep_Chair", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Statues_of_admission_eligibilty", "FK_statues_Of_Admission_Eligibilty")
                         .WithMany()
-                        .HasForeignKey("FK_statues_Of_Admission_Eligibiltyid");
+                        .HasForeignKey("FK_statues_Of_Admission_EligibiltyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AdmissionSystem.Model.Department", "Fk_department")
                         .WithMany()
-                        .HasForeignKey("Fk_departmentid");
+                        .HasForeignKey("Fk_departmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Department", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Faculty", "FK_faculty")
                         .WithMany()
-                        .HasForeignKey("FK_facultyid");
+                        .HasForeignKey("FK_facultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Department_relation_Type", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Department", "FK_Department")
                         .WithMany()
-                        .HasForeignKey("FK_Departmentid");
+                        .HasForeignKey("FK_DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AdmissionSystem.Model.Type_of_high_school_Cirtificate", "FK_type_Of_High_School_Cirtificate")
                         .WithMany()
-                        .HasForeignKey("FK_type_Of_High_School_Cirtificateid");
+                        .HasForeignKey("FK_type_Of_High_School_CirtificateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Persentage_count_for_each__country", b =>
                 {
                     b.HasOne("AdmissionSystem.Model.Country", "FK_country")
-                        .WithOne("FK_persentage_count_for_each__country")
-                        .HasForeignKey("AdmissionSystem.Model.Persentage_count_for_each__country", "FK_countryId")
+                        .WithMany()
+                        .HasForeignKey("FK_countryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdmissionSystem.Model.Statues_of_admission_eligibilty", "FK_statues_of_admission_eligibilty")
                         .WithMany()
-                        .HasForeignKey("FK_statues_of_admission_eligibiltyid");
+                        .HasForeignKey("FK_statues_of_admission_eligibiltyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AdmissionSystem.Model.Statues_Of_Student", b =>

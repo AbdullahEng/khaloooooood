@@ -90,7 +90,23 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
 
                 var countryinpercentage = percentage_Repo.List().Where(c=>c.FK_countryId==country.id).ToList();//customize to one to one realationship
-
+                var countrypercentagelistofRate = percentage_Repo.List().Where(c=>c.FK_statues_of_admission_eligibiltyId==collection.statues_of_adm_eli_ID
+                          );
+                double count = 0;
+                foreach (var item in countrypercentagelistofRate)
+                {
+                    count += item.Rate;
+                }
+                double ratees=collection.Rate;
+                foreach (var item in countrypercentagelistofRate)
+                {
+                    ratees += item.Rate;
+                    if (ratees > 100) {
+                        ViewBag.messageOverRate = "Rate more than 100%" + "  you have just:::  " + (100 - count) + "%";
+                        return View(percviwmodel);
+                    }
+                   
+                }
 
                 if (countryinpercentage.Count == 0)
                 {
@@ -183,10 +199,33 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                                                             && p.FK_statues_of_admission_eligibiltyId==status_of_admi.id
                                                             && p.Rate==collection.Rate).ToList();
 
-               // var countryinpercentage = percentage_Repo.List().Where(c => c.FK_countryId == con.id).ToList();//customize to one to one realationship
+                // var countryinpercentage = percentage_Repo.List().Where(c => c.FK_countryId == con.id).ToList();//customize to one to one realationship
                 // remember to more profisional error message
 
+                var countrypercentagelistofRate = percentage_Repo.List().Where(c => c.FK_statues_of_admission_eligibiltyId == collection.statues_of_adm_eli_ID
+                                                                              );
 
+                double count = 0;
+                foreach (var item in countrypercentagelistofRate)
+                {
+                    count += item.Rate;
+                }
+
+
+                double ratees = collection.Rate;
+                foreach (var item in countrypercentagelistofRate)
+                {
+                    if (item.FK_countryId != con.id)
+                    {
+                        ratees += item.Rate;
+                    }
+                    if (ratees > 100)
+                    {
+                        ViewBag.messageOverRate = "Rate more than 100%" + "  you have just:::  " + (100 - count) + "%";
+                        return View(GetAllEDit(con, status_of_admi));
+                    }
+
+                }
 
                 if (perWhere.Count == 0 )
                 {

@@ -10,6 +10,10 @@ namespace AdmissionSystem.View_Model
     {
         [Display(Name = "Status of admission")]
         public string Status_of_Admission_elgibility { get; set; }
+        [Display(Name = "beginning date of Admission")]
+        public string beganing_date_of_Admission { get; set; }
+        [Display(Name = "Semester_NO")]
+        public int semester_NO { get; set; }
         [Display(Name = "studnet Name")]
         public string studnet_name { get; set; }
         [Display(Name = "Country")]
@@ -20,6 +24,7 @@ namespace AdmissionSystem.View_Model
         public float The_rate { get; set; }
         [Display(Name = "University ID")]
         public string University_ID { get; set; }
+
 
     }
 }

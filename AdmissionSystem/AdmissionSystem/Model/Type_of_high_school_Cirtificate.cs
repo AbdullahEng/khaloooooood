@@ -10,6 +10,8 @@ namespace AdmissionSystem.Model
     {
         public int id { get; set; }
         [Display(Name= "Type of high school Cirtificate ")]
+        [Required]
+        [StringLength(15)]
         public string type { get; set; }
     }
 }

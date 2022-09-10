@@ -1,0 +1,126 @@
+﻿@model IEnumerable<AdmissionSystem.Model.Tracking_Rate>
+
+
+@{
+    Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
+}
+@*<style>
+
+        div.ex1 {
+            overflow: scroll;
+        }
+
+    </style>*@
+
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+    }
+</style>
+<h2 class="text-center">Tacking Rate Studnet</h2>
+<br />
+<br />
+<div>
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" asp-action="TrackingStudnetrate">
+        <div class="input-group">
+            <input type="search" class="form-control bg-light border-0 small" name="term" placeholder="Student Name..."
+                   aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+    <br />
+    <br />
+    @*<p>
+            <a asp-action="Create">Create New</a>
+        </p>*@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.old_rate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.new_rate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.old_country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.new_country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.old_typeofcertificate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.new_typeofcertificate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date_Of_Modification)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FK_Student_Info.First_Name_EN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FK_Employee_Info.name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.old_rate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.new_rate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.old_country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.new_country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.old_typeofcertificate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.new_typeofcertificate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date_Of_Modification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FK_Student_Info.First_Name_EN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FK_Employee_Info.name)
+                    </td>
+                    @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

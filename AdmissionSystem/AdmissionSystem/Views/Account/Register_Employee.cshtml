@@ -62,21 +62,8 @@
                 <input asp-for="Nick_name" class="form-control" />
                 <span asp-validation-for="Nick_name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="password" class="control-label"></label>
-                <input asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+
+
             <div class="form-group">
                 <label asp-for="TheIDnumber" class="control-label"></label>
                 <input asp-for="TheIDnumber" class="form-control" />
@@ -90,21 +77,33 @@
             <div class="form-group">
 
                 <label asp-for="gender" class="control-label">@*@localizer["gender"]*@</label>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+
+                <select asp-for="gender" class="form-control">
+                    <option value="male">Male</option>
+                    <option value="femal">Femal </option>
+
+                </select>
+
+
+
+
+                @*<div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label asp-for="gender" class="btn btn-outline-primary">
-                        <input asp-for="gender" type="radio" name="gender" id="option1" value="male" autocomplete="off" spellcheck="true"> Male
+                        <input asp-for="gender" type="radio" name="gender" id="option1" value="male" autocomplete="off" spellcheck="true" class="radioRegi"> Male
                     </label>
                     <label asp-for="gender" class="btn btn-outline-primary">
-                        <input asp-for="gender" type="radio" name="gender" id="option2" value="femal" autocomplete="off">Femal
+                        <input asp-for="gender" type="radio" name="gender" id="option2" value="femal" autocomplete="off" class="radioRegi">Femal
                     </label>
-                </div>
+                </div>*@
 
                 <span asp-validation-for="gender" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Birth_Date" class="control-label"></label>
                 <input asp-for="Birth_Date" class="form-control" type="date"
-                       min="@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")" />
+                       min="@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")"  value="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")"/>
+                @*value="@DateTime.Now.AddYears(-15)"*@
 
                 <span asp-validation-for="Birth_Date" class="text-danger"></span>
             </div>
@@ -118,24 +117,38 @@
                 </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
-
-
             <div class="form-group">
-
-                <div class="g-recaptcha" data-sitekey=" @GoogleRecaptchaconfig.Value.SiteKey"></div>
-
-
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-
-                @if (ViewBag.captchMessage != null)
-                {
-                    <div class=" text-danger">
-                        @ViewBag.captchMessage
-                    </div>
-
-                }
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group">
+
+            <div class="g-recaptcha" data-sitekey=" @GoogleRecaptchaconfig.Value.SiteKey"></div>
+
+
+        </div>*@
+            @*<div class="form-group">
+
+            @if (ViewBag.captchMessage != null)
+            {
+                <div class=" text-danger">
+                    @ViewBag.captchMessage
+                </div>
+
+            }
+        </div>*@
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-outline-primary" />
@@ -147,7 +160,7 @@
     </div>
 </div>
 
-<script>
+@*<script>
     window.QuformRecaptchaLoaded = function () {
         if (window.grecaptcha && window.jQuery) {
             jQuery('.g-recaptcha').each(function () {
@@ -160,7 +173,7 @@
         }
     };
 </script>
-<script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>*@
 
 
 

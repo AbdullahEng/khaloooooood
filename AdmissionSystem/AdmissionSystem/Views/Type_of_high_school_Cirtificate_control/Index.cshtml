@@ -5,12 +5,11 @@
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1>Type of high school Cirtificate</h1>
-
+<h1 class="text-center">Type of high school Cirtificate</h1>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -32,9 +31,10 @@
                 @Html.DisplayFor(modelItem => item.type)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
+                @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
             </td>
         </tr>
 }

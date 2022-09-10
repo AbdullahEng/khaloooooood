@@ -36,7 +36,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Accabtable_config> List()
         {
-            return DB.Accabtable_config.Include(a=>a.FK_student).ThenInclude(a=>a.Cirtificate_city).ToList();
+            return DB.Accabtable_config.Include(a=>a.FK_student).ThenInclude(a=>a.Cirtificate_city).Include(a=>a.FK_Statues_of_admission_eligibilty).ToList();
         }
 
         public void Update(int id, Accabtable_config entity)

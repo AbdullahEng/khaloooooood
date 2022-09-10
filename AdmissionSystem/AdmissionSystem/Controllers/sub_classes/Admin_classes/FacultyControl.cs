@@ -1,6 +1,7 @@
 ﻿using AdmissionSystem.Data;
 using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
+   // [Authorize(Roles ="Admin")]
     public class FacultyControl : Controller
     {
 
@@ -27,6 +29,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             this.department_Repo = department_Repo;
         }
         // GET: Faculty_controller
+      //  [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var fac = faculty_Repo.List().ToList();

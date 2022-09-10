@@ -28,6 +28,16 @@
 
 
             @*English*@
+
+            @if (ViewBag.messageOverRate != null)
+            {
+                <div class="alert alert-danger border-danger">
+
+                    @ViewBag.messageOverRate
+
+                </div>
+            }
+
             @if (ViewBag.Message != null)
             {
                 <div class="alert alert-warning border-warning">@ViewBag.Message</div>

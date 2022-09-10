@@ -29,14 +29,14 @@ namespace AdmissionSystem.Model.Repository
 
         public Student Find(int id)
         {
-            var Student_f = DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).Include(a=>a.Cirtificate_city).SingleOrDefault(a => a.Id == id);
+            var Student_f = DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).Include(a=>a.Cirtificate_city).Include(a=>a.Statues_Of_Admission_Eligibilty).SingleOrDefault(a => a.Id == id);
             return Student_f;
 
         }
 
         public IList<Student> List()
         {
-            return DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).ToList();
+            return DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).ThenInclude(a=>a.FK_Type_of_high_school_Cirtificate).Include(a => a.Statues_Of_Admission_Eligibilty).ToList();
         }
 
         public void Update(int id, Student entity)

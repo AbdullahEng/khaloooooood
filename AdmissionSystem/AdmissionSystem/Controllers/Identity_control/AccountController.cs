@@ -5,12 +5,11 @@ using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model.Identity_view_model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace AdmissionSystem.Controllers.Identity_control
 {
@@ -27,19 +26,21 @@ namespace AdmissionSystem.Controllers.Identity_control
         private readonly CRUD_Operation_Interface<Statues_of_admission_eligibilty> statusofAdmissionREpo;
         private readonly CRUD_Operation_Interface<Accabtable_config> accRepo;
         private readonly IOptions<GoogleCaptchaConfig> config;
-       
-       public AccountController(UserManager<MyIdentityUser> userManager,
-            SignInManager<MyIdentityUser> LogInManager,
-            RoleManager<MyIdentityRole> roleManager,
-             CRUD_Operation_Interface<Employee> EmployeeRepo,
-             CRUD_Operation_Interface<Student> StudentRepo,
-              CRUD_Operation_Interface<Statues_Of_Student> Statues_Of_Student_Repository,
-             CRUD_Operation_Interface<Tracking_Rate> Tracking_Rate_Repository
-            //,GoogleCaptcahService googleCaptcahServiceeee
-            ,CRUD_Operation_Interface<Statues_of_admission_eligibilty>statusofAdmissionREpo
-            ,CRUD_Operation_Interface<Accabtable_config>accRepo
-            ,IOptions<GoogleCaptchaConfig> config
-            )
+        private readonly ILogger<AccountController> logger;
+
+        public AccountController(UserManager<MyIdentityUser> userManager,
+             SignInManager<MyIdentityUser> LogInManager,
+             RoleManager<MyIdentityRole> roleManager,
+              CRUD_Operation_Interface<Employee> EmployeeRepo,
+              CRUD_Operation_Interface<Student> StudentRepo,
+               CRUD_Operation_Interface<Statues_Of_Student> Statues_Of_Student_Repository,
+              CRUD_Operation_Interface<Tracking_Rate> Tracking_Rate_Repository
+             //,GoogleCaptcahService googleCaptcahServiceeee
+             , CRUD_Operation_Interface<Statues_of_admission_eligibilty> statusofAdmissionREpo
+             , CRUD_Operation_Interface<Accabtable_config> accRepo
+             , IOptions<GoogleCaptchaConfig> config
+            , ILogger<AccountController> logger
+       )
         {
             this.userManager = userManager;
             this.LoginInManager = LogInManager;
@@ -51,10 +52,16 @@ namespace AdmissionSystem.Controllers.Identity_control
             this.statusofAdmissionREpo = statusofAdmissionREpo;
             this.accRepo = accRepo;
             this.config = config;
+            this.logger = logger;
             this.googleCaptcahServiceeee = new GoogleCaptcahService(config);
         }
 
         public ActionResult Index()
+        {
+            // Department_faculty_view_model
+            return View();
+        }
+        public ActionResult IndexAdmin(int id)
         {
             // Department_faculty_view_model
             return View();
@@ -120,7 +127,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult Register_Student(RegisteerStudentViweModel obj)
+        public async Task<PartialViewResult> Register_Student(RegisteerStudentViweModel obj)
         {
 
             string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
@@ -170,8 +177,17 @@ namespace AdmissionSystem.Controllers.Identity_control
                         ,
                         FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate
                     };
+                 
                     if (result.Succeeded)
                     {
+
+                        var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var confirmationlink = Url.Action("Confirmation", "Account",
+                                                            new { UserId = user.Id, token = token }, Request.Scheme);
+
+
+                        ////////////////////////////////////////////
+
                         if (!roleManager.RoleExistsAsync("Student").Result)
                         {
                             MyIdentityRole role = new MyIdentityRole();
@@ -210,11 +226,11 @@ namespace AdmissionSystem.Controllers.Identity_control
 
 
                         var accept = new Accabtable_config {
-                           // Accepted_Or_Not = false,
-                           // Accepted_wish = "" ,
-                            FK_studentId= student.Id,
-                            FK_Statues_of_admission_eligibiltyId= stauts.id
-                           
+                            // Accepted_Or_Not = false,
+                            // Accepted_wish = "" ,
+                            FK_studentId = student.Id,
+                            FK_Statues_of_admission_eligibiltyId = stauts.id
+
 
                         };
                         accRepo.Add(accept);
@@ -222,7 +238,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                         return PartialView("Index");
                     }
                     else {
-                        var disc= result.Errors.Select(e => e.Description).ToArray();
+                        var disc = result.Errors.Select(e => e.Description).ToArray();
                         foreach (var item in disc)
                         {
                             ViewBag.errorinfo += item + "  ";
@@ -238,7 +254,7 @@ namespace AdmissionSystem.Controllers.Identity_control
 
                     return PartialView("Index", obj);
                 }
-              //  return View(obj);
+                //  return View(obj);
             }
             return PartialView("Index");
         }
@@ -268,41 +284,41 @@ namespace AdmissionSystem.Controllers.Identity_control
         {
 
 
-            string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
-            var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
-            if (!validate.success)
-            {
-                var merror = validate.Message.ToArray();
-                foreach (var item in merror)
-                {
-                    ViewBag.captchMessage = item + "    ";
-                }
-                //  =validate.Message.ToArray();
-                //  return RedirectToAction("Login",obj);
-                return View();
-            }
+            //string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
+            //var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
+            //if (!validate.success)
+            //{
+            //    var merror = validate.Message.ToArray();
+            //    foreach (var item in merror)
+            //    {
+            //        ViewBag.captchMessage = item + "    ";
+            //    }
+            //    //  =validate.Message.ToArray();
+            //    //  return RedirectToAction("Login",obj);
+            //    return View();
+            //}
             if (ModelState.IsValid)
             {
                 MyIdentityUser user = new MyIdentityUser();
                 user.UserName = obj.UserName;
                 user.Email = obj.Email;
                 user.TheIDnumber = obj.TheIDnumber;
-               
+
                 IdentityResult result = userManager.CreateAsync
                     (user, obj.password).Result;
-                var Employee = new Employee() { 
-                Email=obj.Email,
-                Type=obj.Type,
-                Birth=obj.Birth_Date,
-                Gender=obj.gender,
-                name=obj.UserName,
-                Nick_Name=obj.Nick_name,
-                Phone_Number=obj.phone_Mobile,
-                The_ID_Number=obj.TheIDnumber
+                var Employee = new Employee() {
+                    Email = obj.Email,
+                    Type = obj.Type,
+                    Birth = obj.Birth_Date,
+                    Gender = obj.gender,
+                    name = obj.UserName,
+                    Nick_Name = obj.Nick_name,
+                    Phone_Number = obj.phone_Mobile,
+                    The_ID_Number = obj.TheIDnumber
                 };
-                if (result.Succeeded )
+                if (result.Succeeded)
                 {
-                    if (!roleManager.RoleExistsAsync("Employee").Result||
+                    if (!roleManager.RoleExistsAsync("Employee").Result ||
                         !roleManager.RoleExistsAsync("Admin").Result
                         )
                     {
@@ -336,7 +352,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                     if (obj.Type == "Employee")
                     {
                         userManager.AddToRoleAsync(user, "Employee").Wait();
-                       
+
 
                     }
                     else if (obj.Type == "Admin")
@@ -365,8 +381,8 @@ namespace AdmissionSystem.Controllers.Identity_control
 
 
         public PartialViewResult Login() {
-            var model = new LoginViewModle { 
-            sitkey= config.Value.SiteKey
+            var model = new LoginViewModle {
+                sitkey = config.Value.SiteKey
 
             };
             //var rige = new RegisteerStudentViweModel();
@@ -377,100 +393,110 @@ namespace AdmissionSystem.Controllers.Identity_control
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login (LoginViewModle obj)
+        public async Task< IActionResult> Login(LoginViewModle obj)
         {
             //var s = Request.;
             string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
             //if (captchaREsponse != "")
             //{
-                var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
-                if (!validate.success)
+            var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
+            if (!validate.success)
+            {
+                var merror = validate.Message.ToArray();
+                foreach (var item in merror)
                 {
-                    var merror = validate.Message.ToArray();
-                    foreach (var item in merror)
-                    {
-                        ViewBag.captchMessage = item + "    ";
-                    }
+                    ViewBag.captchMessage = item + "    ";
+                }
                 //  =validate.Message.ToArray();
                 //  return RedirectToAction("Login",obj);
                 return View("Index");
             }
-                //var capatchservice = await googleCaptcahServiceeee.Vefytoken(obj.token);
-                //if (!capatchservice)
-                //{
-                //    return View();
-                //}
-                if (ModelState.IsValid)
-                {
-                    var Allstudent = studentRepo.List();
-                    var AllEmployee = employeeRepo.List();
-                    var AllUsers = userManager.Users.ToList();
-                    var AllRoles = roleManager.Roles.ToList();
-                    // var usersAndRoles = new List<UserRoleModel>();
-                    // var allRolesUsers=
-                    // var studnetFind = studentRepo.Find();
-                    var result = LoginInManager.PasswordSignInAsync
-                        (obj.UserName, obj.password,
-                        obj.RememberMe, false).Result;
+            //var capatchservice = await googleCaptcahServiceeee.Vefytoken(obj.token);
+            //if (!capatchservice)
+            //{
+            //    return View();
+            //}
+            if (ModelState.IsValid)
+            {
 
-                    if (result.Succeeded)
+                //var userfindemail = await userManager.FindByEmailAsync(obj.Email);
+                //if (userfindemail != null && !userfindemail.Emailconfirmed &&
+                //    (await userManager.CheckPasswordAsync(userfindemail, obj.password))) {
+
+                //    ModelState.AddModelError(string.Empty,"Email not confirmed yet");
+                //    return View(obj);
+                //}
+
+
+                var Allstudent = studentRepo.List();
+                var AllEmployee = employeeRepo.List();
+                var AllUsers = userManager.Users.ToList();
+                var AllRoles = roleManager.Roles.ToList();
+                // var usersAndRoles = new List<UserRoleModel>();
+                // var allRolesUsers=
+                // var studnetFind = studentRepo.Find();
+                var result = LoginInManager.PasswordSignInAsync
+                    (obj.UserName, obj.password,
+                    obj.RememberMe, false).Result;
+
+                if (result.Succeeded)
+                {
+
+                    //foreach (var role in AllRoles)
+                    //{
+
+
+                    foreach (var user in AllUsers)
                     {
 
-                        //foreach (var role in AllRoles)
+                        //if (role.Name == "Employee" || role.Name == "Admin")
+                        foreach (var Employee in AllEmployee)
+                        {
+                            if (obj.UserName == Employee.name &&
+                                user.Email == Employee.Email &&
+                                user.TheIDnumber == Employee.The_ID_Number
+                                )
+                            {
+                                if (Employee.Type == "Admin")
+                                {
+                                    return RedirectToAction("EditAdmin", "Employee", new { id = Employee.id });
+
+                                }
+                                else if (Employee.Type == "Employee")
+                                {
+                                    return RedirectToAction("Edit", "Employee", new { id = Employee.id });
+
+                                }
+
+
+                                //return RedirectToAction("Edit", "Employee", new { id = Employee.id });
+
+                            }
+                        }
+
+                        //else if (role.Name == "Student")
                         //{
 
 
-                        foreach (var user in AllUsers)
+
+                        foreach (var student in Allstudent)
                         {
-
-                            //if (role.Name == "Employee" || role.Name == "Admin")
-                            foreach (var Employee in AllEmployee)
+                            // var studnetFind = studentRepo.Find(student.Id);
+                            if (obj.UserName == student.First_Name_EN &&
+                                user.Email == student.Email &&
+                                user.TheIDnumber == student.Identity_No
+                                )
                             {
-                                if (obj.UserName == Employee.name &&
-                                    user.Email == Employee.Email &&
-                                    user.TheIDnumber == Employee.The_ID_Number
-                                    )
-                                {
-                                    if (Employee.Type == "Admin")
-                                    {
-                                        return RedirectToAction("Edit" , "Employee" , new { id = Employee.id });
-
-                                    }
-                                    else if (Employee.Type == "Employee")
-                                    {
-                                        return RedirectToAction("Edit", "Employee", new { id = Employee.id });
-
-                                    }
-
-
-                                    //return RedirectToAction("Edit", "Employee", new { id = Employee.id });
-
-                                }
-                            }
-
-                            //else if (role.Name == "Student")
-                            //{
-
-
-
-                            foreach (var student in Allstudent)
-                            {
-                                // var studnetFind = studentRepo.Find(student.Id);
-                                if (obj.UserName == student.First_Name_EN &&
-                                    user.Email == student.Email &&
-                                    user.TheIDnumber == student.Identity_No
-                                    )
-                                {
-                                if(student.high_school_certificate == "Syrian")
+                                if (student.high_school_certificate == "Syrian")
                                     return RedirectToAction("Edit", "Studen", new { id = student.Id });
-                               else if(student.high_school_certificate=="UNSyrian")
-                                return RedirectToAction("Edit", "StudentUnsyrian", new { id = student.Id });
+                                else if (student.high_school_certificate == "UNSyrian")
+                                    return RedirectToAction("Edit", "StudentUnsyrian", new { id = student.Id });
 
                             }
                         }
-                            // }
+                        // }
 
-                        }
+                    }
                     /// }
 
 
@@ -479,16 +505,16 @@ namespace AdmissionSystem.Controllers.Identity_control
 
                     return View("Index");
                 }
-                    ModelState.AddModelError("", "Invalid login!!");
+                ModelState.AddModelError("", "Invalid login!!");
 
-                }
+            }
             //}
             //else {
             //    ViewBag.norecaptcha = "please check out your internet connection";
 
 
             //}
-            return View("Index" ,obj);
+            return View("Index", obj);
         }
 
 
@@ -500,7 +526,179 @@ namespace AdmissionSystem.Controllers.Identity_control
             LoginInManager.SignOutAsync().Wait();
             return RedirectToAction("Index", "Account");
         }
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(Change_passowrd_Mode model)
+        {
+            // userManager.ChangePasswordAsync(1,"","");
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.GetUserAsync(User);
+                if (User == null)
+                {
+                    return RedirectToAction("");
+                }
+                var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassowrd);
+                if (!result.Succeeded)
+                {
+                    foreach (var Error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, Error.Description);
+                    }
+                    return View();
+                }
+                await LoginInManager.RefreshSignInAsync(user);
+                return View();
+            }
+            return View(model);
+        }
+        public async Task<IActionResult> EditUser() {
+            var us = await userManager.GetUserAsync(User);
+            var usid = us.Id;
+            var user = await userManager.FindByIdAsync(usid);
+            if (user == null) {
+                ViewBag.ErrorMessage = $"User with Id ={usid} cannot be found";
+                return View();
+            }
+            var claimss = await userManager.GetClaimsAsync(user);
+            var roles = await userManager.GetRolesAsync(user);
+            var model = new EditUserViewModell {
+                Id = user.Id,
+                Email = user.Email,
+                IDNumber = user.TheIDnumber
+            , Claims = claimss.Select(c => c.Value).ToList(),
+                Roles = roles.ToList()
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(EditUserViewModell model)
+        {
+            var us = await userManager.GetUserAsync(User);
+            var usid = us.Id;
+            var user = await userManager.FindByIdAsync(usid);
+            var roleuser = await userManager.GetRolesAsync(user);
+            var roel="";
+            foreach (var item in roleuser)
+            {
+                 roel = item;
+            }
+            if (roel == "Admin" || roel == "Employee") {
+                var empl = employeeRepo.List().SingleOrDefault(e=>e.name==us.UserName);
+                empl.Email = model.Email;
+                empl.The_ID_Number = model.IDNumber;
+                //var employeeedit = new Employee { 
+                //Email=model.Email,
+                //The_ID_Number=model.IDNumber
+                
+                //};
+                employeeRepo.Update(empl.id,empl);
+            }
+            else if (roel== "Student") {
+                var stu = studentRepo.List().SingleOrDefault(s => s.First_Name_EN == us.UserName);
+                stu.Email = model.Email;
+                stu.Identity_No = model.IDNumber;
+                studentRepo.Update(stu.Id,stu);
+            }
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id ={usid} cannot be found";
+                return View();
+            }
+            else {
+                user.Email = model.Email;
+                user.TheIDnumber = model.IDNumber;
+                var result = await userManager.UpdateAsync(user);
+              //  if(roleuser.=="Admin")
+                if (result.Succeeded)
+                {
+                    //  must return To succec view
+                    return View();
+                }
+                foreach (var erorr in result.Errors)
+                {
+                    ModelState.AddModelError("", erorr.Description);
+                }
+                return View(model);
+            }
 
+        }
+        public IActionResult Forgot_password()
+        {
+
+            return View();
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Forgot_password(Forgot_PasswordViewmodel model)
+        {
+            if (ModelState.IsValid) {
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user != null && await userManager.IsEmailConfirmedAsync(user)) {
+                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                    var passwordResetlink = Url.Action("ResetPassword", "Account",
+                                                        new { email = model.Email, token = token }, Request.Scheme);
+                    logger.Log(LogLevel.Warning, passwordResetlink);
+
+                    return View(passwordResetlink);
+                }
+
+            }
+            return View();
+
+        }
+        public IActionResult ResetPassword(string token, string email) {
+            if (token == null || email == null) {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid) {
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var result = await userManager.ResetPasswordAsync(user, model.token, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return View();
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(model);
+                }
+                return View();
+            }
+            return View(model);
+        }
+        public async Task<IActionResult> ConfirmEmail(string userId, string token) {
+            if (userId == null || token == null) {
+                return View();
+            
+            }
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null) {
+                return View();
+            
+            }
+            var result = await userManager.ConfirmEmailAsync(user,token);
+            if (result.Succeeded) {
+                return View();
+            }
+            return View();
+        
+        }
     }
 }

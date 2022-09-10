@@ -44,7 +44,10 @@ namespace AdmissionSystem
             services.AddTransient(typeof(GoogleCaptcahService));
 
 
-            services.AddIdentity<MyIdentityUser, MyIdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<MyIdentityUser, MyIdentityRole>(options => { options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedEmail = true;
+
+            })
        .AddEntityFrameworkStores<ApplicationDbContext>()
        .AddDefaultTokenProviders();
 
@@ -120,6 +123,18 @@ namespace AdmissionSystem
             {
                 options.SignIn.RequireConfirmedAccount = false;
             });
+
+           // services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/Index");
+        //    services
+        //.AddAuthentication()
+        //.AddCookie(options =>
+        //{
+        //    options.LoginPath = "/Account/Index";
+        //    options.LogoutPath = "/logout";
+        //});
+
+
+
 
             //services.AddDefaultIdentity<MyIdentityUser>(options => {
             //});

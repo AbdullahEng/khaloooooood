@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[3.1.19, )"
             },
+            "Microsoft.Build.Utilities.Core": {
+              "target": "Package",
+              "version": "[17.3.1, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.19, )"

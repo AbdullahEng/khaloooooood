@@ -22,10 +22,17 @@
 
 
             @*English*@
-            @if (ViewBag.Message != null)
+            @if (ViewBag.messageOverRate != null)
             {
-                <div class="alert alert-warning border-warning">@ViewBag.Message</div>
+                <div class="alert alert-danger border-danger">
+
+                    @ViewBag.messageOverRate
+
+                </div>
             }
+            @if (ViewBag.Message != null)
+            {<div class="alert alert-warning border-warning">@ViewBag.Message</div>
+        }
             @if (ViewBag.AddSuccess != null)
             {
 
@@ -99,8 +106,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Rate" class="control-label"></label>
-                <input asp-for="Rate" class="form-control"  data-toggle="tooltip" data-placement="bottom" title="As a percent" />
-                <span asp-validation-for="Rate" class="text-danger"  ></span>
+                <input asp-for="Rate" class="form-control" data-toggle="tooltip" data-placement="bottom" title="As a percent" />
+                <span asp-validation-for="Rate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-outline-primary" />
