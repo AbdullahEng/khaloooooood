@@ -6,11 +6,14 @@
 
 @{
     ViewData["Title"] = "Edit";
+     Layout = "_StudentLayout";
 }
 <link href="~/Desighn/3StepsForm.css" rel="stylesheet" />
 <link href="~/Desighn/openimage.css" rel="stylesheet" />
 <link href="~/Desighn/css_uploading_file.css" rel="stylesheet" />
-
+@*@{
+    Layout = "_StudentLayout";
+}*@
 
     @{
         if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
@@ -31,6 +34,7 @@
         <input hidden asp-for="wish_Department_Id3"value="@Model.wish_Department_Id3"/>
         <input hidden asp-for="old_Rate" value="@Model.old_Rate"/>
         <input hidden asp-for="oldType_Of_Certificat" value="@Model.oldType_Of_Certificat"/>
+        <input hidden id="confirmation_value" asp-for="Conformation" value="@Model.Conformation"/>
        
    
         <div class="row form-group border-bottom border-warning ">
@@ -289,7 +293,7 @@
                             <span asp-validation-for="Home_s_Phone" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" id="hide_rate">
 
                         <div class="form-group">
                             <label asp-for="The_Rate" class="control-label">@localizer["The Rate"]</label>
@@ -375,7 +379,7 @@
                 </div> 
                
                 <div class="row  ">
-                    <div class="col">
+                    <div class="col" id="hide_typeofcertivicate">
                         <div class="form-group">
                             <label asp-for="Type_Of_Certificat" class="control-label">@localizer["Type Of Certificat"]</label>
                             <select asp-for="Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
@@ -398,7 +402,7 @@
         </div>
        @* this script to hide images template that is transparent and has 4 edge
       *@  @{
-                                                                                                                                                                 @if (Model.Image_of_crtificat_URL!=null)
+                                                                                                                                                                     @if (Model.Image_of_crtificat_URL!=null)
          {<h1 hidden id="hideornot">hidechoos</h1>
            
           }else{<h1 hidden  id="hideornot">hideimage</h1>}
@@ -589,7 +593,8 @@
                       
                     </div>
                     
-                </div> 
+                </div>
+                <br>
                 <div class="row ">
                     <div class="col ">
 
@@ -777,6 +782,7 @@
 
         <div style="overflow:auto;">
             <div style="float:right;">
+                <br>
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary position-relative">@localizer["Previous"]</button>
                 <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary position-relative">@localizer["Next"]</button>
             </div>
@@ -836,6 +842,14 @@ window.onload = function() {
         document.getElementsByClassName("ButtonToggel4")[0].hidden = true;
     
     }
+    if (document.getElementById("confirmation_value").value == '3' || document.getElementById("confirmation_value").value == '5') {
+         document.getElementById("hide_rate").hidden = true;
+          document.getElementById("hide_typeofcertivicate").hidden = true;
+    }
+     if (document.getElementById("confirmation_value").value == '4' || document.getElementById("confirmation_value").value == '6') {
+         document.getElementById("hide_rate").hidden = true;
+          document.getElementById("hide_typeofcertivicate").hidden = true;
+    }
    }
  </script>
   
@@ -891,7 +905,8 @@ function nextPrev(n) {
   //// Hide the current tab:
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
+    currentTab = currentTab + n;
+    $('html, body').animate({ scrollTop: 70 }, 'slow');
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:

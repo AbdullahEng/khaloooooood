@@ -48,35 +48,35 @@ const imagesTypes3 = [
 // Append Images Types Array Inisde Tooltip Data
 toolTipData3.innerHTML = [...imagesTypes3].join(', .');
 
-// When (drop-zoon) has (dragover) Event 
-dropZoon3.addEventListener('dragover', function (event) {
-  // Prevent Default Behavior 
-  event.preventDefault();
+//// When (drop-zoon) has (dragover) Event 
+//dropZoon3.addEventListener('dragover', function (event) {
+//  // Prevent Default Behavior 
+//  event.preventDefault();
 
-  // Add Class (drop-zoon--over) On (drop-zoon)
-  dropZoon3.classList.add('drop-zoon--over');
-});
+//  // Add Class (drop-zoon--over) On (drop-zoon)
+//  dropZoon3.classList.add('drop-zoon--over');
+//});
 
-// When (drop-zoon) has (dragleave) Event 
-dropZoon3.addEventListener('dragleave', function (event) {
-  // Remove Class (drop-zoon--over) from (drop-zoon)
-  dropZoon3.classList.remove('drop-zoon--over');
-});
+//// When (drop-zoon) has (dragleave) Event 
+//dropZoon3.addEventListener('dragleave', function (event) {
+//  // Remove Class (drop-zoon--over) from (drop-zoon)
+//  dropZoon3.classList.remove('drop-zoon--over');
+//});
 
-// When (drop-zoon) has (drop) Event 
-dropZoon3.addEventListener('drop', function (event) {
-  // Prevent Default Behavior 
-  event.preventDefault();
+//// When (drop-zoon) has (drop) Event 
+//dropZoon3.addEventListener('drop', function (event) {
+//  // Prevent Default Behavior 
+//  event.preventDefault();
 
-  // Remove Class (drop-zoon--over) from (drop-zoon)
-  dropZoon3.classList.remove('drop-zoon--over');
+//  // Remove Class (drop-zoon--over) from (drop-zoon)
+//  dropZoon3.classList.remove('drop-zoon--over');
 
-  // Select The Dropped File
-  const file3 = event.dataTransfer.files[0];
+//  // Select The Dropped File
+//  const file3 = event.dataTransfer.files[0];
 
-  // Call Function uploadFile(), And Send To Her The Dropped File :)
-  uploadFile3(file3);
-});
+//  // Call Function uploadFile(), And Send To Her The Dropped File :)
+//  uploadFile3(file3);
+//});
 
 // When (drop-zoon) has (click) Event 
 dropZoon3.addEventListener('click', function (event) {

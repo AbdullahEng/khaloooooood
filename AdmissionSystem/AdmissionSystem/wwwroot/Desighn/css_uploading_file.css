@@ -30,15 +30,15 @@
 
 /* Upload Area */
 .upload-area {
-  width: 100%;
-  max-width: 25rem;
-  background-color: var(--clr-white);
-  box-shadow: 0 5px 30px rgb(218, 229, 255);
-  border: 2px solid var(--clr-light-blue);
-  border-radius: 24px;
-  padding: 2rem 1.875rem 5rem 1.875rem;
-  margin: 0.625rem;
-  text-align: center;
+    width: 100%;
+    max-width: 25rem;
+    background-color: var(--clr-white);
+    box-shadow: 0 5px 30px rgb(218, 229, 255);
+    border: 2px solid var(--clr-light-blue);
+    border-radius: 24px;
+    padding: 2rem 1.875rem 5rem 1.875rem;
+    margin: auto;
+    text-align: center;
 }
 
 .upload-area--open { /* Slid Down Animation */

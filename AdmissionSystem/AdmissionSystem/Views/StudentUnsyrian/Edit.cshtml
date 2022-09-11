@@ -5,6 +5,7 @@
 @inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Edit";
+     Layout = "_StudentLayout";
 }
 
 <link href="~/Desighn/3StepsForm.css" rel="stylesheet" />
@@ -302,18 +303,18 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="high_school_certificate" class="control-label">@localizer["high school certificate"]</label>
-                            <input asp-for="high_school_certificate" class="form-control" value="UNSyrian" />
+                            <input readonly asp-for="high_school_certificate" class="form-control" value="UNSyrian" />
                             <span asp-validation-for="high_school_certificate" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                   @* <div class="col">
                         <div class="form-group">
                             <label asp-for="The_Rate" class="control-label">@localizer["the Rate"]</label>
                             <input  asp-for="The_Rate" class="form-control" />
                             <span asp-validation-for="The_Rate" class="text-danger small"></span>
                         </div>
                                 
-                    </div>
+                    </div>*@
                     
                 </div> <div class="row">
                     <div class="col">
@@ -539,6 +540,7 @@
                     </div>
                     
                 </div> 
+                <br>
                 <div class="row ">
                     <div class="col ">
 
@@ -841,7 +843,8 @@ function nextPrev(n) {
   //// Hide the current tab:
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
+    currentTab = currentTab + n;
+    $('html, body').animate({ scrollTop: 70 }, 'slow');
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Admission Instructions" xml:space="preserve">
+    <value>تعليمات التقدم</value>
+  </data>
+  <data name="Confirme" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Get started" xml:space="preserve">
+    <value>لنبدأ</value>
+  </data>
+  <data name="My wishes" xml:space="preserve">
+    <value>الرغبات</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>ملاحظة</value>
+  </data>
+  <data name="Our team discovered that you need to edit your data" xml:space="preserve">
+    <value>فريقنا تنبه انه يجب عليك تعديل بعض البيانات</value>
+  </data>
+  <data name="Our team discovered that you need to edit your data and reshoose for wishes list, pleas check your Email about what to edit ." xml:space="preserve">
+    <value>فريقنا تنبه انه يجب عليك تعديل بعض البيانات وإعادة إختيار الرغبات,الرجاء تفقد بريدك الإلكتروني لتعلم مايجب عليك تعديله</value>
+  </data>
+  <data name="Our team discovered wrong inofrmation in your file." xml:space="preserve">
+    <value>فريقنا تنبه أن هناك خطئا في بياناتكم </value>
+  </data>
+  <data name="Our team working on all students files and in nearest time, you will recive an email from the team tell you the condtion of your files." xml:space="preserve">
+    <value>فريقنا يعمل على مراجعة البيانات وسوف تصلك رسالة بالبريد الإلكتروني بحالة الطلب</value>
+  </data>
+  <data name="pleas check your Email about what to edit ." xml:space="preserve">
+    <value>الرجاء تفقد بريدك الإلكتروني لتعلم مايجب عليك تعديله</value>
+  </data>
+  <data name="pleas confirm after Edting" xml:space="preserve">
+    <value>الرجاء تأكيد التعديل</value>
+  </data>
+  <data name="pleas rechoose the wishes." xml:space="preserve">
+    <value>الرجاء إعادة إختيار الرغبات</value>
+  </data>
+  <data name="pleas wait for results to be released." xml:space="preserve">
+    <value>الرجاء إنتظار موعد صدور النتائج</value>
+  </data>
+  <data name="please choose The wishes to complete the requist" xml:space="preserve">
+    <value>الرجاء إدخال الرغبات لإكمال الطلب </value>
+  </data>
+  <data name="So get started and good luck for you." xml:space="preserve">
+    <value>حسنا إبدأ الآن وحظا موفقا</value>
+  </data>
+  <data name="stay tuned to your Email" xml:space="preserve">
+    <value>ابقى متنبها لبريدك الإلكتروني</value>
+  </data>
+  <data name="Thank you for completing all requists." xml:space="preserve">
+    <value>شكرا لإكمال كل الطلبات</value>
+  </data>
+  <data name="This system enable you to sumbit your information easily and make a trusted and secure storage of your data so  pleas read the instructions carfully and start your journy with us." xml:space="preserve">
+    <value>هذا النظام يمكنك من إدخال بياناتك بشكل سهل مبسط, مع امكانية تخزين بياناتك بشكل سري وآمن, الرجاء قراءة التعليمات بتمهل وأما الان فالتبدأ رحلتك معنا</value>
+  </data>
+  <data name="We noted that you did not make a confiramtion for your addmission request, pleas make a conferm or your data will be ignored." xml:space="preserve">
+    <value>لاحظنا أنك لم تقم تأكيد لطلبك ,الرجاء التأكد من بياناتك وقم بالضغط على "تثبت" والا سوف يتم تجاهل بياناتك</value>
+  </data>
+  <data name="We thank you for choosing us as a part of your futur career" xml:space="preserve">
+    <value>نشكرك لإختيارك جامعة القلمون الخاصة لتكون جزءا من مستقبلك الواعد </value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
+  <data name="when you make the conferming we considre that you have reivewed all your personal information, your uploded files and your wishes so pleas make sure that all is correct." xml:space="preserve">
+    <value>عندما يتم الضغط على تثبيت ,نعتبر أن الطالب قد تأكد من معلوماته وأدخل كل الملفات بالشكل المطلوب لذا الرجاء المراجعة قبل التثبيت</value>
+  </data>
+  <data name="You will not be able to edit any more" xml:space="preserve">
+    <value>لن تتمكن من تعديل البيانات بعد ذلك</value>
+  </data>
+</root>

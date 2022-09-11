@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+.card-layout {
+  /*width: 70vw;*/
+  min-width: 500px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+.card-style {
+  background: #ededed;
+  padding: 20px 30px;
+  box-shadow: 0 0 3px #dcdcdc;
+  transition: box-shadow 0.2s ease-in-out;
+}
+.task-text {
+  font-size: 17px;
+  /* 16px */
+  line-height: 24px;
+  /* 21px */
+  font-weight: 700;
+  color: #222;
+}
+.card-layout .circular-checkbox {
+    margin-right: 12px;
+    margin-left: 12px;
+    /*10px in actual*/
+}
+.meta-label {
+  font-size: 12px;
+  /*12px*/
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+.done-by {
+  margin-top: 4px;
+}
+/* CHECKBOX */
+.circular-checkbox {
+  border-radius: 50%;
+  border: 2px solid #3d8aeb;
+  cursor: pointer;
+  display: inline-block;
+  height: 28px;
+  /*2.5rem in actual*/
+  overflow: hidden;
+  position: relative;
+  width: 28px;
+  /*2.5rem in actual*/
+}
+/* NOT OLIVER */
+.task-label {
+  margin-bottom: 10px;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 97vh;
+}
+/* SVGS */
+#basicCheck {
+  fill: #fff;
+}

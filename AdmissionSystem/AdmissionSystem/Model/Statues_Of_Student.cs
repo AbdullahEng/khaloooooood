@@ -23,6 +23,6 @@ namespace AdmissionSystem.Model
         public Student FK_Student_Info { get; set; }//If you like modify the name to FK_Student_Info //sorry i modify it ^_^//one_to_one relationship
         //public int FK_Employee_InfoId { get; set; }//sorry i modify it ^_^
         public Employee FK_Employee_Info { get; set; }//If you like modify the name to FK_Employee_Info 
-       
+        public bool loack { get; set; }
     }
 }

@@ -1,0 +1,94 @@
+﻿#regForm {
+    background-color: #ffffff;
+    margin: 10px auto;
+    padding: 40px;
+    width: 100%;
+    min-width: 300px;
+}
+
+/* Style the input fields */
+input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid {
+        background-color: #ffdddd;
+    }
+
+/* Hide all steps by default: */
+.tab {
+    display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+    /* Mark the active step: */
+    .step.active {
+        opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+        background-color: #04AA6D;
+    }
+
+.ContainerRegForm {
+    position: center;
+    /* width: 75%;
+    height:75%;*/
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .4);
+}
+
+
+.shinbutton {
+    /*width: 250px;*/
+    font-size: 1.25rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: none !important;
+}
+
+.shinbutton::before {
+    content: '';
+    width: 80px;
+    height: 300%;
+    border: none;
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    transform: translateY(-50%) rotate(35deg);
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.35) 50%, rgba(255,255,255,0) 100%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    from {
+        left: -50%;
+    }
+
+    to {
+        left: 100%;
+    }
+}

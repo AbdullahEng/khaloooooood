@@ -8,6 +8,7 @@ namespace AdmissionSystem.View_Model
 {
     public class UnStudent_View_Model
     {
+        public int id { get; set; }
         [Required]
         public string high_school_certificate { get; set; }//syrian or not syrian certificate.
         [Required(ErrorMessage = "First name is required")]
@@ -56,8 +57,7 @@ namespace AdmissionSystem.View_Model
         public int Passport_No { get; set; }
        
         public int Identity_No { get; set; }
-        [Required(ErrorMessage = "Rate is required")]
-        [Range(960, 2300, ErrorMessage = "value shoud be between 960 and 2300")]
+       
         public float The_Rate { get; set; }
         [Required(ErrorMessage = "Full Address is required")]
         [StringLength(50, ErrorMessage = "no more than 50 charecter")]
@@ -86,6 +86,7 @@ namespace AdmissionSystem.View_Model
         [Required(ErrorMessage = "Type of your Certificate is required")]
         public int Type_Of_Certificat { get; set; }
         public int oldType_Of_Certificat { get; set; }
+        public string Type_of_certificate_name { get; set; }
         /// for syrian student  <summary>
         /// for syrian student 
         /// </summary>
@@ -95,6 +96,7 @@ namespace AdmissionSystem.View_Model
         public List<Country> CountryList { get; set; }
         [Required]
         public int country { get; set; }
+        public string country_name { get; set; }
 
 
         public IFormFile Image_Of_Crtificat { get; set; }
@@ -112,7 +114,11 @@ namespace AdmissionSystem.View_Model
 
         public List<Wishes> specializtions { get; set; }
         public int? wish_Department_Id1 { get; set; }
+        public string wih1_name { get; set; }
         public int? wish_Department_Id2 { get; set; }
+        public string wih2_name { get; set; }
         public int? wish_Department_Id3 { get; set; }
+        public string wih3_name { get; set; }
+        public int Conformation { get; set; }
     }
 }

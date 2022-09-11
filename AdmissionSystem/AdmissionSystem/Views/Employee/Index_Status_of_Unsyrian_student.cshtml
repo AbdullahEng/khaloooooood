@@ -1,49 +1,72 @@
-﻿@model IEnumerable<AdmissionSystem.Model.Statues_Of_Student>
+﻿@model AdmissionSystem.View_Model.Statues_of_Student_EmployeeId
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Index_Status_of_Unsyrian_student";
+    Layout = "_EmployeeLayout";
 }
+<style> 
+.ContainerRegForm {
+    position: center;
+    /* width: 75%;
+    height:75%;*/
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .4);
+}
+ </style>
+ <link rel="stylesheet" href="~/aos/aos.css"/>
+ <h5>Welcom @Model.Employee.name</h5>
+ <div class="ContainerRegForm"  data-aos="zoom-in-up">
+<h1 class="text-center">Foreign Students</h1>
 
-<h1>Index_Status_of_Unsyrian_student</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
 <table class="table">
     <thead>
-        <tr>
+          <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id)
+               id
+            </th>
+             <th>
+             @localizer["Student full name"]  
+            </th>
+             <th>
+              @localizer["Country"] 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date_of_Acshiving)
+              @localizer["Checking Recipt"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Checked_recipet)
+               @localizer["Checking identity"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Checked_Identity)
+              @localizer["Checking Certificate"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Checked_city_certificate)
+              @localizer["Checking Rate"]
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Checked_Rate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FK_Student_InfoId)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+@foreach (var item in Model.ListaOfStudent) {
+        <tr cla>
             <td>
                 @Html.DisplayFor(modelItem => item.id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date_of_Acshiving)
+                @Html.DisplayFor(modelItem => item.FK_Student_Info.First_Name_AR)
+                 @Html.DisplayFor(modelItem => item.FK_Student_Info.Nick_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FK_Student_Info.Cirtificate_city.country_name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Checked_recipet)
@@ -57,15 +80,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Checked_Rate)
             </td>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.FK_Student_InfoId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit_Status_of_Unsyrian_student", new {  id=item.id }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @*@Html.ActionLink("Edit", "Edit_Status_of_student", new { id = item.id }) *@
+                <form asp-action="loak_UnSyrian">
+                    <input hidden asp-for="id"  value="@Model.Employee.id"/>
+                    <input hidden asp-for="statusId"  value="@item.id"/>
+                    <button class="btn btn-warning">@localizer["Checking"]</button>
+                </form>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+</div>
+ <script src="~/aos/aos.js"></script>
+ <script>
+      AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+      delay: 100,
+    });
+</script>

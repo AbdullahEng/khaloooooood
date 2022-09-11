@@ -48,35 +48,35 @@ const imagesTypes = [
 // Append Images Types Array Inisde Tooltip Data
 toolTipData.innerHTML = [...imagesTypes].join(', .');
 
-// When (drop-zoon) has (dragover) Event 
-dropZoon.addEventListener('dragover', function (event) {
-  // Prevent Default Behavior 
-  event.preventDefault();
+//// When (drop-zoon) has (dragover) Event 
+//dropZoon.addEventListener('dragover', function (event) {
+//  // Prevent Default Behavior 
+//  event.preventDefault();
 
-  // Add Class (drop-zoon--over) On (drop-zoon)
-  dropZoon.classList.add('drop-zoon--over');
-});
+//  // Add Class (drop-zoon--over) On (drop-zoon)
+//  dropZoon.classList.add('drop-zoon--over');
+//});
 
-// When (drop-zoon) has (dragleave) Event 
-dropZoon.addEventListener('dragleave', function (event) {
-  // Remove Class (drop-zoon--over) from (drop-zoon)
-  dropZoon.classList.remove('drop-zoon--over');
-});
+//// When (drop-zoon) has (dragleave) Event 
+//dropZoon.addEventListener('dragleave', function (event) {
+//  // Remove Class (drop-zoon--over) from (drop-zoon)
+//  dropZoon.classList.remove('drop-zoon--over');
+//});
 
-// When (drop-zoon) has (drop) Event 
-dropZoon.addEventListener('drop', function (event) {
-  // Prevent Default Behavior 
-  event.preventDefault();
+//// When (drop-zoon) has (drop) Event 
+//dropZoon.addEventListener('drop', function (event) {
+//  // Prevent Default Behavior 
+//  event.preventDefault();
 
-  // Remove Class (drop-zoon--over) from (drop-zoon)
-  dropZoon.classList.remove('drop-zoon--over');
+//  // Remove Class (drop-zoon--over) from (drop-zoon)
+//  dropZoon.classList.remove('drop-zoon--over');
 
-  // Select The Dropped File
-  const file = event.dataTransfer.files[0];
+//  // Select The Dropped File
+//  const file = event.dataTransfer.files[0];
 
-  // Call Function uploadFile(), And Send To Her The Dropped File :)
-  uploadFile(file);
-});
+//  // Call Function uploadFile(), And Send To Her The Dropped File :)
+//  uploadFile(file);
+//});
 
 // When (drop-zoon) has (click) Event 
 dropZoon.addEventListener('click', function (event) {

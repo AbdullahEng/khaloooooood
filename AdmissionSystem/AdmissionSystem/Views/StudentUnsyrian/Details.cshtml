@@ -1,0 +1,569 @@
+﻿@model AdmissionSystem.View_Model.UnStudent_View_Model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_StudentLayout";
+
+}
+
+<link href="~/aos/aos.css"rel="stylesheet"/>
+<link href="~/Desighn/openimage.css" rel="stylesheet" />
+<link href="~/Desighn/css_uploading_file.css"rel="stylesheet"/>
+
+
+
+<Style>
+.ContainerRegForm {
+    position: center;
+  /*  width: 75%;*/
+    /*height:75%;*/
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .4);
+}
+</Style>
+<style>
+input:read-only {
+  background-color: white;
+}
+input[type=text],input[type=date],input[type=number],input[type=email] {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 4px 0;
+  /*box-sizing: border-box;*/
+  border: 2px solid #F1EFDC;
+  border-radius: 5px;
+  font-size: 125%;
+  font-family: "Times New Roman", Times, serif;
+  }
+  label {
+  font-size: 80%;
+   font-weight: bold;
+}
+</style>
+<input hidden id="confirmation_value"  value="@Model.Conformation" />
+  <input hidden id="wish_value" value="@Model.wish_Department_Id1"/>
+     <input hidden id="Rate" value="@Model.The_Rate"/>
+  <input hidden id="front_image" value="@Model.Identity_front_image_URL"/>
+<br>
+<div data-aos="fade-up">
+<div class="ContainerRegForm"   >
+    <label style="font-size: 150%;" class="text-primary">@localizer["family and identity information"]</label>
+    <br><br> <hr />
+     <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="First_Name_AR">@localizer["First Name in Arbic"]</label>
+                            <input readonly asp-for="First_Name_AR" />
+                            </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Father_Name_AR">@localizer["Father Name in Arabic"]</label>
+                            <input readonly asp-for="Father_Name_AR" />
+                           
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Mother_Name_AR">@localizer["Mother Name in Arabic"]</label>
+                            <input asp-for="Mother_Name_AR" readonly  />
+                          </div>
+                    </div> <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Grandfather_Name_AR">@localizer["Grand Father name in Arabic"]</label>
+                            <input asp-for="Grandfather_Name_AR" readonly />
+                          </div>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="First_Name_EN">@localizer["First Name in English"]</label>
+                            <input asp-for="First_Name_EN"  readonly />
+                         </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Father_Name_EN">@localizer["Father Name in English"]</label>
+                            <input asp-for="Father_Name_EN"  readonly/>
+                         </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Mother_Name_EN">@localizer["Mother Name in English"]</label>
+                            <input asp-for="Mother_Name_EN"  readonly />
+                         </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Grandfather_Name_EN">@localizer["Grand FAther Name in English"]</label>
+                            <input asp-for="Grandfather_Name_EN"  readonly/>
+                         </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Nick_Name">@localizer["Nick name"] </label>
+                            <input required asp-for="Nick_Name" readonly/>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label asp-for="Birth">@localizer["Birth"]</label>
+                            <input  asp-for="Birth" readonly  />
+                         </div>
+
+                    </div>
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label asp-for="Nationality">@localizer["Nationality"]</label>
+                            <input  asp-for="Nationality" readonly  />
+                         </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+
+                    <div class="col">
+                      
+                       
+                </div>
+</div>
+
+</div>
+
+    
+    <div class="ContainerRegForm" >
+                <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label asp-for="Full_Address" class="control-label">@localizer["Full Address"]</label>
+                            <input  asp-for="Full_Address" readonly />
+                        </div>
+                    </div>
+                    @*<div class="col">
+                        <div class="form-group">
+                            <label asp-for="Civil_Registriation_City" class="control-label">@localizer["Civil Registriation City"]</label>
+                            <input  asp-for="Civil_Registriation_City"readonly />
+                         </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Civil_Registrition_No" class="control-label">@localizer["Civil Registrition No"]</label>
+                            <input asp-for="Civil_Registrition_No" readonly />
+                        </div>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Passport_No" class="control-label">@localizer["Passport No"]</label>
+                            <input asp-for="Passport_No"readonly  />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Identity_No" class="control-label">@localizer["Identity No"]</label>
+                            <input asp-for="Identity_No" readonly  />
+                         </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                         <div class="form-group">
+                            <label asp-for="Current_Address" class="control-label">@localizer["Current Address"]</label>
+                            <input  asp-for="Current_Address" readonly/>
+                        </div>
+                       
+                    </div>
+                    <div class="col">
+                         <div class="form-group">
+                            <label asp-for="Home_s_Phone" class="control-label">@localizer["Home Phone"]</label>
+                            <input asp-for="Home_s_Phone" readonly />
+                         </div>
+                       
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label">@localizer["Email"]</label>
+                            <input asp-for="Email"readonly />
+                        </div>
+                       
+                    </div>
+                    <div class="col">
+                         <div class="form-group">
+                            <label asp-for="Mobile_Phone" class="control-label">@localizer["Mobile Phone"]</label>
+                            <input asp-for="Mobile_Phone" readonly />
+                         </div>
+                       
+                    </div>
+                    
+                </div>
+
+            </div>
+            </div>
+<br>
+    </div>
+    <hr />
+    <div class="ContainerRegForm" data-aos="fade-up">
+        
+         <label style="font-size: 150%;" class="text-primary">@localizer["Certificate inforamtion"] </label>
+  <br><br> <hr />
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="high_school_certificate" class="control-label">@localizer["high school certificate"]</label>
+                            <input asp-for="high_school_certificate" readonly />
+                        </div>
+                    </div>
+                     <div class="col">
+                          <label asp-for="country_name" class="control-label">@localizer["Country"]</label>
+                            <input asp-for="country_name"readonly />
+                       
+                    </div>
+                    <div class="col">
+                         <div class="form-group">
+                            <label asp-for="city_of_high_school_cirtificate" class="control-label">@localizer["City of High School Cirtificate"]</label>
+                            <input asp-for="city_of_high_school_cirtificate" readonly />
+                        </div>
+                    </div>
+                    
+                </div> <div class="row">
+                   
+                    
+                    <div class="col">
+                         <div class="form-group">
+                            <label asp-for="The_Rate" class="control-label">@localizer["The Rate"]</label>
+                            <input asp-for="The_Rate"readonly />
+                         </div>
+                       </div>  <div class="col">
+                        <label asp-for="Type_of_certificate_name" class="control-label">@localizer["Certificate Type"]</label>
+                            <input asp-for="Type_of_certificate_name"readonly />
+                       
+                    </div>
+                </div> 
+               
+                <div class="row  ">
+                    <div class="col">
+                     <div class="form-group">
+                            <label asp-for="date_of_high_school_cirtificate" class="control-label">@localizer["Date of High School Cirtificate"]</label>
+                            <input type="date" asp-for="date_of_high_school_cirtificate" class="form-control"/>
+                        </div>
+                    </div>                  
+
+                </div>
+              
+            </div>
+<br><br>
+    </div>
+    <br>
+     <hr />
+      <div class="ContainerRegForm"  data-aos="fade-up" id="wishes_info" >
+          <label style="font-size: 150%;" class="text-primary">@localizer["Addmission information"] </label>
+         <br> <hr />
+         <div class="row">
+             <div class="col-12">
+                        <div class="form-group">
+                            <label asp-for="Addmition_eleigibilty" class="control-label">@localizer["Addmition eleigibilty"]</label>
+                            <input readonly asp-for="Addmition_eleigibilty" value="@Model.Addmition_eleigibilty"  />
+                        </div>
+
+                    </div>
+         </div>
+         <div class="row">
+             <div class="col">
+                   <label asp-for="wih1_name" class="control-label">@localizer["First wish"]</label>
+                       <input asp-for="wih1_name" readonly/>
+             </div>
+         </div><div class="row">
+             <div class="col">
+                   <label asp-for="wih2_name" class="control-label">@localizer["Secound wish"]</label>
+                       <input asp-for="wih2_name" readonly/>
+             </div>
+         </div><div class="row">
+             <div class="col">
+                   <label asp-for="wih3_name" class="control-label">@localizer["Third wish"]</label>
+                       <input asp-for="wih3_name" readonly/>
+             </div>
+         </div>
+         <br><br>
+          </div>
+          <br >
+          <hr />
+    <div class="ContainerRegForm" >
+         <label style="font-size: 150%;" class="text-primary">@localizer["Uploded files"] </label>
+          <br><br><br>
+           <div class="row">
+                <div class="col-6">
+                    <div id="uploadArea" class="upload-area">
+                        <div class="uploadea__header">
+                       
+
+                        <label class="upload-area__title border-bottom border-warning">@localizer["Front Identity image"]</label>
+
+                        <img id="myImg" src="~/Uploads/@Model.Identity_front_image_URL " style="width:80%;height:70%;object-fit:contain;" />
+
+
+                        <div id="myModal" class="modal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="img01">
+                            <div id="caption"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+               <hr/>
+                <div class="col-6">
+                   <div id="uploadArea" class="upload-area">
+                       <div class="uploadea__header">
+                       
+                        <label class="upload-area__title border-bottom border-warning">@localizer["Back Identity image"]</label>
+                        <img id="myImg2" src="~/Uploads/@Model.Identity_back_image_URL"  style="width:80%;height:70%;object-fit:contain;"/>
+
+                        <div id="myModal2" class="modal">
+                            <span class="close2">&times;</span>
+                            <img class="modal-content" id="img012">
+                            <div id="caption2"></div>
+                        </div>
+
+                        </div>
+                   </div>
+
+
+
+                </div>
+
+
+
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    
+                    <div id="uploadArea" class="upload-area">
+                        <div class="uploadea__header">
+                            <label class="upload-area__title border-bottom border-warning">@localizer["The Certificate"]</label>
+                    <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:80%;height:70%;object-fit:contain;" />
+
+                    
+                    <div id="myModal4" class="modal">
+                        <span class="close4">&times;</span>
+                        <img class="modal-content" id="img014">
+                        <div id="caption4"></div>
+                    </div>
+                    </div>
+                    </div>
+              
+                </div>
+              
+                <div class="col-6">
+                         <div >
+                <div >
+                     <div id="uploadArea" class="upload-area">
+                        <div class="uploadea__header">
+                            <label class="upload-area__title border-bottom border-warning">@localizer["Bank"]</label>
+                    <img id="myImg3" src="~/Uploads/@Model.Check_recipt_image_URL" style="width:80%;height:70%;object-fit:contain;" />
+
+              
+                    <div id="myModal3" class="modal">
+                        <span class="close3">&times;</span>
+                        <img class="modal-content" id="img013">
+                        <div id="caption3"></div>
+                    </div>
+                   </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            <br><br>
+   </div>
+   <br>
+  <form asp-action="Details" id="SubmitForm" >
+   <input  hidden id="conformation" asp-for="Conformation" />
+   </form>
+            
+   <div class="row ContainerRegForm" id="conferting_button">
+        <div class="col"> 
+                        <p>
+        <b>Confiramtion</b>
+        <br>Important for employee to check your files. 
+        <br>Pleas reivew your requset because you will not be able to edit agine.
+        </p><button type="button" onclick="    submitfunction();" class="btn btn-danger">Confirme</button></div>
+                 
+      </div>
+  
+     @*<a class="btn btn-primary btn-lg btn-block"   asp-action="Index">Back to List</a>*@
+   
+   
+     
+     <script src="~/Desighn/openimage.js"></script>
+<script src="~/limonte-sweetalert2/sweetalert2.all.js"></script>
+<script src="~/aos/aos.js"></script>
+<script>
+window.onload = function() {
+    if (document.getElementById("confirmation_value").value=='0' && !document.getElementById("front_image").value) {
+         document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+         document.getElementById("third").hidden = false;
+          document.getElementById("conferting_button").hidden = false;
+          document.getElementById("wishes_info").hidden = true;
+    }
+    else if (document.getElementById("confirmation_value").value=='0' && document.getElementById("front_image").value) {
+         document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+         document.getElementById("third").hidden = false;
+          document.getElementById("conferting_button").hidden = false;
+          document.getElementById("wishes_info").hidden = true;
+    }
+    else if (document.getElementById("confirmation_value").value=='1' && document.getElementById("front_image").value &&document.getElementById("wish_value").value == '') {
+          document.getElementById("conferting_button").hidden = true;
+           document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+          document.getElementById("wishes_info").hidden = true;
+    }
+     else if (document.getElementById("confirmation_value").value=='1' && document.getElementById("front_image").value &&document.getElementById("wish_value").value != '') {
+          document.getElementById("conferting_button").hidden = true;
+           document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+          document.getElementById("wishes_info").hidden = false;
+    }
+      else if (document.getElementById("confirmation_value").value=='2'  &&  document.getElementById("front_image").value && document.getElementById("wish_value").value == '') {
+        document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+          document.getElementById("forth").hidden = false;
+           document.getElementById("wishes_info").hidden = true;
+            document.getElementById("conferting_button").hidden = true;
+    }
+     else if (document.getElementById("confirmation_value").value=='2'  &&  document.getElementById("front_image").value && document.getElementById("wish_value").value != '') {
+        document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+          document.getElementById("forth").hidden = false;
+           document.getElementById("wishes_info").hidden = false;
+            document.getElementById("conferting_button").hidden = false;
+    }
+     else if (document.getElementById("confirmation_value").value=='3'  &&  document.getElementById("front_image").value && document.getElementById("wish_value").value == '') {
+        document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+           document.getElementById("forth").hidden = false;
+           document.getElementById("wishes_info").hidden = true;
+            document.getElementById("conferting_button").hidden = true;
+    } else if (document.getElementById("confirmation_value").value=='3'  &&  document.getElementById("front_image").value && document.getElementById("wish_value").value != '') {
+        document.getElementById("first").hidden = false;
+         document.getElementById("secound").hidden = false;
+           document.getElementById("forth").hidden = true;
+           document.getElementById("wishes_info").hidden = false;
+            document.getElementById("conferting_button").hidden = false;
+    }
+    //  else if (document.getElementById("confirmation_value").value=='2' && document.getElementById("wish_value").value == '') {
+    //     document.getElementById("conferting_button").hidden = true;
+    //     document.getElementById("first").hidden = false;
+    //     document.getElementById("secound").hidden = false;
+    //      document.getElementById("forth").hidden = false;
+    //}
+    // else if (document.getElementById("confirmation_value").value=='3' && document.getElementById("wish_value").value != '') {
+    //     document.getElementById("conferting_button").hidden = true;
+    //      document.getElementById("first").hidden = false;
+    //     document.getElementById("secound").hidden = false;
+    //      document.getElementById("third").hidden = false;
+    //} else if (document.getElementById("confirmation_value").value=='5' && document.getElementById("wish_value").value != '') {
+    //     document.getElementById("conferting_button").hidden = false;
+    //     document.getElementById("first").hidden = false;
+    //     document.getElementById("secound").hidden = false;
+    //      document.getElementById("third").hidden = false;
+    //} else if (document.getElementById("confirmation_value").value=='4' && document.getElementById("wish_value").value == '') {
+    //     document.getElementById("conferting_button").hidden = true; 
+    //     document.getElementById("first").hidden = false;
+    //     document.getElementById("secound").hidden = false;
+    //      document.getElementById("third").hidden = false;
+    //        document.getElementById("forth").hidden = false;
+    //}else if (document.getElementById("confirmation_value").value=='6' && document.getElementById("wish_value").value != '') {
+    //     document.getElementById("conferting_button").hidden = false;   
+    //      document.getElementById("first").hidden = false;
+    //     document.getElementById("secound").hidden = false;
+    //      document.getElementById("third").hidden = false;
+    //        document.getElementById("forth").hidden = false;
+    //     }
+}
+</script>
+<script>
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+      delay: 100,
+    });
+
+
+function submitfunction() { 
+    const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title:'هل أنت متأكد من تثبيت الطلب ؟',
+  text: "لن تستطيع التعديل على بياناتك مرة أخرى",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'نعم, تأكيد',
+  cancelButtonText: 'إلغاء',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    swalWithBootstrapButtons.fire(
+     'Deleted!',
+      'تم التثبيت بنجاح',
+      'success'
+    )
+     document.getElementById("conformation").value  = '1';
+      document.getElementById("SubmitForm").submit();
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'الغاء',
+      'دون التثبيت لن يتم مراجعة طلبكم',
+      'error'
+    )
+     document.getElementById("conformation").checked = false;
+  }
+})
+
+   
+}
+
+  </script>

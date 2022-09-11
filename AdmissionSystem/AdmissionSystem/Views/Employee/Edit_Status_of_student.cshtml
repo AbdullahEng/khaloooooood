@@ -10,213 +10,21 @@
 }
 <link href="~/Desighn/3StepsForm.css" rel="stylesheet" />
 <link href="~/Desighn/openimage.css" rel="stylesheet" />
-
-
-
-
-
-@*<h1>Edit_Status_of_student</h1>
-
-    <h4>Status_Of_Student_View_Model</h4>
-    <hr />
-    <div class="row">
-        <v class="col-md-4">
-            <form asp-action="Edit_Status_of_student">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="high_school_certificate" class="control-label"></label>
-                    <input asp-for="high_school_certificate" class="form-control" />
-                    <span asp-validation-for="high_school_certificate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="New_Country" class="control-label">Country of Certificate"</label>
-                    <select asp-for="New_Country" class="form-control" asp-items="@(new SelectList(Model.CountryList, "id", "country_name"))"></select>
-                    <span asp-validation-for="New_Country" class="text-danger"></span>
-                </div>
-                <input type="hidden" asp-for="Old_Country" class="form-control" />
-
-                <div class="form-group">
-                    <label asp-for="New_Type_Of_Certificat" class="control-label">Type Of Certificat</label>
-                    <select asp-for="New_Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
-                    <span asp-validation-for="New_Type_Of_Certificat" class="text-danger"></span>
-                </div>
-                <input type="hidden" asp-for="Old_Type_Of_Certificat" class="form-control" />
-                <div class="form-group">
-                    <label asp-for="First_Name_AR" class="control-label"></label>
-                    <input asp-for="First_Name_AR" class="form-control" />
-                    <span asp-validation-for="First_Name_AR" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Father_Name_AR" class="control-label"></label>
-                    <input asp-for="Father_Name_AR" class="form-control" />
-                    <span asp-validation-for="Father_Name_AR" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Mother_Name_AR" class="control-label"></label>
-                    <input asp-for="Mother_Name_AR" class="form-control" />
-                    <span asp-validation-for="Mother_Name_AR" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nick_Name" class="control-label"></label>
-                    <input asp-for="Nick_Name" class="form-control" />
-                    <span asp-validation-for="Nick_Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nationality" class="control-label"></label>
-                    <input asp-for="Nationality" class="form-control" />
-                    <span asp-validation-for="Nationality" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Birth" class="control-label"></label>
-                    <input asp-for="Birth" class="form-control" />
-                    <span asp-validation-for="Birth" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Civil_Registriation_City" class="control-label"></label>
-                    <input asp-for="Civil_Registriation_City" class="form-control" />
-                    <span asp-validation-for="Civil_Registriation_City" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Civil_Registrition_No" class="control-label"></label>
-                    <input asp-for="Civil_Registrition_No" class="form-control" />
-                    <span asp-validation-for="Civil_Registrition_No" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Passport_No" class="control-label"></label>
-                    <input asp-for="Passport_No" class="form-control" />
-                    <span asp-validation-for="Passport_No" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Identity_No" class="control-label"></label>
-                    <input asp-for="Identity_No" class="form-control" />
-                    <span asp-validation-for="Identity_No" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Full_Address" class="control-label"></label>
-                    <input asp-for="Full_Address" class="form-control" />
-                    <span asp-validation-for="Full_Address" class="text-danger"></span>
-                </div>
-
-                <img id="myImg" src="~/Uploads/@Model.Identity_front_image " style="object-fit: contain;width:150px;height:150px" />
-
-                The Modal
-                <div id="myModal" class="modal">
-                    <span class="close">&times;</span>
-                    <img class="modal-content" id="img01">
-                    <div id="caption"></div>
-                </div>
-                <img id="myImg2" src="~/Uploads/@Model.Identity_back_image" style="object-fit: contain;width:150px;height:150px" />
-
-                The Modal
-                <div id="myModal2" class="modal">
-                    <span class="close2">&times;</span>
-                    <img class="modal-content" id="img012">
-                    <div id="caption2"></div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Mobile_Phone" class="control-label"></label>
-                    <input asp-for="Mobile_Phone" class="form-control" />
-                    <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="LAnguge_of_the_addmintion" class="control-label"></label>
-                    <input asp-for="LAnguge_of_the_addmintion" class="form-control" />
-                    <span asp-validation-for="LAnguge_of_the_addmintion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Subscription_number" class="control-label"></label>
-                    <input asp-for="Subscription_number" class="form-control" />
-                    <span asp-validation-for="Subscription_number" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="course_number" class="control-label"></label>
-                    <input asp-for="course_number" class="form-control" />
-                    <span asp-validation-for="course_number" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="The_New_Rate" class="control-label"></label>
-                    <input asp-for="The_New_Rate" class="form-control" value="@Model.The_Old_Rate" />
-                    <span asp-validation-for="The_New_Rate" class="text-danger"></span>
-                </div>
-                <input type="hidden" asp-for="The_Old_Rate" class="form-control" />
-
-
-                <div class="form-group">
-                    <label asp-for="city_of_high_school_cirtificate" class="control-label"></label>
-                    <input asp-for="city_of_high_school_cirtificate" class="form-control" />
-                    <span asp-validation-for="city_of_high_school_cirtificate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="date_of_high_school_cirtificate" class="control-label"></label>
-                    <input asp-for="date_of_high_school_cirtificate" class="form-control" />
-                    <span asp-validation-for="date_of_high_school_cirtificate" class="text-danger"></span>
-                </div>
-                @{
-                    string alt = "الرقم الوطني " + Model.Identity_No.ToString() + "<br>" + "khaled";
-                }
-
-                <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" style="object-fit: contain;width:150px;height:150px" />
-
-                The Modal
-                <div id="myModal4" class="modal">
-                    <span class="close4">&times;</span>
-                    <img class="modal-content" id="img014">
-                    <div id="caption4"></div>
-                </div>
-                <img id="myImg3" src="~/Uploads/@Model.check_recipt_image_URL" alt=@alt style="object-fit: contain;width:150px;height:150px" />
-
-                The Modal
-                <div id="myModal3" class="modal">
-                    <span class="close3">&times;</span>
-                    <img class="modal-content" id="img013">
-                    <div id="caption3"></div>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Checking_city_Certificate" /> @Html.DisplayNameFor(model => model.Checking_city_Certificate)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Checking_Identity_Image" /> @Html.DisplayNameFor(model => model.Checking_Identity_Image)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Checking_Rate_Image" /> @Html.DisplayNameFor(model => model.Checking_Rate_Image)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Checking_Recipte_Image" /> @Html.DisplayNameFor(model => model.Checking_Recipte_Image)
-                    </label>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
-    </div>
-    </div>*@
-
-
-
+<link href="~/Desighn/css_uploading_file.css"rel="stylesheet"/>
+<link href="~/Desighn/check-css.css"rel="stylesheet"/>
 
 @{
     if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
     {
-        <h1 hidden id="khaled">khaled</h1>
+    <h1 hidden id="khaled">khaled</h1>
     }
     else
     {<h1 hidden id="khaled">nokhaled</h1>
     }
 }
-
+<h5 hidden id="SaveRateValue">@Model.The_Old_Rate</h5>
+<h5  hidden id="SaveCertificatValue">@Model.Old_Type_Of_Certificat</h5>
+<h5 hidden id="SaveCountryValue">@Model.Old_Country</h5>
 <form id="regForm" asp-action="Edit_Status_of_student" class="ContainerRegForm ">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row form-group border-bottom border-warning ">
@@ -224,10 +32,12 @@
             <h2 class="text-warning ">@localizer["Checking"] </h2>
         </div>
         <img src="~/Desighn/kalamoon logo.png" width="80" height="90" />
+        <input hidden asp-for="EmployeeId" value="@Model.EmployeeId">
+        
     </div>
     <!-- One "tab" for each step in the form: -->
     <div class="tab">
-        <h5 class="alert alert-primary text-center font-weight-bold" role="alert">@localizer["Idendity Inforamtion"] </h5>
+        <h2 class="alert alert-primary text-center font-weight-bold" role="alert">@localizer["Idendity Inforamtion"] </h2>
         <div class="container">
             <div class="row">
                 <div class="col-3">
@@ -328,15 +138,18 @@
             </div>
             
             <div class="row">
-                <div class="col-6 border">
-                    <div class="form-group">
+                <div class="col-6 ">
+                    <div id="uploadArea" class="upload-area">
+                        <div class="uploadea__header">
                         @{
                             string Name_and_identity = "<h3  >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية:" +" "+ Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "الرقم الوطني :" + Model.Identity_No.ToString() ;
                             string certificate_info = "<h3 >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية :" + " " + Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "المعدل: "+Model.The_Old_Rate+"<br>"+"بلد الشهاده: "+Model.CountryList[Model.Old_Country-1].country_name+ "<br>" +"نوع الشهادة: "+Model.Type_Of_certificate_list[Model.Old_Type_Of_Certificat-1].type+"<br>"+"رقم الدورة: "+Model.course_number;
                           }
-                        <label>@localizer["Front Identity image"]</label>
 
-                        <img id="myImg" src="~/Uploads/@Model.Identity_front_image " alt="@Name_and_identity" style="object-fit: contain;width:75px;height:75px" />
+
+                        <label class="upload-area__title border-bottom border-warning">@localizer["Front Identity image"]</label>
+
+                        <img id="myImg" src="~/Uploads/@Model.Identity_front_image " alt="@Name_and_identity" style="width: 200px;height:150px;object-fit:contain;" />
 
 
                         <div id="myModal" class="modal">
@@ -344,31 +157,48 @@
                             <img class="modal-content" id="img01">
                             <div id="caption"></div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-6 border">
-                    <div class="form-group">
-                        <label>@localizer["Back Identity image"]</label>
-                        <img id="myImg2" src="~/Uploads/@Model.Identity_back_image" style="object-fit: contain;width:75px;height:75px" />
-
-                        <div id="myModal2" class="modal">
-                            <span class="close2">&times;</span>
-                            <img class="modal-content" id="img012">
-                            <div id="caption2"></div>
                         </div>
                     </div>
                 </div>
 
 
 
+                <div class="col-6">
+                   <div id="uploadArea" class="upload-area">
+                       <div class="uploadea__header">
+                       
+                        <label class="upload-area__title border-bottom border-warning">@localizer["Back Identity image"]</label>
+                        <img id="myImg2" src="~/Uploads/@Model.Identity_back_image"  style="width: 200px;height:150px;object-fit:contain;"/>
+
+                        <div id="myModal2" class="modal">
+                            <span class="close2">&times;</span>
+                            <img class="modal-content" id="img012">
+                            <div id="caption2"></div>
+                        </div>
+
+                        </div>
+                   </div>
+
+
+
+                </div>
+
+
+
             </div>
             <div class="row">
-                <div class="col-6 form-check">
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Checking_Identity_Image" /> @Html.DisplayNameFor(model => model.Checking_Identity_Image)
-                        </label>
-                    </div>
+                <div class="col-12">
+                    <div class="border">    
+    <div class="card-style card-layout ">
+      <div > <input type="checkbox" class="circular-checkbox" id="identity_image" asp-for="Checking_Identity_Image" onclick="    savegreeting1();" /></div>
+      <div>
+        <div class="task-text">@localizer["Identity validation"] </div>
+        <div class="meta-label done-by">@localizer["please check the box if the inforamtion is right"] </div>
+      </div>
+    
+    </div>
+      
+    </div>
 
                 </div>
             </div>
@@ -380,19 +210,19 @@
 
     </div>
     <div class="tab">
-        <h5 class="alert alert-primary text-center  font-weight-bold" role="alert">@localizer["Certificate Information"] </h5>
+        <h2 class="alert alert-primary text-center  font-weight-bold" role="alert">@localizer["Certificate Information"] </h2>
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="form-group">
-                        <label asp-for="high_school_certificate" class="control-label">@localizer["high school certificate"]</label>
-                        <input  readonly asp-for="high_school_certificate" class="form-control" />
-                        <span asp-validation-for="high_school_certificate" class="text-danger"></span>
+                        <label asp-for="high_school_certificate" class="control-label border-bottom">@localizer["high school certificate"]: <b>@localizer["Syrian"]</b> </label>
+                        
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
+
                     <div class="form-group">
                         <label asp-for="course_number" class="control-label">@localizer["course number"] </label>
                         <input readonly asp-for="course_number" class="form-control" />
@@ -425,43 +255,70 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="form-group">
-                        <label asp-for="New_Country" class="control-label">Country of Certificate"</label>
-                        <select asp-for="New_Country" class="form-control" asp-items="@(new SelectList(Model.CountryList, "id", "country_name"))"></select>
-                        <span asp-validation-for="New_Country" class="text-danger"></span>
-                    </div>
-                    <input type="hidden" asp-for="Old_Country" class="form-control" />
+          <label asp-for="New_Country" class="control-label">Country of Certificate"</label>          
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button id="Country_button" class="btn btn-outline-primary" onclick="    enable_Country();" type="button">@localizer["Edit"]</button>
+  </div>
+        <select disabled  asp-for="New_Country" id="Country_value" class="form-control" asp-items="@(new SelectList(Model.CountryList, "id", "country_name"))"></select>
+      <input type="hidden" asp-for="Old_Country" class="form-control" />
 
+</div>
+                   @* <div class="form-group">
+                        <span asp-validation-for="New_Country" class="text-danger"></span>
+                    </div>*@
+                   
                 </div>
-                <div class="col">
+                @*<div class="col">
                     <div class="form-group">
                         <label asp-for="city_of_high_school_cirtificate" class="control-label">@localizer["The City of High School"]</label>
                         <input readonly asp-for="city_of_high_school_cirtificate" class="form-control" />
                         <span asp-validation-for="city_of_high_school_cirtificate" class="text-danger"></span>
                     </div>
-                </div>
+                </div>*@
                 <div class="col">
 
-                    <div class="form-group">
-                        <label asp-for="New_Type_Of_Certificat" class="control-label">Type Of Certificat</label>
-                        <select asp-for="New_Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
-                        <span asp-validation-for="New_Type_Of_Certificat" class="text-danger"></span>
+      <label asp-for="New_Type_Of_Certificat" class="control-label">Type Of Certificat</label>
+                     
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button id="Certficat_button" onclick="    enable_Certificate();" class="btn btn-outline-primary" type="button">@localizer["Edit"]</button>
+  </div>
+      <select disabled asp-for="New_Type_Of_Certificat" id="Certficat_value" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
+                     
+  
+</div>
+          <input type="hidden" asp-for="Old_Type_Of_Certificat" class="form-control" />
+        
+</div>
+          @*          <div class="form-group">
+                          <span asp-validation-for="New_Type_Of_Certificat" class="text-danger"></span>
                     </div>
-                    <input type="hidden" asp-for="Old_Type_Of_Certificat" class="form-control" />
-                </div>
+                  </div>*@
                 <div class="col">
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label asp-for="The_New_Rate" class="control-label">@localizer["The Rate"]</label>
                         <input asp-for="The_New_Rate" class="form-control" value="@Model.The_Old_Rate" />
                         <span asp-validation-for="The_New_Rate" class="text-danger"></span>
-                    </div>
+                    </div>*@
+                    <label asp-for="The_New_Rate" class="control-label">@localizer["The Rate"]</label>
+                    <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button id="rate_button" onclick="    enable_Rate();" class="btn btn-outline-primary" type="button">@localizer["Edit"]</button>
+  </div>
+  <input disabled asp-for="The_New_Rate" id="rate_value" onchange="    change_saved_value();" class="form-control" value="@Model.The_Old_Rate" placeholder="" aria-label="" aria-describedby="basic-addon1">
+</div>
                     <input type="hidden" asp-for="The_Old_Rate" class="form-control" />
                 </div>
 
             </div> 
-            <div class="row">
-                <div class="col-12 border">
-                    <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" alt="@certificate_info" style="object-fit: contain;width:150px;height:150px" />
+            <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
+                    
+                    <div id="uploadArea" class="upload-area">
+                        <div class="uploadea__header">
+                            <label class="upload-area__title border-bottom border-warning">@localizer["The Certificate"]</label>
+                    <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" alt="@certificate_info" class="img-thumbnail" />
 
                     
                     <div id="myModal4" class="modal">
@@ -469,34 +326,58 @@
                         <img class="modal-content" id="img014">
                         <div id="caption4"></div>
                     </div>
-
-
+                    </div>
+                    </div>
                 </div>
+                
             </div>
             <div class="row">
-                <div class="col-6 form-check checkbox">
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Checking_city_Certificate" /> @Html.DisplayNameFor(model => model.Checking_city_Certificate)
-                        </label>
-                    </div>
+                      
+                <div class="col-12">
+                    @*<div class="wrapper bodyofcheckbox">*@
+    <div >    
+    <div class="card-style card-layout ContainerRegForm border">
+      <div > <input type="checkbox" id="Rate" class="circular-checkbox" asp-for="Checking_Rate_Image"  onclick="    savegreeting3();"/></div>
+      <div>
+        <div class="task-text">@localizer["Rate validation"]   </div>
+        <div class="meta-label done-by">@localizer["please check the box if the inforamtion is right"] </div>
+      </div>
+    
+    </div>
+      
+    </div>
+ @* </div>*@
+  
                 </div>
-                <div class="col-6 form-check">
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Checking_Rate_Image" /> @Html.DisplayNameFor(model => model.Checking_Rate_Image)
-                        </label>
-                    </div>
+                <br>
+                 <div class="col-12">
+                    @*<div class="wrapper bodyofcheckbox">*@
+    <div>    
+    <div class="card-style card-layout border">
+      <div > <input type="checkbox" id="city" class="circular-checkbox" asp-for="Checking_city_Certificate"  onclick="    savegreeting2();"/></div>
+      <div>
+        <div class="task-text">@localizer["Country validation"] </div>
+        <div class="meta-label done-by">@localizer["please check the box if the inforamtion is right"] </div>
+      </div>
+    
+    </div>
+      
+    </div>
+ @* </div>*@
+  
                 </div>
             </div>
         </div>
     </div>
     <div class="tab">
-        <h5 class="alert alert-primary text-center  font-weight-bold" role="alert">@localizer["Banking Infromation"] </h5>
+        <h2 class="alert alert-primary text-center  font-weight-bold" role="alert">@localizer["Banking Infromation"] </h2>
         <div class="container">
-            <div class="row">
-                <div class="col-12 border">
-                    <img id="myImg3" src="~/Uploads/@Model.check_recipt_image_URL" alt="@Name_and_identity" style="object-fit: contain;width:150px;height:150px" />
+            <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
+                     <div id="uploadArea" class="upload-area">
+                        <div class="uploadea__header">
+                            <label class="upload-area__title border-bottom border-warning">@localizer["Bank"]</label>
+                    <img id="myImg3" src="~/Uploads/@Model.check_recipt_image_URL" alt="@Name_and_identity" style="width: 200px;height:150px;object-fit: contain;" />
 
               
                     <div id="myModal3" class="modal">
@@ -504,58 +385,66 @@
                         <img class="modal-content" id="img013">
                         <div id="caption3"></div>
                     </div>
-                   
-
+                   </div>
+                    </div>
                 </div>
                 </div>
             <div class="row">
-            <div class="col-6 form-check">
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Checking_Recipte_Image" /> @Html.DisplayNameFor(model => model.Checking_Recipte_Image)
-                    </label>
-                </div>
+            <div class="col-12">
+                
+                 <div class="border">    
+    <div class="card-style card-layout">
+      <div > <input type="checkbox" id="recipt" class="circular-checkbox" asp-for="Checking_Recipte_Image" onclick="    savegreeting();"/></div>
+      <div>
+        <div class="task-text">@localizer["Bank Recipte validation"]</div>
+        <div class="meta-label done-by">@localizer["please check the box if the inforamtion is right"]</div>
+      </div>
+    
+    </div>
+      
+    </div>
             </div>
                 </div>
         </div>
-           
-        </div>
-   
+        <br>
 
-    <div class="tab">
-        <h5 class="alert alert-primary text-center  font-weight-bold" role="alert">@localizer["Contact Information"] </h5>
+        <h3 class="alert alert-primary text-center  font-weight-bold" role="alert">@localizer["Contact Information"] </h3>
         <div class="container">
             <div class="row">
             <div class="col">
 
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label">@localizer["Email"]</label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
+  <label asp-for="Email" class="control-label">@localizer["Email"]</label>             
+<div class="input-group mb-3">
+  <input readonly type="text"  asp-for="Email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button id="mail_button" onclick="    ShowMessageTemplate();" class="btn  btn-warning" type="button">@localizer["attach a message"]</button>
+  </div>
+</div>
+<input hidden id="mail_meesage" asp-for="Body" type="text"/>
+      
             </div>
            
             <div class="col">
                 <div class="form-group">
                     <label asp-for="Mobile_Phone" class="control-label">@localizer["Mobile Phone"]</label>
-                    <input asp-for="Mobile_Phone" class="form-control" />
+                    <input readonly asp-for="Mobile_Phone" class="form-control" />
                     <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
                 </div>
             </div>
         </div>
-            <div class="row">
-               <div class="row">
-
-                   
-
-                </div>
-            </div>
+        
+           
         </div>
+   
+
+   
     </div>
     <div style="overflow:auto;">
         <div style="float:right;">
+            <br>
             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary position-relative">@localizer["Previous"]</button>
             <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary position-relative">@localizer["Next"]</button>
+           
         </div>
     </div>
 
@@ -564,7 +453,7 @@
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
-        <span class="step"></span>
+        
     </div>
 
 </form>
@@ -616,11 +505,55 @@
             //// Hide the current tab:
             x[currentTab].style.display = "none";
             // Increase or decrease the current tab by 1:
-            currentTab = currentTab + n;
+            if (document.getElementById("rate_button").textContent == 'تثبيت'||
+            document.getElementById("Country_button").textContent == 'تثبيت'||
+            document.getElementById("Certficat_button").textContent == 'تثبيت') { 
+            Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'الرجاء تثبيت القيمة الجديدة',
+  
+})
+            }
+            else {currentTab = currentTab + n;
+            $('html, body').animate({ scrollTop: 70 }, 175);
+             }
             // if you have reached the end of the form... :
             if (currentTab >= x.length) {
                 //...the form gets submitted:
+                // document.querySelector('#rate_value').disabled = false;
+                //document.querySelector('#rate_value').value = document.getElementById("SaveRateValue").textContent;
+                document.getElementById("rate_value").disabled = false;
+                document.getElementById("rate_value").value=document.getElementById("SaveRateValue").textContent;
+                 document.getElementById("Certficat_value").disabled = false;
+                document.getElementById("Certficat_value").value=document.getElementById("SaveCertificatValue").textContent;
+                document.getElementById("Country_value").disabled = false;
+                document.getElementById("Country_value").value=document.getElementById("SaveCountryValue").textContent;
+               
                 document.getElementById("regForm").submit();
+                document.getElementById("regForm").hidden = true;
+                let timerInterval
+Swal.fire({
+  title: 'Saving data',
+  html: 'proccessing',
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
                 return false;
             }
             // Otherwise, display the correct tab:
@@ -667,3 +600,263 @@
     <a asp-action="Index_Status_of_student">Back to List</a>
 </div>
 <script src="~/Desighn/openimage.js"></script>
+<script src="~/limonte-sweetalert2/sweetalert2.all.js"></script>
+<script>
+function savegreeting() 
+{
+    if (document.getElementById("recipt").checked)
+    {
+        
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 1000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Checked successfully'
+})
+    }
+     
+    }
+
+    function savegreeting1() 
+{
+    if (document.getElementById("identity_image").checked)
+    {
+        
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Checked successfully'
+})
+    }
+     
+    }
+      function savegreeting2() 
+{
+    if (document.getElementById("city").checked)
+    {
+        
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Checked successfully'
+})
+    }
+     
+    }
+      function savegreeting3() 
+{
+    if (document.getElementById("Rate").checked)
+    {
+        
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Checked successfully'
+})
+    }
+     
+    }
+
+</script>
+<script>
+let x = 0;
+function enable_Rate() {
+    if (x % 2 == 0) {
+        Swal.fire({
+            title: 'Are you sure',
+            text: "be aware wishes will be re chosed",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                 document.querySelector('#rate_button').textContent = "تثبيت";
+        document.getElementById('rate_button').className = "btn btn-danger";
+       
+                document.querySelector('#rate_value').disabled = false;
+                document.getElementById("SaveRateValue").textContent = document.getElementById("rate_value").value;
+                x++;
+            }
+        })
+        
+    }
+    else {
+        if (parseInt(document.getElementById("rate_value").value) <= 2400 && parseInt(document.getElementById("rate_value").value) >= 780) {
+           document.querySelector('#rate_button').textContent = "تحرير";
+            document.getElementById('rate_button').className = "btn btn-outline-primary";
+            document.getElementById("SaveRateValue").textContent = document.getElementById("rate_value").value;
+            document.querySelector('#rate_value').disabled = true;
+            x++;
+        }else {
+            Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'القيمة محصورة بين 2400 و 780 الرجاء التركيز ',
+  
+})
+        }
+    }
+
+}
+
+
+</script>
+<script>
+let y = 0;
+function enable_Certificate() {
+    if (y % 2 == 0) {
+        Swal.fire({
+            title: 'Are you sure',
+            text: "be aware wishes will be re chosed",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                   document.querySelector('#Certficat_button').textContent = "تثبيت";
+       document.getElementById('Certficat_button').className = "btn btn-danger";
+      
+                document.querySelector('#Certficat_value').disabled = false;
+                y++;
+               //document.getElementById("SaveCertificatValue").textContent = document.getElementById("Certficat_value").value;
+            }
+        })
+        
+    }
+    else {
+       
+        document.querySelector('#Certficat_button').textContent = "تحرير";
+          document.getElementById('Certficat_button').className ="btn btn-outline-primary";
+      
+        document.getElementById("SaveCertificatValue").textContent = document.getElementById("Certficat_value").value;
+         document.querySelector('#Certficat_value').disabled = true;
+        y++;
+    }
+}
+</script>
+<script>
+let z = 0;
+function enable_Country() {
+    if (z % 2 == 0) {
+        Swal.fire({
+            title: 'Are you sure',
+            text: "be aware wishes will be re chosed",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                   document.querySelector('#Country_button').textContent = "تثبيت";
+       document.getElementById('Country_button').className = "btn btn-danger";
+      
+                document.querySelector('#Country_value').disabled = false;
+                z++;
+            //    document.getElementById("SaveCountryValue").textContent = document.getElementById("Country_value").value;
+            }
+        })
+        
+    }
+    else {
+       
+        document.querySelector('#Country_button').textContent = "تحرير";
+          document.getElementById('Country_button').className ="btn btn-outline-primary";
+      
+        document.getElementById("SaveCountryValue").textContent = document.getElementById("Country_value").value;
+         document.querySelector('#Country_value').disabled = true;
+        z++;
+    }
+
+}
+
+</script>
+<script>
+
+async function ShowMessageTemplate() 
+{
+    
+    const { value: text } = await Swal.fire({
+  input: 'textarea',
+  inputLabel: 'Message',
+  inputPlaceholder: 'Type your message here...',
+  inputAttributes: {
+    'aria-label': 'Type your message here'
+  },
+  showCancelButton: true
+})
+
+if (text) {
+    document.getElementById("mail_meesage").value = text;
+  //Swal.fire(text)
+}
+
+  // Swal.fire({
+  //input: 'textarea',
+  //inputLabel: 'Message',const { value: text } = await Swal.fire({
+// const { value: text } =Swal.fire({
+//  input: 'textarea',
+//  inputLabel: 'Message',
+//  inputPlaceholder: 'Type your message here...',
+//  inputAttributes: {
+//    'aria-label': 'Type your message here'
+//  },
+//  showCancelButton: true
+//})
+
+//if (text) {
+//    document.getElementById("mail_meesage").textContent = text;
+//}
+
+//if (text) {
+//  Swal.fire(text)
+//}
+}
+</script>

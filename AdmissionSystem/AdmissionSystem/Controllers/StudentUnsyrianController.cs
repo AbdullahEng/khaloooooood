@@ -62,6 +62,27 @@ namespace AdmissionSystem.Controllers
             }
             return View(lista);
         }
+        public ActionResult Errorview(int id)
+        {
+            var studnet = new UnStudent_View_Model { id = id };
+            return View(studnet);
+        }
+
+        public ActionResult Home(int id)
+        {
+            var Specific_student = studentRepository.Find(id);
+
+            var student = new UnStudent_View_Model
+            {
+                id = id,
+                Conformation = Specific_student.Conformation,
+                First_Name_EN = Specific_student.First_Name_EN,
+                wish_Department_Id1 = Specific_student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish1ID,
+                The_Rate = Specific_student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
+                 Identity_front_image_URL=Specific_student.Identity_front_image
+            };
+            return View(student);
+        }
 
 
         // GET: StudenController/Details/5
@@ -70,9 +91,26 @@ namespace AdmissionSystem.Controllers
 
             var student = studentRepository.Find(id);
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
-
-            var collection = new Student_View_Model
+            var addmisson_eligibilty = statues_Of_Admission_Eligibilty_Repository.Find(student.Statues_Of_Admission_Eligibilty.id).Type_of_admission_eligibilty;
+            string wishe1_name = "لايوجد";
+            string wishe2_name = "لايوجد";
+            string wishe3_name = "لايوجد";
+            if (certeficat.wish1ID != null)
             {
+                wishe1_name = department_Relation_Type_Repository.Find(certeficat.wish1ID.Value).FK_Department.specialization_name;
+            }
+            if (certeficat.wish2ID != null)
+            {
+                wishe2_name = department_Relation_Type_Repository.Find(certeficat.wish2ID.Value).FK_Department.specialization_name;
+            }
+            if (certeficat.wish3ID != null)
+            {
+                wishe3_name = department_Relation_Type_Repository.Find(certeficat.wish3ID.Value).FK_Department.specialization_name;
+            }
+
+            var collection = new UnStudent_View_Model
+            {
+                id = id,
                 Birth = student.Birth,
                 Civil_Registriation_City = student.Civil_Registriation_City,
                 Email = student.Email,
@@ -96,22 +134,26 @@ namespace AdmissionSystem.Controllers
                 Mother_Name_AR = student.Mother_Name_AR,
                 Mother_Name_EN = student.Mother_Name_EN,
                 Identity_No = student.Identity_No,
-                Identity_back_image_URL = student.Identity_back_image,
-                Identity_front_image_URL = student.Identity_front_image,
 
-                LAnguge_of_the_addmintion = certeficat.LAnguge_of_the_addmintion,
-                Check_recipt_image_URL = certeficat.check_recipt_image_URL,
+               
                 date_of_high_school_cirtificate = certeficat.date_of_high_school_cirtificate,
-                Subscription_number = certeficat.Subscription_number,
+               
                 The_Rate = student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
                 city_of_high_school_cirtificate = certeficat.city_of_high_school_cirtificate,
-                course_number = certeficat.course_number,
-                Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
-                Type_Of_certificate_list = FillSelection2(),
-                wish_Department_Id1 = certeficat.wish1.id,
-                wish_Department_Id2 = certeficat.wish2.id,
-                wish_Department_Id3 = certeficat.wish3.id,
+               
+                Identity_back_image_URL = student.Identity_back_image,
+                Identity_front_image_URL = student.Identity_front_image,
                 Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
+                Check_recipt_image_URL = certeficat.check_recipt_image_URL,
+
+                wih1_name = wishe1_name,
+                wih2_name = wishe2_name,
+                wih3_name = wishe3_name,
+                country_name = student.Cirtificate_city.country_name,
+                Type_of_certificate_name = certeficat.FK_Type_of_high_school_Cirtificate.type,
+                Addmition_eleigibilty = addmisson_eligibilty,
+                Conformation = student.Conformation,
+                wish_Department_Id1 = certeficat.wish1ID
 
 
             };
@@ -121,6 +163,16 @@ namespace AdmissionSystem.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Details(int id, UnStudent_View_Model collection)
+        {
+            var student = studentRepository.Find(id);
+            student.Conformation = collection.Conformation;
+            studentRepository.Update(id, student);
+            string url = "/StudentUnsyrian/Home/" + id.ToString();
+            return Redirect(url);
+        }
         // GET: StudenController/Create
         public ActionResult Create()
         {
@@ -267,94 +319,103 @@ namespace AdmissionSystem.Controllers
 
             var student = studentRepository.Find(id);
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
-
-            if (student.Mother_Name_AR == null)
+            if (student.Conformation == 1|| student.Conformation == 2)
             {
-
-                var Student_With_Certificate = new UnStudent_View_Model
-                {
-                    //specializtions= FillSelection(),
-                    Type_Of_certificate_list = FillSelection2()
-                 ,
-                    CountryList = FillSelection3()
-                 ,
-                    Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
-
-                ,
-                    Birth = student.Birth,
-                    gender = student.gender,
-                    Email = student.Email,
-                    Identity_No = student.Identity_No,
-                    First_Name_EN = student.First_Name_EN,
-                    Nick_Name = student.Nick_Name,
-                    Mobile_Phone = student.Mobile_Phone,
-                    high_school_certificate = student.high_school_certificate,
-
-
-                };
-                return View(Student_With_Certificate);
-
+                string url = "/StudentUnsyrian/Errorview/" + id.ToString();
+                return Redirect(url);
             }
             else
             {
-
-                var Student_With_Certificate = new UnStudent_View_Model
+                if (student.Mother_Name_AR == null)
                 {
-                    //specializtions= FillSelection(),
-                    Type_Of_certificate_list = FillSelection2()
-                 ,
-                    CountryList = FillSelection3()
-                 ,
-                    Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
 
-                ,
-                    Birth = student.Birth,
-                    gender = student.gender,
-                    Email = student.Email,
-                    Identity_No = student.Identity_No,
-                    First_Name_EN = student.First_Name_EN,
-                    Nick_Name = student.Nick_Name,
-                    Mobile_Phone = student.Mobile_Phone,
-                    high_school_certificate = student.high_school_certificate,
-                    Civil_Registriation_City = student.Civil_Registriation_City,
-                    Current_Address = student.Current_Address,
-                    Father_Name_AR = student.Father_Name_AR,
-                    Father_Name_EN = student.Father_Name_EN,
-                    First_Name_AR = student.First_Name_AR,
-                    Marital_status = student.Marital_status,
-                    Home_s_Phone = student.Home_s_Phone,
-                    Passport_No = student.Passport_No,
-                    Full_Address = student.Full_Address,
-                    Grandfather_Name_AR = student.Grandfather_Name_AR,
-                    Grandfather_Name_EN = student.Grandfather_Name_EN,
-                    Civil_Registrition_No = student.Civil_Registrition_No,
-                    Nationality = student.Nationality,
-                    Mother_Name_AR = student.Mother_Name_AR,
-                    Mother_Name_EN = student.Mother_Name_EN,
-                    Identity_back_image_URL = student.Identity_back_image,
-                    Identity_front_image_URL = student.Identity_front_image,
+                    var Student_With_Certificate = new UnStudent_View_Model
+                    {
+                        //specializtions= FillSelection(),
+                        Type_Of_certificate_list = FillSelection2()
+                     ,
+                        CountryList = FillSelection3()
+                     ,
+                        Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
 
-                    //LAnguge_of_the_addmintion = certeficat.LAnguge_of_the_addmintion,
-                    Check_recipt_image_URL = certeficat.check_recipt_image_URL,
-                    date_of_high_school_cirtificate = certeficat.date_of_high_school_cirtificate,
-                    //Subscription_number = certeficat.Subscription_number,
-                    The_Rate = student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
-                    //old_Rate = student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
-                    city_of_high_school_cirtificate = certeficat.city_of_high_school_cirtificate,
-                    //course_number = certeficat.course_number,
-                    Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
-                    oldType_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
-                    Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
-                    country = student.Cirtificate_city.id,
-                    wish_Department_Id1 = certeficat.wish1ID,
-                    wish_Department_Id2 = certeficat.wish2ID,
-                    wish_Department_Id3 = certeficat.wish3ID
-
-                };
+                    ,
+                        Birth = student.Birth,
+                        gender = student.gender,
+                        Email = student.Email,
+                        Identity_No = student.Identity_No,
+                        First_Name_EN = student.First_Name_EN,
+                        Nick_Name = student.Nick_Name,
+                        Mobile_Phone = student.Mobile_Phone,
+                        high_school_certificate = student.high_school_certificate,
 
 
+                    };
+                    return View(Student_With_Certificate);
 
-                return View(Student_With_Certificate);
+                }
+                else
+                {
+
+                    var Student_With_Certificate = new UnStudent_View_Model
+                    {
+                        //specializtions= FillSelection(),
+                        Type_Of_certificate_list = FillSelection2()
+                     ,
+                        CountryList = FillSelection3()
+                     ,
+                        Addmition_eleigibilty = statues_Of_Admission_Eligibilty_Repository.List().Last().Type_of_admission_eligibilty
+
+                    ,
+                        Birth = student.Birth,
+                        gender = student.gender,
+                        Email = student.Email,
+                        Identity_No = student.Identity_No,
+                        First_Name_EN = student.First_Name_EN,
+                        Nick_Name = student.Nick_Name,
+                        Mobile_Phone = student.Mobile_Phone,
+                        high_school_certificate = student.high_school_certificate,
+                        Civil_Registriation_City = student.Civil_Registriation_City,
+                        Current_Address = student.Current_Address,
+                        Father_Name_AR = student.Father_Name_AR,
+                        Father_Name_EN = student.Father_Name_EN,
+                        First_Name_AR = student.First_Name_AR,
+                        Marital_status = student.Marital_status,
+                        Home_s_Phone = student.Home_s_Phone,
+                        Passport_No = student.Passport_No,
+                        Full_Address = student.Full_Address,
+                        Grandfather_Name_AR = student.Grandfather_Name_AR,
+                        Grandfather_Name_EN = student.Grandfather_Name_EN,
+                        Civil_Registrition_No = student.Civil_Registrition_No,
+                        Nationality = student.Nationality,
+                        Mother_Name_AR = student.Mother_Name_AR,
+                        Mother_Name_EN = student.Mother_Name_EN,
+                        Identity_back_image_URL = student.Identity_back_image,
+                        Identity_front_image_URL = student.Identity_front_image,
+
+                        //LAnguge_of_the_addmintion = certeficat.LAnguge_of_the_addmintion,
+                        Check_recipt_image_URL = certeficat.check_recipt_image_URL,
+                        date_of_high_school_cirtificate = certeficat.date_of_high_school_cirtificate,
+                        //Subscription_number = certeficat.Subscription_number,
+                        The_Rate = student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
+                        //old_Rate = student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
+                        city_of_high_school_cirtificate = certeficat.city_of_high_school_cirtificate,
+                        //course_number = certeficat.course_number,
+                        Type_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
+                        oldType_Of_Certificat = certeficat.FK_Type_of_high_school_Cirtificate.id,
+                        Image_of_crtificat_URL = certeficat.Image_of_crtificat_URL,
+                        country = student.Cirtificate_city.id,
+                        wish_Department_Id1 = certeficat.wish1ID,
+                        wish_Department_Id2 = certeficat.wish2ID,
+                        wish_Department_Id3 = certeficat.wish3ID,
+                        Conformation = student.Conformation
+
+
+                    };
+
+
+
+                    return View(Student_With_Certificate);
+                }
             }
 
 
@@ -593,7 +654,7 @@ namespace AdmissionSystem.Controllers
                         //DB.Student.Update(student);
                         //DB.SaveChanges();
                         //ViewBag.succeed = "succeed";
-                        string url = "/StudentUnsyrian/WishesSelection/" + id.ToString();
+                        string url = "/StudentUnsyrian/Details/" + id.ToString();
                         return Redirect(url);
                     
                     //return RedirectToAction(nameof(Index));
@@ -691,109 +752,118 @@ namespace AdmissionSystem.Controllers
             }
 
             Student st = studentRepository.Find(id);
-            Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
-            var CertificatRate = certificate.The_Rate;
-            var CertificatType = certificate.FK_Type_of_high_school_Cirtificate;
-            List<Wishes> lista_of_the_student = new List<Wishes>();
-            foreach (var x in lista_of_wishes)
+            if (st.Conformation == 1|| st.Conformation == 0|| st.Conformation == 3)
             {
-                if (x.Minemum_of_Rate <= CertificatRate && x.FK_type_Of_High_School_Cirtificate.id == CertificatType.id)
-                    lista_of_the_student.Add(x);
-            }
-
-            if (certificate.wish1 != null && certificate.wish2 != null && certificate.wish3 != null)
-            {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
-                {
-                    specializtions = lista_of_the_student,
-                    wish_Department_Id1 = certificate.wish1.id,
-                    wish_Department_Id2 = certificate.wish2.id,
-                    wish_Department_Id3 = certificate.wish3.id
-
-                };
-                ViewBag.wish1 = 1;
-
-                return View(Student_Wishes_View_Model);
-            }
-            else if (certificate.wish1 != null && certificate.wish2 != null && certificate.wish3 == null)
-            {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
-                {
-                    specializtions = lista_of_the_student,
-                    wish_Department_Id1 = certificate.wish1.id,
-                    wish_Department_Id2 = certificate.wish2.id,
-
-
-                };
-                return View(Student_Wishes_View_Model);
-            }
-            else if (certificate.wish1 != null && certificate.wish2 == null && certificate.wish3 != null)
-            {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
-                {
-                    specializtions = lista_of_the_student,
-                    wish_Department_Id1 = certificate.wish1.id,
-
-
-                };
-                return View(Student_Wishes_View_Model);
-            }
-            else if (certificate.wish1 == null && certificate.wish2 != null && certificate.wish3 != null)
-            {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
-                {
-                    specializtions = lista_of_the_student,
-                    wish_Department_Id3 = certificate.wish3.id,
-                    wish_Department_Id2 = certificate.wish2.id,
-
-
-                };
-                return View(Student_Wishes_View_Model);
-            }
-            else if (certificate.wish1 != null && certificate.wish2 == null && certificate.wish3 == null)
-            {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
-                {
-                    specializtions = lista_of_the_student,
-                    wish_Department_Id1 = certificate.wish1.id,
-
-
-
-                };
-                return View(Student_Wishes_View_Model);
-            }
-            else if (certificate.wish1 == null && certificate.wish2 != null && certificate.wish3 == null)
-            {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
-                {
-                    specializtions = lista_of_the_student,
-                    wish_Department_Id2 = certificate.wish2.id,
-
-
-
-                };
-                return View(Student_Wishes_View_Model);
-            }
-            else if (certificate.wish1 == null && certificate.wish2 == null && certificate.wish3 != null)
-            {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
-                {
-                    specializtions = lista_of_the_student,
-                    wish_Department_Id3 = certificate.wish3.id,
-
-
-
-                };
-                return View(Student_Wishes_View_Model);
+                string url = "/StudentUnsyrian/Errorview/" + id.ToString();
+                return Redirect(url);
             }
             else
             {
-                var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+               
+                var CertificatRate = (certificate.The_Rate * 100) / 2300; ;
+                var CertificatType = certificate.FK_Type_of_high_school_Cirtificate;
+                List<Wishes> lista_of_the_student = new List<Wishes>();
+                foreach (var x in lista_of_wishes)
                 {
-                    specializtions = lista_of_the_student,
+                    if (x.Minemum_of_Rate <= CertificatRate && x.FK_type_Of_High_School_Cirtificate.id == CertificatType.id)
+                        lista_of_the_student.Add(x);
+                }
 
-                };
-                return View(Student_Wishes_View_Model);
+                if (certificate.wish1 != null && certificate.wish2 != null && certificate.wish3 != null)
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+                        wish_Department_Id1 = certificate.wish1.id,
+                        wish_Department_Id2 = certificate.wish2.id,
+                        wish_Department_Id3 = certificate.wish3.id
+
+                    };
+                    ViewBag.wish1 = 1;
+
+                    return View(Student_Wishes_View_Model);
+                }
+                else if (certificate.wish1 != null && certificate.wish2 != null && certificate.wish3 == null)
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+                        wish_Department_Id1 = certificate.wish1.id,
+                        wish_Department_Id2 = certificate.wish2.id,
+
+
+                    };
+                    return View(Student_Wishes_View_Model);
+                }
+                else if (certificate.wish1 != null && certificate.wish2 == null && certificate.wish3 != null)
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+                        wish_Department_Id1 = certificate.wish1.id,
+
+
+                    };
+                    return View(Student_Wishes_View_Model);
+                }
+                else if (certificate.wish1 == null && certificate.wish2 != null && certificate.wish3 != null)
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+                        wish_Department_Id3 = certificate.wish3.id,
+                        wish_Department_Id2 = certificate.wish2.id,
+
+
+                    };
+                    return View(Student_Wishes_View_Model);
+                }
+                else if (certificate.wish1 != null && certificate.wish2 == null && certificate.wish3 == null)
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+                        wish_Department_Id1 = certificate.wish1.id,
+
+
+
+                    };
+                    return View(Student_Wishes_View_Model);
+                }
+                else if (certificate.wish1 == null && certificate.wish2 != null && certificate.wish3 == null)
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+                        wish_Department_Id2 = certificate.wish2.id,
+
+
+
+                    };
+                    return View(Student_Wishes_View_Model);
+                }
+                else if (certificate.wish1 == null && certificate.wish2 == null && certificate.wish3 != null)
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+                        wish_Department_Id3 = certificate.wish3.id,
+
+
+
+                    };
+                    return View(Student_Wishes_View_Model);
+                }
+                else
+                {
+                    var Student_Wishes_View_Model = new Student_Wishes_View_Model
+                    {
+                        specializtions = lista_of_the_student,
+
+                    };
+                    return View(Student_Wishes_View_Model);
+                }
             }
         }
 
@@ -811,7 +881,8 @@ namespace AdmissionSystem.Controllers
                 certificate.wish3 = department_Relation_Type_Repository.Find(collection.wish_Department_Id3);
 
                 admission_Eligibilty_Certificate_Repository.Update(id, certificate);
-                return RedirectToAction(nameof(Index));
+                string url = "/StudentUnsyrian/Details/" + id.ToString();
+                return Redirect(url);
             }
             catch
             {

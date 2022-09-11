@@ -488,9 +488,9 @@ namespace AdmissionSystem.Controllers.Identity_control
                                 )
                             {
                                 if (student.high_school_certificate == "Syrian")
-                                    return RedirectToAction("Edit", "Studen", new { id = student.Id });
+                                    return RedirectToAction("Home", "Studen", new { id = student.Id });
                                 else if (student.high_school_certificate == "UNSyrian")
-                                    return RedirectToAction("Edit", "StudentUnsyrian", new { id = student.Id });
+                                    return RedirectToAction("Home", "StudentUnsyrian", new { id = student.Id });
 
                             }
                         }

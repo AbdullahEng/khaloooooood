@@ -8,6 +8,7 @@ namespace AdmissionSystem.View_Model
 {
     public class Student_Wishes_View_Model
     {
+        public int id { get; set; }
         public List<Wishes> specializtions { get; set; }
         public int wish_Department_Id1 { get; set; }
         public int wish_Department_Id2 { get; set; }

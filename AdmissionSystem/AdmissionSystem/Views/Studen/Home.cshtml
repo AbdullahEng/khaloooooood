@@ -1,0 +1,408 @@
+﻿@model AdmissionSystem.View_Model.Student_View_Model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
+@{Layout="_StudentLayout";}
+<link rel="stylesheet" href="~/aos/aos.css"/>
+<link rel="stylesheet" href="~/Desighn/Home.css"/>
+
+<input hidden  id="confirmation_value" value="@Model.Conformation"/>
+  <input hidden id="wish_value" value="@Model.wish_Department_Id1"/>
+   <input hidden id="Rate" value="@Model.The_Rate"/>
+      
+
+<div  class="ContainerRegForm" id="hello_part" data-aos="fade-up">
+    <img src="~/Desighn/welcomPage.webp" class="img-fluid float-right"/>
+    <h1>@localizer["Welcome"]  @Model.First_Name_EN 👋</h1>
+    <br> <h5 class=""> @localizer["We thank you for choosing us as a part of your futur career"]<br>@localizer["So get started and good luck for you."]   </h5>    
+ <br> <br> 
+  <b>@localizer["Note"]</b>
+      <p>
+   @localizer["This system enable you to sumbit your information easily and make a trusted and secure storage of your data so  pleas read the instructions carfully and start your journy with us."]  
+    </p>
+<button type="button" onclick="    hidefunction();" class="btn btn-primary shinbutton" data-toggle="modal" data-target=".bd-example-modal-lg">@localizer["Get started"] </button>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     <form id="regForm" action="">
+<h2 class="text-center">@localizer["Admission Instructions"] </h2>
+<br>
+
+<!-- One "tab" for each step in the form: -->
+<div class="tab">
+     <h5 class="alert alert-primary text-center " role="alert">step one </h5>
+ @*<video width="320" height="240" controls>
+  <source src="~/Desighn/video.mp4" type="video/mp4">*@
+  
+</video>
+</div>
+
+<div class="tab">
+       <h5 class="alert alert-primary text-center " role="alert">step tow </h5>
+
+  <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+  <br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla</p>
+</div>
+
+<div class="tab">   
+    <h5 class="alert alert-primary text-center " role="alert">step three </h5>
+    <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+  <br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla</p>
+ 
+</div>
+
+<div class="tab"> 
+    <h5 class="alert alert-primary text-center " role="alert">step four </h5>
+    <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+  <br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla</p>
+</div>
+
+<div style="overflow:auto;">
+  <div style="float:right;">
+    <button type="button"  class="btn btn-primary btn-sm" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+    <button type="button"  class="btn btn-primary btn-sm" id="nextBtn" onclick="nextPrev(1)">Next</button>
+     <a hidden asp-action="Edit" id="Edit_anchore" class="btn btn-primary btn-sm" asp-route-id=@Model.id>Start</a>
+
+  </div>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+<div style="text-align:center;margin-top:40px;">
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
+
+</form>
+    </div>
+  </div>
+</div>
+ 
+
+
+<div  class="ContainerRegForm" id="confirmation_part"  data-aos="fade-down">
+    <img src="~/Desighn/Warning image.webp" class="img-fluid float-right" style="width:40%;height:40%;"/>
+    <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["We noted that you did not make a confiramtion for your addmission request, pleas make a conferm or your data will be ignored."]   </h5>    
+ <br> <br> 
+  <b>@localizer["Note"]</b>
+      <p>
+  @localizer["when you make the conferming we considre that you have reivewed all your personal information, your uploded files and your wishes so pleas make sure that all is correct."]  </p>
+   <p><b>@localizer["You will not be able to edit any more"] </b></p>
+    <form asp-action="Details" id="SubmitForm" >
+     <input hidden asp-for="id" value="@Model.id"/>
+   <input  hidden id="conformation" asp-for="Conformation"/>
+   </form>
+<button type="button"  onclick="    submitfunction();" class="btn btn-danger shinbutton">Confirme The Request</button>
+</div>
+
+
+
+<div  class="ContainerRegForm" id="checking_part">
+    <img src="~/Desighn/paper_testing.jpg" class="img-fluid float-right" style="width:40%;height:40%;"/>
+    <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["Thank you for completing all requists."] <br>@localizer["Our team working on all students files and in nearest time, you will recive an email from the team tell you the condtion of your files."]   </h5>    
+ <br> <br> <br><br><br>
+  <b>@localizer["Note"]</b>
+   <p class="text-primary">@localizer["stay tuned to your Email"] </p>
+    
+@*<button type="button"  onclick="    submitfunction();" class="btn btn-danger shinbutton">Confirme The Request</button>*@
+</div>
+
+
+<div  class="ContainerRegForm" id="rechosing_part">
+    <img src="~/Desighn/Warning image.webp" class="img-fluid float-right" style="width:40%;height:40%;"/>
+     <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["Our team discovered wrong inofrmation in your file."] <br>@localizer["pleas rechoose the wishes."] </h5>    
+ <br> <br> <br><br><br>
+  <b>@localizer["Note"]</b>
+   <p class="text-primary">@localizer["stay tuned to your Email"] </p>
+      <a class="btn btn-primary shinbutton" asp-action="WishesSelection" asp-route-id=@Model.id class="side">@localizer["My wishes"]</a>
+ </div>
+
+ 
+<div  class="ContainerRegForm" id="ReEdit_part">
+    <img src="~/Desighn/Warning image.webp" class="img-fluid float-right" style="width:40%;height:40%;"/>
+     <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["Our team discovered that you need to edit your data"]<br> @localizer["pleas check your Email about what to edit ."] </h5>    
+ <br> <br> <br> <br> <br> <br>
+   
+      <a class="btn btn-primary shinbutton" asp-action="Edit" asp-route-id=@Model.id >@localizer["Edit"] </a>
+   </div> 
+
+   
+<div hidden  class="ContainerRegForm" id="ReEdit_ReWishes_part">
+    <img src="~/Desighn/Warning image.webp" class="img-fluid float-right" style="width:40%;height:40%;"/>
+     <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["Our team discovered that you need to edit your data and reshoose for wishes list, pleas check your Email about what to edit ."]</h5>    
+ <br> <br> <br> <br> <br> <br>
+   
+      <a class="btn btn-primary shinbutton" asp-action="Edit" asp-route-id=@Model.id >@localizer["Edit"]</a>
+   </div> 
+
+ <div hidden class="ContainerRegForm" id="confirm_edit">
+     <h5>@localizer["pleas confirm after Edting"] </h5>
+      <form asp-action="Details" id="SubmitForm" >
+     <input hidden asp-for="id" value="@Model.id"/>
+   <input  hidden id="conformation" asp-for="Conformation"/>
+   </form>
+<button type="button"  onclick="    submitfunction();" class="btn btn-danger shinbutton">@localizer["Confirme"] </button>
+     </div>
+           
+  <div hidden id="nowishes" class="ContainerRegForm">
+   <img src="~/Desighn/Warning image.webp" class="img-fluid float-right" style="width:40%;height:40%;"/>
+    <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["please choose The wishes to complete the requist"]   </h5>    
+ <br> <br><br> <br> <br> <br>  <br>
+  
+     <a class="btn btn-primary shinbutton" asp-action="WishesSelection" asp-route-id=@Model.id class="side">@localizer["My wishes"]</a>
+
+ </div>
+ 
+  <div  hidden style="background: #f8f9ff;" class="ContainerRegForm" id="waiting_result">
+    <img  src="~/Desighn/waiting_charecter.gif" class="img-fluid float-right" style="width:40%;height:40%;"/>
+   <br> <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["Thank you for completing all requists."]<br>@localizer["pleas wait for results to be released."] </h5>    
+ <br> <br> <br><br><br>
+  <b>@localizer["Note"]</b>
+   <p class="text-primary">@localizer["stay tuned to your Email"]</p>
+ </div>
+ <br><br><br>
+<script src="~/aos/aos.js"></script>
+<script src="~/limonte-sweetalert2/sweetalert2.all.js"></script>
+<script>
+window.onload = function() {
+     //document.getElementById("test").value = "im in function";
+    if (document.getElementById("confirmation_value").value == '0' && document.getElementById("wish_value").value == '' && document.getElementById("Rate").value == '0') {
+        document.getElementById("hello_part").hidden = false;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = true;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("ReEdit_part").hidden = true;
+    }
+    else if (document.getElementById("confirmation_value").value == '1' && document.getElementById("wish_value").value != '') {
+        document.getElementById("checking_part").hidden = false;
+        document.getElementById("confirmation_part").hidden = true;
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("ReEdit_part").hidden = true;
+    }
+    else if (document.getElementById("confirmation_value").value == '0' && document.getElementById("wish_value").value != '') {
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = false;
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("ReEdit_part").hidden = true;
+         document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+         document.getElementById("third").hidden = false;
+        document.getElementById("forth").hidden = false;
+    }
+    else if (document.getElementById("confirmation_value").value == '2' && document.getElementById("wish_value").value == '' && document.getElementById("Rate").value != '0') {
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = true;
+         document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("forth").hidden = false;
+        document.getElementById("ReEdit_part").hidden = true;
+    } else if (document.getElementById("confirmation_value").value == '2' && document.getElementById("wish_value").value != '' && document.getElementById("Rate").value != '0') {
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = false;
+        document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("forth").hidden = false;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("ReEdit_part").hidden = true;
+    } else if (document.getElementById("confirmation_value").value == '3' && document.getElementById("wish_value").value != '' && document.getElementById("Rate").value != '0') {
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = true;
+        document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("third").hidden = false;
+        document.getElementById("rechosing_part").hidden = true;
+    } else if (document.getElementById("confirmation_value").value == '5' && document.getElementById("wish_value").value != '' && document.getElementById("Rate").value != '0') {
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = true;
+        document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("third").hidden = false;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("confirm_edit").hidden = false;
+    } else if (document.getElementById("confirmation_value").value == '4' && document.getElementById("wish_value").value == '' && document.getElementById("Rate").value != '0') {
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = true;
+        document.getElementById("forth").hidden = false;
+         document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("third").hidden = false;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("ReEdit_part").hidden = true;
+        document.getElementById("confirm_edit").hidden = true;
+        document.getElementById("ReEdit_ReWishes_part").hidden = false;
+    } else if (document.getElementById("confirmation_value").value == '6' && document.getElementById("wish_value").value != '' && document.getElementById("Rate").value != '0') {
+        document.getElementById("hello_part").hidden = true;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = true;
+        document.getElementById("forth").hidden = false;
+         document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("third").hidden = false;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("ReEdit_part").hidden = true;
+        document.getElementById("confirm_edit").hidden = false;
+        document.getElementById("ReEdit_ReWishes_part").hidden = false;
+    }
+     else if (document.getElementById("confirmation_value").value == '0' && document.getElementById("wish_value").value == ''&&document.getElementById("Rate").value != '0') {
+         document.getElementById("hello_part").hidden = true;
+        document.getElementById("checking_part").hidden = true;
+        document.getElementById("confirmation_part").hidden = true;
+        document.getElementById("forth").hidden = false;
+         document.getElementById("first").hidden = false;
+        document.getElementById("secound").hidden = false;
+        document.getElementById("third").hidden = false;
+        document.getElementById("rechosing_part").hidden = true;
+        document.getElementById("ReEdit_part").hidden = true;
+        document.getElementById("confirm_edit").hidden = true;
+        document.getElementById("ReEdit_ReWishes_part").hidden = true;
+        document.getElementById("nowishes").hidden = false;
+    }
+   
+}
+</script>
+<script>
+    var currentTab = 0;
+showTab(currentTab); 
+
+function showTab(n) {
+ var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").hidden = true;
+       document.getElementById("Edit_anchore").hidden = false;
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+     document.getElementById("nextBtn").hidden = false;
+       document.getElementById("Edit_anchore").hidden = true;
+  }
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  var x = document.getElementsByClassName("tab");
+ 
+  x[currentTab].style.display = "none";
+  currentTab = currentTab + n;
+  if (currentTab >= x.length) {
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  showTab(currentTab);
+}
+
+function fixStepIndicator(n) {
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  x[n].className += " active";
+}
+</script>
+<script>
+      AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+      delay: 100,
+    });
+
+function hidefunction() {
+    document.getElementById("hello_part").hidden = false;
+    document.getElementById("slidmenu").hidden = true;
+    
+}
+
+function submitfunction() { 
+    const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title:'هل أنت متأكد من تثبيت الطلب ؟',
+  text: "لن تستطيع التعديل على بياناتك مرة أخرى",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'نعم, تأكيد',
+  cancelButtonText: 'إلغاء',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    swalWithBootstrapButtons.fire(
+     'Deleted!',
+      'تم التثبيت بنجاح',
+      'success'
+    )
+     document.getElementById("conformation").value  = '1';
+      document.getElementById("SubmitForm").submit();
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'الغاء',
+      'دون التثبيت لن يتم مراجعة طلبكم',
+      'error'
+    )
+     document.getElementById("conformation").checked = false;
+  }
+})
+
+   
+}
+</script>

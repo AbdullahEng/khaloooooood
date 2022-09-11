@@ -1,0 +1,163 @@
+﻿@model AdmissionSystem.Model.Employee
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
+
+@{
+    ViewData["Title"] = "Home";
+    Layout = "_EmployeeLayout";
+}
+<link rel="stylesheet" href="~/aos/aos.css"/>
+<link rel="stylesheet" href="~/Desighn/Home.css"/>
+
+
+<div  class="ContainerRegForm" style="background-color:#eeeeee;" data-aos="zoom-in" >
+     <h4 class=" text-center">@localizer["Welcome to Admission System"]</h4>
+     <img src="~/Desighn/working.gif" class="img-fluid float-right" style="width:40%;height:40%;" />
+   
+  <br><br><h3>@localizer["Hi"] @Model.name @Model.Nick_Name 👋</h3>   <p style="font-size:125%;">@localizer["Here you can check new students files confidantilly with no"] <br>@localizer["more mistakes,no more paper work and no missing values."] </p>    
+ <p style="font-size:100%;font-family:'Italic'">@localizer["Our duty is to support your productivty and safe your time."]</p>
+ <br> <br>
+  <b>@localizer["Note"]</b>
+      <p>
+    @localizer["Pleas review the steps on how the checking work and follow the instructions carfally."]  
+    </p>
+<button type="button"  class="btn btn-primary shinbutton" data-toggle="modal" data-target=".bd-example-modal-lg">@localizer["Get started"]</button>
+<br>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     <form id="regForm" action="">
+<h2 class="text-center">@localizer["Admission Instructions"]</h2>
+<br>
+
+<!-- One "tab" for each step in the form: -->
+<div class="tab">
+     <h5 class="alert alert-primary text-center " role="alert">step one </h5>
+ @*<video width="320" height="240" controls>
+  <source src="~/Desighn/video.mp4" type="video/mp4">*@
+  
+</video>
+</div>
+
+<div class="tab">
+       <h5 class="alert alert-primary text-center " role="alert">step tow </h5>
+
+  <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+  <br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla</p>
+</div>
+
+<div class="tab">   
+    <h5 class="alert alert-primary text-center " role="alert">step three </h5>
+    <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+  <br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla</p>
+ 
+</div>
+
+<div class="tab"> 
+    <h5 class="alert alert-primary text-center " role="alert">step four </h5>
+    <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+      <br>bla bla bla bla bla bla bla
+  <br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla
+<br>bla bla bla bla bla bla bla</p>
+</div>
+
+<div style="overflow:auto;">
+  <div style="float:right;">
+    <button type="button"  class="btn btn-primary btn-sm" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+    <button type="button"  class="btn btn-primary btn-sm" id="nextBtn" onclick="nextPrev(1)">Next</button>
+    
+  </div>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+<div style="text-align:center;margin-top:40px;">
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
+
+</form>
+    </div>
+  </div>
+</div>
+ <script src="~/aos/aos.js"></script>
+<script>
+    var currentTab = 0;
+showTab(currentTab); 
+
+function showTab(n) {
+ var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").innerHTML = "Finished";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+    
+  }
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  var x = document.getElementsByClassName("tab");
+ 
+  x[currentTab].style.display = "none";
+  currentTab = currentTab + n;
+  if (currentTab >= x.length) {
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  showTab(currentTab);
+}
+
+function fixStepIndicator(n) {
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  x[n].className += " active";
+}
+</script>
+<script>
+      AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+      delay: 100,
+    });
+</script>
+
