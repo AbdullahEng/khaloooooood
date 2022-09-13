@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AdmissionSystem.Data
 {
     public static class ModelBuilderExtenisons
-    {   public static void seed(this ModelBuilder modelbuilder) {
+    {   public static void seed(this ModelBuilder modelbuilder ) {
             modelbuilder.Entity<Faculty>().HasData(
                 new Faculty {id=1,Faculty_name= "كلية طبية" },
                  new Faculty { id = 2, Faculty_name = "كلية الهندسة المدنية والمعمارية" },
@@ -71,6 +71,17 @@ namespace AdmissionSystem.Data
                   new Department_relation_Type { id = 21, FK_DepartmentId = 11, FK_type_Of_High_School_CirtificateId = 5, Minemum_of_Rate = 63, }
 
              );
+
+            modelbuilder.Entity<Employee>().HasData(
+
+                new Employee { id=1, name = "Admin1", Email = "useer2@localhost", Type = "Admin", Gender = "Male", Nick_Name = "adm", Phone_Number = 0987, The_ID_Number = 8765 },
+
+                 new Employee { id=2, name = "Admin2", Email = "useer2@localhost", Type = "Admin", Gender = "Male", Nick_Name = "adm", Phone_Number = 0987, The_ID_Number = 8765 }
+          
+                
+                );
+            
+
         }
         
     }

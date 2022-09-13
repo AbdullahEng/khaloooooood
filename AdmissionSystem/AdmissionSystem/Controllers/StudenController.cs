@@ -989,5 +989,30 @@ namespace AdmissionSystem.Controllers
             return (types);
 
         }
+
+        //public ActionResult StudnetsForAdmin() {
+
+        //    var stumodel = new Student_View_Model { 
+            
+            
+        //    };
+        //    return View();
+        
+        //}
+
+        //public ActionResult ExcelsheetstudentsSY() {
+
+
+
+        //}
+
+
+
+
+
+
+
     }
+
+
 }

@@ -2,6 +2,7 @@
 using AdmissionSystem.Model.GoogleCaptcha;
 using AdmissionSystem.Model.Identity_classes;
 using AdmissionSystem.Model.Repository;
+using AdmissionSystem.Services;
 using AdmissionSystem.View_Model.Identity_view_model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         private readonly CRUD_Operation_Interface<Accabtable_config> accRepo;
         private readonly IOptions<GoogleCaptchaConfig> config;
         private readonly ILogger<AccountController> logger;
+        private readonly IMailingService mailingService;
 
         public AccountController(UserManager<MyIdentityUser> userManager,
              SignInManager<MyIdentityUser> LogInManager,
@@ -40,6 +42,7 @@ namespace AdmissionSystem.Controllers.Identity_control
              , CRUD_Operation_Interface<Accabtable_config> accRepo
              , IOptions<GoogleCaptchaConfig> config
             , ILogger<AccountController> logger
+            , IMailingService mailingService
        )
         {
             this.userManager = userManager;
@@ -53,6 +56,7 @@ namespace AdmissionSystem.Controllers.Identity_control
             this.accRepo = accRepo;
             this.config = config;
             this.logger = logger;
+            this.mailingService = mailingService;
             this.googleCaptcahServiceeee = new GoogleCaptcahService(config);
         }
 
@@ -154,9 +158,20 @@ namespace AdmissionSystem.Controllers.Identity_control
                                                             && s.high_school_certificate == obj.high_school_certificate
                                                             // && s.Mobile_Phone = obj.Mobile_Phone
                                                             ).ToList();
+                var emailstudent = studentRepo.List().Where(s=>s.Email==obj.Email).ToList();
+                var TheIDnumberstudent = studentRepo.List().Where(s => s.Identity_No == obj.TheIDnumber).ToList();
 
                 if (studentWhere.Count == 0)
                 {
+
+                  if (emailstudent.Count==0 && TheIDnumberstudent.Count==0)
+                          
+                    {
+
+
+
+
+                   
                     MyIdentityUser user = new MyIdentityUser();
                     user.UserName = obj.UserName;
                     user.Email = obj.Email;
@@ -182,13 +197,14 @@ namespace AdmissionSystem.Controllers.Identity_control
                     {
 
                         var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var confirmationlink = Url.Action("Confirmation", "Account",
+                        var confirmationlink = Url.Action("ConfirmEmail", "Account",
                                                             new { UserId = user.Id, token = token }, Request.Scheme);
+                            string htmlll = confirmationlink ;
+                           await mailingService.SendEmailAsync(obj.Email, "تاكيد الحساب", confirmationlink);
 
+                            ////////////////////////////////////////////
 
-                        ////////////////////////////////////////////
-
-                        if (!roleManager.RoleExistsAsync("Student").Result)
+                            if (!roleManager.RoleExistsAsync("Student").Result)
                         {
                             MyIdentityRole role = new MyIdentityRole();
                             role.Name = "Student";
@@ -246,13 +262,20 @@ namespace AdmissionSystem.Controllers.Identity_control
 
                         return PartialView("Index", obj);
                     }
+                    }
+                 else
+                 {
+                   ViewBag.message = "Registration fails becouse IdentityNO or Email is Repeated by another student ";
+
+                        return PartialView("Index");
+                 }
                 }
                 else
                 {
 
                     ViewBag.message = "Registration fails becouse there is another student with  the same info ";
 
-                    return PartialView("Index", obj);
+                    return PartialView("Index");
                 }
                 //  return View(obj);
             }
@@ -280,7 +303,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register_Employee(RegisterViewModel obj)
+        public async Task< IActionResult> Register_Employee(RegisterViewModel obj)
         {
 
 
@@ -299,7 +322,12 @@ namespace AdmissionSystem.Controllers.Identity_control
             //}
             if (ModelState.IsValid)
             {
-                MyIdentityUser user = new MyIdentityUser();
+                var emailstudent = employeeRepo.List().Where(e => e.Email == obj.Email).ToList();
+                var TheIDnumberstudent = employeeRepo.List().Where(e => e.The_ID_Number == obj.TheIDnumber).ToList();
+                if (emailstudent.Count == 0 && TheIDnumberstudent.Count == 0)
+
+                {
+                    MyIdentityUser user = new MyIdentityUser();
                 user.UserName = obj.UserName;
                 user.Email = obj.Email;
                 user.TheIDnumber = obj.TheIDnumber;
@@ -318,6 +346,13 @@ namespace AdmissionSystem.Controllers.Identity_control
                 };
                 if (result.Succeeded)
                 {
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmationlink = Url.Action("ConfirmEmail", "Account",
+                                                        new { UserId = user.Id, token = token }, Request.Scheme);
+                    string htmlll = confirmationlink;
+                    await mailingService.SendEmailAsync(obj.Email, "تاكيد الحساب", confirmationlink);
+
+
                     if (!roleManager.RoleExistsAsync("Employee").Result ||
                         !roleManager.RoleExistsAsync("Admin").Result
                         )
@@ -361,7 +396,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                         userManager.AddToRoleAsync(user, "Admin").Wait();
                     }
                     employeeRepo.Add(Employee);
-                    return RedirectToAction("login", "Account");
+                    return View("Success_Register_Employee");
                 }
 
                 else
@@ -373,6 +408,14 @@ namespace AdmissionSystem.Controllers.Identity_control
                     }
 
                     return View(obj);
+                }
+                }
+                else
+                {
+
+                    ViewBag.message = "Registration fails becouse there is another student with  the same info ";
+
+                    return View();
                 }
             }
             return View(obj);
@@ -396,7 +439,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         public async Task< IActionResult> Login(LoginViewModle obj)
         {
             //var s = Request.;
-            string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
+            string captchaREsponse =  Request.Form["g-recaptcha-response"].ToString();
             //if (captchaREsponse != "")
             //{
             var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
@@ -464,7 +507,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                                 }
                                 else if (Employee.Type == "Employee")
                                 {
-                                    return RedirectToAction("Edit", "Employee", new { id = Employee.id });
+                                    return RedirectToAction("Home", "Employee", new { id = Employee.id });
 
                                 }
 
@@ -505,7 +548,8 @@ namespace AdmissionSystem.Controllers.Identity_control
 
                     return View("Index");
                 }
-                ModelState.AddModelError("", "Invalid login!!");
+                ViewBag.invalidlogin = "Invalid login!!";
+               // ModelState.AddModelError("", "Invalid login!!");
 
             }
             //}
@@ -514,7 +558,7 @@ namespace AdmissionSystem.Controllers.Identity_control
 
 
             //}
-            return View("Index", obj);
+            return View("Index");
         }
 
 
@@ -552,12 +596,15 @@ namespace AdmissionSystem.Controllers.Identity_control
                     }
                     return View();
                 }
+
                 await LoginInManager.RefreshSignInAsync(user);
-                return View();
+                LogOff();
+                return View("Success_change_password");
             }
             return View(model);
         }
         public async Task<IActionResult> EditUser() {
+
             var us = await userManager.GetUserAsync(User);
             var usid = us.Id;
             var user = await userManager.FindByIdAsync(usid);
@@ -575,58 +622,82 @@ namespace AdmissionSystem.Controllers.Identity_control
                 Roles = roles.ToList()
             };
             return View(model);
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUser(EditUserViewModell model)
         {
-            var us = await userManager.GetUserAsync(User);
-            var usid = us.Id;
-            var user = await userManager.FindByIdAsync(usid);
-            var roleuser = await userManager.GetRolesAsync(user);
-            var roel="";
-            foreach (var item in roleuser)
+            var emailstudent = employeeRepo.List().Where(e => e.Email == model.Email).ToList();
+            var TheIDnumberuser = employeeRepo.List().Where(e => e.The_ID_Number == model.IDNumber).ToList();
+            if (emailstudent.Count == 0 && TheIDnumberuser.Count == 0)
+
             {
-                 roel = item;
-            }
-            if (roel == "Admin" || roel == "Employee") {
-                var empl = employeeRepo.List().SingleOrDefault(e=>e.name==us.UserName);
-                empl.Email = model.Email;
-                empl.The_ID_Number = model.IDNumber;
-                //var employeeedit = new Employee { 
-                //Email=model.Email,
-                //The_ID_Number=model.IDNumber
-                
-                //};
-                employeeRepo.Update(empl.id,empl);
-            }
-            else if (roel== "Student") {
-                var stu = studentRepo.List().SingleOrDefault(s => s.First_Name_EN == us.UserName);
-                stu.Email = model.Email;
-                stu.Identity_No = model.IDNumber;
-                studentRepo.Update(stu.Id,stu);
-            }
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id ={usid} cannot be found";
-                return View();
-            }
-            else {
-                user.Email = model.Email;
-                user.TheIDnumber = model.IDNumber;
-                var result = await userManager.UpdateAsync(user);
-              //  if(roleuser.=="Admin")
-                if (result.Succeeded)
+                var us = await userManager.GetUserAsync(User);
+                var usid = us.Id;
+                var user = await userManager.FindByIdAsync(usid);
+                var roleuser = await userManager.GetRolesAsync(user);
+                var roel = "";
+                foreach (var item in roleuser)
                 {
-                    //  must return To succec view
+                    roel = item;
+                }
+                if (roel == "Admin" || roel == "Employee")
+                {
+                    var empl = employeeRepo.List().SingleOrDefault(e => e.name == us.UserName);
+                    empl.Email = model.Email;
+                    empl.The_ID_Number = model.IDNumber;
+                    //var employeeedit = new Employee { 
+                    //Email=model.Email,
+                    //The_ID_Number=model.IDNumber
+
+                    //};
+                    employeeRepo.Update(empl.id, empl);
+                }
+                else if (roel == "Student")
+                {
+                    var stu = studentRepo.List().SingleOrDefault(s => s.First_Name_EN == us.UserName);
+                    stu.Email = model.Email;
+                    stu.Identity_No = model.IDNumber;
+                    studentRepo.Update(stu.Id, stu);
+                }
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = $"User with Id ={usid} cannot be found";
                     return View();
                 }
-                foreach (var erorr in result.Errors)
+                else
                 {
-                    ModelState.AddModelError("", erorr.Description);
+                    user.Email = model.Email;
+                    user.TheIDnumber = model.IDNumber;
+                    var result = await userManager.UpdateAsync(user);
+                    //  if(roleuser.=="Admin")
+                    if (result.Succeeded)
+                    {
+                        //  must return To succec view
+                        return View("Success_Change_Info");
+                    }
+                    foreach (var erorr in result.Errors)
+                    {
+                        ModelState.AddModelError("", erorr.Description);
+                    }
+                    return View(model);
+
                 }
-                return View(model);
             }
+            //else if (emailstudent.Count == 1 && TheIDnumberuser.Count == 1)
+            //{
+            //    ViewBag.message = "Same Edit!!!";
+
+            //    return View();
+
+            //}
+            else {
+                ViewBag.message = "Edit fails becouse there is another student with  the same info ";
+
+                return View();
+            }
+
 
         }
         public IActionResult Forgot_password()
@@ -641,13 +712,21 @@ namespace AdmissionSystem.Controllers.Identity_control
         {
             if (ModelState.IsValid) {
                 var user = await userManager.FindByEmailAsync(model.Email);
-                if (user != null && await userManager.IsEmailConfirmedAsync(user)) {
+                if (user != null && await userManager.IsEmailConfirmedAsync(user))
+                {
                     var token = await userManager.GeneratePasswordResetTokenAsync(user);
                     var passwordResetlink = Url.Action("ResetPassword", "Account",
                                                         new { email = model.Email, token = token }, Request.Scheme);
-                    logger.Log(LogLevel.Warning, passwordResetlink);
+                    await mailingService.SendEmailAsync(model.Email, "إعادة ضبط كلمة المرور", passwordResetlink);
 
-                    return View(passwordResetlink);
+                    //   logger.Log(LogLevel.Warning, passwordResetlink);
+
+                    return View("success_send_link_forgot");
+                }
+                else {
+                    ViewBag.checkoutEmail = "Please check out your Email Adress";
+             //   ModelState.AddModelError("", "Please check out your Email Adress");
+                    return View();
                 }
 
             }
@@ -671,7 +750,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                     var result = await userManager.ResetPasswordAsync(user, model.token, model.Password);
                     if (result.Succeeded)
                     {
-                        return View();
+                        return View("Success_Reset_Password");
                     }
                     foreach (var error in result.Errors)
                     {
