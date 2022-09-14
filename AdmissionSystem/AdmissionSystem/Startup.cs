@@ -125,7 +125,9 @@ namespace AdmissionSystem
             services.Configure<IdentityOptions>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail =true;
             });
+
 
            // services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/Index");
         //    services
@@ -176,8 +178,8 @@ namespace AdmissionSystem
 
             app.UseAuthentication();
             app.UseAuthorization();
-            var myIdentiy =new  MyIdentityDataInitializer();//
-            myIdentiy.SeedData(userManager, roleManager);
+           // var myIdentiy =new  MyIdentityDataInitializer();//
+           MyIdentityDataInitializer.SeedData(userManager, roleManager);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

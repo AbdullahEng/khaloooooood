@@ -74,7 +74,7 @@ namespace AdmissionSystem.Data
 
             modelbuilder.Entity<Employee>().HasData(
 
-                new Employee { id=1, name = "Admin1", Email = "useer2@localhost", Type = "Admin", Gender = "Male", Nick_Name = "adm", Phone_Number = 0987, The_ID_Number = 8765 },
+                new Employee { id=1, name = "Admin1", Email = "useer1@localhost", Type = "Admin", Gender = "Male", Nick_Name = "adm", Phone_Number = 0987, The_ID_Number = 8765 },
 
                  new Employee { id=2, name = "Admin2", Email = "useer2@localhost", Type = "Admin", Gender = "Male", Nick_Name = "adm", Phone_Number = 0987, The_ID_Number = 8765 }
           

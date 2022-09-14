@@ -944,7 +944,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 worksheet.Cell(currentRow, 5).Value = "Status of Admission elgibility";
                 worksheet.Cell(currentRow, 6).Value = "beginning date of Admission";
                 worksheet.Cell(currentRow, 7).Value = "semester NO";
-
+                worksheet.Cell(currentRow, 8).Value = "Unvirsty Id";
 
 
 
@@ -960,7 +960,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     worksheet.Cell(currentRow, 5).Value = item.Status_of_Admission_elgibility;
                     worksheet.Cell(currentRow, 6).Value = item.beganing_date_of_Admission;
                     worksheet.Cell(currentRow, 7).Value = item.semester_NO;
-
+                    worksheet.Cell(currentRow, 8).Value = item.University_ID;
                 }
                 using (var stream = new MemoryStream())
                 {
@@ -1059,7 +1059,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 worksheet.Cell(currentRow, 5).Value = "Status of Admission elgibility";
                 worksheet.Cell(currentRow, 6).Value = "beginning date of Admission";
                 worksheet.Cell(currentRow, 7).Value = "semester NO";
-
+                worksheet.Cell(currentRow, 8).Value = "Unvirsty Id";
 
 
                 foreach (var item in accinfolist)
@@ -1072,6 +1072,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                     worksheet.Cell(currentRow, 5).Value = item.Status_of_Admission_elgibility;
                     worksheet.Cell(currentRow, 6).Value = item.beganing_date_of_Admission;
                     worksheet.Cell(currentRow, 7).Value = item.semester_NO;
+                    worksheet.Cell(currentRow, 8).Value = item.University_ID;
 
                 }
                 using (var stream = new MemoryStream())

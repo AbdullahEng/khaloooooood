@@ -10,19 +10,19 @@ namespace AdmissionSystem.Model.Identity_classes
 {
     public class MyIdentityDataInitializer
     {
-        private readonly CRUD_Operation_Interface<Employee> employeerepooo;
-        private readonly ApplicationDbContext dB;
+        //private readonly CRUD_Operation_Interface<Employee> employeerepooo;
+        //private readonly ApplicationDbContext dB;
 
-        public MyIdentityDataInitializer()
-        {
+        //public MyIdentityDataInitializer()
+        //{
 
-        }
-        public  MyIdentityDataInitializer(  CRUD_Operation_Interface<Employee> employeerepooo, ApplicationDbContext DB)
-        {
-            this.employeerepooo = employeerepooo;
-            dB = DB;
-        }
-        public  void SeedData(UserManager<MyIdentityUser> userManager,RoleManager<MyIdentityRole> roleManager
+        //}
+        //public  MyIdentityDataInitializer(  CRUD_Operation_Interface<Employee> employeerepooo, ApplicationDbContext DB)
+        //{
+        //    this.employeerepooo = employeerepooo;
+        //    dB = DB;
+        //}
+        public static void SeedData(UserManager<MyIdentityUser> userManager,RoleManager<MyIdentityRole> roleManager
         
             ) {
             
@@ -44,13 +44,14 @@ namespace AdmissionSystem.Model.Identity_classes
         //        dB.Employee.Add(emp);
         //    }
         //}
-        public  void SeedaUsers(UserManager<MyIdentityUser> userManager) {
+        public async static void SeedaUsers(UserManager<MyIdentityUser> userManager) {
 
             if (userManager.FindByNameAsync("Admin1").Result == null) {
 
                 MyIdentityUser user = new MyIdentityUser();
                 user.UserName = "Admin1";
                 user.Email = "useer1@localhost";
+                user.TheIDnumber =8765;
               
                 //user.FullName = "Nancy Davolio";
                 //user.BirhtDate = new DateTime(1960, 1, 1);
@@ -58,9 +59,9 @@ namespace AdmissionSystem.Model.Identity_classes
                 if (result.Succeeded) {
 
                     userManager.AddToRoleAsync(user, "Admin").Wait();
-                    var token =  userManager.GenerateEmailConfirmationTokenAsync(user).ToString();
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                     //var user = await userManager.FindByIdAsync(userId);
-                    var result1 =  userManager.ConfirmEmailAsync(user, token);
+                    var result1 = await userManager.ConfirmEmailAsync(user, token);
                    
                 }
                
@@ -72,8 +73,8 @@ namespace AdmissionSystem.Model.Identity_classes
 
                 MyIdentityUser user = new MyIdentityUser();
                 user.UserName = "Admin2";
-                user.Email = "Admin2@localhost";
-              
+                user.Email = "useer2@localhost";
+                user.TheIDnumber = 8765;
                 //user.FullName = "Nancy Davolio";
                 // user.BirhtDate = new DateTime(1960, 1, 1);
                 IdentityResult result = userManager.CreateAsync(user, "Abd_12345").Result;
@@ -81,9 +82,9 @@ namespace AdmissionSystem.Model.Identity_classes
                 {
 
                     userManager.AddToRoleAsync(user, "Admin").Wait();
-                    var token =  userManager.GenerateEmailConfirmationTokenAsync(user).ToString();
+                    var token = await  userManager.GenerateEmailConfirmationTokenAsync(user);
                     //// var user = await userManager.FindByIdAsync(userId);
-                    var result1 =  userManager.ConfirmEmailAsync(user, token);
+                    var result1 = await userManager.ConfirmEmailAsync(user, token);
                    
                 }
             }

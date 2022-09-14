@@ -36,7 +36,7 @@ namespace AdmissionSystem.Model.Repository
 
         public IList<Student> List()
         {
-            return DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).ThenInclude(a=>a.FK_Type_of_high_school_Cirtificate).Include(a => a.Statues_Of_Admission_Eligibilty).ToList();
+            return DB.Student.Include(a => a.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate).ThenInclude(a=>a.FK_Type_of_high_school_Cirtificate).Include(a => a.Statues_Of_Admission_Eligibilty).Include(c=>c.Cirtificate_city).ToList();
         }
 
         public void Update(int id, Student entity)

@@ -160,12 +160,16 @@ namespace AdmissionSystem.Controllers.Identity_control
                                                             ).ToList();
                 var emailstudent = studentRepo.List().Where(s=>s.Email==obj.Email).ToList();
                 var TheIDnumberstudent = studentRepo.List().Where(s => s.Identity_No == obj.TheIDnumber).ToList();
-
+            //var listofUsers=userManager.Users;
+            //  var emailstudentfromuserTable= listofUsers.Where(s => s.Email == obj.Email).ToList();
+            //    var TheIDnumberstudentfromuserTable = listofUsers.Where(s => s.TheIDnumber == obj.TheIDnumber).ToList();
                 if (studentWhere.Count == 0)
                 {
 
-                  if (emailstudent.Count==0 && TheIDnumberstudent.Count==0)
-                          
+                  if (emailstudent.Count==0 && TheIDnumberstudent.Count==0 )
+                     // && emailstudentfromuserTable.Count == 0 && TheIDnumberstudentfromuserTable.Count==0
+                     // )
+
                     {
 
 
@@ -251,7 +255,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                         };
                         accRepo.Add(accept);
 
-                        return PartialView("Index");
+                        return PartialView("Success_Registeration_Studnet");
                     }
                     else {
                         var disc = result.Errors.Select(e => e.Description).ToArray();
@@ -260,7 +264,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                             ViewBag.errorinfo += item + "  ";
                         }
 
-                        return PartialView("Index", obj);
+                        return PartialView("Index");
                     }
                     }
                  else
@@ -324,8 +328,12 @@ namespace AdmissionSystem.Controllers.Identity_control
             {
                 var emailstudent = employeeRepo.List().Where(e => e.Email == obj.Email).ToList();
                 var TheIDnumberstudent = employeeRepo.List().Where(e => e.The_ID_Number == obj.TheIDnumber).ToList();
+                //var listofUsers = userManager.Users;
+                //var emailstudentfromuserTable = listofUsers.Where(s => s.Email == obj.Email).ToList();
+                //var TheIDnumberstudentfromuserTable = listofUsers.Where(s => s.TheIDnumber == obj.TheIDnumber).ToList();
                 if (emailstudent.Count == 0 && TheIDnumberstudent.Count == 0)
-
+                      //&& emailstudentfromuserTable.Count == 0 && TheIDnumberstudentfromuserTable.Count == 0
+                      //)
                 {
                     MyIdentityUser user = new MyIdentityUser();
                 user.UserName = obj.UserName;
