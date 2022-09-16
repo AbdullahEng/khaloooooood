@@ -510,7 +510,7 @@ namespace AdmissionSystem.Controllers.Identity_control
                             {
                                 if (Employee.Type == "Admin")
                                 {
-                                    return RedirectToAction("EditAdmin", "Employee", new { id = Employee.id });
+                                    return RedirectToAction("Index", "AdminControl", new { id = Employee.id });
 
                                 }
                                 else if (Employee.Type == "Employee")
@@ -553,13 +553,14 @@ namespace AdmissionSystem.Controllers.Identity_control
 
 
 
-
+                    ViewBag.invalidlogin = "Invalid login!!";
                     return View("Index");
                 }
                 ViewBag.invalidlogin = "Invalid login!!";
                // ModelState.AddModelError("", "Invalid login!!");
 
             }
+            ViewBag.invalidlogin = "Invalid login!!";
             //}
             //else {
             //    ViewBag.norecaptcha = "please check out your internet connection";

@@ -6,6 +6,16 @@
 @{Layout="_StudentLayout";}
 <link rel="stylesheet" href="~/aos/aos.css"/>
 <link rel="stylesheet" href="~/Desighn/Home.css"/>
+
+ @{
+        if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+        {
+    <h1 hidden id="khaled">khaled</h1>
+} 
+    else {<h1 hidden id="khaled">nokhaled</h1>
+    }
+    }
+
 <input hidden  id="confirmation_value" value="@Model.Conformation"/>
   <input hidden id="wish_value" value="@Model.wish_Department_Id1"/>
    <input hidden id="Rate" value="@Model.The_Rate"/>
@@ -17,11 +27,14 @@
     <br> <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
     <br> <h5 class="">@localizer["We thank you for choosing us as a part of your futur career"]<br>@localizer["So get started and good luck for you."]  </h5>    
  <br> <br> 
-  <b>Note</b>
+  <b>@localizer["Note"]</b>
       <p>
   @localizer["This system enable you to sumbit your information easily and make a trusted and secure storage of your data so  pleas read the instructions carfully and start your journy with us."]   
     </p>
-<button type="button" onclick="    hidefunction();" class="btn btn-primary shinbutton" data-toggle="modal" data-target=".bd-example-modal-lg">Get started</button>
+<button type="button" onclick="    hidefunction();" class="btn btn-primary shinbutton" data-toggle="modal" data-target=".bd-example-modal-lg">@localizer["Get started"]</button>
+<br>
+<br>
+
 </div>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -34,64 +47,44 @@
 <!-- One "tab" for each step in the form: -->
 <div class="tab">
      <h5 class="alert alert-primary text-center " role="alert">step one </h5>
-@* <video width="320" height="240" controls>
-  <source src="~/Desighn/video.mp4" type="video/mp4">
-  *@
-</video>
+    <div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
+
 </div>
 
 <div class="tab">
        <h5 class="alert alert-primary text-center " role="alert">step tow </h5>
-
-  <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
-      <br>bla bla bla bla bla bla bla
-      <br>bla bla bla bla bla bla bla
-  <br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla</p>
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
 </div>
 
 <div class="tab">   
     <h5 class="alert alert-primary text-center " role="alert">step three </h5>
-    <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
-      <br>bla bla bla bla bla bla bla
-      <br>bla bla bla bla bla bla bla
-  <br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla</p>
+   <div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
  
 </div>
 
 <div class="tab"> 
     <h5 class="alert alert-primary text-center " role="alert">step four </h5>
-    <p>blablalbalbalbalbalbalbalbalbalblablabal<br>bla bla bla bla bla bla bla
-      <br>bla bla bla bla bla bla bla
-      <br>bla bla bla bla bla bla bla
-  <br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla
-<br>bla bla bla bla bla bla bla</p>
+   <div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
 </div>
 
 <div style="overflow:auto;">
   <div style="float:right;">
-    <button type="button"  class="btn btn-primary btn-sm" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <br><br><br>
+    <button type="button"  class="btn btn-primary btn-sm" id="prevBtn" onclick="nextPrev(-1)">@localizer["Previous"]</button>
     <button type="button"  class="btn btn-primary btn-sm" id="nextBtn" onclick="nextPrev(1)">Next</button>
-     <a hidden asp-action="Edit" id="Edit_anchore" class="btn btn-primary btn-sm" asp-route-id=@Model.id>Start</a>
+     <a hidden asp-action="Edit" id="Edit_anchore" class="btn btn-primary btn-sm" asp-route-id=@Model.id>@localizer["Start"]</a>
 
   </div>
 </div>
@@ -116,7 +109,7 @@
    <br>  <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
     <br> <h5 class="">@localizer["We noted that you did not make a confiramtion for your addmission request, pleas make a conferm or your data will be ignored."]  </h5>    
  <br> <br> 
-  <b>Note</b>
+  <b>@localizer["Note"]</b>
       <p>
   @localizer["when you make the conferming we considre that you have reivewed all your personal information and your uploded files, so pleas make sure that all is correct."]  </p>
    <p><b>@localizer["You will not be able to edit any more"]</b></p>
@@ -125,6 +118,9 @@
    <input  hidden id="conformation" asp-for="Conformation"/>
    </form>
 <button type="button"  onclick="    submitfunction();" class="btn btn-danger shinbutton">@localizer["Confirme The Request"]</button>
+<br>
+<br>
+
 </div>
 
 
@@ -134,7 +130,7 @@
     <br> <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
     <br> <h5 class="">@localizer["Thank you for completing all requists."]<br>@localizer["Our team will check your files and in nearest time, you will recive an email from the team tell to log in and choose your wishes."]  </h5>    
  <br> <br> <br><br><br>
-  <b>Note</b>
+  <b>@localizer["Note"]</b>
    <p class="text-primary">@localizer["stay tuned to your Email"]</p>
     
 @*<button type="button"  onclick="    submitfunction();" class="btn btn-danger shinbutton">Confirme The Request</button>*@
@@ -144,10 +140,13 @@
    <br> <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
     <br> <h5 class="">>@localizer["Thank you for completing all requists.<br>pleas wait for results to be released."] </h5>    
  <br> <br> <br><br><br>
-  <b>Note</b>
+  <b>@localizer["Note"]</b>
    <p class="text-primary">@localizer["stay tuned to your Email"]</p>
     
 @*<button type="button"  onclick="    submitfunction();" class="btn btn-danger shinbutton">Confirme The Request</button>*@
+<br>
+<br>
+
 </div>
 
  
@@ -157,9 +156,12 @@
     <br> <h5 class="">@localizer["your rate is scaled to"] <b class="text-danger">@Model.The_Rate</b>@localizer["out of 2400."] </h5>
     <p style="font-size:85%;" class="font-italic text-secondary"><b>@localizer["the scaler intrduced by the Ministry of Higher Education Standards."]</b></p>
  <br> <br> <br> <br> <br> <br>
-   <h5 >Pleas Choose the wishes you want.</h5>
+   <h5 >@localizer["Pleas Choose the wishes you want."]</h5>
       <a class="btn btn-primary shinbutton" asp-action="WishesSelection" asp-route-id=@Model.id >@localizer["My wishes"]</a>
-   </div> 
+  <br>
+<br>
+
+  </div> 
 
    
 <div hidden  class="ContainerRegForm" id="ReEdit_noeditwish_part">
@@ -242,10 +244,22 @@ function showTab(n) {
   if (n == (x.length - 1)) {
       document.getElementById("nextBtn").hidden = true;
        document.getElementById("Edit_anchore").hidden = false;
+       if (document.getElementById("khaled").textContent == "khaled") {
+            document.getElementById("nextBtn").innerHTML = "تسليم";
+            //me document.getElementById("nextBtn").type = "submit";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+            //me document.getElementById("nextBtn").type = "submit";
+ }
   } else {
     document.getElementById("nextBtn").innerHTML = "Next";
      document.getElementById("nextBtn").hidden = false;
        document.getElementById("Edit_anchore").hidden = true;
+        if (document.getElementById("khaled").textContent == "khaled") {
+          document.getElementById("nextBtn").innerHTML = "التالي";
+      } else {
+          document.getElementById("nextBtn").innerHTML = "Next";
+      }
   }
   fixStepIndicator(n)
 }

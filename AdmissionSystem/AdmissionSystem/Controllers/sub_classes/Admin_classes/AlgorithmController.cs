@@ -3,6 +3,7 @@ using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
 using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
+    [Authorize(Roles = "Admin")]
     public class AlgorithmController : Controller
     {
         private readonly CRUD_Operation_Interface<Student> studentRepository;

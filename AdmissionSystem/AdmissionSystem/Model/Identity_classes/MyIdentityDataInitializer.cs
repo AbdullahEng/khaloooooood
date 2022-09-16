@@ -51,7 +51,7 @@ namespace AdmissionSystem.Model.Identity_classes
                 MyIdentityUser user = new MyIdentityUser();
                 user.UserName = "Admin1";
                 user.Email = "useer1@localhost";
-                user.TheIDnumber =8765;
+                user.TheIDnumber = "8765";
               
                 //user.FullName = "Nancy Davolio";
                 //user.BirhtDate = new DateTime(1960, 1, 1);
@@ -74,7 +74,7 @@ namespace AdmissionSystem.Model.Identity_classes
                 MyIdentityUser user = new MyIdentityUser();
                 user.UserName = "Admin2";
                 user.Email = "useer2@localhost";
-                user.TheIDnumber = 8765;
+                user.TheIDnumber = "8765";
                 //user.FullName = "Nancy Davolio";
                 // user.BirhtDate = new DateTime(1960, 1, 1);
                 IdentityResult result = userManager.CreateAsync(user, "Abd_12345").Result;

@@ -3,6 +3,38 @@
 @{
     ViewData["Title"] = "Privacy Policy";
 }
+<link rel="stylesheet" href="~/aos/aos.css"/>
+<style>
+    .ContainerRegForm {
+    position: center;
+    /* width: 75%;
+    height:75%;*/
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .4);
+}
+</style>
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>The site on devloping, this page is not ready </p>
+    <a class="btn btn-primary" asp-area="" asp-page="/Index">Go to Home</a>
+                     
+
+
+    <img src="~/Desighn/on_devloping.gif"  data-aos="fade-up" class="float-right" width="60%"/>
+  
+    <br><br>
+    <script src="~/aos/aos.js"></script>
+   
+    <script>
+      AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+      delay: 100,
+    });
+
+</script>

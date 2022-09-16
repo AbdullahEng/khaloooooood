@@ -7,6 +7,10 @@
 @using Microsoft.Extensions.Options
 @using AdmissionSystem.Model.GoogleCaptcha
 @inject IOptions<GoogleCaptchaConfig> GoogleRecaptchaconfig
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 <style>
     dl {
         width: 120%;
@@ -33,13 +37,26 @@
         padding: 0;
         margin: 0;
     }
+    label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-family: Oxygen;
+    font-size: 20px;
+}
+option{
+    font-family: Oxygen;
+    font-size: 16px;
+     display: inline-block;
+}
+
 </style>
 
 
 <html>
 
 <head>
-
+    
+<link rel="stylesheet" href="~/aos/aos.css"/>
     <link href="~/loginLip/css/login_rigi.css" rel="stylesheet" />
     <script type="text/javascript" src="quform/js/scripts.js"></script>
 
@@ -59,15 +76,15 @@
 
 
 
-    <div id="advice">Click on Sign Up button<i id="cross" class="fas fa-times"></i></div>
-    <div id="container">
+    <div id="advice">@localizer["Click on Sign Up button"]<i id="cross" class="fas fa-times"></i></div>
+    <div id="container"  data-aos="fade-down">
         <div id="leftSide">
-            <div class="title">One of us?</div>
-            <div class="text">If you already have an account you can log in.</div>
+            <div class="title">@localizer["One of us?"]</div>
+            <div class="text">@localizer["If you already have an account you can log in."]</div>
         </div>
         <div id="rightSide">
-            <div class="title">New here?</div>
-            <div class="text">You can create your own account right now!</div>
+            <div class="title">@localizer["New here?"]</div>
+            <div class="text">@localizer["You can create your own account right now!"]</div>
         </div>
         <div id="loginBlock">
             <partial name="Login" />
@@ -78,7 +95,7 @@
 
         <div id="bar">
             <div id="mask">
-                <div id="toggle"><div class="dot">.</div><div id="loginText">Log&nbsp;In</div><div id="signupText">Sign&nbsp;Up</div></div>
+                <div id="toggle" onclick="    scrollfunction();" ><div class="dot">.</div><div id="loginText" style="font-size:75%">@localizer["Log&nbsp;In"]</div><div id="signupText" >@localizer["Sign&nbsp;Up"]</div></div>
             </div>
         </div>
 
@@ -110,6 +127,7 @@
     </script>
     <script src="https://www.google.com/recaptcha/api.js?onload=QuformRecaptchaLoaded&amp;render=explicit" async defer></script>
     <script src="~/loginLip/js/login_regi.js"></script>
+<script src="~/aos/aos.js"></script>
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
@@ -131,7 +149,21 @@
             });
 
         </script>*@
+<script>
+function scrollfunction(){
+     document.getElementById('signupContent').scrollTo({
+  top: 100,
+  behavior: 'smooth'
+});
+}
+  AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+      delay: 100,
+    });
 
+</script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.Services;
 using AdmissionSystem.View_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers
 {
+    [Authorize(Roles = "Employee")]
     public class EmployeeController : Controller
     {
         private readonly CRUD_Operation_Interface<Employee> employee_Repository;
@@ -44,103 +46,112 @@ namespace AdmissionSystem.Controllers
             statues_Of_Admission_Eligibilty_Repository = Statues_of_admission_eligibilty_Repository;
         }
         // GET: EmployeeController
-        public ActionResult Index()
-        {
-            var lista = employee_Repository.List();
-            return View(lista);
-        }
+        //public ActionResult Index()
+        //{
+        //    var lista = employee_Repository.List();
+        //    return View(lista);
+        //}
 
-        // GET: EmployeeController/Details/5
-        public ActionResult Details(int id)
+        //// GET: EmployeeController/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
+
+        //// GET: EmployeeController/Create
+        //public ActionResult Create()
+        //{
+        //    var em = new Employee { };
+        //    return View(em);
+        //}
+
+        //// POST: EmployeeController/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(Employee collection)
+        //{
+        //    try
+        //    {
+        //        var em = collection;
+        //        employee_Repository.Add(collection);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+
+        //// GET: EmployeeController/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    var em = employee_Repository.Find(id);
+        //    return View(em);
+        //}
+
+        //// POST: EmployeeController/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, Employee collection)
+        //{
+        //    try
+        //    {
+        //        var em = new Employee
+        //        {
+        //            Email = collection.Email,
+        //            name = collection.name,
+        //            Nick_Name = collection.Nick_Name,
+        //            Phone_Number = collection.Phone_Number,
+        //            id = collection.id
+
+        //        };
+        //        employee_Repository.Update(id, em);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        //// GET: EmployeeController/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
+
+        //// POST: EmployeeController/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete()
+        //{
+        //    try
+        //    {
+
+
+        //        return RedirectToAction();
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+        public ActionResult AccessError()
         {
             return View();
-        }
-
-        // GET: EmployeeController/Create
-        public ActionResult Create()
-        {
-            var em = new Employee { };
-            return View(em);
-        }
-
-        // POST: EmployeeController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Employee collection)
-        {
-            try
-            {
-                var em = collection;
-                employee_Repository.Add(collection);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-       
-        // GET: EmployeeController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var em = employee_Repository.Find(id);
-            return View(em);
-        }
-
-        // POST: EmployeeController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Employee collection)
-        {
-            try
-            {
-                var em = new Employee
-                {
-                    Email = collection.Email,
-                    name = collection.name,
-                    Nick_Name = collection.Nick_Name,
-                    Phone_Number = collection.Phone_Number,
-                    id = collection.id
-
-                };
-                employee_Repository.Update(id, em);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: EmployeeController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: EmployeeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete()
-        {
-            try
-            {
-               
-
-                return RedirectToAction();
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         public ActionResult Home(int id)
         {
            
             var Employee = employee_Repository.Find(id);
-             
+            var user = HttpContext.User.Identity.Name;
+            if (user != Employee.name)
+            {
+                string url = "/Employee/AccessError";
+                return Redirect(url);
+            }
             return View(Employee);
         }
 
@@ -170,12 +181,18 @@ namespace AdmissionSystem.Controllers
             Student y;
             Statues_Of_Student y2;
             var em = employee_Repository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != em.name)
+            {
+                string url = "/Employee/AccessError";
+                return Redirect(url);
+            }
             foreach (var x in Status_of_student_list)
             {
                 y = student_Repository.Find(x.FK_Student_InfoId);
                 y2 = statues_Of_Student_Repository.Find(y.Id);
                
-                if (y.high_school_certificate == "Syrian")
+                if (y.high_school_certificate == "Syrian" &&y.Conformation==1)
                 {
                     if (y2.Checked_city_certificate != true || y2.Checked_recipet != true || y2.Checked_Identity != true || y2.Checked_Rate != true)
                     {
@@ -221,6 +238,13 @@ namespace AdmissionSystem.Controllers
             var student = student_Repository.Find(id);
             var certificate = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             var statuesofstudent = statues_Of_Student_Repository.Find(id);
+            var em = employee_Repository.Find(host);
+            var user = HttpContext.User.Identity.Name;
+            if (user != em.name)
+            {
+                string url = "/Employee/AccessError";
+                return Redirect(url);
+            }
             if (statuesofstudent.Checked_city_certificate == true && statuesofstudent.Checked_Rate == true && statuesofstudent.Checked_Identity == true && statuesofstudent.Checked_recipet == true)
             {
 
@@ -653,12 +677,18 @@ namespace AdmissionSystem.Controllers
             List<Statues_Of_Student> lista = new List<Statues_Of_Student>();
             Student y;
             Statues_Of_Student y2;
-            var em = employee_Repository.Find(id);
+            var em = employee_Repository.Find(id);   
+            var user = HttpContext.User.Identity.Name;
+            if (user != em.name)
+            {
+                string url = "/Employee/AccessError";
+                return Redirect(url);
+            }
             foreach (var x in Status_of_student_list)
             {
                 y = student_Repository.Find(x.FK_Student_InfoId);
                 y2 = statues_Of_Student_Repository.Find(y.Id);
-                if (y.high_school_certificate == "UNSyrian")
+                if (y.high_school_certificate == "UNSyrian"&&y.Conformation == 1)
                 {
 
                     if (y2.Checked_city_certificate != true || y2.Checked_recipet != true || y2.Checked_Identity != true || y2.Checked_Rate != true)
@@ -697,6 +727,13 @@ namespace AdmissionSystem.Controllers
             var student = student_Repository.Find(id);
             var certificate = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             var statuesofstudent = statues_Of_Student_Repository.Find(id);
+            var em = employee_Repository.Find(host);
+            var user = HttpContext.User.Identity.Name;
+            if (user != em.name)
+            {
+                string url = "/Employee/AccessError";
+                return Redirect(url);
+            }
             if (statuesofstudent.Checked_city_certificate == true && statuesofstudent.Checked_Rate == true && statuesofstudent.Checked_Identity == true && statuesofstudent.Checked_recipet == true)
             {
 

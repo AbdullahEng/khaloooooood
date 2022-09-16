@@ -33,11 +33,15 @@ namespace AdmissionSystem.View_Model.Identity_view_model
         [Range(0, 999999999999)]
         [Required]
         [Display(Name = "The ID number")]
-        public int TheIDnumber { get; set; }
+        [RegularExpression(@"^[0-9]{9}([0-9]{2})?$",
+        ErrorMessage = "Characters are not allowed and only 11 for identity and 9 for passport.")]
+        public string TheIDnumber { get; set; }
         [DataType(DataType.PhoneNumber)]
         [Required]
         [Display(Name = "Mobile phone")]
-        public int phone_Mobile { get; set; }
+        [RegularExpression(@"^[0-9]{10}$",
+        ErrorMessage = "Characters are not allowed and only 10 numbers.")]
+        public string phone_Mobile { get; set; }
         [Required]
         [Display(Name = "Gender")]
         public string gender { get; set; }

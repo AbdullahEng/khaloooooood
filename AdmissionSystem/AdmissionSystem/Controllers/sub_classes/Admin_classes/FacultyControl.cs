@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
-   // [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class FacultyControl : Controller
     {
 

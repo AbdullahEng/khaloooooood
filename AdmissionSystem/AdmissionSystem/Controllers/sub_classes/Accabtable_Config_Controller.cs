@@ -1,5 +1,6 @@
 ﻿using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes
 {
+    [Authorize(Roles = "Admin")]
     public class Accabtable_Config_Controller : Controller
     {
         public Accabtable_Config_Controller(CRUD_Operation_Interface<Accabtable_config> accbt_repo)

@@ -2,6 +2,7 @@
 using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers
 {
-    
+    [Authorize(Roles = "Student")]
     public class StudenController : Controller
     {
         private readonly ApplicationDbContext DB;
@@ -57,8 +58,12 @@ namespace AdmissionSystem.Controllers
             var studnet = new Student_View_Model { id = id };
             return View(studnet);
         }
-            // GET: StudenController
-            public ActionResult Index()
+        public ActionResult AccessError()
+        {   
+            return View();
+        }
+        // GET: StudenController
+        public ActionResult Index()
         {
             var allstudents = studentRepository.List();
             List<Student> lista = new List<Student>();
@@ -71,11 +76,18 @@ namespace AdmissionSystem.Controllers
             }
             return View(lista);
         }
-
+       
         public ActionResult Home(int id)
         {
-            var Specific_student = studentRepository.Find(id);
 
+           
+            var Specific_student = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != Specific_student.First_Name_EN)
+            {
+                string url = "/Studen/AccessError";
+                return Redirect(url);
+            }
             var student = new Student_View_Model {
                 id = id,Conformation=Specific_student.Conformation
                 ,First_Name_EN=Specific_student.First_Name_EN
@@ -89,6 +101,12 @@ namespace AdmissionSystem.Controllers
         {
 
             var student = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != student.First_Name_EN)
+            {
+                string url = "/Studen/AccessError";
+                return Redirect(url);
+            }
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             var addmisson_eligibilty = statues_Of_Admission_Eligibilty_Repository.Find(student.Statues_Of_Admission_Eligibilty.id).Type_of_admission_eligibilty;
             string wishe1_name="لايوجد";
@@ -311,6 +329,12 @@ namespace AdmissionSystem.Controllers
         {
       
             var student = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != student.First_Name_EN)
+            {
+                string url = "/Studen/AccessError";
+                return Redirect(url);
+            }
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             if (student.Conformation == 1|| student.Conformation == 2)
             {
@@ -827,6 +851,12 @@ namespace AdmissionSystem.Controllers
             //
             //
             Student st = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != st.First_Name_EN)
+            {
+                string url = "/Studen/AccessError";
+                return Redirect(url);
+            }
             if (st.Conformation == 1|| st.Conformation == 3|| st.Conformation == 5) {
                 string url = "/Studen/Errorview/" + id.ToString();
                 return Redirect(url);

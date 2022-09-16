@@ -1,6 +1,9 @@
 ﻿
 @model AdmissionSystem.View_Model.Identity_view_model.LoginViewModle
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Login";
     Layout = "";
@@ -99,7 +102,7 @@
                    
                     <div class="wrapper">
                         <input type="text" id="username" asp-for="UserName  " required />
-                        <label for="username" class="loginlabel">User name</label>
+                        <label for="username" class="loginlabel">@localizer["User name"]</label>
 
 
 
@@ -107,7 +110,7 @@
                     <div class="wrapper">
                         <input type="password" id="password" asp-for="password" required />
 
-                        <label for="password" class="loginlabel">Password</label>
+                        <label for="password" class="loginlabel">@localizer["Password"]</label>
 
                     </div>
 
@@ -141,12 +144,12 @@
                         <br />
                         <div class="submit">
 
-                            <input type="submit" value="Log In" />
+                            <input type="submit" value=@localizer["Log In"] />
 
                         </div>
                         <div>
 
-                            <a asp-action="Forgot_password">Forgot password?</a>
+                            <a asp-action="Forgot_password" style="font-family: Oxygen;font-size: 16px;">@localizer["Forgot password?"]</a>
                         </div>
 
 

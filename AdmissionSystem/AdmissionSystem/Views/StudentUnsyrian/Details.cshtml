@@ -180,10 +180,10 @@ input[type=text],input[type=date],input[type=number],input[type=email] {
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Passport_No" class="control-label">@localizer["Passport No"]</label>
-                            <input asp-for="Passport_No"readonly  />
+                           <input asp-for="Identity_No" readonly  />
                         </div>
                     </div>
-                    <div class="col">
+                    <div hidden class="col">
                         <div class="form-group">
                             <label asp-for="Identity_No" class="control-label">@localizer["Identity No"]</label>
                             <input asp-for="Identity_No" readonly  />
@@ -259,7 +259,7 @@ input[type=text],input[type=date],input[type=number],input[type=email] {
                 </div> <div class="row">
                    
                     
-                    <div class="col">
+                    <div class="col" id="rate_showing">
                          <div class="form-group">
                             <label asp-for="The_Rate" class="control-label">@localizer["The Rate"]</label>
                             <input asp-for="The_Rate"readonly />
@@ -421,9 +421,7 @@ input[type=text],input[type=date],input[type=number],input[type=email] {
         </p><button type="button" onclick="    submitfunction();" class="btn btn-danger">Confirme</button></div>
                  
       </div>
-  
-     @*<a class="btn btn-primary btn-lg btn-block"   asp-action="Index">Back to List</a>*@
-   
+  <br><br><br>
    
      
      <script src="~/Desighn/openimage.js"></script>
@@ -444,12 +442,16 @@ window.onload = function() {
          document.getElementById("third").hidden = false;
           document.getElementById("conferting_button").hidden = false;
           document.getElementById("wishes_info").hidden = true;
+          document.getElementById("rate_showing").hidden = true;
+
     }
     else if (document.getElementById("confirmation_value").value=='1' && document.getElementById("front_image").value &&document.getElementById("wish_value").value == '') {
           document.getElementById("conferting_button").hidden = true;
            document.getElementById("first").hidden = false;
          document.getElementById("secound").hidden = false;
           document.getElementById("wishes_info").hidden = true;
+           document.getElementById("rate_showing").hidden = true;
+
     }
      else if (document.getElementById("confirmation_value").value=='1' && document.getElementById("front_image").value &&document.getElementById("wish_value").value != '') {
           document.getElementById("conferting_button").hidden = true;

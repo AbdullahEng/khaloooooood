@@ -71,6 +71,10 @@
     <div class="row">
     <div class="col-1">
      <ul class="menu" id="slidmenu">
+      <li hidden class="menu_list" id="zero">
+        <span class="front fas fa-solid fa-gear"></span>
+          <a asp-action="Home" asp-route-id=@Model.id class="side">@localizer["Settings"]</a>
+    </li>
     <li hidden class="menu_list" id="first">
         <span class="front fas fa-home"></span>
           <a asp-action="Home" asp-route-id=@Model.id class="side">@localizer["Home"]</a>

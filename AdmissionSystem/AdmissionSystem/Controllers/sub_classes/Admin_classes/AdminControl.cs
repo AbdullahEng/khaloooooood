@@ -1,6 +1,7 @@
 ﻿using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
+    [Authorize(Roles ="Admin")]
     public class AdminControl : Controller
     {
         private readonly CRUD_Operation_Interface<Country> countryRepoo;
@@ -29,7 +31,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             this.stautusofstuRepooo = stautusofstuRepooo;
         }
         // GET: AdminControl
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             //   var ccountres = countryRepoo.List();
             //   var studnets1 = studentRepooo.List().Where(s=>s.Cirtificate_city.id==1).ToList();

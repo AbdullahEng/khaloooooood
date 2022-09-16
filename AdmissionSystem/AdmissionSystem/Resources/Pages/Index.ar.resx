@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="building Web apps with ASP.NET Core" xml:space="preserve">
-    <value>بناء تطبيقات ويب مع تقنية الكور</value>
+  <data name="Here you can addmit to the universty of Kalmoon Remotley" xml:space="preserve">
+    <value>يمكنك من خلال هذا النظام أنت تتقدم الى المفاضلة بشكل إلكتروني</value>
   </data>
-  <data name="Learn about" xml:space="preserve">
-    <value>تعلم عن</value>
+  <data name="How to Make Account" xml:space="preserve">
+    <value>كيف أقوم بالتسجيل</value>
   </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>مرحبا</value>
+  <data name="if you are a new studet pleas start with us by clicking one of the buttoms here" xml:space="preserve">
+    <value>اذا كنت ترغب في التقدم إلى المفاضلة يجب عليك ان تسجل بريدك معنا</value>
+  </data>
+  <data name="Make an account in the Admession Sytem" xml:space="preserve">
+    <value>تفعيل حساب في نظام القبول</value>
+  </data>
+  <data name="Register Student" xml:space="preserve">
+    <value>تسجيل الطالب</value>
+  </data>
+  <data name="Welcome To UOK" xml:space="preserve">
+    <value>أهلاً بك في جامعة القلمون</value>
   </data>
 </root>

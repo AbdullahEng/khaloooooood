@@ -1,5 +1,6 @@
 ﻿using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
+    [Authorize(Roles = "Admin")]
     public class Statues_Of_Student_control : Controller
     {
         private readonly CRUD_Operation_Interface<Statues_Of_Student> statusRepooo;

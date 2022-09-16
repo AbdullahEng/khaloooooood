@@ -26,8 +26,8 @@ namespace AdmissionSystem.View_Model
         [Required(ErrorMessage = "Mother name is required")]
         [StringLength(20, ErrorMessage = "no more than 20 charecter")]
         public string Mother_Name_AR { get; set; }
-        [Required(ErrorMessage = "First name is required")]
-        [StringLength(20, ErrorMessage = "no more than 20 charecter")]
+        //[Required(ErrorMessage = "First name is required")]
+        //[StringLength(20, ErrorMessage = "no more than 20 charecter")]
         public string First_Name_EN { get; set; }
         [Required(ErrorMessage = "Father name in is required")]
         [StringLength(20, ErrorMessage = "no more than 20 charecter")]
@@ -41,8 +41,8 @@ namespace AdmissionSystem.View_Model
         [Required(ErrorMessage = "Nick name is required")]
         [StringLength(20, ErrorMessage = "no more than 20 charecter")]
         public string Nick_Name { get; set; }
-        [Required(ErrorMessage = "Gender is required")]
-        [StringLength(20, ErrorMessage = "no more than 20 charecter")]
+        //[Required(ErrorMessage = "Gender is required")]
+        //[StringLength(20, ErrorMessage = "no more than 20 charecter")]
         public string gender { get; set; }
         [Required(ErrorMessage = "Nationality is required")]
         [StringLength(20, ErrorMessage = "no more than 20 charecter")]
@@ -57,25 +57,31 @@ namespace AdmissionSystem.View_Model
         public string Civil_Registriation_City { get; set; }
         [Required(ErrorMessage = "Civil Registrition No is required")]
         public int Civil_Registrition_No { get; set; }
-        
-        public int  Passport_No { get; set; }
+        [RegularExpression(@"^[0-9]{9}$",
+        ErrorMessage = "Characters are not allowed and only 9 numbers.")]
+        public string Passport_No { get; set; }
         [Required(ErrorMessage = "Identity No is required")]
-        public int  Identity_No { get; set; }
+        [RegularExpression(@"^[0-9]{11}$",
+        ErrorMessage = "Characters are not allowed and only 11 numbers.")]
+        public string Identity_No { get; set; }
         [Required(ErrorMessage = "Full Address is required")]
         [StringLength(50, ErrorMessage = "no more than 50 charecter")]
         public string Full_Address { get; set; }
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress]
+        //[Required(ErrorMessage = "Email is required")]
+        //[EmailAddress]
         public string Email { get; set; }
         [Required(ErrorMessage = "Current Address is required")]
         [StringLength(50, ErrorMessage = "no more than 50 charecter")]
         public string Current_Address { get; set; }//address after the acciption
         [Required(ErrorMessage = "Mobile Phone is required")]
-        
-        public int Mobile_Phone { get; set; }
-        public int Home_s_Phone { get; set; }
+        [RegularExpression(@"^[0-9]{10}$",
+        ErrorMessage = "Characters are not allowed and only 10 numbers.")]
+        public string Mobile_Phone { get; set; }
+        [RegularExpression(@"^[0-9]{10}$",
+       ErrorMessage = "Characters are not allowed and only 10 numbers.")]
+        public string Home_s_Phone { get; set; }
         [Required(ErrorMessage = "Rate is required")]
-        [Range(960, 2300,ErrorMessage ="value shoud be between 960 and 2300")]
+        [Range(960, 2400,ErrorMessage ="value shoud be between 960 and 2400")]
         public float The_Rate { get; set; }
         public float old_Rate { get; set; }
         [Required(ErrorMessage = "City of Certificate is required")]

@@ -29,9 +29,7 @@ namespace AdmissionSystem.Model
         public DateTime semester_Date { get; set; }
         // we have to add this prop to controller
         // للعدد الطلاب المسموح قبولهم من قبل الوزارة 
-        [Required]
-        [Display(Name = "Number Student")]
-        [Range(0,9999)]
+       
         public int Number_Student  { get; set; }
 
     }

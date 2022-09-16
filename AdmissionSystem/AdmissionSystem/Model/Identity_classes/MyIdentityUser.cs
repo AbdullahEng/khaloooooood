@@ -9,7 +9,7 @@ namespace AdmissionSystem.Model.Identity_classes
 {
     public class MyIdentityUser:IdentityUser
     {
-        public int TheIDnumber { get; set; }
+        public string TheIDnumber { get; set; }
       //  public DateTime birhtdate { get; set; }
     }
 }

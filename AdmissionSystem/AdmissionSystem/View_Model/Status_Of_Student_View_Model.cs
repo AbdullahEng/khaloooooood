@@ -34,11 +34,11 @@ namespace AdmissionSystem.View_Model
         public DateTime Birth { get; set; }
         public string Civil_Registriation_City { get; set; }
         public int Civil_Registrition_No { get; set; }
-        public int Passport_No { get; set; }
-        public int Identity_No { get; set; }
+        public string Passport_No { get; set; }
+        public string Identity_No { get; set; }
         public string Full_Address { get; set; }
         public string Email { get; set; }
-        public int Mobile_Phone { get; set; }
+        public string Mobile_Phone { get; set; }
         public string Identity_front_image { get; set; }
         public string Identity_back_image { get; set; }
         public string Image_of_crtificat_URL { get; set; }

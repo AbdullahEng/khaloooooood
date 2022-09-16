@@ -33,7 +33,9 @@ namespace AdmissionSystem.View_Model.Identity_view_model
         [Range(0,999999999999)]
         [Required]
         [Display(Name ="The ID number")]
-        public int  TheIDnumber { get; set; }
+        [RegularExpression(@"^[0-9]{9}([0-9]{2})?$",
+        ErrorMessage = "Characters are not allowed and only 11 for identity and 9 for passport.")]
+        public string TheIDnumber { get; set; }
 
         [Required]
         [Display(Name= "High school certificate ")]
@@ -43,9 +45,11 @@ namespace AdmissionSystem.View_Model.Identity_view_model
         public string Gender { get; set; }
         [DataType(DataType.PhoneNumber)]
         [Required]
+        [RegularExpression(@"^[0-9]{10}$",
+        ErrorMessage = "Characters are not allowed and only 10 numbers.")]
         [Display(Name ="Mobile phone")]
        // [Phone]
-        public int Mobile_Phone { get; set; }
+        public string Mobile_Phone { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name ="Birht")]

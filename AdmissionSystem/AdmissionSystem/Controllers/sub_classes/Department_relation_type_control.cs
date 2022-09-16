@@ -2,6 +2,7 @@
 using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
+    [Authorize(Roles = "Admin")]
     public class Department_relation_type_control : Controller
     {
         private readonly CRUD_Operation_Interface<Department_relation_Type> depart_Relat_Ty_repo;
@@ -187,21 +189,61 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
 
                 var ddrtOverRate = depart_Relat_Ty_repo.List().Where(d => d.FK_DepartmentId == department_realtion.FK_DepartmentId);
-                double Rates = collection.Rate_of_chaire_count;
+
+
+
+
+
+                double count = 0;
                 foreach (var item in ddrtOverRate)
                 {
-                  if(item.FK_DepartmentId!=department_realtion.FK_DepartmentId &&
-                        item.FK_type_Of_High_School_CirtificateId!=department_realtion.FK_type_Of_High_School_CirtificateId
-                        ) Rates += item.Rate_of_chaire_count;
 
+                    count += item.Rate_of_chaire_count;
+
+                }
+
+
+                double Rates = collection.Rate_of_chaire_count;
+
+                foreach (var item in ddrtOverRate)
+                {
+                    if (item.FK_DepartmentId != department_realtion.FK_DepartmentId &&
+                              item.FK_type_Of_High_School_CirtificateId!=department_realtion.FK_type_Of_High_School_CirtificateId
+                              ) 
+                    {
+                        Rates += item.Rate_of_chaire_count;
+                    }
+                    //Rates += item.Rate_of_chaire_count;
                     if (Rates > 100)
                     {
-                        ViewBag.messageOverRate = "Rate more than 100%";
-                        return View(GetAllEDit(departfind, typfind));
+                        ViewBag.messageOverRate = "Rate more than 100%" + "  you have just:::  " + (100 - count) + "%";
+                        return View(GetAll());
                     }
 
 
+
                 }
+
+
+
+
+
+
+                //double Rates = collection.Rate_of_chaire_count;
+                //foreach (var item in ddrtOverRate)
+                //{
+                //  if(item.FK_DepartmentId!=department_realtion.FK_DepartmentId &&
+                //        item.FK_type_Of_High_School_CirtificateId!=department_realtion.FK_type_Of_High_School_CirtificateId
+                //        ) Rates += item.Rate_of_chaire_count;
+
+                //    if (Rates > 100)
+                //    {
+                //        ViewBag.messageOverRate = "Rate more than 100%";
+                //        return View(GetAllEDit(departfind, typfind));
+                //    }
+
+
+                //}
                 //|| drttypeofhigh.Count == 0
                 if (ddrrtt.Count == 0)
                 {

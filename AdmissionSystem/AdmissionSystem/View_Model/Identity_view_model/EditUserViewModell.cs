@@ -18,7 +18,9 @@ namespace AdmissionSystem.View_Model.Identity_view_model
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        public int IDNumber { get; set; }
+        [RegularExpression(@"^[0-9]{9}([0-9]{2})?$",
+        ErrorMessage = "Characters are not allowed and only 11 for identity and 9 for passport.")]
+        public string IDNumber { get; set; }
         public List<string> Claims { get; set; }
         public List<string> Roles{ get; set; }        
     }

@@ -2,6 +2,7 @@
 using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace AdmissionSystem.Controllers
 {
+    [Authorize(Roles = "Student")]
     public class StudentUnsyrianController : Controller
     {
         private readonly ApplicationDbContext dB;
@@ -67,11 +69,20 @@ namespace AdmissionSystem.Controllers
             var studnet = new UnStudent_View_Model { id = id };
             return View(studnet);
         }
+        public ActionResult AccessError()
+        {
+            return View();
+        }
 
         public ActionResult Home(int id)
         {
             var Specific_student = studentRepository.Find(id);
-
+            var user = HttpContext.User.Identity.Name;
+            if (user != Specific_student.First_Name_EN)
+            {
+                string url = "/StudentUnsyrian/AccessError";
+                return Redirect(url);
+            }
             var student = new UnStudent_View_Model
             {
                 id = id,
@@ -90,6 +101,12 @@ namespace AdmissionSystem.Controllers
         {
 
             var student = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != student.First_Name_EN)
+            {
+                string url = "/StudentUnsyrian/AccessError";
+                return Redirect(url);
+            }
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             var addmisson_eligibilty = statues_Of_Admission_Eligibilty_Repository.Find(student.Statues_Of_Admission_Eligibilty.id).Type_of_admission_eligibilty;
             string wishe1_name = "لايوجد";
@@ -122,7 +139,7 @@ namespace AdmissionSystem.Controllers
                 Marital_status = student.Marital_status,
                 high_school_certificate = student.high_school_certificate,
                 Home_s_Phone = student.Home_s_Phone,
-                Passport_No = student.Passport_No,
+                //Passport_No = student.Identity_No,
                 Mobile_Phone = student.Mobile_Phone,
                 First_Name_EN = student.First_Name_EN,
                 gender = student.gender,
@@ -318,6 +335,12 @@ namespace AdmissionSystem.Controllers
         {
 
             var student = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != student.First_Name_EN)
+            {
+                string url = "/StudentUnsyrian/AccessError";
+                return Redirect(url);
+            }
             var certeficat = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
             if (student.Conformation == 1|| student.Conformation == 2)
             {
@@ -752,6 +775,12 @@ namespace AdmissionSystem.Controllers
             }
 
             Student st = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != st.First_Name_EN)
+            {
+                string url = "/StudentUnsyrian/AccessError";
+                return Redirect(url);
+            }
             if (st.Conformation == 1|| st.Conformation == 0|| st.Conformation == 3)
             {
                 string url = "/StudentUnsyrian/Errorview/" + id.ToString();

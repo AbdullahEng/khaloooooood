@@ -11,8 +11,8 @@ namespace AdmissionSystem.Model
         public string name { get; set; }
         public string Nick_Name { get; set; }
         public string Email { get; set; }
-        public int Phone_Number { get; set; }
-        public int The_ID_Number { get; set; }//abd
+        public string Phone_Number { get; set; }
+        public string The_ID_Number { get; set; }//abd
         public string Type { get; set; }//abd
         public string Gender { get; set; }//abd
         public DateTime Birth { get; set; }//abd

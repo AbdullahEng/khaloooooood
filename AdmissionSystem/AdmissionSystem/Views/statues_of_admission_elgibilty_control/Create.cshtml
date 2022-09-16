@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label asp-for="Begaining_date_of_the_process" class="control-label"></label>
                 <input asp-for="Begaining_date_of_the_process" type="date" class="form-control "
-                       min="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" />
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" value="@DateTime.Now.AddYears(0).ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="Begaining_date_of_the_process" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -109,11 +109,11 @@
             <div class="form-group">
                 <label asp-for="semester_Date" class="control-label"></label>
                 <input asp-for="semester_Date" class="form-control" type="date"
-                       min="@DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" />
+                       min="@DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" value="@DateTime.Now.AddYears(0).ToString("yyyy-MM-dd")" />
 
                 <span asp-validation-for="semester_Date" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div hidden class="form-group">
                 <label asp-for="Number_Student" class="control-label"></label>
                 <input asp-for="Number_Student" class="form-control" />
                 <span asp-validation-for="Number_Student" class="text-danger"></span>

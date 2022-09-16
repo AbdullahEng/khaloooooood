@@ -48,6 +48,7 @@
     /*background: url('https://images.pexels.com/photos/1002224/pexels-photo-1002224.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat;*/
     /*background: url('~\AdmissionSystem\wwwroot\275851348_1574548656237148_2879083426103472254_n.jpg') no-repeat;*/
     background: url("../../275851348_1574548656237148_2879083426103472254_n.jpg") repeat 0 0;
+    /*background: url("../../background.jpg") repeat 0 0;*/
     background-size: cover;
     overflow: hidden;
     z-index: 4;

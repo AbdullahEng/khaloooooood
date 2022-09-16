@@ -123,6 +123,9 @@
   <data name="Confirme" xml:space="preserve">
     <value>تأكيد</value>
   </data>
+  <data name="Confirme The Request" xml:space="preserve">
+    <value>تثبيت</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="My wishes" xml:space="preserve">
     <value>الرغبات</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
   </data>
   <data name="Note" xml:space="preserve">
     <value>ملاحظة</value>
@@ -142,13 +148,13 @@
     <value>فريقنا تنبه انه يجب عليك تعديل بعض البيانات وإعادة إختيار الرغبات,الرجاء تفقد بريدك الإلكتروني لتعلم مايجب عليك تعديله</value>
   </data>
   <data name="Our team discovered wrong inofrmation in your file." xml:space="preserve">
-    <value>فريقنا تنبه أن هناك خطئا في بياناتكم </value>
+    <value>فريقنا تنبه لطلبك على وجود خطأ في بياناتكم </value>
   </data>
   <data name="Our team working on all students files and in nearest time, you will recive an email from the team tell you the condtion of your files." xml:space="preserve">
     <value>فريقنا يعمل على مراجعة البيانات وسوف تصلك رسالة بالبريد الإلكتروني بحالة الطلب</value>
   </data>
   <data name="pleas check your Email about what to edit ." xml:space="preserve">
-    <value>الرجاء تفقد بريدك الإلكتروني لتعلم مايجب عليك تعديله</value>
+    <value>الرجاء تفقد بريدك الإلكتروني لإخذ العلم بما يجب عليك تعديله</value>
   </data>
   <data name="pleas confirm after Edting" xml:space="preserve">
     <value>الرجاء تأكيد التعديل</value>
@@ -162,8 +168,14 @@
   <data name="please choose The wishes to complete the requist" xml:space="preserve">
     <value>الرجاء إدخال الرغبات لإكمال الطلب </value>
   </data>
+  <data name="Previous" xml:space="preserve">
+    <value>السابق </value>
+  </data>
   <data name="So get started and good luck for you." xml:space="preserve">
     <value>حسنا إبدأ الآن وحظا موفقا</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>إبدء</value>
   </data>
   <data name="stay tuned to your Email" xml:space="preserve">
     <value>ابقى متنبها لبريدك الإلكتروني</value>
@@ -175,7 +187,7 @@
     <value>هذا النظام يمكنك من إدخال بياناتك بشكل سهل مبسط, مع امكانية تخزين بياناتك بشكل سري وآمن, الرجاء قراءة التعليمات بتمهل وأما الان فالتبدأ رحلتك معنا</value>
   </data>
   <data name="We noted that you did not make a confiramtion for your addmission request, pleas make a conferm or your data will be ignored." xml:space="preserve">
-    <value>لاحظنا أنك لم تقم تأكيد لطلبك ,الرجاء التأكد من بياناتك وقم بالضغط على "تثبت" والا سوف يتم تجاهل بياناتك</value>
+    <value>لاحظنا أنك لم تقم بعملية التأكيد على طلبك ,الرجاء التأكد من بياناتك وقم بالضغط على "تثبيت" والا سوف يتم تجاهل بياناتك</value>
   </data>
   <data name="We thank you for choosing us as a part of your futur career" xml:space="preserve">
     <value>نشكرك لإختيارك جامعة القلمون الخاصة لتكون جزءا من مستقبلك الواعد </value>
@@ -184,7 +196,7 @@
     <value>مرحبا</value>
   </data>
   <data name="when you make the conferming we considre that you have reivewed all your personal information, your uploded files and your wishes so pleas make sure that all is correct." xml:space="preserve">
-    <value>عندما يتم الضغط على تثبيت ,نعتبر أن الطالب قد تأكد من معلوماته وأدخل كل الملفات بالشكل المطلوب لذا الرجاء المراجعة قبل التثبيت</value>
+    <value>عندما يتم الضغط على تثبيت ,نعتبر أن الطالب قد تأكد من معلوماته وأدخل كل الملفات بالشكل المطلوب ,لذا الرجاء المراجعة قبل التثبيت</value>
   </data>
   <data name="You will not be able to edit any more" xml:space="preserve">
     <value>لن تتمكن من تعديل البيانات بعد ذلك</value>
