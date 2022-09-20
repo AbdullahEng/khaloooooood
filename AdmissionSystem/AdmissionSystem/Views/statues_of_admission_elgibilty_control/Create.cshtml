@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
+    
 }
 
 <h1 class="text-center">Create</h1>
@@ -118,6 +119,11 @@
                 <input asp-for="Number_Student" class="form-control" />
                 <span asp-validation-for="Number_Student" class="text-danger"></span>
             </div>
+             <div class="custom-control custom-switch">
+  <input type="checkbox" asp-for="status" class="custom-control-input" id="customSwitch1">
+  <label class="custom-control-label text-danger" for="customSwitch1">Toggle this to activate the admission</label>
+</div>
+    <br>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-outline-primary" />
             </div>

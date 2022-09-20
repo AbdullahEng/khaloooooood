@@ -1,5 +1,6 @@
 ﻿using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
+using AdmissionSystem.View_Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,25 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         public ActionResult Index()
         {
             var stlist = statues_O_A_E_Repo.List().ToList();
-            return View(stlist);
+            if (stlist.Count==0)
+            {
+                var statuslist = new StatusOfAdmissionActivateOrStop
+                {
+                    lisat = stlist
+                 
+                };
+                return View(statuslist);
+            }
+            else
+            {
+                var statuslist = new StatusOfAdmissionActivateOrStop
+                {
+                    lisat = stlist
+                   ,
+                    status = stlist.Last().status
+                };
+                return View(statuslist);
+            }
         }
 
         // GET: statues_of_admission_elgibilty_controller/Details/5
@@ -61,7 +80,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                                                             s.Type_of_admission_eligibilty == collection.Type_of_admission_eligibilty &&
                                                             s.semester_no == collection.semester_no &&
                                                             s.semester_Date == collection.semester_Date &&
-                                                            s.Begaining_date_of_the_process == collection.Begaining_date_of_the_process
+                                                            s.Begaining_date_of_the_process == collection.Begaining_date_of_the_process 
+                                                           
                      ).ToList();
 
 
@@ -212,5 +232,18 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 return View();
             }
         }
+
+
+
+        public ActionResult AdmissionStartOrStop(int id, StatusOfAdmissionActivateOrStop statues)
+        {
+            var admission_status = statues_O_A_E_Repo.Find(id);
+            admission_status.status = statues.status;
+            statues_O_A_E_Repo.Update(id, admission_status);
+
+            return RedirectToAction("Index");
+
+        }
+
     }
 }

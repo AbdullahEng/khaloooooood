@@ -31,6 +31,6 @@ namespace AdmissionSystem.Model
         // للعدد الطلاب المسموح قبولهم من قبل الوزارة 
        
         public int Number_Student  { get; set; }
-
+        public bool status { get; set; }
     }
 }

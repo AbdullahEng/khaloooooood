@@ -73,7 +73,10 @@ namespace AdmissionSystem.Controllers
         {
             return View();
         }
-
+        public ActionResult NoAdmissionError()
+        {
+            return View();
+        }
         public ActionResult Home(int id)
         {
             var Specific_student = studentRepository.Find(id);
@@ -184,6 +187,12 @@ namespace AdmissionSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Details(int id, UnStudent_View_Model collection)
         {
+            if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+            {
+
+                return Redirect("/StudentUnsyrian/NoAdmissionError");
+
+            }
             var student = studentRepository.Find(id);
             student.Conformation = collection.Conformation;
             studentRepository.Update(id, student);
@@ -346,6 +355,12 @@ namespace AdmissionSystem.Controllers
             {
                 string url = "/StudentUnsyrian/Errorview/" + id.ToString();
                 return Redirect(url);
+            }
+            else if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+            {
+
+                return Redirect("/StudentUnsyrian/NoAdmissionError");
+
             }
             else
             {
@@ -785,6 +800,12 @@ namespace AdmissionSystem.Controllers
             {
                 string url = "/StudentUnsyrian/Errorview/" + id.ToString();
                 return Redirect(url);
+            }
+            else if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+            {
+
+                return Redirect("/StudentUnsyrian/NoAdmissionError");
+
             }
             else
             {

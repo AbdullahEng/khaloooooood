@@ -48,7 +48,7 @@ namespace AdmissionSystem.Services
                 await smtp.SendAsync(email);
 
                 smtp.Disconnect(true);
-            }catch(Exception ) {
+            }catch(Exception e ) {
                
             }
 

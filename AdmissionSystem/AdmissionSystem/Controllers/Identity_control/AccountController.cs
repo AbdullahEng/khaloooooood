@@ -134,19 +134,19 @@ namespace AdmissionSystem.Controllers.Identity_control
         public async Task<PartialViewResult> Register_Student(RegisteerStudentViweModel obj)
         {
 
-            string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
-            var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
-            if (!validate.success)
-            {
-                var merror = validate.Message.ToArray();
-                foreach (var item in merror)
-                {
-                    ViewBag.captchMessageregi = item + "    ";
-                }
-                //  =validate.Message.ToArray();
-                //  return RedirectToAction("Login",obj);
-                return PartialView("Index");
-            }
+            //string captchaREsponse = Request.Form["g-recaptcha-response"].ToString();
+            //var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
+            //if (!validate.success)
+            //{
+            //    var merror = validate.Message.ToArray();
+            //    foreach (var item in merror)
+            //    {
+            //        ViewBag.captchMessageregi = item + "    ";
+            //    }
+            //    //  =validate.Message.ToArray();
+            //    //  return RedirectToAction("Login",obj);
+            //    return PartialView("Index");
+            //}
             if (ModelState.IsValid)
             {
                 var studentWhere = studentRepo.List().Where(s => s.First_Name_EN == obj.UserName
@@ -446,27 +446,21 @@ namespace AdmissionSystem.Controllers.Identity_control
         [ValidateAntiForgeryToken]
         public async Task< IActionResult> Login(LoginViewModle obj)
         {
-            //var s = Request.;
-            string captchaREsponse =  Request.Form["g-recaptcha-response"].ToString();
-            //if (captchaREsponse != "")
+            
+            //string captchaREsponse =  Request.Form["g-recaptcha-response"].ToString();
+           
+            //var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
+            //if (!validate.success)
             //{
-            var validate = googleCaptcahServiceeee.ValidateCaptcah(captchaREsponse);
-            if (!validate.success)
-            {
-                var merror = validate.Message.ToArray();
-                foreach (var item in merror)
-                {
-                    ViewBag.captchMessage = item + "    ";
-                }
-                //  =validate.Message.ToArray();
-                //  return RedirectToAction("Login",obj);
-                return View("Index");
-            }
-            //var capatchservice = await googleCaptcahServiceeee.Vefytoken(obj.token);
-            //if (!capatchservice)
-            //{
-            //    return View();
+            //    var merror = validate.Message.ToArray();
+            //    foreach (var item in merror)
+            //    {
+            //        ViewBag.captchMessage = item + "    ";
+            //    }
+               
+            //    return View("Index");
             //}
+            
             if (ModelState.IsValid)
             {
 

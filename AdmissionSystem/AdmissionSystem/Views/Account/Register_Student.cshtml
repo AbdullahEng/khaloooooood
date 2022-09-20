@@ -106,7 +106,7 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label">@localizer["Email"]</label> <label style="font-size:80%;" class="text-danger">@localizer["  you can put Passport ID for UnSyrian"]</label>
+                <label asp-for="Email" class="control-label">@localizer["Email"]</label> <label style="font-size:80%;" class="text-warning">@localizer["Must be active Email"]</label>
            
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -168,9 +168,9 @@
 
             <div class="form-group">
 
-                <div class="g-recaptcha" data-sitekey=" @GoogleRecaptchaconfig.Value.SiteKey"></div>
+             @*   <div class="g-recaptcha" data-sitekey=" @GoogleRecaptchaconfig.Value.SiteKey"></div>
 
-
+*@
             </div>
             <div class="form-group">
 

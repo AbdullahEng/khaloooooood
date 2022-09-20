@@ -62,6 +62,10 @@ namespace AdmissionSystem.Controllers
         {   
             return View();
         }
+        public ActionResult NoAdmissionError()
+        {
+            return View();
+        }
         // GET: StudenController
         public ActionResult Index()
         {
@@ -182,6 +186,12 @@ namespace AdmissionSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Details(int id, Student_View_Model collection)
         {
+            if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+            {
+
+                return Redirect("/Studen/NoAdmissionError");
+
+            }
             var student = studentRepository.Find(id);
             student.Conformation = collection.Conformation;
             studentRepository.Update(id, student);
@@ -340,6 +350,12 @@ namespace AdmissionSystem.Controllers
             {
                 string url = "/Studen/Errorview/"+id.ToString();
                 return Redirect(url);
+
+            }
+            else if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+            {
+              
+                return Redirect("/Studen/NoAdmissionError");
 
             }
             else
@@ -860,6 +876,12 @@ namespace AdmissionSystem.Controllers
             if (st.Conformation == 1|| st.Conformation == 3|| st.Conformation == 5) {
                 string url = "/Studen/Errorview/" + id.ToString();
                 return Redirect(url);
+            }
+            else if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+            {
+
+                return Redirect("/Studen/NoAdmissionError");
+
             }
             else { 
             Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);

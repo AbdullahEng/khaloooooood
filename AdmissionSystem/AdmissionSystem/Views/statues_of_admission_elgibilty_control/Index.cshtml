@@ -1,8 +1,20 @@
-﻿@model IEnumerable<AdmissionSystem.Model.Statues_of_admission_eligibilty>
+﻿@model AdmissionSystem.View_Model.StatusOfAdmissionActivateOrStop
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
+    string statuesofaddmission = null;
+    if (Model.lisat.Count != 0)
+    {
+        if (Model.lisat.Last().status == false)
+        {
+            statuesofaddmission = "Toggle this to activate";
+        }
+        else
+        {
+            statuesofaddmission = "Toggle this to Stop";
+        }
+    }
 }
 
 <h1 class=" text-center">statues of admission elgibilty </h1>
@@ -14,54 +26,97 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Type_of_admission_eligibilty)
+           Type of admission eligibilty
 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Begaining_date_of_the_process)
+              Begaining date of theprocess
 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.semester_no)
-
-            </th>
-            <th>
-
-                @Html.DisplayNameFor(model => model.semester_Date)
+             semester no
 
             </th>
             <th>
 
-                @Html.DisplayNameFor(model => model.Number_Student)
+              semester Date
+
+            </th>
+            <th>
+
+              status
 
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type_of_admission_eligibilty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Begaining_date_of_the_process)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.semester_no)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.semester_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number_Student)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
-                @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
-            </td>
-        </tr>
-}
+        
+@{if (Model.lisat.Count!=0)foreach (var item in Model.lisat) {
+            if (item.id==Model.lisat.Last().id)
+            {
+               <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type_of_admission_eligibilty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Begaining_date_of_the_process)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.semester_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.semester_Date)
+                </td>
+                <td>
+                    
+                      <form asp-action="AdmissionStartOrStop" id="switchform">
+                        <input hidden  asp-for="id"  value="@item.id"/>
+                       <div class="custom-control custom-switch">
+      <input type="checkbox" asp-for="status" onchange="    toggleswitch();" class="custom-control-input" id="customSwitch1">
+      <label class="custom-control-label text-danger" for="customSwitch1">@statuesofaddmission</label>
+    </div>
+                     
+                    </form>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
+                    @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+                </td>
+                    </tr>
+            }
+            else
+            {  <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type_of_admission_eligibilty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Begaining_date_of_the_process)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.semester_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.semester_Date)
+                </td>
+                <td>
+                    stoped
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
+                    @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+                
+            }
+          
+}}
     </tbody>
 </table>
+<script>
+function toggleswitch() {
+    document.getElementById("switchform").submit();
+}
+</script>
