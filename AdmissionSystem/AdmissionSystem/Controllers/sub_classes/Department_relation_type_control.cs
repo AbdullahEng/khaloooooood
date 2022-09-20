@@ -2,7 +2,6 @@
 using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
-    [Authorize(Roles = "Admin")]
     public class Department_relation_type_control : Controller
     {
         private readonly CRUD_Operation_Interface<Department_relation_Type> depart_Relat_Ty_repo;

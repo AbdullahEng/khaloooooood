@@ -1,7 +1,6 @@
 ﻿using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.View_Model;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 {
-    [Authorize(Roles ="Admin")]
     public class AdminControl : Controller
     {
         private readonly CRUD_Operation_Interface<Country> countryRepoo;
