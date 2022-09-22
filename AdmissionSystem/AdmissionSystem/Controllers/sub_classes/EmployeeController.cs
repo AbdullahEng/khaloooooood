@@ -357,33 +357,34 @@ namespace AdmissionSystem.Controllers
                         year = year - 1;
                     }
 
-
-                    var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving).LastOrDefault();
-
+               
+                    //var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving).LastOrDefault();
+                   
+                    var Laststudent = student_Repository.List().Where(a => a.UnvirstyId != null).OrderBy(a=>a.UnvirstyId).LastOrDefault();
                     if (Laststudent == null)
                     {
                         student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + "0001");
                     }
-                    else if (Laststudent.FK_Student_Info.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year != student.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year && semester_Number == 1)
+                    else if (Laststudent.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year != student.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year && semester_Number == 1)
                     {
                         student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + "0001");
                     }
                     else
                     {
-                        string SectionofNumber = Laststudent.FK_Student_Info.UnvirstyId.ToString().Substring(5);
+                        string SectionofNumber = Laststudent.UnvirstyId.ToString().Substring(5);
 
                         if (int.Parse(SectionofNumber) == 9999)
                         {
                             student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + (int.Parse(SectionofNumber) + 1).ToString());
                         }
-                        else if (Laststudent.FK_Student_Info.Statues_Of_Admission_Eligibilty.semester_no != student.Statues_Of_Admission_Eligibilty.semester_no)
+                        else if (Laststudent.Statues_Of_Admission_Eligibilty.semester_no != student.Statues_Of_Admission_Eligibilty.semester_no)
                         {
                             student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + "0001");
 
                         }
                         else
                         {
-                            student.UnvirstyId = Laststudent.FK_Student_Info.UnvirstyId + 1;
+                            student.UnvirstyId = Laststudent.UnvirstyId + 1;
                         }
                     }
                     student_Repository.Update(id,student);
@@ -842,33 +843,33 @@ namespace AdmissionSystem.Controllers
                         year = year - 1;
                     }
 
-                    var lista = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving);
-                    var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving).LastOrDefault();
+                    // var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving).LastOrDefault();
+                   var LastStudent = student_Repository.List().Where(a => a.UnvirstyId != null).OrderBy(a => a.UnvirstyId).LastOrDefault();
 
-                    if (Laststudent == null)
+                    if (LastStudent == null)
                     {
                         student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + "0001");
                     }
-                    else if (Laststudent.FK_Student_Info.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year != student.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year && semester_Number == 1)
+                    else if (LastStudent.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year != student.Statues_Of_Admission_Eligibilty.Begaining_date_of_the_process.Year && semester_Number == 1)
                     {
                         student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + "0001");
                     }
                     else
                     {
-                        string SectionofNumber = Laststudent.FK_Student_Info.UnvirstyId.ToString().Substring(5);
+                        string SectionofNumber = LastStudent.UnvirstyId.ToString().Substring(5);
 
                         if (int.Parse(SectionofNumber) == 9999)
                         {
                             student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + (int.Parse(SectionofNumber) + 1).ToString());
                         }
-                        else if (Laststudent.FK_Student_Info.Statues_Of_Admission_Eligibilty.semester_no != student.Statues_Of_Admission_Eligibilty.semester_no)
+                        else if (LastStudent.Statues_Of_Admission_Eligibilty.semester_no != student.Statues_Of_Admission_Eligibilty.semester_no)
                         {
                             student.UnvirstyId = double.Parse(year.ToString() + semester_Number.ToString() + "0001");
 
                         }
                         else
                         {
-                            student.UnvirstyId = Laststudent.FK_Student_Info.UnvirstyId + 1;
+                            student.UnvirstyId = LastStudent.UnvirstyId + 1;
                         }
                     }
                 }
