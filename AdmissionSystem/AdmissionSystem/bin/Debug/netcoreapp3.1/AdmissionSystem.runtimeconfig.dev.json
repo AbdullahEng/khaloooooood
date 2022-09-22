@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\khale\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\khale\\.nuget\\packages"
-    ]
-  }
-}
