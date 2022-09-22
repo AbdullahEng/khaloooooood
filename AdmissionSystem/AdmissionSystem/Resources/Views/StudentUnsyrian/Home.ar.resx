@@ -192,6 +192,9 @@
   <data name="Thank you for completing all requists." xml:space="preserve">
     <value>شكرا لإكمال كل الطلبات</value>
   </data>
+  <data name="Thank you for completing all the requists.&lt;br&gt;please wait for results to be released." xml:space="preserve">
+    <value>الرجاء الإنتظار الى حين إصدار النتائج&lt;br&gt;شكرا لك لإتمام جميع الطلبات</value>
+  </data>
   <data name="the scaler intrduced by the Ministry of Higher Education Standards." xml:space="preserve">
     <value>حساب المعدل تم بحسب قوانين وزارة التعليم العالي السورية</value>
   </data>

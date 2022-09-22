@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap-rtl@3.4.0",
+      "destination": "wwwroot/lib/bootstrap-rtl/"
+    },
+    {
+      "library": "limonte-sweetalert2@11.4.26",
+      "destination": "wwwroot/limonte-sweetalert2/"
+    },
+    {
+      "library": "aos@2.3.4",
+      "destination": "wwwroot/aos/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "font-awesome@6.2.0",
+      "destination": "wwwroot/lib/font-awesome/"
+    }
+  ]
+}

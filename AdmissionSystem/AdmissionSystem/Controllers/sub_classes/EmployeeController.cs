@@ -358,7 +358,7 @@ namespace AdmissionSystem.Controllers
                     }
 
 
-                    var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).LastOrDefault();
+                    var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving).LastOrDefault();
 
                     if (Laststudent == null)
                     {
@@ -842,8 +842,8 @@ namespace AdmissionSystem.Controllers
                         year = year - 1;
                     }
 
-
-                    var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).LastOrDefault();
+                    var lista = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving);
+                    var Laststudent = statues_Of_Student_Repository.List().Where(c => c.Checked_city_certificate == true && c.Checked_Identity == true && c.Checked_Rate == true && c.Checked_recipet == true).OrderBy(a => a.Date_of_Acshiving).LastOrDefault();
 
                     if (Laststudent == null)
                     {
