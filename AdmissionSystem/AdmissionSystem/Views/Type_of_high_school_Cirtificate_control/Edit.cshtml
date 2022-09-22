@@ -1,11 +1,14 @@
 ﻿@model AdmissionSystem.Model.Type_of_high_school_Cirtificate
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center">Edit Type of high school Cirtificate</h1>
+<h1 class="text-center">@localizer["Edit Type of high school Cirtificate"]</h1>
 
 @*<h4>Type_of_high_school_Cirtificate</h4>*@
 <hr />
@@ -88,12 +91,12 @@
         }*@
           
             <div class="form-group">
-                <label asp-for="type" class="control-label"></label>
+                <label asp-for="type" class="control-label">@localizer["Type"]</label>
                 <input asp-for="type" class="form-control" />
                 <span asp-validation-for="type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Save"]" class="btn btn-outline-primary" />
             </div>
             <div>
                 <a asp-action="Index" class="btn btn-secondary btn-circle  ">

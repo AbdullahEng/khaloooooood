@@ -1,0 +1,157 @@
+﻿@model AdmissionSystem.View_Model.UnStudent_View_Model
+@using System.Globalization
+
+@inject IViewLocalizer localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@{Layout="_StudentLayout";}
+<link rel="stylesheet" href="~/aos/aos.css"/>
+<link rel="stylesheet" href="~/Desighn/Home.css"/>
+
+ @{
+        if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+        {
+    <h1 hidden id="khaled">khaled</h1>
+} 
+    else {<h1 hidden id="khaled">nokhaled</h1>
+    }
+    }
+
+      
+
+<div   class="ContainerRegForm" id="hello_part" >
+    <img src="~/Desighn/welcomPage.webp" class="img-fluid float-right"/>
+    <br> <h1>@localizer["Welcome"] @Model.First_Name_EN 👋</h1>
+    <br> <h5 class="">@localizer["We thank you for choosing us as a part of your future career"]<br>@localizer["So get started and good luck for you."]  </h5>    
+ <br> <br> 
+  <b>@localizer["Note"]</b>
+      <p>
+  @localizer["This system enable you to sumbit your information easily and make a trusted and secure storage of your data so  please read the instructions carfully and start your journy with us."]   
+    </p>
+<button type="button" onclick="    hidefunction();" class="btn btn-primary shinbutton" data-toggle="modal" data-target=".bd-example-modal-lg">@localizer["Get started"]</button>
+<br>
+<br>
+
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     <form id="regForm" action="">
+<h2 class="text-center">@localizer["Admission Instructions"]</h2>
+<br>
+
+<!-- One "tab" for each step in the form: -->
+<div class="tab">
+     <h5 class="alert alert-primary text-center " role="alert">step one </h5>
+    <div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
+
+</div>
+
+<div class="tab">
+       <h5 class="alert alert-primary text-center " role="alert">step tow </h5>
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
+</div>
+
+<div class="tab">   
+    <h5 class="alert alert-primary text-center " role="alert">step three </h5>
+   <div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
+ 
+</div>
+
+<div class="tab"> 
+    <h5 class="alert alert-primary text-center " role="alert">step four </h5>
+   <div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A4HYgv21KXs">
+</iframe>
+</div>
+</div>
+
+<div style="overflow:auto;">
+  <div style="float:right;">
+      <br><br><br>
+    <button type="button"  class="btn btn-primary btn-sm" id="prevBtn" onclick="nextPrev(-1)">@localizer["Previous"]</button>
+    <button type="button"  class="btn btn-primary btn-sm" id="nextBtn" onclick="nextPrev(1)">Next</button>
+     <a hidden asp-action="Edit" id="Edit_anchore" class="btn btn-primary btn-sm" asp-route-id=@Model.id>@localizer["Start"]</a>
+
+  </div>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+<div style="text-align:center;margin-top:40px;">
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
+
+</form>
+    </div>
+  </div>
+</div>
+
+
+
+    <script>
+    var currentTab = 0;
+showTab(currentTab); 
+
+function showTab(n) {
+ var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").hidden = true;
+       document.getElementById("Edit_anchore").hidden = false;
+       if (document.getElementById("khaled").textContent == "khaled") {
+            document.getElementById("nextBtn").innerHTML = "تسليم";
+            //me document.getElementById("nextBtn").type = "submit";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+            //me document.getElementById("nextBtn").type = "submit";
+ }
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+     document.getElementById("nextBtn").hidden = false;
+       document.getElementById("Edit_anchore").hidden = true;
+        if (document.getElementById("khaled").textContent == "khaled") {
+          document.getElementById("nextBtn").innerHTML = "التالي";
+      } else {
+          document.getElementById("nextBtn").innerHTML = "Next";
+      }
+  }
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  var x = document.getElementsByClassName("tab");
+ 
+  x[currentTab].style.display = "none";
+  currentTab = currentTab + n;
+  if (currentTab >= x.length) {
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  showTab(currentTab);
+}
+
+function fixStepIndicator(n) {
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  x[n].className += " active";
+}
+</script>

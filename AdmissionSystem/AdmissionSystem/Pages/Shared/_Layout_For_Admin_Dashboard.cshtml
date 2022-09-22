@@ -1,7 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
+
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -60,6 +66,17 @@
 </head>
 
 <body id="page-top ">
+      @{ if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+        {
+            <link href="~/lib/bootstrap-rtl/css/bootstrap-flipped.css" rel="stylesheet" />
+            <link href="~/lib/bootstrap-rtl/css/bootstrap-rtl.css" rel="stylesheet" />
+            <link rel="stylesheet"
+                  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+                  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+                  crossorigin="anonymous" />
+
+        }
+    }
     @using Microsoft.AspNetCore.Identity
     @using AdmissionSystem.Model.Identity_classes;
     @inject SignInManager<MyIdentityUser> SignInManager
@@ -82,7 +99,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-shield-alt"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"> Admin Dashboard <sup></sup></div>
+                <div class="sidebar-brand-text mx-3"> @localizer["Admin Dashboard"] <sup></sup></div>
             </a>
 
             <!-- Divider -->
@@ -92,7 +109,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/AdminControl/Index">
                     <i class="fas fa-fw fa-lightbulb"></i>
-                    <span>Admission System</span>
+                    <span>@localizer["Admission System"]</span>
                 </a>
             </li>
 
@@ -101,7 +118,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Fundamental Settings
+                @localizer["Fundamental Settings"]
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -109,14 +126,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components<sup>1</sup></span>
+                    <span>@localizer["Components"]<sup>1</sup></span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">It must be set first:</h6>
-                        <a class="collapse-item" href="~/FacultyControl/Index">Faculty</a>
-                        <a class="collapse-item" href="~/CountryControl/Index">Country</a>
-                        <a class="collapse-item" href="~/Type_of_high_school_Cirtificate_control/Index">Type of high school Cirtificate</a>
+                        <h6 class="collapse-header">@localizer["It must be set first:"]</h6>
+                        <a class="collapse-item" href="~/FacultyControl/Index">@localizer["Faculty"]</a>
+                        <a class="collapse-item" href="~/CountryControl/Index">@localizer["Country"]</a>
+                        <a class="collapse-item" href="~/Type_of_high_school_Cirtificate_control/Index">@localizer["Type of high school Cirtificate"]</a>
                     </div>
                 </div>
             </li>
@@ -126,14 +143,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Components<sup>2</sup></span>
+                    <span>@localizer["Components"]<sup>2</sup></span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Secondly,it must be set:</h6>
-                        <a class="collapse-item" href="~/DapartmentControl/Index">Department</a>
-                        <a class="collapse-item" href="~/statues_of_admission_elgibilty_control/Index">statues of admission</a>
+                        <h6 class="collapse-header">@localizer["Secondly,it must be set:"]</h6>
+                        <a class="collapse-item" href="~/DapartmentControl/Index">@localizer["Department"]</a>
+                        <a class="collapse-item" href="~/statues_of_admission_elgibilty_control/Index">@localizer["statues of admission"]</a>
 
                     </div>
                 </div>
@@ -146,15 +163,15 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiestwo"
                    aria-expanded="true" aria-controls="collapseUtilitiestwo">
                     <i class="fas fa-fw fa-pencil-ruler"></i>
-                    <span>Components<sup>3</sup></span>
+                    <span>@localizer["Components"]<sup>3</sup></span>
                 </a>
                 <div id="collapseUtilitiestwo" class="collapse" aria-labelledby="headingUtilitiestwo"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Third, it must be set:</h6>
-                        <a class="collapse-item" href="~/percentage_count_for_each_country_Control/Index">percentage count<br />  for each country</a>
-                        <a class="collapse-item" href="~/Broken_Relationshib_Stat_Dep_Chair_Control/Index">Broken Relationshib<br /> Stat Dep Chair</a>
-                        <a class="collapse-item" href="~/Department_relation_type_control/Index">Department relation type</a>
+                        <h6 class="collapse-header">@localizer["Third, it must be set:"]</h6>
+                        <a class="collapse-item" href="~/percentage_count_for_each_country_Control/Index">@localizer["percentage count"]<br />  @localizer["for each country"]</a>
+                        <a class="collapse-item" href="~/Broken_Relationshib_Stat_Dep_Chair_Control/Index">@localizer["Broken Relationshib"]<br />@localizer["Stat Dep Chair"] </a>
+                        <a class="collapse-item" href="~/Department_relation_type_control/Index">@localizer["Department relation type"] </a>
 
                     </div>
                 </div>
@@ -166,7 +183,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                The Admission
+               @localizer["The Admission"] 
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -174,12 +191,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                    aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Accepted students</span>
+                    <span>@localizer["Accepted students"]</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="~/Algorithm/AlgorithmSyrain">Syrian Admission</a>
-                        <a class="collapse-item" href="~/Algorithm/AlgorithmUNSyrain">UnSyrian Admission</a>
+                        <a class="collapse-item" href="~/Algorithm/AlgorithmSyrain">@localizer["Syrian Admission"]</a>
+                        <a class="collapse-item" href="~/Algorithm/AlgorithmUNSyrain">@localizer["UnSyrian Admission"]</a>
 
                     </div>
                 </div>
@@ -191,14 +208,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagessearch"
                    aria-expanded="true" aria-controls="collapsePagessearch">
                     <i class="fas fa-fw fa-search"></i>
-                    <span>searches</span>
+                    <span>@localizer["searches"]</span>
                 </a>
                 <div id="collapsePagessearch" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
                      
-                        <a class="collapse-item" href="~/TrackingRate_control/TrackingStudnetrate">Tracking rate</a>
-                        <a class="collapse-item" href="~/Statues_Of_Student_control/statusofstudnet">status of student</a>
+                        <a class="collapse-item" href="~/TrackingRate_control/TrackingStudnetrate">@localizer["Tracking rate"]</a>
+                        <a class="collapse-item" href="~/Statues_Of_Student_control/statusofstudnet">@localizer["status of student"]</a>
 
                     </div>
                 </div>
@@ -210,7 +227,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="~/Account/Register_Employee">
                     <i class="fas fa-fw fa-plus"></i>
-                    <span>Register new Employee</span>
+                    <span>@localizer["Register new Employee"]</span>
                 </a>
             </li>
 
@@ -434,13 +451,13 @@
                                      aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="~/Account/ChangePassword">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Change Password
+                                       @localizer["Change Password"] 
                                     </a>
                                     
                                     <a class="dropdown-item"  asp-action="EditUser" asp-controller="Account"
                                      >
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Change info
+                                       @localizer["Change info"] 
                                     </a>
                                     <form asp-action="LogOff" asp-controller="Account" method="post">
 

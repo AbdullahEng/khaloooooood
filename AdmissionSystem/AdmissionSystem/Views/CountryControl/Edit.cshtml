@@ -1,11 +1,14 @@
 ﻿@model AdmissionSystem.Model.Country
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center">Edit Country</h1>
+<h1 class="text-center">@localizer["Edit Country"]</h1>
 
 
 <hr />
@@ -91,15 +94,15 @@
 
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="country_name" class="control-label"></label>
+                <label asp-for="country_name" class="control-label">@localizer["Country name"]</label>
                 <input asp-for="country_name" class="form-control" />
                 <span asp-validation-for="country_name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Save"]" class="btn btn-outline-primary" />
             </div>
             <div>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Index" class="btn btn-secondary">@localizer["Back to List"]</a>
             </div>
         </form>
     </div>

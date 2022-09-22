@@ -31,87 +31,94 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
         // GET: AdminControl
         public ActionResult Index(int id)
         {
-            //   var ccountres = countryRepoo.List();
-            //   var studnets1 = studentRepooo.List().Where(s=>s.Cirtificate_city.id==1).ToList();
-            //   var studnets2 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 2).ToList();
-            //   var studnets3 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 3).ToList();
-            //   var studnets4 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 4).ToList();
-            //   var studnets5 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 5).ToList();
-            //   var studnets6 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 6).ToList();
-            //   var studnets7 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 7).ToList();
-            //   var studnets8 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 8).ToList();
-            //   var studnets9 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 9).ToList();
-            //   var studnets10 = studentRepooo.List().Where(s => s.Cirtificate_city.id == 10).ToList();
-
-
-            //   var sY = studentRepooo.List().Where(s => s.high_school_certificate == "Syrian").ToList();
-            //   var UN = studentRepooo.List().Where(s => s.high_school_certificate == "UNSyrian").ToList();
-
-            //   var All = studentRepooo.List().ToList();
-
-            //   var acc = acceptedRepooo.List().Where(a=>a.Accepted_Or_Not==true).ToList();
-            //   var UNacc = acceptedRepooo.List().Where(a => a.Accepted_Or_Not == false).ToList();
-            //   var SyChecked = stautusofstuRepooo.List().Where(a => a.FK_Student_Info.high_school_certificate== "Syrian" 
-            //                                                   &&a.Checked_city_certificate==true
-            //                                                   &&a.Checked_Identity==true
-            //                                                   &&a.Checked_Rate==true
-            //                                                   &&a.Checked_recipet==true
-
-            //   ).ToList();
-            //   var SyUNChecked = stautusofstuRepooo.List().Where(a => a.FK_Student_Info.high_school_certificate == "Syrian"
-            //                                                  ||a.Checked_city_certificate == false
-            //                                                  || a.Checked_Identity == false
-            //                                                  || a.Checked_Rate == false
-            //                                                  || a.Checked_recipet == false
-
-            //  ).ToList();
+            // a => (someCondition) ? a == "something" : true
+            var ccountres = countryRepoo.List();
+            var studnets1 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 1 : false).ToList();
+            var studnets2 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 2 : false).ToList();
+            var studnets3 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 3 : false).ToList();
+            var studnets4 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 4 : false).ToList();
+            var studnets5 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 5 : false).ToList();
+            var studnets6 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 6 : false).ToList();
+            var studnets7 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 7 : false).ToList();
+            var studnets8 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 8 : false).ToList();
+            var studnets9 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 9 : false).ToList();
+            var studnets10 = studentRepooo.List().Where(s => (s.Cirtificate_city != null) ? s.Cirtificate_city.id == 10 : false).ToList();
 
 
 
-            //   var UNSyChecked = stautusofstuRepooo.List().Where(a => a.FK_Student_Info.high_school_certificate == "UNSyrian"
-            //                                                  && a.Checked_city_certificate == true
-            //                                                  && a.Checked_Identity == true
-            //                                                  && a.Checked_Rate == true
-            //                                                  && a.Checked_recipet == true
+            var sY = studentRepooo.List().Where(s => (s.high_school_certificate != null) ? s.high_school_certificate == "Syrian" : false).ToList();
+            var UN = studentRepooo.List().Where(s => (s.high_school_certificate != null) ? s.high_school_certificate == "UNSyrian" : false).ToList();
 
-            //  ).ToList();
+            var All = studentRepooo.List().ToList();
 
+            var acc = acceptedRepooo.List().Where(a =>  a.Accepted_Or_Not == true ).ToList();
+            var UNacc = acceptedRepooo.List().Where(a => a.Accepted_Or_Not == false).ToList();
+            var SyChecked = stautusofstuRepooo.List().Where(a => (a.FK_Student_Info != null) ? a.FK_Student_Info.high_school_certificate == "Syrian"
+                                                            && a.Checked_city_certificate == true
+                                                            && a.Checked_Identity == true
+                                                            && a.Checked_Rate == true
+                                                            && a.Checked_recipet == true 
+                                                            : false
 
-            //   var UNSyUNChecked = stautusofstuRepooo.List().Where(a => a.FK_Student_Info.high_school_certificate == "UNSyrian"
-            //                                                || a.Checked_city_certificate == false
-            //                                                || a.Checked_Identity == false
-            //                                                || a.Checked_Rate == false
-            //                                                || a.Checked_recipet == false
+            ).ToList();
+            var SyUNChecked = stautusofstuRepooo.List().Where(a => (a.FK_Student_Info != null) ? a.FK_Student_Info.high_school_certificate == "Syrian"
+                                                           || a.Checked_city_certificate == false
+                                                           || a.Checked_Identity == false
+                                                           || a.Checked_Rate == false
+                                                           || a.Checked_recipet == false 
+                                                           : false
 
-            //).ToList();
-            //   var model = new Adminviewmodel {
-            //       country1 = studnets1.Count.ToString(),
-            //       country2 = studnets2.Count.ToString(),
-            //       country3 = studnets3.Count.ToString(),
-            //       country4 = studnets4.Count.ToString(),
-            //       country5 = studnets5.Count.ToString(),
-            //       country6 = studnets6.Count.ToString(),
-            //       country7 = studnets7.Count.ToString(),
-            //       country8 = studnets8.Count.ToString(),
-            //       country9 = studnets9.Count.ToString(),
-            //       country10 = studnets10.Count.ToString(),
-            //       Systudent = sY.Count.ToString(),
-            //       UnSYstudent = UN.Count.ToString(),
-            //       allstudentNO = All.Count.ToString(),
-            //       AcceptStudnet = acc.Count.ToString(),
-            //       UNAcceptStudnet = UNacc.Count.ToString(),
-            //       studentSYChecked = SyChecked.Count.ToString(),
-            //       studentSYUNChecked= SyUNChecked.Count.ToString(),
-            //       StudentUNSYchecked= UNSyChecked.Count.ToString(),
-            //       StudentUNSYUNchecked = UNSyUNChecked.Count.ToString(),
+           ).ToList();
 
 
 
-            //   };
+            var UNSyChecked = stautusofstuRepooo.List().Where(a => (a.FK_Student_Info != null) ? a.FK_Student_Info.high_school_certificate == "UNSyrian"
+                                                           && a.Checked_city_certificate == true
+                                                           && a.Checked_Identity == true
+                                                           && a.Checked_Rate == true
+                                                           && a.Checked_recipet == true
+                                                           : false
+
+           ).ToList();
 
 
-            //   return View(model);
-            return View();
+            var UNSyUNChecked = stautusofstuRepooo.List().Where(a => (a.FK_Student_Info != null) ? a.FK_Student_Info.high_school_certificate == "UNSyrian"
+                                                        && a.Checked_city_certificate == false
+                                                        && a.Checked_Identity == false
+                                                        && a.Checked_Rate == false
+                                                         && a.Checked_recipet == false 
+                                                         : false
+
+         ).ToList();
+            var model = new Adminviewmodel
+            {
+                country1 = studnets1.Count.ToString(),
+                country2 = studnets2.Count.ToString(),
+                country3 = studnets3.Count.ToString(),
+                country4 = studnets4.Count.ToString(),
+                country5 = studnets5.Count.ToString(),
+                country6 = studnets6.Count.ToString(),
+                country7 = studnets7.Count.ToString(),
+                country8 = studnets8.Count.ToString(),
+                country9 = studnets9.Count.ToString(),
+                country10 = studnets10.Count.ToString(),
+                Systudent = sY.Count.ToString(),
+                UnSYstudent = UN.Count.ToString(),
+                allstudentNO = All.Count.ToString(),
+                AcceptStudnet = acc.Count.ToString(),
+                UNAcceptStudnet = UNacc.Count.ToString(),
+                studentSYChecked = SyChecked.Count.ToString(),
+                studentSYUNChecked = SyUNChecked.Count.ToString(),
+                StudentUNSYchecked = UNSyChecked.Count.ToString(),
+                StudentUNSYUNchecked = UNSyUNChecked.Count.ToString(),
+
+
+
+            };
+
+
+            return View(model);
+           // return View();
         }
 
         // GET: AdminControl/Details/5

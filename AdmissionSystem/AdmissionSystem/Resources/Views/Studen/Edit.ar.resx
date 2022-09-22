@@ -120,6 +120,9 @@
   <data name="Addmition eleigibilty" xml:space="preserve">
     <value>مفاضلة</value>
   </data>
+  <data name="Alepo" xml:space="preserve">
+    <value>حلب</value>
+  </data>
   <data name="Birth" xml:space="preserve">
     <value>المواليد</value>
   </data>
@@ -144,6 +147,12 @@
   <data name="Current Address" xml:space="preserve">
     <value>العنوان الحالي</value>
   </data>
+  <data name="Damascus" xml:space="preserve">
+    <value>دمشق</value>
+  </data>
+  <data name="Daraa" xml:space="preserve">
+    <value>درعا</value>
+  </data>
   <data name="Date of High School Cirtificate" xml:space="preserve">
     <value>تاريخ الشهادة الثانوية</value>
   </data>
@@ -165,6 +174,9 @@
   <data name="femal" xml:space="preserve">
     <value>انثى </value>
   </data>
+  <data name="First course" xml:space="preserve">
+    <value>الدورة الأولى</value>
+  </data>
   <data name="First Name in Arbic" xml:space="preserve">
     <value>الإسم الأول</value>
   </data>
@@ -183,11 +195,20 @@
   <data name="Grand FAther Name in English" xml:space="preserve">
     <value>اسم الجد بالإنجليزية</value>
   </data>
+  <data name="Hama" xml:space="preserve">
+    <value>حماة</value>
+  </data>
+  <data name="Haska" xml:space="preserve">
+    <value>الحسكة</value>
+  </data>
   <data name="high school certificate" xml:space="preserve">
     <value>منشأ الشهادة الثانوية</value>
   </data>
   <data name="Home Phone" xml:space="preserve">
     <value>رقم المنزل</value>
+  </data>
+  <data name="Homs" xml:space="preserve">
+    <value>حمص</value>
   </data>
   <data name="Identity back image" xml:space="preserve">
     <value>الصورة الخلفية للهوية</value>
@@ -198,17 +219,23 @@
   <data name="Identity No" xml:space="preserve">
     <value>الرقم الوطني</value>
   </data>
+  <data name="Idleb" xml:space="preserve">
+    <value>إدلب</value>
+  </data>
   <data name="Image Of Crtificat" xml:space="preserve">
     <value>صورة الشهادة</value>
   </data>
   <data name="informaion part 1" xml:space="preserve">
-    <value>معلومات عن الشهادة</value>
+    <value>معلومات عن الهوية ومكان الإقامة</value>
   </data>
   <data name="informaion part 2" xml:space="preserve">
     <value>معلومات عن الشهادة</value>
   </data>
-  <data name="LAnguge of the addmintion" xml:space="preserve">
+  <data name="language of the admission" xml:space="preserve">
     <value>لغة التفاضل</value>
+  </data>
+  <data name="Latakia" xml:space="preserve">
+    <value>اللاذقية</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>ذكر</value>
@@ -234,17 +261,29 @@
   <data name="Next" xml:space="preserve">
     <value>التالي</value>
   </data>
-  <data name="Nick name" xml:space="preserve">
-    <value>الكنية </value>
-  </data>
   <data name="Passport No" xml:space="preserve">
     <value>رقم الجواز</value>
+  </data>
+  <data name="Please choose" xml:space="preserve">
+    <value>الرجاء الإختيار</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>السابق</value>
   </data>
+  <data name="Quneitra" xml:space="preserve">
+    <value>القنيطرة</value>
+  </data>
+  <data name="Raka" xml:space="preserve">
+    <value>الرقة</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>التسجيل</value>
+  </data>
+  <data name="Secound course" xml:space="preserve">
+    <value>الدورة الثانية</value>
+  </data>
+  <data name="Secound name" xml:space="preserve">
+    <value>الكنية </value>
   </data>
   <data name="Single" xml:space="preserve">
     <value>عازب</value>
@@ -254,6 +293,12 @@
   </data>
   <data name="Subscription Number" xml:space="preserve">
     <value>رقم الإكتتاب</value>
+  </data>
+  <data name="Sweida" xml:space="preserve">
+    <value>السويداء</value>
+  </data>
+  <data name="Tartous" xml:space="preserve">
+    <value>طرطوس</value>
   </data>
   <data name="The Rate" xml:space="preserve">
     <value>المعدل</value>

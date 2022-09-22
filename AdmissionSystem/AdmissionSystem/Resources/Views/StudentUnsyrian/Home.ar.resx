@@ -127,7 +127,7 @@
     <value>تأكيد</value>
   </data>
   <data name="Confirme The Request" xml:space="preserve">
-    <value>تأكيد الطلب</value>
+    <value>تثبيت</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
@@ -207,7 +207,7 @@
   <data name="Welcome" xml:space="preserve">
     <value>مرحبا</value>
   </data>
-  <data name="when you make the conferming we considre that you have reivewed all your personal information, your uploded files and your wishes so pleas make sure that all is correct." xml:space="preserve">
+  <data name="when you make the confirmation we considre that you have reivewed all your personal information and your uploded files, so pleas make sure that all is correct." xml:space="preserve">
     <value>عندما يتم الضغط على تثبيت ,نعتبر أن الطالب قد تأكد من معلوماته وأدخل كل الملفات بالشكل المطلوب لذا الرجاء المراجعة قبل التثبيت</value>
   </data>
   <data name="You will not be able to edit any more" xml:space="preserve">

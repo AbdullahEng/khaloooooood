@@ -120,6 +120,15 @@
   <data name="Admission Instructions" xml:space="preserve">
     <value>تعليمات التقدم</value>
   </data>
+  <data name="After choosing your wishes you have to confirme your requist" xml:space="preserve">
+    <value>بعد إختيار الرغبات يجب تثبيت الطلب يا حباب</value>
+  </data>
+  <data name="After entering your information you have to fill your wishes" xml:space="preserve">
+    <value>بعد إدخال البيانات يجب إختيار الرغبات بدقة يا حباب</value>
+  </data>
+  <data name="After privouse steps we can say that you finished all the requirments and you have to wait until the results exported." xml:space="preserve">
+    <value>بعد كل هذه الخطوات ينتقل طلبك الى موظف القبول والتسجيل لفحص الطلب والتأكد </value>
+  </data>
   <data name="Confirme" xml:space="preserve">
     <value>تأكيد</value>
   </data>
@@ -180,16 +189,19 @@
   <data name="stay tuned to your Email" xml:space="preserve">
     <value>ابقى متنبها لبريدك الإلكتروني</value>
   </data>
+  <data name="Student enter his information like the youtube sample below" xml:space="preserve">
+    <value>يجب إدخال البيانات كما هو موضح في الفيديو</value>
+  </data>
   <data name="Thank you for completing all requists." xml:space="preserve">
     <value>شكرا لإكمال كل الطلبات</value>
   </data>
-  <data name="This system enable you to sumbit your information easily and make a trusted and secure storage of your data so  pleas read the instructions carfully and start your journy with us." xml:space="preserve">
+  <data name="This system enable you to sumbit your information easily and make a trusted and secure storage of your data so  please read the instructions carfully and start your journy with us." xml:space="preserve">
     <value>هذا النظام يمكنك من إدخال بياناتك بشكل سهل مبسط, مع امكانية تخزين بياناتك بشكل سري وآمن, الرجاء قراءة التعليمات بتمهل وأما الان فالتبدأ رحلتك معنا</value>
   </data>
   <data name="We noted that you did not make a confiramtion for your addmission request, pleas make a conferm or your data will be ignored." xml:space="preserve">
     <value>لاحظنا أنك لم تقم بعملية التأكيد على طلبك ,الرجاء التأكد من بياناتك وقم بالضغط على "تثبيت" والا سوف يتم تجاهل بياناتك</value>
   </data>
-  <data name="We thank you for choosing us as a part of your futur career" xml:space="preserve">
+  <data name="We thank you for choosing us as a part of your future career" xml:space="preserve">
     <value>نشكرك لإختيارك جامعة القلمون الخاصة لتكون جزءا من مستقبلك الواعد </value>
   </data>
   <data name="Welcome" xml:space="preserve">

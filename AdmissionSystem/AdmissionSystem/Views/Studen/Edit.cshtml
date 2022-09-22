@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="Nick_Name">@localizer["Nick name"] </label>
+                            <label asp-for="Nick_Name">@localizer["Secound name"] </label>
                             <input  asp-for="Nick_Name" class="form-control" />
                             <span asp-validation-for="Nick_Name" class="text-danger small"></span>
                         </div>
@@ -219,7 +219,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="Identity_No" class="control-label">@localizer["Identity No"]</label>
-                            <input asp-for="Identity_No" class="form-control"  />
+                            <input readonly asp-for="Identity_No" class="form-control"  />
                             <span asp-validation-for="Identity_No" class="text-danger small"></span>
                         </div>
                     </div>
@@ -315,19 +315,19 @@
                         <div class="form-group">
                             <label asp-for="city_of_high_school_cirtificate" class="control-label">@localizer["City of High School Cirtificate"]</label>
                           
-                            <select asp-for="city_of_high_school_cirtificate" class="form-control" >
+                            <select asp-for="city_of_high_school_cirtificate" class="form-control" style="font-family: Oxygen;font-size: 16px;" >
   <option >@localizer["Damascus"]</option>
   <option >@localizer["Homs"]</option>
   <option >@localizer["Hama"]</option>
-  <option >@localizer["Halap"]</option>
+  <option >@localizer["Alepo"]</option>
   <option >@localizer["Tartous"]</option>
   <option >@localizer["Latakia"]</option>
   <option >@localizer["Idleb"]</option>
 <option >@localizer["Haska"]</option>
 <option >@localizer["Raka"]</option>
-<option >@localizer["dara"]</option>
-<option >@localizer["sweda"]</option>
-<option >@localizer["Qunitar"]</option>
+<option >@localizer["Daraa"]</option>
+<option >@localizer["Sweida"]</option>
+<option >@localizer["Quneitra"]</option>
 
 
 
@@ -365,7 +365,7 @@
                         <div class="form-group">
                             <label asp-for="course_number" class="control-label">@localizer["course number"] </label>
                             
-                             <select asp-for="course_number" class="form-control">
+                             <select asp-for="course_number" class="form-control" style="font-family: Oxygen;font-size: 16px;">
                     <option value="1">@localizer["First course"]</option>
                     <option value="2">@localizer["Secound course"]</option>
                    
@@ -389,7 +389,7 @@
                         </div>
                     </div>
                     <div class="col">
-                         <label asp-for="LAnguge_of_the_addmintion" class="control-label">@localizer["LAnguge of the addmintion"]</label>
+                         <label asp-for="LAnguge_of_the_addmintion" class="control-label">@localizer["language of the admission"]</label>
                          <div class="btn-group btn-group-toggle"  data-toggle="buttons">
                          <label  for="kh"  asp-for="LAnguge_of_the_addmintion" class="btn btn-outline-primary " >
                          <input  asp-for="LAnguge_of_the_addmintion" type="radio" name="LAnguge_of_the_addmintion" id="kh" value="English" autocomplete="off" > @localizer["English"]
@@ -425,106 +425,7 @@
             <h2 class="alert alert-primary text-center " role="alert">@localizer["Uploading file"] </h2>
             <div class="container">
                  <div class="row">
-                    <div class="col ">
-                       
-                       @* <div class="controling1">
-                       
-                             <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL"class="rounded" style="object-fit: contain;width:150px;height:150px" />}
-                       
-                                                                           <!-- The Modal -->
-                                                                           <div id="myModal4" class="modal">
-                                                                           <span class="close4">&times;</span>
-                                                                           <img class="modal-content" id="img014">
-                                                                           <div id="caption4"></div>
-                                                                           </div>
-           
-                            
-                        @*<img src="~/Uploads/@Model.Image_of_crtificat_URL" style="width:124px;" class="img-thumbnail" />*@
-                        @*<input type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" />*@
-                        @*</div>*@
-                 
-                    <div class="bodyboximag">
-                  <!-- Upload Area -->
-<div id="uploadArea" class="upload-area">
-    <!-- Header -->
-    <div class="upload-area__header">
-      <h1 class="upload-area__title" >@localizer["Image Of Crtificat"]</h1>
-       <label asp-for="Image_Of_Crtificat" class="control-label">Upload your file here</label>
-                         
-      <p class="upload-area__paragraph">
-        File should be an image
-        <strong class="upload-area__tooltip">
-          Like
-          <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
-        </strong>
-      </p>
-    </div>
-    <button type="button" class="ButtonToggel btn btn-primary" onclick="myfunction();">change the image</button>
-    <!-- End Header --><br>
-    <br>
-  <div  class="TheImage">
-                             <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" class="rounded" style="object-fit: contain;width:300px;height:150px" />
-                       
-                                                                           <!-- The Modal -->
-                                                                           <div id="myModal4" class="modal ">
-                                                                           <span class="close4 ">&times;</span>
-                                                                           <img class="modal-content" id="img014">
-                                                                           <div id="caption4"></div>
-                                                                           </div>
-                                                                           </div>
-                                                                           <input id="Image_of_crtificat_URL" type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" value="@Model.Image_of_crtificat_URL"/>
-                                                                                 
-    <!-- Drop Zoon --><div class="ChooseImage">
-    <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-      <span class="drop-zoon__icon">
-        <i class='bx bxs-file-image'></i>
-      </span>
-      <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-      <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-         <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                               @* @if (Model.Image_of_crtificat_URL!="")
-                                {
-                                    <img src="~/Uploads/@Model.Image_of_crtificat_URL" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                }
-                                else
-                                {
-                                   <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-       
-                                }
-*@
-         
-     
-      <input type="file" id="fileInput" onchange="    showbar1();" onclick="    hideimageandbar1();" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="drop-zoon__file-input" accept="image/*">
-    </div>
-    <!-- End Drop Zoon -->
-  
-    <!-- File Details --><div class="hide_bar1">
-    <div id="fileDetails" class="upload-area__file-details file-details">
-      <h3 class="file-details__title">Uploaded File</h3>
-  
-      <div id="uploadedFile" class="uploaded-file">
-        <div class="uploaded-file__icon-container">
-          <i class='bx bxs-file-blank uploaded-file__icon'></i>
-          <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
-        </div>
-  
-        <div id="uploadedFileInfo" class="uploaded-file__info">
-          <span class="uploaded-file__name">Proejct 1</span>
-          <span class="uploaded-file__counter">0%</span>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-    <!-- End File Details -->
-  </div>
-  <!-- End Upload Area -->
-</div>
-
-     <span asp-validation-for="Image_Of_Crtificat" class="text-danger"></span>
-                      
-                    </div>
-                    <div class="col ">
+                          <div class="col ">
                          
 
 
@@ -601,11 +502,8 @@
      <span asp-validation-for="Identity_front_image" class="text-danger"></span>
                       
                     </div>
-                    
-                </div>
-                <br>
-                <div class="row ">
-                    <div class="col ">
+                 
+                      <div class="col ">
 
                       @*  <div class="form-group">
                             <label asp-for="Identity_back_image" class="control-label">@localizer["Identity back image"]</label>
@@ -703,6 +601,98 @@
 
 
      <span asp-validation-for="Identity_back_image" class="text-danger"></span>
+                      
+                    </div>
+               
+                    
+                </div>
+                <br>
+                <div class="row ">
+                  
+
+
+                       <div class="col ">
+                       
+                      
+                    <div class="bodyboximag">
+                  <!-- Upload Area -->
+<div id="uploadArea" class="upload-area">
+    <!-- Header -->
+    <div class="upload-area__header">
+      <h1 class="upload-area__title" >@localizer["Image Of Crtificat"]</h1>
+       <label asp-for="Image_Of_Crtificat" class="control-label">Upload your file here</label>
+                         
+      <p class="upload-area__paragraph">
+        File should be an image
+        <strong class="upload-area__tooltip">
+          Like
+          <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
+        </strong>
+      </p>
+    </div>
+    <button type="button" class="ButtonToggel btn btn-primary" onclick="myfunction();">change the image</button>
+    <!-- End Header --><br>
+    <br>
+  <div  class="TheImage">
+                             <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" class="rounded" style="object-fit: contain;width:300px;height:150px" />
+                       
+                                                                           <!-- The Modal -->
+                                                                           <div id="myModal4" class="modal ">
+                                                                           <span class="close4 ">&times;</span>
+                                                                           <img class="modal-content" id="img014">
+                                                                           <div id="caption4"></div>
+                                                                           </div>
+                                                                           </div>
+                                                                           <input id="Image_of_crtificat_URL" type="hidden" asp-for="Image_of_crtificat_URL" class="form-control" value="@Model.Image_of_crtificat_URL"/>
+                                                                                 
+    <!-- Drop Zoon --><div class="ChooseImage">
+    <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+      <span class="drop-zoon__icon">
+        <i class='bx bxs-file-image'></i>
+      </span>
+      <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
+      <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+         <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+                               @* @if (Model.Image_of_crtificat_URL!="")
+                                {
+                                    <img src="~/Uploads/@Model.Image_of_crtificat_URL" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+                                }
+                                else
+                                {
+                                   <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+       
+                                }
+*@
+         
+     
+      <input type="file" id="fileInput" onchange="    showbar1();" onclick="    hideimageandbar1();" name="Image_Of_Crtificat" asp-for="Image_Of_Crtificat" class="drop-zoon__file-input" accept="image/*">
+    </div>
+    <!-- End Drop Zoon -->
+  
+    <!-- File Details --><div class="hide_bar1">
+    <div id="fileDetails" class="upload-area__file-details file-details">
+      <h3 class="file-details__title">Uploaded File</h3>
+  
+      <div id="uploadedFile" class="uploaded-file">
+        <div class="uploaded-file__icon-container">
+          <i class='bx bxs-file-blank uploaded-file__icon'></i>
+          <span class="uploaded-file__icon-text"></span> <!-- Data Will be Comes From Js -->
+        </div>
+  
+        <div id="uploadedFileInfo" class="uploaded-file__info">
+          <span class="uploaded-file__name">Proejct 1</span>
+          <span class="uploaded-file__counter">0%</span>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <!-- End File Details -->
+  </div>
+  <!-- End Upload Area -->
+</div>
+
+     <span asp-validation-for="Image_Of_Crtificat" class="text-danger"></span>
                       
                     </div>
 

@@ -1,20 +1,24 @@
 ﻿@model IEnumerable<AdmissionSystem.Model.Faculty>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center active">Facultes</h1>
+<h1 class="text-center active">@localizer["Facultes"]</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">@localizer["Create New"]</a>
 </p>
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-               <h5>Name</h5>
+               <h5>@localizer["Name"]</h5>
                 @*@Html.DisplayNameFor(model => model.Faculty_name)*@
             </th>
             <th></th>
@@ -39,9 +43,9 @@
     <input type="radio" name="options" id="option3" autocomplete="off"> Radio
   </label>
 </div>*@
-                <a  asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>   
+                <a  asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">@localizer["Edit"]</a>   
                 @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">@localizer["Delete"]</a>
             </td>
         </tr>
 }

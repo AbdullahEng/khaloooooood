@@ -1,5 +1,8 @@
 ﻿@model AdmissionSystem.Model.Country
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";

@@ -1,11 +1,15 @@
 ﻿@model AdmissionSystem.Model.Faculty
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center">Create faculty</h1>
+<h1 class="text-center">@localizer["Create faculty"]</h1>
 
 <hr/>
 <style>
@@ -55,16 +59,16 @@
                 }*@
 
             <div class="form-group">
-                <label class="control-label"> Name</label>
+                <label class="control-label">@localizer["Name"] </label>
                 <input asp-for="Faculty_name" class="form-control " required="required" />
                 <span asp-validation-for="Faculty_name" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Create"]" class="btn btn-outline-primary" />
             </div>
             <div>
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            <a asp-action="Index" class="btn btn-secondary">@localizer["Back to List"]</a>
     </div>
     </form>
 </div>

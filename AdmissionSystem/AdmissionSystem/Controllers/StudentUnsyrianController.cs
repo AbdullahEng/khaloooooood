@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +29,7 @@ namespace AdmissionSystem.Controllers
         private readonly CRUD_Operation_Interface<Country> country_Repository;
         private readonly CRUD_Operation_Interface<Statues_of_admission_eligibilty> statues_Of_Admission_Eligibilty_Repository;
         private readonly CRUD_Operation_Interface<Department> department_Repository;
+        private readonly IStringLocalizer<StudentUnsyrianController> localizer;
 
         public StudentUnsyrianController(ApplicationDbContext DB,CRUD_Operation_Interface<Student> StudentRepository,
             IHostingEnvironment hosting_,
@@ -38,6 +41,9 @@ namespace AdmissionSystem.Controllers
                CRUD_Operation_Interface<Country> Country_Repository,
                 CRUD_Operation_Interface<Statues_of_admission_eligibilty> Statues_of_admission_eligibilty_Repository
         , CRUD_Operation_Interface<Department> Department_Repository
+        , IStringLocalizer<StudentUnsyrianController> localizer
+
+
             )
         {
             dB = DB;
@@ -51,6 +57,7 @@ namespace AdmissionSystem.Controllers
             country_Repository = Country_Repository;
             statues_Of_Admission_Eligibilty_Repository = Statues_of_admission_eligibilty_Repository;
             department_Repository = Department_Repository;
+            this.localizer = localizer;
         }
         // GET: StudenController
         public ActionResult Index()
@@ -77,6 +84,36 @@ namespace AdmissionSystem.Controllers
         {
             return View();
         }
+        public ActionResult GetStarted(int id)
+        {
+            var Specific_student = studentRepository.Find(id);
+            var user = HttpContext.User.Identity.Name;
+            if (user != Specific_student.First_Name_EN)
+            {
+                string url = "/Studen/AccessError";
+                return Redirect(url);
+            }
+            var student = new UnStudent_View_Model
+            {
+                id = id,
+                Conformation = Specific_student.Conformation
+                ,
+                First_Name_EN = Specific_student.First_Name_EN
+                ,
+                wish_Department_Id1 = Specific_student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish1ID
+                ,
+                The_Rate = Specific_student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate
+            };
+            if (student.Conformation == 0 && student.Identity_front_image_URL == null)
+            {
+                return View(student);
+            }
+            else
+            {
+                string url = "/Studen/AccessError";
+                return Redirect(url);
+            }
+        }
         public ActionResult Home(int id)
         {
             var Specific_student = studentRepository.Find(id);
@@ -95,6 +132,11 @@ namespace AdmissionSystem.Controllers
                 The_Rate = Specific_student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.The_Rate,
                  Identity_front_image_URL=Specific_student.Identity_front_image
             };
+            if(student.Conformation==0&&student.Identity_front_image_URL==null)
+            {
+                string url = "/StudentUnsyrian/GetStarted/" + id.ToString();
+                return Redirect(url);
+            }
             return View(student);
         }
 
@@ -561,7 +603,7 @@ namespace AdmissionSystem.Controllers
                 else
                 {
 
-                    if (collection.Image_Of_Crtificat != null)
+                    if (collection.Image_Of_Crtificat != null && dB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL == null)
                     {
                         if (collection.Image_Of_Crtificat.Length != collection.Identity_front_image.Length && collection.Image_Of_Crtificat.Length != collection.Identity_back_image.Length && collection.Image_Of_Crtificat.Length != collection.check_recipt_image.Length)
                         {
@@ -574,7 +616,7 @@ namespace AdmissionSystem.Controllers
                         }
                     }
 
-                    if (collection.Identity_front_image != null)
+                    if (collection.Identity_front_image != null && dB.Student.AsNoTracking().Single(a => a.Id == id).Identity_front_image == null)
                     {
                         if (collection.Identity_front_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_front_image.Length != collection.Identity_back_image.Length && collection.Identity_front_image.Length != collection.check_recipt_image.Length)
                         {
@@ -587,7 +629,7 @@ namespace AdmissionSystem.Controllers
                         }
                     }
 
-                    if (collection.Identity_back_image != null)
+                    if (collection.Identity_back_image != null && dB.Student.AsNoTracking().Single(a => a.Id == id).Identity_back_image == null)
                     {
                         if (collection.Identity_back_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Identity_front_image.Length && collection.Identity_back_image.Length != collection.check_recipt_image.Length)
                         {
@@ -600,7 +642,7 @@ namespace AdmissionSystem.Controllers
                     }
 
 
-                    if (collection.check_recipt_image != null)
+                    if (collection.check_recipt_image != null && dB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).check_recipt_image_URL == null)
                     {
                         if (collection.check_recipt_image.Length != collection.Identity_front_image.Length && collection.check_recipt_image.Length != collection.Identity_back_image.Length && collection.check_recipt_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Identity_front_image.Length && collection.Identity_back_image.Length != collection.check_recipt_image.Length)
                         {
@@ -620,9 +662,16 @@ namespace AdmissionSystem.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (collection.Image_of_crtificat_URL == null && dB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL != null)
+                    {
+                        collection.Image_of_crtificat_URL = dB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL;
+                        collection.Check_recipt_image_URL = dB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).check_recipt_image_URL;
+                        collection.Identity_front_image_URL = dB.Student.AsNoTracking().Single(a => a.Id == id).Identity_front_image;
+                        collection.Identity_back_image_URL = dB.Student.AsNoTracking().Single(a => a.Id == id).Identity_back_image;
 
-                  
-                        var certificate_ = new Admission_Eligibilty_Certificate
+                    }
+
+                    var certificate_ = new Admission_Eligibilty_Certificate
                         {
                             //id=student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id,
                             id = id,
@@ -702,11 +751,14 @@ namespace AdmissionSystem.Controllers
 
                     if (collection.check_recipt_image != null || collection.Identity_front_image != null || collection.Identity_back_image != null || collection.Image_Of_Crtificat != null)
                     {
-                        //if (collection.check_recipt_image.Length != collection.Identity_front_image.Length && collection.check_recipt_image.Length != collection.Identity_back_image.Length &&collection.check_recipt_image.Length != collection.Image_Of_Crtificat.Length
-                        //    &&collection.Identity_front_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_front_image.Length != collection.Identity_back_image.Length && collection.Identity_front_image.Length != collection.check_recipt_image.Length
-                        //    && collection.Image_Of_Crtificat.Length != collection.Identity_front_image.Length && collection.Image_Of_Crtificat.Length != collection.Identity_back_image.Length && collection.Image_Of_Crtificat.Length != collection.check_recipt_image.Length)
-                        //{
-                        var certificate_2 = new Admission_Eligibilty_Certificate
+                        if (dB.Student.AsNoTracking().Single(a => a.Id == id).Identity_back_image == null &&
+                             dB.Student.AsNoTracking().Single(a => a.Id == id).Identity_front_image == null &&
+                             dB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).check_recipt_image_URL == null &&
+                             dB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL == null
+
+                             )
+                        {
+                            var certificate_2 = new Admission_Eligibilty_Certificate
                         {
                             id = id,
                             check_recipt_image_URL = collection.Check_recipt_image_URL,
@@ -715,17 +767,26 @@ namespace AdmissionSystem.Controllers
                         var student_2 = new Student
                         {
                             Id = id,
+                            First_Name_EN = collection.First_Name_EN,
+                            Identity_No = collection.Identity_No,
+                            gender = collection.gender,
+                            Birth = collection.Birth,
+                            Nick_Name = collection.Nick_Name,
+                            high_school_certificate = collection.high_school_certificate,
+                            Mobile_Phone = collection.Mobile_Phone,
                             Identity_back_image = collection.Identity_back_image_URL,
                             Identity_front_image = collection.Identity_front_image_URL,
+                            Statues_Of_Admission_Eligibilty = statues_Of_Admission_Eligibilty_Repository.List().Last(),
                             FK_Admission_Eligibilty_Requist_For_UNsy_Certificate = certificate_2
                         };
                         dB.Admission_Eligibilty_Certificate.Update(certificate_2);
                         //admission_Eligibilty_Certificate_Repository.Update(id, certificate_2);
                         studentRepository.Update(id, student_2);
-                    }/* }*/
+                        }
+                    }
 
                     ModelState.AddModelError("", "");
-                    ViewBag.Erroremessage = "please cheack and reach all requirments";
+                    ViewBag.Erroremessage = localizer["please cheack and reach all requirments"];
                     UnStudent_View_Model collection2 = collection;
                     collection2.CountryList = FillSelection3();
                     collection2.Type_Of_certificate_list = FillSelection2();
