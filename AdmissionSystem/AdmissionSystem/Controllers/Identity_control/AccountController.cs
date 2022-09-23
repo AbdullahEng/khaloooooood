@@ -201,12 +201,18 @@ namespace AdmissionSystem.Controllers.Identity_control
                     {
 
                         var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var confirmationlink = Url.Action("ConfirmEmail", "Account",
-                                                            new { UserId = user.Id, token = token }, Request.Scheme);
-                            string htmlll = confirmationlink ;
-                           await mailingService.SendEmailAsync(obj.Email, "تاكيد الحساب", confirmationlink);
+                        //var confirmationlink = Url.Action("ConfirmEmail", "Account",
+                        //                                    new { UserId = user.Id, token = token }, Request.Scheme);
+                        //    string htmlll = confirmationlink ;
+                        //   await mailingService.SendEmailAsync(obj.Email, "تاكيد الحساب", confirmationlink);
 
                             ////////////////////////////////////////////
+
+
+                        
+                            var result1 = await userManager.ConfirmEmailAsync(user, token);
+
+
 
                             if (!roleManager.RoleExistsAsync("Student").Result)
                         {

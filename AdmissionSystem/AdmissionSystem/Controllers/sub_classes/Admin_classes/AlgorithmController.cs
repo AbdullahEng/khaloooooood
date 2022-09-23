@@ -906,6 +906,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             ,
                             studnet_name = item.FK_student.Father_Name_EN,
                             The_rate = Admission.The_Rate
+                             ,
+                            University_ID = stu.UnvirstyId.ToString()
 
                         };
                         accinfolist.Add(accifo);
@@ -984,6 +986,121 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
         }
 
+        public ActionResult ExcelsheetAdmissionAll(AlgorithemViewModel modelalgo)
+        {
+
+            //  var countryfindsy = countryRepoooooo.Find(1);
+            var viewwithCountry = acceptedREpo.List().Where(a =>
+                                                                 countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+
+
+                                                                   == modelalgo.countryId
+                                                                      && a.FK_Statues_of_admission_eligibilty.id == modelalgo.statusofAdmissionId
+
+                                                                   ).ToList();
+           // var departments = department_Repository.List().SingleOrDefault(a => a.id == modelalgo.DepartmentId);
+            var accinfolist = new List<AcceptebleIformationAnd_Details>();
+
+            foreach (var item in viewwithCountry)
+            {
+                if (viewwithCountry != null)
+                {
+                    var stu = studentRepository.Find(item.FK_studentId);
+                    var country11 = countryRepoooooo.Find(stu.Cirtificate_city.id);
+                    var Admission = admission_Eligibilty_Certificate_Repository.Find(stu.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+                    var statusof = statues_Of_Admission_Eligibilty_Repository.Find(item.FK_Statues_of_admission_eligibiltyId);
+                    if (item.Accepted_Or_Not == true)
+                    {
+                        var accifo = new AcceptebleIformationAnd_Details
+                        {
+                            Accepted_wish = item.Accepted_wish,
+                            cuntry = country11.country_name,
+                            Status_of_Admission_elgibility = statusof.Type_of_admission_eligibilty,
+                            beganing_date_of_Admission = statusof.Begaining_date_of_the_process.ToString()
+                            ,
+                            semester_NO = statusof.semester_no
+                            ,
+                            studnet_name = item.FK_student.Father_Name_EN,
+                            The_rate = Admission.The_Rate
+                           ,University_ID=stu.UnvirstyId.ToString()
+
+                        };
+                        accinfolist.Add(accifo);
+                    }
+                }
+            }
+            var cont = countryRepoooooo.List().ToList();
+            var dep = department_Repository.List().ToList();
+            var algo = new AlgorithemViewModel
+            {
+                CountryList = cont,
+                Accinfo = accinfolist
+               ,
+                departmentList = dep
+
+            };
+
+
+
+
+
+
+
+
+
+
+            //   var depfind = department_Repository.Find(modelalgo.DepartmentId);
+            var countr = countryRepoooooo.Find(modelalgo.countryId);
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Admission");
+                var currentRow = 1;
+                worksheet.Cell(currentRow, 1).Value = "Student name";
+                worksheet.Cell(currentRow, 2).Value = "Accepted Wish";
+                worksheet.Cell(currentRow, 3).Value = "country";
+                worksheet.Cell(currentRow, 4).Value = "Rate";
+                worksheet.Cell(currentRow, 5).Value = "Status of Admission elgibility";
+                worksheet.Cell(currentRow, 6).Value = "beginning date of Admission";
+                worksheet.Cell(currentRow, 7).Value = "semester NO";
+                worksheet.Cell(currentRow, 8).Value = "Unvirsty Id";
+
+
+
+
+
+                foreach (var item in accinfolist)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = item.studnet_name;
+                    worksheet.Cell(currentRow, 2).Value = item.Accepted_wish;
+                    worksheet.Cell(currentRow, 3).Value = item.cuntry;
+                    worksheet.Cell(currentRow, 4).Value = item.The_rate;
+                    worksheet.Cell(currentRow, 5).Value = item.Status_of_Admission_elgibility;
+                    worksheet.Cell(currentRow, 6).Value = item.beganing_date_of_Admission;
+                    worksheet.Cell(currentRow, 7).Value = item.semester_NO;
+                    worksheet.Cell(currentRow, 8).Value = item.University_ID;
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "Admission " + countr.country_name + ".xlsx"
+                        );
+
+
+
+                }
+
+
+
+
+            }
+
+        }
+
 
 
 
@@ -1022,6 +1139,8 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                             ,
                             studnet_name = item.FK_student.Father_Name_EN,
                             The_rate = Admission.The_Rate
+                             ,
+                            University_ID = stu.UnvirstyId.ToString()
 
                         };
                         accinfolist.Add(accifo);
@@ -1097,6 +1216,117 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
         }
 
+
+
+
+
+        public ActionResult ExcelsheetAdmissionAllUNSrian(AlgorithemViewModel modelalgo)
+        {
+
+            // var countryfindsy = countryRepoooooo.Find(1);
+            var viewwithCountry = acceptedREpo.List().Where(a =>
+                                                                         countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                           == modelalgo.countryId
+                                                                           && a.FK_Statues_of_admission_eligibilty.id == modelalgo.statusofAdmissionId
+                                                                           ).ToList();
+          //  var departments = department_Repository.List().SingleOrDefault(a => a.id == modelalgo.DepartmentId);
+            var accinfolist = new List<AcceptebleIformationAnd_Details>();
+
+            foreach (var item in viewwithCountry)
+            {
+                if (viewwithCountry != null)
+                {
+                    var stu = studentRepository.Find(item.FK_studentId);
+                    var country11 = countryRepoooooo.Find(stu.Cirtificate_city.id);
+                    var Admission = admission_Eligibilty_Certificate_Repository.Find(stu.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
+                    var statusof = statues_Of_Admission_Eligibilty_Repository.Find(item.FK_Statues_of_admission_eligibiltyId);
+                    if (item.Accepted_Or_Not == true)
+                    {
+                        var accifo = new AcceptebleIformationAnd_Details
+                        {
+                            Accepted_wish = item.Accepted_wish,
+                            cuntry = country11.country_name,
+                            Status_of_Admission_elgibility = statusof.Type_of_admission_eligibilty,
+                            beganing_date_of_Admission = statusof.Begaining_date_of_the_process.ToString()
+                            ,
+                            semester_NO = statusof.semester_no
+                            ,
+                            studnet_name = item.FK_student.Father_Name_EN,
+                            The_rate = Admission.The_Rate
+                            ,University_ID=stu.UnvirstyId.ToString()
+                        };
+                        accinfolist.Add(accifo);
+                    }
+                }
+            }
+            //var cont = countryRepoooooo.List().ToList();
+            //var dep = department_Repository.List().ToList();
+            //var algo = new AlgorithemViewModel
+            //{
+            //    CountryList = cont,
+            //    Accinfo = accinfolist
+            //   ,
+            //    departmentList = dep
+            //};
+
+
+
+
+
+
+
+
+
+
+            //  var depfind = department_Repository.Find(modelalgo.DepartmentId);
+            var countr = countryRepoooooo.Find(modelalgo.countryId);
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Admission");
+                var currentRow = 1;
+                worksheet.Cell(currentRow, 1).Value = "Student name";
+                worksheet.Cell(currentRow, 2).Value = "Accepted Wish";
+                worksheet.Cell(currentRow, 3).Value = "country";
+                worksheet.Cell(currentRow, 4).Value = "Rate";
+                worksheet.Cell(currentRow, 5).Value = "Status of Admission elgibility";
+                worksheet.Cell(currentRow, 6).Value = "beginning date of Admission";
+                worksheet.Cell(currentRow, 7).Value = "semester NO";
+                worksheet.Cell(currentRow, 8).Value = "Unvirsty Id";
+
+
+                foreach (var item in accinfolist)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = item.studnet_name;
+                    worksheet.Cell(currentRow, 2).Value = item.Accepted_wish;
+                    worksheet.Cell(currentRow, 3).Value = item.cuntry;
+                    worksheet.Cell(currentRow, 4).Value = item.The_rate;
+                    worksheet.Cell(currentRow, 5).Value = item.Status_of_Admission_elgibility;
+                    worksheet.Cell(currentRow, 6).Value = item.beganing_date_of_Admission;
+                    worksheet.Cell(currentRow, 7).Value = item.semester_NO;
+                    worksheet.Cell(currentRow, 8).Value = item.University_ID;
+
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "Admission " + countr.country_name + ".xlsx"
+                        );
+
+
+
+                }
+
+
+
+
+            }
+
+        }
 
 
 
