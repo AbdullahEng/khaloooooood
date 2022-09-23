@@ -674,7 +674,7 @@ namespace AdmissionSystem.Controllers
         }
         public ActionResult Index_Status_of_Unsyrian_student(int id)
         {
-            var Status_of_student_list = statues_Of_Student_Repository.List();
+            var Status_of_student_list = statues_Of_Student_Repository.List().Where(a=>a.FK_Student_Info.Cirtificate_city!=null).OrderBy(a=>a.FK_Student_Info.Cirtificate_city.country_name);
             List<Statues_Of_Student> lista = new List<Statues_Of_Student>();
             Student y;
             Statues_Of_Student y2;

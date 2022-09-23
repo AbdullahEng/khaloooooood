@@ -594,7 +594,7 @@ namespace AdmissionSystem.Controllers
                 }
                 else {
 
-                    if (collection.Image_Of_Crtificat != null && DB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a=>a.id==id).Image_of_crtificat_URL==null)
+                    if (collection.Image_Of_Crtificat != null && DB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL == null)
                     {
                         if (collection.Image_Of_Crtificat.Length != collection.Identity_front_image.Length && collection.Image_Of_Crtificat.Length != collection.Identity_back_image.Length && collection.Image_Of_Crtificat.Length != collection.check_recipt_image.Length)
                         {
@@ -620,7 +620,7 @@ namespace AdmissionSystem.Controllers
                         }
                     }
 
-                    if (collection.Identity_back_image != null && DB.Student.AsNoTracking().Single(a=>a.Id==id).Identity_back_image==null)
+                    if (collection.Identity_back_image != null && DB.Student.AsNoTracking().Single(a => a.Id == id).Identity_back_image == null)
                     {
                         if (collection.Identity_back_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Identity_front_image.Length && collection.Identity_back_image.Length != collection.check_recipt_image.Length)
                         {
@@ -653,7 +653,7 @@ namespace AdmissionSystem.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (collection.Image_of_crtificat_URL == null && DB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL!=null)
+                    if (collection.Image_of_crtificat_URL == null/* && DB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL!=null*/)
                     {
                         collection.Image_of_crtificat_URL = DB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).Image_of_crtificat_URL;
                         collection.Check_recipt_image_URL = DB.Admission_Eligibilty_Certificate.AsNoTracking().Single(a => a.id == id).check_recipt_image_URL;
@@ -863,7 +863,7 @@ namespace AdmissionSystem.Controllers
                             //admission_Eligibilty_Certificate_Repository.Update(id, certificate_2);
                             studentRepository.Update(id, student_2);
                         }
-                       
+
                     }
 
                     ModelState.AddModelError("", "");
