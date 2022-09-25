@@ -1,11 +1,15 @@
 ﻿@model AdmissionSystem.View_Model.percentage_count_for_each_country_view_model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center">Edit percentage count </h1>
+<h1 class="text-center">@localizer["Edit percentage count"] </h1>
 
 @*<h4>percentage_count_for_each_country_view_model</h4>*@
 <hr />
@@ -103,7 +107,7 @@
 
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="statues_of_adm_eli_ID" class="control-label"></label>
+                <label asp-for="statues_of_adm_eli_ID" class="control-label">@localizer["Type of admission eligibilty"]</label>
                 <select asp-for="statues_of_adm_eli_ID" class="form-control" asp-items="@(new SelectList(Model.FK_statues_of_admission_eligibilty,"id","Type_of_admission_eligibilty"))">
                 </select>
 
@@ -111,22 +115,22 @@
             </div>
             <input type="hidden" asp-for="countryId" />
             <div class="form-group">
-                <label asp-for="countryId" class="control-label"></label>
+                <label asp-for="countryId" class="control-label">@localizer["Country"]</label>
                 <select name="countryseltectd" asp-for="countryId" class="form-control" disabled asp-items="@(new SelectList(Model.FK_country,"id","country_name") )">
                 </select>
                 <span asp-validation-for="countryId" class="text-danger"></span>
                 @*<input type="hidden" asp-for="countryId" value=@Model.countryId />*@
             </div>
             <div class="form-group">
-                <label asp-for="Rate" class="control-label"></label>
+                <label asp-for="Rate" class="control-label">@localizer["percentage"]</label>
                 <input asp-for="Rate" class="form-control " />
                 <span asp-validation-for="Rate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Save"]" class="btn btn-outline-primary" />
             </div>
             <div>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Index" class="btn btn-secondary">@localizer["Back to List"]</a>
             </div>
         </form>
     </div>

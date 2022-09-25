@@ -1,32 +1,36 @@
 ﻿@model IEnumerable<AdmissionSystem.Model.Broken_Relationshib_Stat_Dep_Chair>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h3 class="text-center">Chair count and kind of Admission and department related with their</h3>
+<h3 class="text-center">@localizer["CHair count for each department"]</h3>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">@localizer["Create New"]</a>
 </p>
 <table  class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id)
+             @localizer["id"] 
             </th>
             <th data-toggle="tooltip" data-placement="bottom" title="That main Normal Admition or extended Admition and so on">
                 @*@Html.DisplayNameFor(model => model.FK_statues_Of_Admission_EligibiltyId)*@
-                Type Of admission elgibilty
+               @localizer["Type Of admission elgibilty"] 
             </th>
             <th>
                 @*  @Html.DisplayNameFor(model => model.Fk_departmentId)*@
-                The department
+              @localizer["The department"]  
             </th>
             <th data-toggle="tooltip" data-placement="bottom" title="As number of chair  not as percent">
                @* @Html.DisplayNameFor(model => model.Chair_count)*@
-                Chair count
+              @localizer["Chair count"]  
             </th>
             <th></th>
         </tr>
@@ -51,9 +55,9 @@
         @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
 
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">@localizer["Edit"]</a>
                 @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">@localizer["Delete"]</a>
 
 
             </td>

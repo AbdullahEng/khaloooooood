@@ -1,4 +1,8 @@
 ﻿@model AdmissionSystem.Model.Statues_of_admission_eligibilty
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Create";
@@ -6,9 +10,8 @@
     
 }
 
-<h1 class="text-center">Create</h1>
+<h1 class="text-center">@localizer["Create"]</h1>
 
-<h4>Statues of admission eligibilty</h4>
 <hr />
 <style>
     .content {
@@ -88,27 +91,27 @@
 
 
             <div class="form-group">
-                <label asp-for="Type_of_admission_eligibilty" class="control-label"></label>
+                <label asp-for="Type_of_admission_eligibilty" class="control-label">@localizer["Type of admission eligibilty"]</label>
                 <input asp-for="Type_of_admission_eligibilty" class="form-control" />
                 <span asp-validation-for="Type_of_admission_eligibilty" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Begaining_date_of_the_process" class="control-label"></label>
+                <label asp-for="Begaining_date_of_the_process" class="control-label">@localizer["Begaining date of the process"]</label>
                 <input asp-for="Begaining_date_of_the_process" type="date" class="form-control "
                        min="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" value="@DateTime.Now.AddYears(0).ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="Begaining_date_of_the_process" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="semester_no" class="control-label"></label>
+                <label asp-for="semester_no" class="control-label">@localizer["Semester no"]</label>
                 <select asp-for="semester_no" class="form-control">
-                    <option value="1">First semester</option>
-                    <option value="2">Secound semester </option>
-                    <option value="3">Summer semester</option>
+                    <option value="1">@localizer["First semester"]</option>
+                    <option value="2">@localizer["Secound semester"] </option>
+                    <option value="3">@localizer["Summer semester"]</option>
                 </select>
                 <span asp-validation-for="semester_no" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="semester_Date" class="control-label"></label>
+                <label asp-for="semester_Date" class="control-label">@localizer["Semester Date"]</label>
                 <input asp-for="semester_Date" class="form-control" type="date"
                        min="@DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(2).ToString("yyyy-MM-dd")" value="@DateTime.Now.AddYears(0).ToString("yyyy-MM-dd")" />
 
@@ -121,15 +124,15 @@
             </div>
              <div class="custom-control custom-switch">
   <input type="checkbox" asp-for="status" class="custom-control-input" id="customSwitch1">
-  <label class="custom-control-label text-danger" for="customSwitch1">Toggle this to activate the admission</label>
+  <label class="custom-control-label text-danger" for="customSwitch1">@localizer["Toggle this to activate the admission"]</label>
 </div>
     <br>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Create"]" class="btn btn-outline-primary" />
             </div>
 
             <div>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Index" class="btn btn-secondary">@localizer["Back to List"]</a>
             </div>
         </form>
     </div>

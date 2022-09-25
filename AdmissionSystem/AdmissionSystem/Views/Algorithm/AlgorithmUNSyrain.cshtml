@@ -1,11 +1,14 @@
 ﻿@model AdmissionSystem.View_Model.AlgorithemViewModel
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "AlgorithmUNSyrain";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1>UNSyrain Admission eligibility</h1>
+<h1>@localizer["UNSyrain Admission eligibility"]</h1>
 
 @*<h4>AlgorithemViewModel</h4>*@
 <hr />
@@ -25,7 +28,7 @@
 
             }
             <div class="form-group">
-                <label asp-for="countryId" class="control-label"></label>
+                <label asp-for="countryId" class="control-label">@localizer["Country"]</label>
                 <select asp-for="countryId" class="form-control"
                         asp-items="@(new SelectList(Model.CountryList,"id","country_name"))"></select>
 
@@ -33,23 +36,23 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="DepartmentId" class="control-label"></label>
+                <label asp-for="DepartmentId" class="control-label">@localizer["Department"]</label>
                 <select asp-for="DepartmentId" class="form-control"
                         asp-items="@(new SelectList(Model.departmentList,"id","specialization_name"))" ></select>
 
                 <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="statusofAdmissionId" class="control-label"></label>
+                <label asp-for="statusofAdmissionId" class="control-label">@localizer["Admission eligibility"]</label>
                 <select asp-for="statusofAdmissionId" class="form-control"
                         asp-items="@(new SelectList(Model.statues_Of_Admission_Eligibiltieslist,"id","Type_of_admission_eligibilty")) "></select>
                 @*onchange="this.form.submit()"*@
                 <span asp-validation-for="statusofAdmissionId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <input type="submit" value="Export Excel sheet" class="btn btn-primary " formaction="ExcelsheetAdmissionUNSrian" />
-                <input type="submit" value="Export Excel sheet for All" class="btn btn-primary " formaction="ExcelsheetAdmissionAllUNSrian" />
+                <input type="submit" value="@localizer["Save"]" class="btn btn-primary" />
+                <input type="submit" value="@localizer["Export Excel sheet"]" class="btn btn-primary " formaction="ExcelsheetAdmissionUNSrian" />
+                <input type="submit" value="@localizer["Export Excel sheet for All"]" class="btn btn-primary " formaction="ExcelsheetAdmissionAllUNSrian" />
 
 
             </div>
@@ -77,25 +80,25 @@
     <thead>
         <tr>
             <th>
-                <label class="control-label"> Student name </label>
+                <label class="control-label"> @localizer["Student name"] </label>
             </th>
             <th>
-                <label class="control-label">Accepted Wish</label>
+                <label class="control-label">@localizer["Accepted Wish"]</label>
             </th>
             <th>
-                <label class="control-label">country</label>
+                <label class="control-label">@localizer["Country"]</label>
             </th>
             <th>
-                <label class="control-label"> Rate</label>
+                <label class="control-label"> @localizer["Rate"]</label>
             </th>
             <th>
-                <label class="control-label">Status of Admission elgibility</label>
+                <label class="control-label">@localizer["Admission eligibility"]</label>
             </th>
             <th>
-                <label class="control-label">begining date of Admission</label>
+                <label class="control-label">@localizer["begining date of Admission"]</label>
             </th>
             <th>
-                <label class="control-label">semester NO</label>
+                <label class="control-label">@localizer["semester NO"]</label>
             </th>
             @*<th>
             @Html.DisplayNameFor(model => model.)

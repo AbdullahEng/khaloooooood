@@ -147,7 +147,7 @@
   <data name="Confiramtion" xml:space="preserve">
     <value>الثبيت</value>
   </data>
-  <data name="Confirme" xml:space="preserve">
+  <data name="Confirm" xml:space="preserve">
     <value>تثبيت</value>
   </data>
   <data name="Country" xml:space="preserve">
@@ -228,7 +228,7 @@
   <data name="Passport No" xml:space="preserve">
     <value>رقم الجواز</value>
   </data>
-  <data name="Pleas reivew your requset because you will not be able to edit agine." xml:space="preserve">
+  <data name="Please reivew your requset because you will not be able to edit againe." xml:space="preserve">
     <value>الرجاء التأكد ومراجعة طلبكم ,لن تتمكن من اعدة التعديل بعد إجراء التثبيت</value>
   </data>
   <data name="Secound wish" xml:space="preserve">

@@ -1,11 +1,14 @@
 ﻿@model AdmissionSystem.View_Model.Department_relation_type_view_model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class=" text-center">Create</h1>
+<h1 class=" text-center">@localizer["Create"]</h1>
 <style>
     .content {
         max-width: 500px;
@@ -104,33 +107,33 @@
 
 
             <div class="form-group">
-                <label asp-for="Department_id" class="control-label"></label>
+                <label asp-for="Department_id" class="control-label">@localizer["Department"]</label>
                 <select asp-for="Department_id" class="form-control" asp-items="@(new SelectList(Model.FK_Department,"id","specialization_name"))">
                 </select>
                 <span asp-validation-for="Department_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Type_of_high_school_cirtificate_id" class="control-label"></label>
+                <label asp-for="Type_of_high_school_cirtificate_id" class="control-label">@localizer["Type of high school cirtificate"]</label>
                 <select asp-for="Type_of_high_school_cirtificate_id" class="form-control" asp-items="@(new SelectList(Model.FK_type_Of_High_School_Cirtificate,"id","type"))">
                 </select>
                 <span asp-validation-for="Type_of_high_school_cirtificate_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Minemum_of_Rate" class="control-label"></label>
+                <label asp-for="Minemum_of_Rate" class="control-label">@localizer["Minemum of Rate"]</label>
                 <input asp-for="Minemum_of_Rate" class="form-control" />
                 <span asp-validation-for="Minemum_of_Rate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rate_of_chaire_count" class="control-label"></label>
+                <label asp-for="Rate_of_chaire_count" class="control-label">@localizer["Rate of chaire count"]</label>
                 <input asp-for="Rate_of_chaire_count" class="form-control" />
                 <span asp-validation-for="Rate_of_chaire_count" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Create"]" class="btn btn-outline-primary" />
             </div>
 
             <div>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Index" class="btn btn-secondary">@localizer["Back to List"]</a>
             </div>
 
         </form>

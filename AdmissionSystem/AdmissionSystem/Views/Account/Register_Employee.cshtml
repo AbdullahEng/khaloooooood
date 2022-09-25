@@ -1,5 +1,8 @@
 ﻿@model AdmissionSystem.View_Model.Identity_view_model.RegisterViewModel
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Register_Employee";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
@@ -7,7 +10,7 @@
 @using Microsoft.Extensions.Options
 @using AdmissionSystem.Model.GoogleCaptcha
 @inject IOptions<GoogleCaptchaConfig> GoogleRecaptchaconfig
-<h1 class="text-center">Register Employee</h1>
+<h1 class="text-center">@localizer["Register Employee"]</h1>
 
 @*<h4>RegisterViewModel</h4>*@
 <hr />
@@ -53,30 +56,30 @@
                 </div>
             }
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
+                <label asp-for="UserName" class="control-label">@localizer["UserName"]</label>
                 <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nick_name" class="control-label"></label>
+                <label asp-for="Nick_name" class="control-label">@localizer["last name"]</label>
                 <input asp-for="Nick_name" class="form-control" />
                 <span asp-validation-for="Nick_name" class="text-danger"></span>
             </div>
 
 
             <div class="form-group">
-                <label asp-for="TheIDnumber" class="control-label"></label>
+                <label asp-for="TheIDnumber" class="control-label">@localizer["National id number"]</label>
                 <input asp-for="TheIDnumber" class="form-control" />
                 <span asp-validation-for="TheIDnumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="phone_Mobile" class="control-label"></label>
+                <label asp-for="phone_Mobile" class="control-label">@localizer["Mobile phone"]</label>
                 <input asp-for="phone_Mobile" class="form-control" />
                 <span asp-validation-for="phone_Mobile" class="text-danger"></span>
             </div>
             <div class="form-group">
 
-                <label asp-for="gender" class="control-label">@*@localizer["gender"]*@</label>
+                <label asp-for="gender" class="control-label">@localizer["gender"]</label>
 
 
                 <select asp-for="gender" class="form-control">
@@ -100,7 +103,7 @@
                 <span asp-validation-for="gender" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Birth_Date" class="control-label"></label>
+                <label asp-for="Birth_Date" class="control-label">@localizer["Birth Date"]</label>
                 <input asp-for="Birth_Date" class="form-control" type="date"
                        min="@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")"  value="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")"/>
                 @*value="@DateTime.Now.AddYears(-15)"*@
@@ -108,7 +111,7 @@
                 <span asp-validation-for="Birth_Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
+                <label asp-for="Type" class="control-label">@localizer["Type"]</label>
                 @*  <input asp-for="Type" class="form-control" />*@
                 <select asp-for="Type" class="form-control">
                     <option value="Admin">Admin</option>
@@ -118,17 +121,17 @@
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label">@localizer["Email"]</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="password" class="control-label"></label>
+                <label asp-for="password" class="control-label">@localizer["Password"]</label>
                 <input asp-for="password" class="form-control" />
                 <span asp-validation-for="password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <label asp-for="ConfirmPassword" class="control-label">@localizer["Confirm Password"]</label>
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
@@ -151,10 +154,10 @@
         </div>*@
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Create"]" class="btn btn-outline-primary" />
             </div>
             <div>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Index" class="btn btn-secondary">@localizer["Back to List"]</a>
             </div>
         </form>
     </div>

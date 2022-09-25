@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<AdmissionSystem.Model.Tracking_Rate>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 
 @{
@@ -22,13 +26,13 @@
         margin: auto;
     }
 </style>
-<h2 class="text-center">Tacking Rate Studnet</h2>
+<h2 class="text-center">@localizer["Tacking Rate Studnet"]</h2>
 <br />
 <br />
 <div>
     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" asp-action="TrackingStudnetrate">
         <div class="input-group">
-            <input type="search" class="form-control bg-light border-0 small" name="term" placeholder="Student Name..."
+            <input type="search" class="form-control bg-light border-0 small" name="term" placeholder="@localizer["Student Name..."]"
                    aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">
@@ -48,34 +52,34 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.id)
+                  @localizer["id"]   
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.old_rate)
+                   @localizer["Old Rate"]   
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.new_rate)
+                   @localizer["New Rate"]  
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.old_country)
+                  @localizer["Old Country"]    
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.new_country)
+                  @localizer["New Country"]    
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.old_typeofcertificate)
+                 @localizer["Old type of certificate"]    
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.new_typeofcertificate)
+                 @localizer["new type of certificate"]   
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Date_Of_Modification)
+                  @localizer["Date of Modification"]   
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FK_Student_Info.First_Name_EN)
+                 @localizer["Student name"]     
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FK_Employee_Info.name)
+                 @localizer["Employee name"]     
                 </th>
                 <th></th>
             </tr>
@@ -109,7 +113,7 @@
                         @Html.DisplayFor(modelItem => item.Date_Of_Modification)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FK_Student_Info.First_Name_EN)
+                 @*  @item.FK_Student_Info.First_Name_AR @item.FK_Student_Info.Nick_Name  *@   @Html.DisplayFor(modelItem => item.FK_Student_Info.First_Name_EN)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FK_Employee_Info.name)

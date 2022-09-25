@@ -1,32 +1,35 @@
 ﻿@model IEnumerable<AdmissionSystem.Model.Department_relation_Type>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class=" text-center">Department relation type</h1>
+<h1 class=" text-center">@localizer["Department relation type"]</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary ">Create New</a>
+    <a asp-action="Create" class="btn btn-primary ">@localizer["Create New"]</a>
 </p>
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id)
+            @localizer["id"]    
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_DepartmentId)
+            @localizer["Department id"]  
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_type_Of_High_School_CirtificateId)
+              @localizer["Type of high school cirtificate"] 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Minemum_of_Rate)
+             @localizer["Minemum rate"]   
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rate_of_chaire_count)
+            @localizer["rate of chaire count"]    
             </th>
 
         </tr>
@@ -52,9 +55,9 @@
                 </td>
 
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">@localizer["Edit"]</a>
                     @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
-                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">@localizer["Delete"]</a>
                 </td>
             </tr>
         }

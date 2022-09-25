@@ -120,13 +120,13 @@
   <data name="Admission Instructions" xml:space="preserve">
     <value>تعليمات التقدم</value>
   </data>
-  <data name="After choosing your wishes you have to confirme your requist" xml:space="preserve">
+  <data name="After choosing your wishes you have to confirm your requist" xml:space="preserve">
     <value>بعد إختيار الرغبات يجب تثبيت الطلب يا حباب</value>
   </data>
   <data name="After entering your information you have to fill your wishes" xml:space="preserve">
     <value>بعد إدخال البيانات يجب إختيار الرغبات بدقة يا حباب</value>
   </data>
-  <data name="After privouse steps we can say that you finished all the requirments and you have to wait until the results exported." xml:space="preserve">
+  <data name="After previous steps we can say that you finished all the requirments and you have to wait until the results to be released." xml:space="preserve">
     <value>بعد كل هذه الخطوات ينتقل طلبك الى موظف القبول والتسجيل لفحص الطلب والتأكد </value>
   </data>
   <data name="Get started" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="Start" xml:space="preserve">
     <value>إبدء</value>
   </data>
-  <data name="Student enter his information like the youtube sample below" xml:space="preserve">
+  <data name="Student enters his information like the youtube sample below" xml:space="preserve">
     <value>يجب إدخال البيانات كما هو موضح في الفيديو</value>
   </data>
   <data name="This system enable you to sumbit your information easily and make a trusted and secure storage of your data so  please read the instructions carfully and start your journy with us." xml:space="preserve">

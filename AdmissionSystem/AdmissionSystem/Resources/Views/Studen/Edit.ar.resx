@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Addmition eleigibilty" xml:space="preserve">
+  <data name="Admission eligibility" xml:space="preserve">
     <value>مفاضلة</value>
   </data>
   <data name="Alepo" xml:space="preserve">
@@ -132,10 +132,10 @@
   <data name="City of High School Cirtificate" xml:space="preserve">
     <value>مدينة الثانوية العامة</value>
   </data>
-  <data name="Civil Registriation City" xml:space="preserve">
+  <data name="Civil Registration City" xml:space="preserve">
     <value>القيد</value>
   </data>
-  <data name="Civil Registrition No" xml:space="preserve">
+  <data name="Civil Registration No" xml:space="preserve">
     <value>رقم القيد</value>
   </data>
   <data name="Country of Certificate" xml:space="preserve">
@@ -165,10 +165,10 @@
   <data name="family and identity information" xml:space="preserve">
     <value>المعلومات الشخصية و العائلية</value>
   </data>
-  <data name="Father Name in Arabic" xml:space="preserve">
+  <data name="Father name in Arabic" xml:space="preserve">
     <value>اسم الأب</value>
   </data>
-  <data name="Father Name in English" xml:space="preserve">
+  <data name="Father name in English" xml:space="preserve">
     <value>اسم الأب بالإنجليزية  </value>
   </data>
   <data name="femal" xml:space="preserve">
@@ -177,10 +177,10 @@
   <data name="First course" xml:space="preserve">
     <value>الدورة الأولى</value>
   </data>
-  <data name="First Name in Arbic" xml:space="preserve">
+  <data name="First name in Arabic" xml:space="preserve">
     <value>الإسم الأول</value>
   </data>
-  <data name="First Name in English" xml:space="preserve">
+  <data name="First name in English" xml:space="preserve">
     <value>الإسم الأول بالإنجليزية</value>
   </data>
   <data name="Full Address" xml:space="preserve">
@@ -189,10 +189,10 @@
   <data name="Gender" xml:space="preserve">
     <value>الجنس</value>
   </data>
-  <data name="Grand Father name in Arabic" xml:space="preserve">
+  <data name="Grand father name in Arabic" xml:space="preserve">
     <value>اسم الجد(والد الأب)</value>
   </data>
-  <data name="Grand FAther Name in English" xml:space="preserve">
+  <data name="Grand father name in English" xml:space="preserve">
     <value>اسم الجد بالإنجليزية</value>
   </data>
   <data name="Hama" xml:space="preserve">
@@ -225,10 +225,10 @@
   <data name="Image Of Crtificat" xml:space="preserve">
     <value>صورة الشهادة</value>
   </data>
-  <data name="informaion part 1" xml:space="preserve">
+  <data name="Information part 1" xml:space="preserve">
     <value>معلومات عن الهوية ومكان الإقامة</value>
   </data>
-  <data name="informaion part 2" xml:space="preserve">
+  <data name="Information part 2" xml:space="preserve">
     <value>معلومات عن الشهادة</value>
   </data>
   <data name="language of the admission" xml:space="preserve">
@@ -249,10 +249,10 @@
   <data name="Mobile Phone" xml:space="preserve">
     <value>رقم الجوال</value>
   </data>
-  <data name="Mother Name in Arabic" xml:space="preserve">
+  <data name="Mother name in Arabic" xml:space="preserve">
     <value>اسم الأم</value>
   </data>
-  <data name="Mother Name in English" xml:space="preserve">
+  <data name="Mother name in English" xml:space="preserve">
     <value>اسم الأم بالإنجليزية</value>
   </data>
   <data name="Nationality" xml:space="preserve">
@@ -279,10 +279,10 @@
   <data name="Register" xml:space="preserve">
     <value>التسجيل</value>
   </data>
-  <data name="Secound course" xml:space="preserve">
+  <data name="Second course" xml:space="preserve">
     <value>الدورة الثانية</value>
   </data>
-  <data name="Secound name" xml:space="preserve">
+  <data name="Second name" xml:space="preserve">
     <value>الكنية </value>
   </data>
   <data name="Single" xml:space="preserve">
@@ -303,7 +303,7 @@
   <data name="The Rate" xml:space="preserve">
     <value>المعدل</value>
   </data>
-  <data name="Type Of Certificat" xml:space="preserve">
+  <data name="Type Of Certificate" xml:space="preserve">
     <value>نوع الشهادة</value>
   </data>
   <data name="Uploading file" xml:space="preserve">

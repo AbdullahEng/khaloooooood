@@ -30,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Uploads\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\SB_Admin2\img\undraw_posting_photo.svg" />
     <None Include="wwwroot\SB_Admin2\img\undraw_profile.svg" />
     <None Include="wwwroot\SB_Admin2\img\undraw_profile_1.svg" />

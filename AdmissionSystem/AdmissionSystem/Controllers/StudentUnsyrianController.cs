@@ -786,7 +786,7 @@ namespace AdmissionSystem.Controllers
                     }
 
                     ModelState.AddModelError("", "");
-                    ViewBag.Erroremessage = localizer["please cheack and reach all requirments"];
+                    ViewBag.Erroremessage = localizer["please check and fill all requirements"];
                     UnStudent_View_Model collection2 = collection;
                     collection2.CountryList = FillSelection3();
                     collection2.Type_Of_certificate_list = FillSelection2();

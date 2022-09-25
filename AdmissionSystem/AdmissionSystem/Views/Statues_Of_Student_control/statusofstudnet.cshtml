@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<AdmissionSystem.Model.Statues_Of_Student>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 
 @{
@@ -12,12 +16,12 @@
         margin: auto;
     }
 </style>
-<h2 class="text-center">Status of Studnet</h2>
+<h2 class="text-center">@localizer["Status of Studnet"]</h2>
 <br />
 <br />
 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" asp-action="statusofstudnet">
     <div class="input-group">
-        <input type="search" class="form-control bg-light border-0 small" name="term" placeholder="Student Name..."
+        <input type="search" class="form-control bg-light border-0 small" name="term" placeholder="@localizer["Student Name..."]"
                aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
             <button class="btn btn-primary" type="submit">
@@ -37,25 +41,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id)
+            @localizer["id"]    
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date_of_Acshiving)
+            @localizer["Date of Acshiving"]   
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Checked_recipet)
+             @localizer["recipet Status"]   
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Checked_Identity)
+            @localizer["Identity Status"]    
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Checked_city_certificate)
+            @localizer["Country Status"]   
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Checked_Rate)
+            @localizer["Rate Status"]   
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_Student_Info.First_Name_EN)
+            @localizer["Student name"]  
             </th>
             <th></th>
         </tr>

@@ -1,24 +1,27 @@
 ﻿@model IEnumerable<AdmissionSystem.Model.Department>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center active" data-toggle="tooltip" data-placement="bottom" title="It contains specialization like(IT,comunicaatio, Arcitict,and so on........)" >Departments</h1>
+<h1 class="text-center active" data-toggle="tooltip" data-placement="bottom" title="It contains specialization like(IT,comunicaatio, Arcitict,and so on........)" >@localizer["Departments"]</h1>
 
 @*<h6 class="text-center active">It contains specialization like(IT,comunicaatio, Arcitict,and so on........) </h6>*@
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">@localizer["Create New"]</a>
 </p>
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-               <h5>Spicialization name</h5>
+               <h5>@localizer["Spicialization name"]</h5>
             </th>
             <th>
-                <h5>Faculty name</h5>
+                <h5>@localizer["Faculty name"]</h5>
             </th>
 
             <th></th>
@@ -35,9 +38,9 @@
             </td>
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a> 
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">@localizer["Edit"]</a> 
                 @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">@localizer["Delete"]</a>
             </td>
         </tr>
 }

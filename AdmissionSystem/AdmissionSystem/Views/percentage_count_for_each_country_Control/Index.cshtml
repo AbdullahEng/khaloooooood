@@ -1,26 +1,30 @@
 ﻿@model IEnumerable<AdmissionSystem.Model.Persentage_count_for_each__country>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class=" text-center">percentage count for each country</h1>
+<h1 class=" text-center">@localizer["percentage count for each country"]</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary ">Create New</a>
+    <a asp-action="Create" class="btn btn-primary ">@localizer["Create New"]</a>
 </p>
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FK_statues_of_admission_eligibilty)
+              @localizer["The admission eligibility"]  
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FK_country)
+             @localizer["Country"]   
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rate)
+            @localizer["percentage"]    
             </th>
             <th></th>
         </tr>
@@ -39,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Rate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">Edit</a>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-dark">@localizer["Edit"]</a>
                 @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger">@localizer["Delete"]</a>
             </td>
         </tr>
         }

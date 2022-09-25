@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Here you can addmit to the universty of Kalmoon Remotley" xml:space="preserve">
+  <data name="Here you can addmit to the universty of Kalmoon Remotely" xml:space="preserve">
     <value>يمكنك من خلال هذا النظام أنت تتقدم الى المفاضلة بشكل إلكتروني</value>
   </data>
   <data name="How to Make Account" xml:space="preserve">
     <value>كيف أقوم بالتسجيل</value>
   </data>
-  <data name="if you are a new studet please start with us by clicking one of the buttoms here" xml:space="preserve">
+  <data name="if you are a new student please click on one of these buttons" xml:space="preserve">
     <value>اذا كنت ترغب في التقدم إلى المفاضلة يجب عليك ان تسجل بريدك معنا</value>
   </data>
   <data name="Make an account in the Admission Sytem" xml:space="preserve">

@@ -39,10 +39,10 @@
 <!-- One "tab" for each step in the form: -->
 <div class="tab">
      <h5 class="alert alert-primary text-center " role="alert">step one </h5>
-     <p class="alert alert-warning text-center " role="alert">@localizer["Student enter his information like the youtube sample below"]</p>
+     <p class="alert alert-warning text-center " role="alert">@localizer["Student enters his information like the youtube sample below"]</p>
 
  <div class="embed-responsive embed-responsive-16by9">
-<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ze7Axow41Ac">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/qnemmNr9-zA">
 </iframe>
 </div>
 </div>
@@ -52,16 +52,16 @@
 <p class="alert alert-warning text-center " role="alert">@localizer["After entering your information you have to fill your wishes"]</p>
 <div class="embed-responsive embed-responsive-16by9">
 <iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/AnzJwqRwWk0">
-</iframe>
+</iframe> 
 </div>
 </div>
 
 <div class="tab">   
     <h5 class="alert alert-primary text-center " role="alert">step three </h5>
-    <p class="alert alert-warning text-center " role="alert">@localizer["After choosing your wishes you have to confirme your requist"] </p>
+    <p class="alert alert-warning text-center " role="alert">@localizer["After choosing your wishes you have to confirm your requist"] </p>
 
     <div class="embed-responsive embed-responsive-16by9">
-<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/7jnNiCNxmVw">
+<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/e7AIMSGG8RQ">
 </iframe> 
 </div>
  
@@ -69,7 +69,10 @@
 
 <div class="tab"> 
     <h5 class="alert alert-primary text-center " role="alert">step four </h5>
-      <p class="alert alert-warning text-center " role="alert">@localizer["After privouse steps we can say that you finished all the requirments and you have to wait until the results exported."] </p>
+      <p class="alert alert-warning text-center " role="alert">@localizer["After previous steps we can say that you finished all the requirments and you have to wait until the results to be released."] <br>
+          <br><br><br>
+           <a hidden asp-action="Edit" id="Edit_anchore" class="btn btn-primary btn-lg shinbutton" asp-route-id=@Model.id>@localizer["Start"]</a>
+           <br></p>
 
 </div>
 
@@ -78,7 +81,7 @@
       <br><br>
     <button type="button"  class="btn btn-primary btn-sm" id="prevBtn" onclick="nextPrev(-1)">@localizer["Previous"]</button>
     <button type="button"  class="btn btn-primary btn-sm" id="nextBtn" onclick="nextPrev(1)">@localizer["Next"]</button>
-     <a hidden asp-action="Edit" id="Edit_anchore" class="btn btn-warning btn-sm" asp-route-id=@Model.id>@localizer["Start"]</a>
+    
 
   </div>
 </div>

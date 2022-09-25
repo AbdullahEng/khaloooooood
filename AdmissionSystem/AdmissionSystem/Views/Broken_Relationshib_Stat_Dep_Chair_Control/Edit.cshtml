@@ -1,11 +1,15 @@
 ﻿@model AdmissionSystem.View_Model.Broken_Relationshib_Stat_Dep_Chair_View_model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center">Edit</h1>
+<h1 class="text-center">@localizer["Edit"]</h1>
 
 @*<h4>Broken_Relationshib_Stat_Dep_Chair_View_model</h4>*@
 <hr />
@@ -90,27 +94,27 @@
 
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label class="control-label"> Type Of Admission</label>
+                <label class="control-label">@localizer["Type Of Admission"]</label>
                 <select asp-for="status_of_admi_eligi_id" class="form-control" asp-items="@(new SelectList(Model.FK_statues_Of_Admission_Eligibilty,"id","Type_of_admission_eligibilty"))">
                 </select>
                 <span asp-validation-for="status_of_admi_eligi_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label"> Department </label>
+                <label class="control-label">@localizer["Department"]  </label>
                 <select asp-for="department_id" class="form-control" asp-items="@(new SelectList(Model.Fk_department,"id","specialization_name"))">
                 </select>
                 <span asp-validation-for="department_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label"> Cahir count</label>
+                <label class="control-label">@localizer["Chair count"] </label>
                 <input asp-for="Chair_count" class="form-control" />
                 <span asp-validation-for="Chair_count" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-primary" />
+                <input type="submit" value="@localizer["Save"]" class="btn btn-outline-primary" />
             </div>
             <div>
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Index" class="btn btn-secondary">@localizer["Back to List"]</a>
             </div>
         </form>
     </div>

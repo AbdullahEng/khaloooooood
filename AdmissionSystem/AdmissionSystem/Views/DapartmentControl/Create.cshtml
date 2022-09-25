@@ -1,11 +1,14 @@
 ﻿@model AdmissionSystem.View_Model.Department_faculty_view_model
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Pages/Shared/_Layout_For_Admin_Dashboard.cshtml";
 }
 
-<h1 class="text-center">Create</h1>
+<h1 class="text-center">@localizer["Create"]</h1>
 
 
 <hr />
@@ -88,7 +91,7 @@
 
 
             <div class="form-group">
-                <h5>Facultes</h5>
+                <h5>@localizer["Faculties"]</h5>
                 <select asp-for="facultyid" class="form-control" asp-items="@(new SelectList(Model.facultylist,"id","Faculty_name"))"></select>
                 <span asp-validation-for="facultyid" class="text-danger"></span>
             </div>
@@ -113,16 +116,16 @@
 
 
             <div class="form-group ">
-                <h5 data-toggle="tooltip" data-placement="bottom" title="specialization like(IT,comunicatio, Arcitict,and so on........)">specialization name</h5>
+                <h5 data-toggle="tooltip" data-placement="bottom" title="specialization like(IT,comunicatio, Arcitict,and so on........)">@localizer["specialization name"]</h5>
                 <input asp-for="specialization_name" class="form-control" />
 
                 <span asp-validation-for="specialization_name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-outline-primary " />
+                <input type="submit" value="@localizer["Create"]" class="btn btn-outline-primary " />
             </div>
             <div>
-                <a asp-action="Index" class="btn btn-secondary ">Back to List</a>
+                <a asp-action="Index" class="btn btn-secondary ">@localizer["Back to List"]</a>
             </div>
         </form>
     </div>
