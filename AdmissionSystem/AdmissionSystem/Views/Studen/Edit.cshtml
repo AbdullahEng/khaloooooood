@@ -35,19 +35,21 @@
         <input hidden id="confirmation_value" asp-for="Conformation" value="@Model.Conformation"/>
        
    
-        <div class="row form-group border-bottom border-warning ">
+        <div class="row form-group border-bottom border-warning " id="log_regestration">
             <div class="col-11">
                 <h2 class="text-warning">@localizer["Registration"] </h2>
                 <label class="text-primary">@Model.Addmition_eleigibilty</label>
             </div>
             <img src="~/Desighn/kalamoon logo.png" width="80" height="90" />
         </div>
+         
+         <h2  id="mobieltype" class="text-warning  border-bottom border-warning" >@localizer["Student Registration"]</h2>
         <!-- One "tab" for each step in the form: -->
         <div class="tab">
             <h2 class="alert alert-primary text-center " role="alert">@localizer["family and identity information"] </h2>
             <div class="container">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="First_Name_AR">@localizer["First name in Arabic"]</label>
                             <input asp-for="First_Name_AR" class="form-control" />
@@ -55,7 +57,7 @@
                         </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Father_Name_AR">@localizer["Father name in Arabic"]</label>
                             <input asp-for="Father_Name_AR" class="form-control" required />
@@ -63,13 +65,13 @@
                         </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Mother_Name_AR">@localizer["Mother name in Arabic"]</label>
                             <input asp-for="Mother_Name_AR" class="form-control" />
                             <span asp-validation-for="Mother_Name_AR" class="text-danger small"></span>
                         </div>
-                    </div> <div class="col">
+                    </div> <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Grandfather_Name_AR">@localizer["Grand father name in Arabic"]</label>
                             <input asp-for="Grandfather_Name_AR" class="form-control" />
@@ -87,21 +89,21 @@
                             <span asp-validation-for="First_Name_EN" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Father_Name_EN">@localizer["Father name in English"]</label>
                             <input asp-for="Father_Name_EN" class="form-control" />
                             <span asp-validation-for="Father_Name_EN" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Mother_Name_EN">@localizer["Mother name in English"]</label>
                             <input asp-for="Mother_Name_EN" class="form-control"  />
                             <span asp-validation-for="Mother_Name_EN" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Grandfather_Name_EN">@localizer["Grand father name in English"]</label>
                             <input asp-for="Grandfather_Name_EN" class="form-control" />
@@ -111,14 +113,14 @@
 
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Nick_Name">@localizer["Second name"] </label>
                             <input  asp-for="Nick_Name" class="form-control" />
                             <span asp-validation-for="Nick_Name" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div  class="col">
+                    <div  class="col-md-4">
 
                         <div class="form-group">
                             <label asp-for="Birth">@localizer["Birth"]</label>
@@ -127,7 +129,7 @@
                         </div>
 
                     </div>
-                    <div  class="col">
+                    <div  class="col-md-4">
 
                         <div class="form-group">
                             <label asp-for="Nationality">@localizer["Nationality"]</label>
@@ -135,7 +137,7 @@
                             <span asp-validation-for="Nationality" class="text-danger small"></span>
                         </div>
                     </div>
-  <div class="col">
+  <div class="col-md-4">
                            <label asp-for="Marital_status" class="control-label">@localizer["Marital status"]</label>
                          <div class="btn-group btn-group-toggle" data-toggle="buttons">
                          <label for="Marital_status1"  asp-for="Marital_status" class="btn btn-outline-primary">
@@ -159,7 +161,7 @@
                 </div>
                 <div class="row">
                   
-                    <div hidden class="col">
+                    <div hidden class="col-md-4">
                       
                          <label asp-for="gender" class="control-label">@localizer["gender"]</label>
                          <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -199,31 +201,31 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Civil_Registriation_City" class="control-label">@localizer["Civil Registration City"]</label>
-                            <input placeholder="مثال :حمص الحميدية" asp-for="Civil_Registriation_City" class="form-control" value="info"/>
+                            <input placeholder="مثال :حمص الحميدية" asp-for="Civil_Registriation_City" class="form-control" />
                             <span asp-validation-for="Civil_Registriation_City" class="text-danger small"></span>
                         </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Civil_Registrition_No" class="control-label">@localizer["Civil Registration No"]</label>
-                            <input asp-for="Civil_Registrition_No" class="form-control" value="1"/>
+                            <input asp-for="Civil_Registrition_No" class="form-control"/>
                             <span asp-validation-for="Civil_Registrition_No" class="text-danger small"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Identity_No" class="control-label">@localizer["Identity No"]</label>
                             <input readonly asp-for="Identity_No" class="form-control"  />
                             <span asp-validation-for="Identity_No" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Passport_No" class="control-label">@localizer["Passport No"]</label>
                             <input asp-for="Passport_No" class="form-control" placeholder="إختياري"   />
@@ -235,7 +237,7 @@
                 </div>
 
                 <div class="row">
-                    <div hidden class="col">
+                    <div hidden class="col-md-4">
 
                         <div class="form-group">
                             <label asp-for="Email" class="control-label">@localizer["Email"]</label>
@@ -243,15 +245,15 @@
                             <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
 
                         <div class="form-group">
                             <label asp-for="Current_Address" class="control-label">@localizer["Current Address"]</label>
-                            <input placeholder="مثال: سوريا حمص" asp-for="Current_Address" class="form-control" value="قاعد في البيت " />
+                            <input placeholder="مثال: سوريا حمص" asp-for="Current_Address" class="form-control"  />
                             <span asp-validation-for="Current_Address" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
 
                         <div class="form-group">
                             <label asp-for="Full_Address" class="control-label">@localizer["Full Address"]</label>
@@ -259,14 +261,14 @@
                             <span asp-validation-for="Full_Address" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Mobile_Phone" class="control-label">@localizer["Mobile Phone"]</label>
-                            <input asp-for="Mobile_Phone" class="form-control" value="0911111111"/>
+                            <input asp-for="Mobile_Phone" class="form-control" />
                             <span asp-validation-for="Mobile_Phone" class="text-danger small" ></span>
                         </div>
                     </div>
-                     <div class="col">
+                     <div class="col-md-3">
 
                         <div class="form-group">
                             <label asp-for="Home_s_Phone" class="control-label">@localizer["Home Phone"]</label>
@@ -287,14 +289,14 @@
             <h2 class="alert alert-primary text-center " role="alert">@localizer["Information part 2"] </h2>
             <div class="container">
                 <div class="row">
-                    <div hidden class="col">
+                    <div hidden class="col-md-4">
                         <div class="form-group">
                             <label asp-for="high_school_certificate" class="control-label">@localizer["high school certificate"]</label>
                             <input readonly asp-for="high_school_certificate" class="form-control" value="Syrian" />
                             <span asp-validation-for="high_school_certificate" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Addmition_eleigibilty" class="control-label">@localizer["Admission eligibility"]</label>
                             <input readonly asp-for="Addmition_eleigibilty" class="form-control" />
@@ -302,7 +304,7 @@
                         </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="country" class="control-label">@localizer["Country of Certificate"]</label>
                             <input readonly asp-for="CountryList" class="form-control"  value=@Model.CountryList[0].country_name/>
@@ -311,7 +313,7 @@
                         </div>
                        
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="city_of_high_school_cirtificate" class="control-label">@localizer["City of High School Cirtificate"]</label>
                           
@@ -340,14 +342,14 @@
                     </div>
                     
                 </div>         <div class="row  ">
-                    <div class="col" id="hide_typeofcertivicate">
+                    <div class="col-md-6" id="hide_typeofcertivicate">
                         <div class="form-group">
                             <label asp-for="Type_Of_Certificat" class="control-label">@localizer["Type Of Certificate"]</label>
                             <select asp-for="Type_Of_Certificat" class="form-control" asp-items="@(new SelectList(Model.Type_Of_certificate_list, "id", "type"))"></select>
                             <span asp-validation-for="Type_Of_Certificat" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
 
                         <div class="form-group">
                             <label asp-for="date_of_high_school_cirtificate" class="control-label">@localizer["Date of High School Cirtificate"]</label>
@@ -361,7 +363,7 @@
                 </div>
                 <div class="row">
                     
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="course_number" class="control-label">@localizer["course number"] </label>
                             
@@ -373,14 +375,14 @@
                             <span asp-validation-for="course_number" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Subscription_number" class="control-label">@localizer["Subscription Number"]</label>
-                            <input asp-for="Subscription_number" class="form-control" value=1/>
+                            <input asp-for="Subscription_number" class="form-control" />
                             <span asp-validation-for="Subscription_number" class="text-danger small"></span>
                         </div>
                     </div>
-                      <div class="col" id="hide_rate">
+                      <div class="col-md-4" id="hide_rate">
 
                         <div class="form-group">
                             <label asp-for="The_Rate" class="control-label">@localizer["The Rate"]</label>
@@ -388,7 +390,7 @@
                             <span asp-validation-for="The_Rate" class="text-danger small"></span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                          <label asp-for="LAnguge_of_the_addmintion" class="control-label">@localizer["language of the admission"]</label>
                          <div class="btn-group btn-group-toggle"  data-toggle="buttons">
                          <label  for="kh"  asp-for="LAnguge_of_the_addmintion" class="btn btn-outline-primary " >
@@ -411,7 +413,7 @@
         </div>
        @* this script to hide images template that is transparent and has 4 edge
       *@  @{
-                                                                                                                                                                     @if (Model.Image_of_crtificat_URL!=null)
+                                                                                                                                                                             @if (Model.Image_of_crtificat_URL!=null)
          {<h1 hidden id="hideornot">hidechoos</h1>
            
           }else{<h1 hidden  id="hideornot">hideimage</h1>}
@@ -425,7 +427,7 @@
             <h2 class="alert alert-primary text-center " role="alert">@localizer["Uploading file"] </h2>
             <div class="container">
                  <div class="row">
-                          <div class="col ">
+                          <div class="col-md-6 ">
                          
 
 
@@ -452,7 +454,7 @@
       </p>
     </div>
     <!-- End Header --><button type="button" class="ButtonToggel2  btn btn-primary" onclick="myfunction2();">change the image</button><br><br>
-                                                     <div class="TheImage2"> <img  id="myImg" src="~/Uploads/@Model.Identity_front_image_URL" class="rounded" style="object-fit: contain;width:300px;height:150px">
+                                                     <div class="TheImage2"> <img  id="myImg" src="~/Uploads/@Model.Identity_front_image_URL" class="rounded"  style="width:80%;height:70%;object-fit:contain;">
 
                                                                                                 <!-- The Modal -->
                                                                                                 <div id="myModal" class="modal">
@@ -503,7 +505,7 @@
                       
                     </div>
                  
-                      <div class="col ">
+                      <div class="col-md-6 ">
 
                       @*  <div class="form-group">
                             <label asp-for="Identity_back_image" class="control-label">@localizer["Identity back image"]</label>
@@ -545,7 +547,7 @@
       </p>
     </div>
     <!-- End Header --><button type="button" class="ButtonToggel3  btn btn-primary" onclick="myfunction3();">change the image</button><br><br>
-       <div class="TheImage3">    <img id="myImg2"  src="~/Uploads/@Model.Identity_back_image_URL" class="rounded" style="object-fit: contain;width:300px;height:150px"/>
+       <div class="TheImage3">    <img id="myImg2"  src="~/Uploads/@Model.Identity_back_image_URL" class="rounded"  style="width:80%;height:70%;object-fit:contain;"/>
                            
                                 
                                                                                                                                                     <!-- The Modal -->
@@ -611,7 +613,7 @@
                   
 
 
-                       <div class="col ">
+                       <div class="col-md-6 ">
                        
                       
                     <div class="bodyboximag">
@@ -634,7 +636,7 @@
     <!-- End Header --><br>
     <br>
   <div  class="TheImage">
-                             <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" class="rounded" style="object-fit: contain;width:300px;height:150px" />
+                             <img id="myImg4" src="~/Uploads/@Model.Image_of_crtificat_URL" class="rounded"  style="width:80%;height:70%;object-fit:contain;" />
                        
                                                                            <!-- The Modal -->
                                                                            <div id="myModal4" class="modal ">
@@ -696,7 +698,7 @@
                       
                     </div>
 
-                    <div class="col ">
+                    <div class="col-md-6 ">
                        @* <div class="form-group">
                             <label asp-for="check_recipt_image" class="control-label">@localizer["check recipt image"]</label>
                             <input type="file" onchange="readURL4(this);" name="check_recipt_image" asp-for="check_recipt_image" class="form-control-file" />
@@ -725,7 +727,7 @@
     </p>
   </div>
   <!-- End Header --><button type="button" class="ButtonToggel4  btn btn-primary" onclick="myfunction4();">change the image</button><br><br>
-       <div class="TheImage3"> <img id="myImg3" src="~/Uploads/@Model.Check_recipt_image_URL" style="object-fit: contain;width:300px;height:150px" />
+       <div class="TheImage3"> <img id="myImg3" src="~/Uploads/@Model.Check_recipt_image_URL"  style="width:80%;height:70%;object-fit:contain;" />
                             
                                                                                                                                                     <!-- The Modal -->
                                                                                                                                                     <div id="myModal3" class="modal">
@@ -820,6 +822,7 @@ function sumbitfunction(){
    </script>
 <script>
 window.onload = function() {
+  
         if (document.getElementById("hideornot").textContent == "hidechoos") 
     {//document.getElementById("hideornot").textContent = "hi it is me";
      document.getElementsByClassName("ChooseImage")[0].hidden = true;
@@ -927,7 +930,7 @@ function nextPrev(n) {
               Swal.fire({
                   icon: 'error',
                   title: 'Oops...',
-                  text: 'you have chosen similar image',
+                  text: 'قد وضعت صورا متماثلة,إنتبه',
 
               })
               }
@@ -938,7 +941,7 @@ function nextPrev(n) {
               Swal.fire({
                   icon: 'error',
                   title: 'Oops...',
-                  text: 'you have to choose and fill all images.',
+                  text: 'يجب عليك أن تملئ جميع الصور',
 
               })
 
@@ -962,7 +965,7 @@ function nextPrev(n) {
           Swal.fire({
   icon: 'error',
   title: 'Oops...',
-  text: 'you rechoosed a similar image',
+  text: 'قد أعدت إختيار صور متشابه',
  
 })
 
@@ -973,7 +976,7 @@ function nextPrev(n) {
           Swal.fire({
   icon: 'error',
   title: 'Oops...',
-  text: 'make sure that you choosed all images.',
+  text: 'يجب أن تختار جميع الصور',
  
 })
          

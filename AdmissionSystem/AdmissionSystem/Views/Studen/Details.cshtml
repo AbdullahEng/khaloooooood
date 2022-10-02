@@ -48,7 +48,8 @@ input[type=text],input[type=date],input[type=number],input[type=email] {
    font-weight: bold;
     font-family: 'Open Sans', sans-serif;
   
-}
+}h1{font-weight: bold;
+    font-family: 'Open Sans', sans-serif;}
 p{
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
@@ -58,19 +59,21 @@ p{
 <input hidden id="confirmation_value"  value="@Model.Conformation" />
   <input hidden id="wish_value" value="@Model.wish_Department_Id1"/>
    <input hidden id="Rate" value="@Model.The_Rate"/>
+     <h1  id="mobieltype" class="text-warning  border-bottom border-warning" >@localizer["Student inforamtion"]</h1>
+     
 <div data-aos="fade-up">
 <div class="ContainerRegForm"   >
     <label style="font-size: 150%;" class="text-primary">@localizer["family and identity information"]</label>
     <br><br> <hr />
      <div class="row">
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="First_Name_AR">@localizer["First Name in Arbic"]</label>
                             <input readonly asp-for="First_Name_AR" />
                             </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Father_Name_AR">@localizer["Father Name in Arabic"]</label>
                             <input readonly asp-for="Father_Name_AR" />
@@ -78,12 +81,12 @@ p{
                         </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Mother_Name_AR">@localizer["Mother Name in Arabic"]</label>
                             <input asp-for="Mother_Name_AR" readonly  />
                           </div>
-                    </div> <div class="col">
+                    </div> <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Grandfather_Name_AR">@localizer["Grand Father name in Arabic"]</label>
                             <input asp-for="Grandfather_Name_AR" readonly />
@@ -93,25 +96,25 @@ p{
                 </div>
                 <div class="row">
 
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="First_Name_EN">@localizer["First Name in English"]</label>
                             <input asp-for="First_Name_EN"  readonly />
                          </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Father_Name_EN">@localizer["Father Name in English"]</label>
                             <input asp-for="Father_Name_EN"  readonly/>
                          </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Mother_Name_EN">@localizer["Mother Name in English"]</label>
                             <input asp-for="Mother_Name_EN"  readonly />
                          </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="Grandfather_Name_EN">@localizer["Grand FAther Name in English"]</label>
                             <input asp-for="Grandfather_Name_EN"  readonly/>
@@ -120,13 +123,13 @@ p{
 
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Nick_Name">@localizer["Nick name"] </label>
                             <input required asp-for="Nick_Name" readonly/>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
 
                         <div class="form-group">
                             <label asp-for="Birth">@localizer["Birth"]</label>
@@ -134,7 +137,7 @@ p{
                          </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
 
                         <div class="form-group">
                             <label asp-for="Nationality">@localizer["Nationality"]</label>
@@ -144,16 +147,7 @@ p{
 
 
                 </div>
-                <div class="row">
-                    <div class="col">
-
-                    </div>
-
-                    <div class="col">
-                      
-                       
-                </div>
-</div>
+              
 
 </div>
 
@@ -161,21 +155,21 @@ p{
     <div class="ContainerRegForm" >
                 <div class="container">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-4">
 
                         <div class="form-group">
                             <label asp-for="Full_Address" class="control-label">@localizer["Full Address"]</label>
                             <input  asp-for="Full_Address" readonly />
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Civil_Registriation_City" class="control-label">@localizer["Civil Registriation City"]</label>
                             <input  asp-for="Civil_Registriation_City"readonly />
                          </div>
 
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Civil_Registrition_No" class="control-label">@localizer["Civil Registrition No"]</label>
                             <input asp-for="Civil_Registrition_No" readonly />
@@ -183,13 +177,13 @@ p{
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Passport_No" class="control-label">@localizer["Passport No"]</label>
                             <input asp-for="Passport_No"readonly  />
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Identity_No" class="control-label">@localizer["Identity No"]</label>
                             <input asp-for="Identity_No" readonly  />
@@ -199,14 +193,14 @@ p{
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6">
                          <div class="form-group">
                             <label asp-for="Current_Address" class="control-label">@localizer["Current Address"]</label>
                             <input  asp-for="Current_Address" readonly/>
                         </div>
                        
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                          <div class="form-group">
                             <label asp-for="Home_s_Phone" class="control-label">@localizer["Home Phone"]</label>
                             <input asp-for="Home_s_Phone" readonly />
@@ -216,14 +210,14 @@ p{
                     
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Email" class="control-label">@localizer["Email"]</label>
                             <input asp-for="Email"readonly />
                         </div>
                        
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                          <div class="form-group">
                             <label asp-for="Mobile_Phone" class="control-label">@localizer["Mobile Phone"]</label>
                             <input asp-for="Mobile_Phone" readonly />
@@ -244,18 +238,18 @@ p{
   <br><br> <hr />
             <div class="container">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="high_school_certificate" class="control-label">@localizer["high school certificate"]</label>
                             <input asp-for="high_school_certificate" readonly />
                         </div>
                     </div>
-                     <div class="col">
+                     <div class="col-md-4">
                           <label asp-for="country_name" class="control-label">@localizer["Country"]</label>
                             <input asp-for="country_name"readonly />
                        
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                          <div class="form-group">
                             <label asp-for="city_of_high_school_cirtificate" class="control-label">@localizer["City of High School Cirtificate"]</label>
                             <input asp-for="city_of_high_school_cirtificate" readonly />
@@ -265,31 +259,31 @@ p{
                 </div> <div class="row">
                    
                     
-                    <div class="col">
+                    <div class="col-md-4">
                          <div class="form-group">
                             <label asp-for="The_Rate" class="control-label">@localizer["The Rate"]</label>
                             <input asp-for="The_Rate"readonly />
                          </div>
-                       </div>  <div class="col">
+                       </div>  <div class="col-md-4">
                         <label asp-for="Type_of_certificate_name" class="control-label">@localizer["Certificate Type"]</label>
                             <input asp-for="Type_of_certificate_name"readonly />
                        
                     </div>
                 </div> 
                
-                <div class="row  ">
-                    <div class="col">
+                <div class="row">
+                    <div class="col-md-4">
                      <div class="form-group">
                             <label asp-for="date_of_high_school_cirtificate" class="control-label">@localizer["Date of High School Cirtificate"]</label>
                             <input type="date" asp-for="date_of_high_school_cirtificate" class="form-control"/>
                         </div>
-                    </div><div class="col">
+                    </div><div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="course_number" class="control-label">@localizer["course number"] </label>
                             <input asp-for="course_number" readonly />
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Subscription_number" class="control-label">@localizer["Subscription Number"]</label>
                             <input asp-for="Subscription_number" readonly />
@@ -347,7 +341,7 @@ p{
          <label style="font-size: 150%;" class="text-primary">@localizer["Uploded files"] </label>
           <br><br><br>
            <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                     <div id="uploadArea" class="upload-area">
                         <div class="uploadea__header">
                        
@@ -367,7 +361,7 @@ p{
                 </div>
 
                <hr/>
-                <div class="col-6">
+                <div class="col-md-6">
                    <div id="uploadArea" class="upload-area">
                        <div class="uploadea__header">
                        
@@ -392,7 +386,7 @@ p{
             </div>
             <br>
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                     
                     <div id="uploadArea" class="upload-area">
                         <div class="uploadea__header">
@@ -410,7 +404,7 @@ p{
               
                 </div>
               
-                <div class="col-6">
+                <div class="col-md-6">
                          <div >
                 <div >
                      <div id="uploadArea" class="upload-area">
@@ -453,6 +447,7 @@ p{
 <script src="~/aos/aos.js"></script>
 <script>
 window.onload = function() {
+
     if (document.getElementById("confirmation_value").value == '1' && document.getElementById("wish_value").value != '') {
         document.getElementById("first").hidden = false;
         document.getElementById("secound").hidden = false;

@@ -249,6 +249,9 @@
   <data name="Single" xml:space="preserve">
     <value>عازب</value>
   </data>
+  <data name="Student Registration" xml:space="preserve">
+    <value>تسجيل الطالب</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>تسليم الطلب</value>
   </data>

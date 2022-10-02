@@ -1,4 +1,4 @@
-// Design By
+﻿// Design By
 // - https://dribbble.com/shots/13992184-File-Uploader-Drag-Drop
 
 // Select Upload-Area
@@ -204,7 +204,7 @@ function fileValidate2(fileType2, fileSize2) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Please Your File Should be 2 Megabytes or Less',
+            text: 'يجب إختيار صورة أقل من 2 ميغا',
 
         })
         document.getElementsByClassName("hide_bar2")[0].hidden = true;
@@ -214,7 +214,7 @@ function fileValidate2(fileType2, fileSize2) {
       Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Please make sure to upload An Image File Type',
+          text: 'تأكد من إختيارك صورة وليس ملف أخر',
 
       })
       document.getElementsByClassName("hide_bar2")[0].hidden = true;

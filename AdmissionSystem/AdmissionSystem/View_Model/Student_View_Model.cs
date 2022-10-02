@@ -81,7 +81,7 @@ namespace AdmissionSystem.View_Model
        ErrorMessage = "Characters are not allowed and only 10 numbers.")]
         public string Home_s_Phone { get; set; }
         [Required(ErrorMessage = "Rate is required")]
-        [Range(960, 2400,ErrorMessage ="value shoud be between 960 and 2400")]
+        [Range(780, 2400,ErrorMessage ="value shoud be between 780 and 2400")]
         public float The_Rate { get; set; }
         public float old_Rate { get; set; }
         [Required(ErrorMessage = "City of Certificate is required")]

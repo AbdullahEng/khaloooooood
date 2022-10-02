@@ -113,14 +113,14 @@ $selects.on('change', function(evt) {
         Swal.fire({
   icon: 'error',
   title: 'Oops...',
-  text: 'we are sorry, you are not able to choose any wish',
+  text: 'نعتذر!! لست مؤهلا لإختيار أي رغبة',
   footer: '<a href="http://www.uok.edu.sy/%D8%A5%D8%B9%D9%84%D8%A7%D9%86-%D9%85%D9%81%D8%A7%D8%B6%D9%84%D8%A9-%D8%A7%D9%84%D9%82%D8%A8%D9%88%D9%84-%D9%81%D9%8A-%D8%AC%D8%A7%D9%85%D8%B9%D8%A9-%D8%A7%D9%84%D9%82%D9%84%D9%85%D9%88%D9%86-%D8%A7/">Please Rereview the Admission Eligibility Instructions </a>'
 })
     }
     else if (parseInt(document.getElementById("wishscount").textContent) == 1) {
         Swal.fire({
             icon: 'info',
-            title: 'we are sorry, you are not able to choose more than one wishe',
+            title: 'نعتذر!! أنت مؤهل لإختيار رغبة واحدة',
             showClass: {
                 popup: 'animate__animated animate__fadeInDown'
             },
@@ -132,7 +132,7 @@ $selects.on('change', function(evt) {
     else if (parseInt(document.getElementById("wishscount").textContent) == 2) {
         Swal.fire({
             icon: 'info',
-            title: 'we are sorry, you are not able to choose more than two wishes',
+            title: 'نعتذر!! أنت مؤهل لإختيار رغبتان فقط',
             showClass: {
                 popup: 'animate__animated animate__fadeInDown'
             },
@@ -154,7 +154,7 @@ function submitFunction() {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'you have to choose one wish at least',
+                text: 'يجب عليك أن تختار رغبة واحدة على الأقل',
 
             })
         }
@@ -168,7 +168,7 @@ function submitFunction() {
             Swal.fire({
                 icon: 'info',
                 title: "Note",
-                html: "<label style=font-size:160%;><b>There are more wishes to choose</b></label> <br><label>?Do you want to save changes</label>",
+                html:"<label style=font-size:160%;><b>يوجد المزيد من الرغبات للإختيار</b></label> <br><label>هل أنت متأكد من الإختيار</label>",
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: 'Save',
@@ -194,7 +194,7 @@ function submitFunction() {
             Swal.fire({
                     icon: 'question',
                     title:"Note",
-                    html:"<label style=font-size:160%;><b>Do you want to save the changes</b></label>",
+                    html:"<label style=font-size:160%;><b>هل تريد حفظ التغيرات؟</b></label>",
                     showDenyButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Save',
@@ -221,7 +221,7 @@ function submitFunction() {
             Swal.fire({
                     icon: 'question',
                     title:"Note",
-                    html:"<label style=font-size:160%;><b>Do you want to save the changes</b></label>",
+                    html:"<label style=font-size:160%;><b>هل تريد حفظ التغيرات؟</b></label>",
                     showDenyButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Save',
@@ -253,7 +253,7 @@ function makechanges1() {
          document.getElementById("selectwish2").disabled=false;
           Swal.fire(
   'Good job!',
-  'first wish has selected successfully',
+  'تم إختيار الرغبة الأولى بنجاح',
   'success'
 )
      }
@@ -275,7 +275,7 @@ function makechanges2() {
          document.getElementById("selectwish3").disabled=false;
           Swal.fire(
   'Good job!',
-  'secound wish has selected successfully',
+  'تم إختيار الرغبة الثانية بنجاح',
   'success'
 )
      }
@@ -295,7 +295,7 @@ function makechanges3() {
     {
           Swal.fire(
   'Good job!',
-  'Third wish has selected successfully',
+  'تم إختيار الرغبة الثالثة بنجاح',
   'success'
 )
     }

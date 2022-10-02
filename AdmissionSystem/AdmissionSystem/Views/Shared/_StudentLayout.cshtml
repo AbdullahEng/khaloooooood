@@ -56,20 +56,17 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                       
-                    </ul>
+                     <partial name="_SelectLanguagePartial" />
+                <partial name="_LoginPartial" />
+                   
                 </div>
-                <div>  
-                    <partial name="_SelectLanguagePartial" />
-                </div>
+                
 
             </div>
         </nav>
     </header>
-    <div class="row">
-    <div class="col-1">
+    <div >
+    <div  id="RenderBody1" >
      <ul class="menu" id="slidmenu">
       <li hidden class="menu_list" id="zero">
         <span class="front fas fa-solid fa-gear"></span>
@@ -93,9 +90,10 @@
     </li>
 </ul>
     </div>
-    <div class="col-10">
+    <div id="RenderBody" >
        <div class="container">
         <main role="main" class="pb-3">
+        <hr>
             @RenderBody()
         </main>
     </div>

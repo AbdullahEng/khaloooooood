@@ -234,6 +234,9 @@
   <data name="Secound wish" xml:space="preserve">
     <value>الرغبة الثانية</value>
   </data>
+  <data name="Student inforamtion" xml:space="preserve">
+    <value>معلومات الطالب</value>
+  </data>
   <data name="Subscription Number" xml:space="preserve">
     <value>رقم الإكتتاب</value>
   </data>

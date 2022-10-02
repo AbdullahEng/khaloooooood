@@ -25,6 +25,8 @@
 <h5 hidden id="SaveRateValue">@Model.The_Old_Rate</h5>
 <h5  hidden id="SaveCertificatValue">@Model.Old_Type_Of_Certificat</h5>
 <h5 hidden id="SaveCountryValue">@Model.Old_Country</h5>
+
+
 <form id="regForm" asp-action="Edit_Status_of_Unsyrian_student" class="ContainerRegForm ">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row form-group border-bottom border-warning ">
@@ -141,10 +143,10 @@
                 <div class="col-6 ">
                     <div id="uploadArea" class="upload-area">
                         <div class="uploadea__header">
-                        @{
-                            string Name_and_identity = "<h3  >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية:" +" "+ Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "الرقم الوطني :" + Model.Identity_No.ToString() ;
-                            string certificate_info = "<h3 >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية :" + " " + Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "المعدل: "+Model.The_Old_Rate+"<br>"+"بلد الشهاده: "+Model.CountryList[Model.Old_Country-1].country_name+ "<br>" +"نوع الشهادة: "+Model.Type_Of_certificate_list[Model.Old_Type_Of_Certificat-1].type+"<br>"+"رقم الدورة: "+Model.course_number;
-                          }
+                            @{
+                                string Name_and_identity = "<h3  >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية:" +" "+ Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "الرقم الوطني :" + Model.Identity_No.ToString() ;
+                                string certificate_info = "<h3 >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية :" + " " + Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>"+"البلد: " + Model.CountryName + "<br>" + "نوع الشهادة: " + Model.Type_of_certificate_name;
+                            }
 
 
                         <label class="upload-area__title border-bottom border-warning">@localizer["Front Identity image"]</label>

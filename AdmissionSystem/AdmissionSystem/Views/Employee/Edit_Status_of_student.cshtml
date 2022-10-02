@@ -143,7 +143,7 @@
                         <div class="uploadea__header">
                         @{
                             string Name_and_identity = "<h3  >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية:" +" "+ Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "الرقم الوطني :" + Model.Identity_No.ToString() ;
-                            string certificate_info = "<h3 >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية :" + " " + Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "المعدل: "+Model.The_Old_Rate+"<br>"+"بلد الشهاده: "+Model.CountryList[Model.Old_Country-1].country_name+ "<br>" +"نوع الشهادة: "+Model.Type_Of_certificate_list[Model.Old_Type_Of_Certificat-1].type+"<br>"+"رقم الدورة: "+Model.course_number;
+                            string certificate_info = "<h3 >مدخلات الطالب</h3>" + "<br>" + "الاسم و الكنية :" + " " + Model.First_Name_AR.ToString() + " " + Model.Nick_Name.ToString() + "<br>" + "المعدل: "+Model.The_Old_Rate+"<br>"+"بلد الشهاده: "+Model.CountryName+ "<br>" +"نوع الشهادة: "+Model.Type_of_certificate_name+"<br>"+"رقم الدورة: "+Model.course_number;
                           }
 
 
@@ -706,8 +706,8 @@ let x = 0;
 function enable_Rate() {
     if (x % 2 == 0) {
         Swal.fire({
-            title: 'Are you sure',
-            text: "be aware wishes will be re chosed",
+            title: 'هل أنت متأكد ؟ ',
+            text: " سوف يطلب إعادة إختيار الرغبات من الطالب حال التغيير ",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -751,8 +751,8 @@ let y = 0;
 function enable_Certificate() {
     if (y % 2 == 0) {
         Swal.fire({
-            title: 'Are you sure',
-            text: "be aware wishes will be re chosed",
+            title: 'هل أنت متأكد ؟ ',
+            text: " سوف يطلب إعادة إختيار الرغبات من الطالب حال التغيير",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -786,8 +786,8 @@ let z = 0;
 function enable_Country() {
     if (z % 2 == 0) {
         Swal.fire({
-            title: 'Are you sure',
-            text: "be aware wishes will be re chosed",
+            title: 'هل أنت متأكد ؟',
+            text: " سوف يطلب إعادة إختيار الرغبات من الطالب حال التغيير",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

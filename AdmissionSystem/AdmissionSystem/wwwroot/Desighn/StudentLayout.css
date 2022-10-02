@@ -46,7 +46,7 @@ a.side {
 }
 
 li.menu_list:hover a.side {
-    transform: rotateY(0deg);
+    transform: rotate(0deg);
 }
 
 li.menu_list:hover .front {
@@ -54,3 +54,14 @@ li.menu_list:hover .front {
 }
 
 
+
+
+ul li {
+    float: left;
+    
+    /* margin: 0px auto;*/
+}
+#slidmenu {
+    display: flex;
+    justify-content: center;
+}

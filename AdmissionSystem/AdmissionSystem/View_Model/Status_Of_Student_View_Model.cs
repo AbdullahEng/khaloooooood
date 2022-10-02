@@ -17,11 +17,12 @@ namespace AdmissionSystem.View_Model
         public List<Country> CountryList { get; set; }
         public int Old_Country { get; set; }
         public int New_Country { get; set; }
+        public string CountryName { get; set; }
 
         public List<Type_of_high_school_Cirtificate> Type_Of_certificate_list { get; set; }
         public int Old_Type_Of_Certificat { get; set; }
         public int New_Type_Of_Certificat { get; set; }
-
+        public string Type_of_certificate_name { get; set; }
         /// <summary>
         /// 
         /// </summary>

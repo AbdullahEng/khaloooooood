@@ -300,7 +300,9 @@ namespace AdmissionSystem.Controllers
                     Checking_Identity_Image = statuesofstudent.Checked_Identity,
                     Checking_Rate_Image = statuesofstudent.Checked_Rate,
                     Checking_Recipte_Image = statuesofstudent.Checked_recipet,
-                    EmployeeId = statuesofstudent.FK_Employee_Info.id
+                    EmployeeId = statuesofstudent.FK_Employee_Info.id,
+                    CountryName=student.Cirtificate_city.country_name,
+                    Type_of_certificate_name = certificate.FK_Type_of_high_school_Cirtificate.type
 
                 };
                 return View(Status_of_student);
@@ -787,8 +789,10 @@ namespace AdmissionSystem.Controllers
                     Checking_Identity_Image = statuesofstudent.Checked_Identity,
                     Checking_Rate_Image = statuesofstudent.Checked_Rate,
                     Checking_Recipte_Image = statuesofstudent.Checked_recipet,
-                    EmployeeId=statuesofstudent.FK_Employee_Info.id
-                    
+                    EmployeeId=statuesofstudent.FK_Employee_Info.id,
+                    CountryName = student.Cirtificate_city.country_name,
+                    Type_of_certificate_name=certificate.FK_Type_of_high_school_Cirtificate.type
+
                 };
                 return View(Status_of_student);
             }

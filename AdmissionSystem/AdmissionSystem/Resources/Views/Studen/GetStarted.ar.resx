@@ -121,10 +121,10 @@
     <value>تعليمات التقدم</value>
   </data>
   <data name="After choosing your wishes you have to confirm your requist" xml:space="preserve">
-    <value>بعد إختيار الرغبات يجب تثبيت الطلب يا حباب</value>
+    <value>بعد إختيار الرغبات يجب تثبيت الطلب </value>
   </data>
   <data name="After entering your information you have to fill your wishes" xml:space="preserve">
-    <value>بعد إدخال البيانات يجب إختيار الرغبات بدقة يا حباب</value>
+    <value>بعد إدخال البيانات يجب إختيار الرغبات بدقة و بحسب أولوية الرغبة لديك من الرغبة الأولى الى الثالثة</value>
   </data>
   <data name="After previous steps we can say that you finished all the requirments and you have to wait until the results to be released." xml:space="preserve">
     <value>بعد كل هذه الخطوات ينتقل طلبك الى موظف القبول والتسجيل لفحص الطلب والتأكد </value>
@@ -145,7 +145,7 @@
     <value>حسنا إبدأ الآن وحظا موفقا</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>إبدء</value>
+    <value>إضغط هنا للتسجيل</value>
   </data>
   <data name="Student enters his information like the youtube sample below" xml:space="preserve">
     <value>يجب إدخال البيانات كما هو موضح في الفيديو</value>
