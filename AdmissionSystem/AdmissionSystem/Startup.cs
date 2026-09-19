@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -158,7 +159,7 @@ namespace AdmissionSystem
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public  void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            UserManager<MyIdentityUser>userManager,RoleManager<MyIdentityRole>roleManager)
+            UserManager<MyIdentityUser>userManager,RoleManager<MyIdentityRole>roleManager, ILogger<Startup> logger)
         {
             //app.UseAuthentication();
             
@@ -188,7 +189,13 @@ namespace AdmissionSystem
             app.UseAuthentication();
             app.UseAuthorization();
            // var myIdentiy =new  MyIdentityDataInitializer();//
-           MyIdentityDataInitializer.SeedData(userManager, roleManager);
+           // Security fix: the admin password is read from configuration, never from the code (see README).
+           var seedAdminPassword = Configuration["SeedAdmin:Password"];
+           if (string.IsNullOrWhiteSpace(seedAdminPassword))
+           {
+               logger.LogWarning("SeedAdmin:Password is not set, so missing admin accounts will not be created. See README.");
+           }
+           MyIdentityDataInitializer.SeedData(userManager, roleManager, seedAdminPassword);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

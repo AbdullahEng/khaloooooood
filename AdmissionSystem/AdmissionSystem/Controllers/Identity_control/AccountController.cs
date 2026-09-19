@@ -4,6 +4,7 @@ using AdmissionSystem.Model.Identity_classes;
 using AdmissionSystem.Model.Repository;
 using AdmissionSystem.Services;
 using AdmissionSystem.View_Model.Identity_view_model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -58,6 +59,26 @@ namespace AdmissionSystem.Controllers.Identity_control
             this.logger = logger;
             this.mailingService = mailingService;
             this.googleCaptcahServiceeee = new GoogleCaptcahService(config);
+        }
+
+        // reCAPTCHA is verified on the server only when GoogleReCaptcha:Enabled is true and a
+        // SecretKey is configured (see README). Before this, the widget was shown on the login
+        // page but its answer was never checked, so it gave no protection against bots.
+        private bool CaptchaPassed()
+        {
+            if (!config.Value.Enabled || string.IsNullOrEmpty(config.Value.SecretKey))
+            {
+                return true;
+            }
+            try
+            {
+                var result = googleCaptcahServiceeee.ValidateCaptcah(Request.Form["g-recaptcha-response"].ToString());
+                return result != null && result.success;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
         }
 
         public ActionResult Index()
@@ -301,6 +322,9 @@ namespace AdmissionSystem.Controllers.Identity_control
         /// // Employee
 
 
+        // Security fix: this page was open to everyone, and the form lets you pick Type = "Admin",
+        // so anyone on the internet could create an administrator account. Only admins may use it now.
+        [Authorize(Roles = "Admin")]
         public IActionResult Register_Employee()
         {
             var model = new RegisterViewModel
@@ -313,6 +337,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task< IActionResult> Register_Employee(RegisterViewModel obj)
         {
 
@@ -467,6 +492,12 @@ namespace AdmissionSystem.Controllers.Identity_control
             //    return View("Index");
             //}
             
+            if (!CaptchaPassed())
+            {
+                ViewBag.captchMessage = "Please confirm that you are not a robot.";
+                return View("Index");
+            }
+
             if (ModelState.IsValid)
             {
 
@@ -486,9 +517,11 @@ namespace AdmissionSystem.Controllers.Identity_control
                 // var usersAndRoles = new List<UserRoleModel>();
                 // var allRolesUsers=
                 // var studnetFind = studentRepo.Find();
+                // Security fix: lockoutOnFailure was false, so passwords could be guessed without limit.
+                // With true, ASP.NET Core Identity locks the account for 5 minutes after 5 wrong tries.
                 var result = LoginInManager.PasswordSignInAsync
                     (obj.UserName, obj.password,
-                    obj.RememberMe, false).Result;
+                    obj.RememberMe, lockoutOnFailure: true).Result;
 
                 if (result.Succeeded)
                 {
@@ -579,6 +612,8 @@ namespace AdmissionSystem.Controllers.Identity_control
             LoginInManager.SignOutAsync().Wait();
             return RedirectToAction("Index", "Account");
         }
+        // Fix: these account pages need a logged-in user (they crashed with a null user before).
+        [Authorize]
         public IActionResult ChangePassword()
         {
             return View();
@@ -586,6 +621,7 @@ namespace AdmissionSystem.Controllers.Identity_control
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> ChangePassword(Change_passowrd_Mode model)
         {
             // userManager.ChangePasswordAsync(1,"","");
@@ -612,6 +648,7 @@ namespace AdmissionSystem.Controllers.Identity_control
             }
             return View(model);
         }
+        [Authorize]
         public async Task<IActionResult> EditUser() {
 
             var us = await userManager.GetUserAsync(User);
@@ -635,6 +672,7 @@ namespace AdmissionSystem.Controllers.Identity_control
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> EditUser(EditUserViewModell model)
         {
             var emailstudent = employeeRepo.List().Where(e => e.Email == model.Email).ToList();

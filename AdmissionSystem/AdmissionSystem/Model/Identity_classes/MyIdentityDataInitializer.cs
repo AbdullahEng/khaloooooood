@@ -22,12 +22,19 @@ namespace AdmissionSystem.Model.Identity_classes
         //    this.employeerepooo = employeerepooo;
         //    dB = DB;
         //}
+        // Security fix: the two admin accounts used to be created with a password written in the code,
+        // which is visible to anyone who can read the repository. The password now comes from
+        // configuration (SeedAdmin:Password, e.g. user-secrets or an environment variable).
+        // If it is not set, the admin accounts are simply not created.
         public static void SeedData(UserManager<MyIdentityUser> userManager,RoleManager<MyIdentityRole> roleManager
-        
+            , string adminPassword
             ) {
             
             SeedRoles(roleManager);
-            SeedaUsers(userManager);
+            if (!string.IsNullOrWhiteSpace(adminPassword))
+            {
+                SeedaUsers(userManager, adminPassword);
+            }
            // seedemployee();
 
         }
@@ -44,7 +51,7 @@ namespace AdmissionSystem.Model.Identity_classes
         //        dB.Employee.Add(emp);
         //    }
         //}
-        public async static void SeedaUsers(UserManager<MyIdentityUser> userManager) {
+        public async static void SeedaUsers(UserManager<MyIdentityUser> userManager, string adminPassword) {
 
             if (userManager.FindByNameAsync("Admin1").Result == null) {
 
@@ -55,7 +62,7 @@ namespace AdmissionSystem.Model.Identity_classes
               
                 //user.FullName = "Nancy Davolio";
                 //user.BirhtDate = new DateTime(1960, 1, 1);
-                IdentityResult result = userManager.CreateAsync(user, "Abd_12345").Result;
+                IdentityResult result = userManager.CreateAsync(user, adminPassword).Result;
                 if (result.Succeeded) {
 
                     userManager.AddToRoleAsync(user, "Admin").Wait();
@@ -77,7 +84,7 @@ namespace AdmissionSystem.Model.Identity_classes
                 user.TheIDnumber = "8765";
                 //user.FullName = "Nancy Davolio";
                 // user.BirhtDate = new DateTime(1960, 1, 1);
-                IdentityResult result = userManager.CreateAsync(user, "Abd_12345").Result;
+                IdentityResult result = userManager.CreateAsync(user, adminPassword).Result;
                 if (result.Succeeded)
                 {
 

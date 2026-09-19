@@ -1,6 +1,7 @@
 ﻿using AdmissionSystem.Data;
 using AdmissionSystem.Model;
 using AdmissionSystem.Model.Repository;
+using AdmissionSystem.Services;
 using AdmissionSystem.View_Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -59,6 +60,39 @@ namespace AdmissionSystem.Controllers
             department_Repository = Department_Repository;
             this.localizer = localizer;
         }
+
+        // Security fix: the GET actions already check that the page belongs to the logged-in
+        // student, but the POST actions did not, so any student could post changes for another id.
+        private bool IsOwner(Student student)
+        {
+            return student != null && student.First_Name_EN == HttpContext.User.Identity.Name;
+        }
+
+        // Security fix: the wish list on the page is filtered by rate and certificate type, but the
+        // POST accepted any department id. This applies the same rule again on the server.
+        private bool WishesAreAllowed(Admission_Eligibilty_Certificate certificate, Student_Wishes_View_Model collection)
+        {
+            if (certificate == null || certificate.FK_Type_of_high_school_Cirtificate == null)
+            {
+                return false;
+            }
+            var certificateRate = (certificate.The_Rate * 100) / 2300;
+            var certificateTypeId = certificate.FK_Type_of_high_school_Cirtificate.id;
+            foreach (var wishId in new[] { collection.wish_Department_Id1, collection.wish_Department_Id2, collection.wish_Department_Id3 })
+            {
+                if (wishId == 0)
+                {
+                    continue; // this wish was left empty
+                }
+                var wish = department_Relation_Type_Repository.Find(wishId);
+                if (wish == null || wish.Minemum_of_Rate > certificateRate || wish.FK_type_Of_High_School_CirtificateId != certificateTypeId)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public ActionResult Errorview(int id)
         {
             var studnet = new Student_View_Model { id = id };
@@ -235,12 +269,24 @@ namespace AdmissionSystem.Controllers
 
             }
             var student = studentRepository.Find(id);
+            // Security fix: only the owner can confirm, and the page only ever sends 1 (= confirmed).
+            if (!IsOwner(student))
+            {
+                return Redirect("/Studen/AccessError");
+            }
+            if (collection.Conformation != 1)
+            {
+                return Redirect("/Studen/Home/" + id.ToString());
+            }
             student.Conformation = collection.Conformation;
             studentRepository.Update(id, student);
             string url = "/Studen/Home/" + id.ToString();
             return Redirect(url);
         }
         // GET: StudenController/Create
+        // Not used by any page (students register through Account/Register_Student).
+        // Disabled because any logged-in student could post here and create extra student rows.
+        [NonAction]
         public ActionResult Create()
         {
             var Student_With_Certificate = new Student_View_Model { 
@@ -253,6 +299,7 @@ namespace AdmissionSystem.Controllers
         }
 
         // POST: StudenController/Create
+        [NonAction]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Student_View_Model collection)
@@ -265,35 +312,35 @@ namespace AdmissionSystem.Controllers
                     string filenameIMa = string.Empty;
                     if (collection.Image_Of_Crtificat != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameIMa = collection.Identity_No.ToString() + collection.Image_Of_Crtificat.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameIMa = UploadFiles.NewFileName(collection.Identity_No, collection.Image_Of_Crtificat.FileName);
                         string fullpath = Path.Combine(uploads, filenameIMa);
-                        collection.Image_Of_Crtificat.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        UploadFiles.Save(collection.Image_Of_Crtificat, fullpath);
                     }
                     string filenameFront = string.Empty;
                     if (collection.Identity_front_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameFront = collection.Identity_No.ToString() + collection.Identity_front_image.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameFront = UploadFiles.NewFileName(collection.Identity_No, collection.Identity_front_image.FileName);
                         string fullpath = Path.Combine(uploads, filenameFront);
-                        collection.Identity_front_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        UploadFiles.Save(collection.Identity_front_image, fullpath);
                     }
                     string filenameBack = string.Empty;
                     if (collection.Identity_back_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameBack = collection.Identity_No.ToString() + collection.Identity_back_image.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameBack = UploadFiles.NewFileName(collection.Identity_No, collection.Identity_back_image.FileName);
                         string fullpath = Path.Combine(uploads, filenameBack);
-                        collection.Identity_back_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        UploadFiles.Save(collection.Identity_back_image, fullpath);
                     }
 
                     string filenameCheck = string.Empty;
                     if (collection.check_recipt_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameCheck = collection.Identity_No.ToString() + collection.check_recipt_image.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameCheck = UploadFiles.NewFileName(collection.Identity_No, collection.check_recipt_image.FileName);
                         string fullpath = Path.Combine(uploads, filenameCheck);
-                        collection.check_recipt_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                        UploadFiles.Save(collection.check_recipt_image, fullpath);
                     }
 
 
@@ -501,6 +548,46 @@ namespace AdmissionSystem.Controllers
         {
             try
             {
+                // Security fix: repeat the checks of the GET action. Without them a student could
+                // post this form for another student's id, or keep editing (for example raise
+                // The_Rate) after an employee had already verified the request.
+                var storedStudent = DB.Student.AsNoTracking().SingleOrDefault(s => s.Id == id);
+                if (!IsOwner(storedStudent))
+                {
+                    return Redirect("/Studen/AccessError");
+                }
+                if (storedStudent.Conformation == 1 || storedStudent.Conformation == 2)
+                {
+                    return Redirect("/Studen/Errorview/" + id.ToString());
+                }
+                if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+                {
+                    return Redirect("/Studen/NoAdmissionError");
+                }
+
+                // Security fix: these values were read from hidden form fields. They now always come
+                // from the database, so they cannot be edited in the browser (for example to choose
+                // wishes the student does not qualify for, or to delete another student's files).
+                var storedCertificate = DB.Admission_Eligibilty_Certificate.AsNoTracking()
+                    .Include(a => a.FK_Type_of_high_school_Cirtificate)
+                    .SingleOrDefault(a => a.id == id);
+                collection.First_Name_EN = storedStudent.First_Name_EN;
+                collection.Conformation = storedStudent.Conformation;
+                collection.Identity_front_image_URL = storedStudent.Identity_front_image;
+                collection.Identity_back_image_URL = storedStudent.Identity_back_image;
+                if (storedCertificate != null)
+                {
+                    collection.Image_of_crtificat_URL = storedCertificate.Image_of_crtificat_URL;
+                    collection.Check_recipt_image_URL = storedCertificate.check_recipt_image_URL;
+                    collection.old_Rate = storedCertificate.The_Rate;
+                    if (storedCertificate.FK_Type_of_high_school_Cirtificate != null)
+                    {
+                        collection.oldType_Of_Certificat = storedCertificate.FK_Type_of_high_school_Cirtificate.id;
+                    }
+                    collection.wish_Department_Id1 = storedCertificate.wish1ID;
+                    collection.wish_Department_Id2 = storedCertificate.wish2ID;
+                    collection.wish_Department_Id3 = storedCertificate.wish3ID;
+                }
 
                     //var stu = studentRepository.Find(id);
                     string filenameIMa = string.Empty;
@@ -514,41 +601,41 @@ namespace AdmissionSystem.Controllers
                     System.GC.WaitForPendingFinalizers();
                     if (collection.Image_Of_Crtificat != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameIMa = collection.Identity_No.ToString() + collection.Image_Of_Crtificat.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameIMa = UploadFiles.NewFileName(collection.Identity_No, collection.Image_Of_Crtificat.FileName);
                         string fullpath = Path.Combine(uploads, filenameIMa);
                         //delete Old File
 
                         string oldFileName = collection.Image_of_crtificat_URL;
-                        string fullOldPath = Path.Combine(uploads, oldFileName);
+                        string fullOldPath = Path.Combine(uploads, UploadFiles.CleanName(oldFileName));
                         if (fullpath != fullOldPath)
                         {
                             
 
-                            System.IO.File.Delete(fullOldPath);
+                            UploadFiles.DeleteIfExists(fullOldPath);
                             
                         //save new image
                             collection.Image_of_crtificat_URL = filenameIMa;
-                            collection.Image_Of_Crtificat.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.Image_Of_Crtificat, fullpath);
                         }
                     }
 
                     if (collection.Identity_front_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameFront = collection.Identity_No.ToString() + collection.Identity_front_image.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameFront = UploadFiles.NewFileName(collection.Identity_No, collection.Identity_front_image.FileName);
                         string fullpath = Path.Combine(uploads, filenameFront);
 
                         string oldFileName = collection.Identity_front_image_URL;
-                        string fullOldPath = Path.Combine(uploads, oldFileName);
+                        string fullOldPath = Path.Combine(uploads, UploadFiles.CleanName(oldFileName));
                         if (fullpath != fullOldPath)
                         {
                            
 
-                            System.IO.File.Delete(fullOldPath);
+                            UploadFiles.DeleteIfExists(fullOldPath);
                             //save new image
                             collection.Identity_front_image_URL = filenameFront;
-                            collection.Identity_front_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.Identity_front_image, fullpath);
                         }
 
 
@@ -558,36 +645,36 @@ namespace AdmissionSystem.Controllers
 
                     if (collection.Identity_back_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameBack = collection.Identity_No.ToString() + collection.Identity_back_image.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameBack = UploadFiles.NewFileName(collection.Identity_No, collection.Identity_back_image.FileName);
                         string fullpath = Path.Combine(uploads, filenameBack);
 
                         string oldFileName = collection.Identity_back_image_URL;
-                        string fullOldPath = Path.Combine(uploads, oldFileName);
+                        string fullOldPath = Path.Combine(uploads, UploadFiles.CleanName(oldFileName));
                         if (fullpath != fullOldPath)
                         {
-                            System.IO.File.Delete(fullOldPath);
+                            UploadFiles.DeleteIfExists(fullOldPath);
                             //save new image
                             collection.Identity_back_image_URL = filenameBack;
-                            collection.Identity_back_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.Identity_back_image, fullpath);
                         }
 
 
                     }
                     if (collection.check_recipt_image != null)
                     {
-                        string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                        filenameCheck = collection.Identity_No.ToString() + collection.check_recipt_image.FileName;
+                        string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                        filenameCheck = UploadFiles.NewFileName(collection.Identity_No, collection.check_recipt_image.FileName);
                         string fullpath = Path.Combine(uploads, filenameCheck);
 
                         string oldFileName = collection.Check_recipt_image_URL;
-                        string fullOldPath = Path.Combine(uploads, oldFileName);
+                        string fullOldPath = Path.Combine(uploads, UploadFiles.CleanName(oldFileName));
                         if (fullpath != fullOldPath)
                         {
-                            System.IO.File.Delete(fullOldPath);
+                            UploadFiles.DeleteIfExists(fullOldPath);
                             collection.Check_recipt_image_URL = filenameCheck;
                             //save new image
-                            collection.check_recipt_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.check_recipt_image, fullpath);
                         }
 
                     }
@@ -598,12 +685,12 @@ namespace AdmissionSystem.Controllers
                     {
                         if (collection.Image_Of_Crtificat.Length != collection.Identity_front_image.Length && collection.Image_Of_Crtificat.Length != collection.Identity_back_image.Length && collection.Image_Of_Crtificat.Length != collection.check_recipt_image.Length)
                         {
-                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                            filenameIMa = collection.Identity_No.ToString() + collection.Image_Of_Crtificat.FileName;
+                            string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                            filenameIMa = UploadFiles.NewFileName(collection.Identity_No, collection.Image_Of_Crtificat.FileName);
                             string fullpath = Path.Combine(uploads, filenameIMa);
                             collection.Image_of_crtificat_URL = filenameIMa;
 
-                            collection.Image_Of_Crtificat.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.Image_Of_Crtificat, fullpath);
                         }
                     }
 
@@ -611,12 +698,12 @@ namespace AdmissionSystem.Controllers
                     {
                         if (collection.Identity_front_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_front_image.Length != collection.Identity_back_image.Length && collection.Identity_front_image.Length != collection.check_recipt_image.Length)
                         {
-                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                            filenameFront = collection.Identity_No.ToString() + collection.Identity_front_image.FileName;
+                            string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                            filenameFront = UploadFiles.NewFileName(collection.Identity_No, collection.Identity_front_image.FileName);
                             string fullpath = Path.Combine(uploads, filenameFront);
                             collection.Identity_front_image_URL = filenameFront;
 
-                            collection.Identity_front_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.Identity_front_image, fullpath);
                         }
                     }
 
@@ -624,11 +711,11 @@ namespace AdmissionSystem.Controllers
                     {
                         if (collection.Identity_back_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Identity_front_image.Length && collection.Identity_back_image.Length != collection.check_recipt_image.Length)
                         {
-                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                            filenameBack = collection.Identity_No.ToString() + collection.Identity_back_image.FileName;
+                            string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                            filenameBack = UploadFiles.NewFileName(collection.Identity_No, collection.Identity_back_image.FileName);
                             string fullpath = Path.Combine(uploads, filenameBack);
                             collection.Identity_back_image_URL = filenameBack;
-                            collection.Identity_back_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.Identity_back_image, fullpath);
                         }
                     }
 
@@ -637,11 +724,11 @@ namespace AdmissionSystem.Controllers
                     {
                         if (collection.check_recipt_image.Length != collection.Identity_front_image.Length && collection.check_recipt_image.Length != collection.Identity_back_image.Length && collection.check_recipt_image.Length != collection.Image_Of_Crtificat.Length&& collection.Identity_back_image.Length != collection.Image_Of_Crtificat.Length && collection.Identity_back_image.Length != collection.Identity_front_image.Length && collection.Identity_back_image.Length != collection.check_recipt_image.Length)
                         {
-                            string uploads = Path.Combine(hosting_.WebRootPath, "Uploads");
-                            filenameCheck = collection.Identity_No.ToString() + collection.check_recipt_image.FileName;
+                            string uploads = UploadFiles.Folder(hosting_.WebRootPath);
+                            filenameCheck = UploadFiles.NewFileName(collection.Identity_No, collection.check_recipt_image.FileName);
                             string fullpath = Path.Combine(uploads, filenameCheck);
                             collection.Check_recipt_image_URL = filenameCheck;
-                            collection.check_recipt_image.CopyTo(new FileStream(fullpath, FileMode.Create));
+                            UploadFiles.Save(collection.check_recipt_image, fullpath);
                         }
                     }
 
@@ -1056,10 +1143,27 @@ namespace AdmissionSystem.Controllers
             try
             {  
                 Student st = studentRepository.Find(id);
+                // Security fix: same checks as the GET action (owner, request state, admission open).
+                if (!IsOwner(st))
+                {
+                    return Redirect("/Studen/AccessError");
+                }
+                if (st.Conformation == 1 || st.Conformation == 3 || st.Conformation == 5)
+                {
+                    return Redirect("/Studen/Errorview/" + id.ToString());
+                }
+                if (statues_Of_Admission_Eligibilty_Repository.List().Last().status == false)
+                {
+                    return Redirect("/Studen/NoAdmissionError");
+                }
                 if (st.Conformation==4) {
                     st.Conformation = 6;
                 }
                 Admission_Eligibilty_Certificate certificate = admission_Eligibilty_Certificate_Repository.Find(st.Id);
+                if (!WishesAreAllowed(certificate, collection))
+                {
+                    return Redirect("/Studen/Errorview/" + id.ToString());
+                }
                 certificate.wish1 = department_Relation_Type_Repository.Find(collection.wish_Department_Id1);
                 certificate.wish2 = department_Relation_Type_Repository.Find(collection.wish_Department_Id2);
                 certificate.wish3 = department_Relation_Type_Repository.Find(collection.wish_Department_Id3);
