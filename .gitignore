@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------
+# Visual Studio / Rider: per-machine files (never commit these)
+# ---------------------------------------------------------------
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ---------------------------------------------------------------
+# Build and publish output
+# ---------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+*.pubxml.user
+*.nupkg
+[Ll]ogs/
+
+# ---------------------------------------------------------------
+# Secrets and per-environment settings
+# (use "dotnet user-secrets" locally and environment variables on the server)
+# ---------------------------------------------------------------
+appsettings.Production.json
+appsettings.*.local.json
+*.pfx
+*.publishsettings
+
+# ---------------------------------------------------------------
+# Files uploaded by students while the app runs
+# (ID cards, certificates, payment receipts = personal data)
+# ---------------------------------------------------------------
+AdmissionSystem/AdmissionSystem/wwwroot/Uploads/*
+!AdmissionSystem/AdmissionSystem/wwwroot/Uploads/.gitkeep
+
+# ---------------------------------------------------------------
+# Operating system files
+# ---------------------------------------------------------------
+Thumbs.db
+Desktop.ini
+.DS_Store
