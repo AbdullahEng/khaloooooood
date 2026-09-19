@@ -155,9 +155,20 @@ namespace AdmissionSystem.Controllers
             return View(Employee);
         }
 
+        // Security fix: the employee id comes from the form. Make sure it is the logged-in employee,
+        // so one employee cannot lock or check requests in another employee's name.
+        private bool IsCurrentEmployee(Employee employee)
+        {
+            return employee != null && employee.name == HttpContext.User.Identity.Name;
+        }
+
         public ActionResult loak_Syrian(Statues_of_Student_EmployeeId collection)
         {
             var em = employee_Repository.Find(collection.id);
+            if (!IsCurrentEmployee(em))
+            {
+                return Redirect("/Employee/AccessError");
+            }
             var statues = statues_Of_Student_Repository.Find(collection.statusId);
             if (statues.loack == false || (statues.loack == true && statues.FK_Employee_Info == em))
             {
@@ -319,6 +330,10 @@ namespace AdmissionSystem.Controllers
                 
                 // I chosed this employee for testing 
                 Employee em = employee_Repository.Find(collection.EmployeeId);
+                if (!IsCurrentEmployee(em))
+                {
+                    return Redirect("/Employee/AccessError");
+                }
                 Student student = student_Repository.Find(id);
                 Admission_Eligibilty_Certificate Certificate = admission_Eligibilty_Certificate_Repository.Find(id);
                 Tracking_Rate traking = tracking_Rate_Repository.Find(id);
@@ -657,6 +672,10 @@ namespace AdmissionSystem.Controllers
         public ActionResult loak_UnSyrian(Statues_of_Student_EmployeeId collection)
         {
             var em = employee_Repository.Find(collection.id);
+            if (!IsCurrentEmployee(em))
+            {
+                return Redirect("/Employee/AccessError");
+            }
             var statues = statues_Of_Student_Repository.Find(collection.statusId);
             if (statues.loack == false || (statues.loack == true && statues.FK_Employee_Info == em))
             {
@@ -807,6 +826,10 @@ namespace AdmissionSystem.Controllers
             {
                 // I chosed this employee for testing 
                 Employee em = employee_Repository.Find(collection.EmployeeId);
+                if (!IsCurrentEmployee(em))
+                {
+                    return Redirect("/Employee/AccessError");
+                }
                 Student student = student_Repository.Find(id);
                 Admission_Eligibilty_Certificate Certificate = admission_Eligibilty_Certificate_Repository.Find(student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.id);
                 Tracking_Rate traking = tracking_Rate_Repository.Find(id);
