@@ -152,6 +152,15 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
 
         }
+        // Fix: students who registered but never completed the application form have no certificate
+        // country yet. The old lookup (Cirtificate_city.id) crashed the results page and the Excel
+        // export with a NullReferenceException as soon as one such student existed.
+        private int CertificateCountryId(int studentId)
+        {
+            var student = studentRepository.Find(studentId);
+            return (student != null && student.Cirtificate_city != null) ? student.Cirtificate_city.id : int.MinValue;
+        }
+
         public ActionResult AlgorithmUNSyrain()
         {
            
@@ -214,12 +223,29 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                 return View(alogviewmodel);
             }
             var percentagelist = percentRepo.List().SingleOrDefault(c => c.FK_countryId == modelAlgo.countryId);
+            if (percentagelist == null)
+            {
+                // Fix: without a seat percentage for this country the page crashed.
+                ViewBag.message = "Please set the seat percentage for this country first.";
+                return View(new AlgorithemViewModel
+                {
+                    CountryList = fillcountryUnSyrian(),
+                    Accinfo = new List<AcceptebleIformationAnd_Details>(),
+                    departmentList = FillDepartment(),
+                    statues_Of_Admission_Eligibiltieslist = fillstatusAdmsissionUnSyrian()
+                });
+            }
 
             var brokenlist = brokRepo.List();
             var listDeaprtmentsCahir = new List<NumberoStuentsForEachDepartment>();
 
             //   if(country.id==1)
-            foreach (var item in brokenlist)
+            // Fix: seat rows are saved per admission round. Keep one row per department (the selected
+            // round's row when there is one), otherwise the SingleOrDefault lookups below crash.
+            var seatRowPerDepartment = brokenlist.GroupBy(b => b.Fk_departmentId)
+                                                 .Select(g => g.OrderByDescending(b => b.FK_statues_Of_Admission_EligibiltyId == modelAlgo.statusofAdmissionId).First())
+                                                 .ToList();
+            foreach (var item in seatRowPerDepartment)
             {
 
                 var number = new NumberoStuentsForEachDepartment
@@ -238,6 +264,10 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                                                                        && statues_Of_Student_Repository.Find(s.Id).Checked_Rate == true
                                                                        && statues_Of_Student_Repository.Find(s.Id).Checked_recipet == true
                                                                        // && s.Fk_Cirtificate_cityId == country.countryId
+                                                                       // Fix: Fk_Cirtificate_cityId is never filled (the real foreign key is the
+                                                                       // Cirtificate_city navigation), so the country filter had been switched off and
+                                                                       // students from every country competed for the selected country's seats.
+                                                                       && s.Cirtificate_city != null && s.Cirtificate_city.id == modelAlgo.countryId
                                                                        && s.high_school_certificate == "UNSyrian"
                                                                        && s.Statues_Of_Admission_Eligibilty.id==modelAlgo.statusofAdmissionId
                                                                        ).ToList();
@@ -354,10 +384,19 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                                 admissioncirtificate.wish3.FK_DepartmentId).chaircount = NumberofstudentinTHEREDDepartmentREAlTIME.chaircount - 1;
 
                 }
-                //else { 
-
-
-                //}
+                else
+                {
+                    // Fix: no seat left in any of the three wishes. Clear a result that an earlier
+                    // run of the algorithm may have saved, so re-running always gives a clean result.
+                    var stuAccconfig = dB.Accabtable_config.AsNoTracking().SingleOrDefault(a => a.id == student.Id);
+                    if (stuAccconfig != null)
+                    {
+                        stuAccconfig.Accepted_Or_Not = false;
+                        stuAccconfig.Accepted_wish = null;
+                        dB.Accabtable_config.Update(stuAccconfig);
+                        dB.SaveChanges();
+                    }
+                }
 
 
 
@@ -370,7 +409,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
 
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                                        countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                        CertificateCountryId(a.FK_studentId)
                                                                           == modelAlgo.countryId
                                                                           && a.FK_Statues_of_admission_eligibilty.id ==modelAlgo.statusofAdmissionId
                                                                           ).ToList();
@@ -587,6 +626,18 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
           //  var countryfindsy = countryRepoooooo.Find(1);
             var percentagelist = percentRepo.List().SingleOrDefault(c => c.FK_countryId == modelAlgo.countryId);
+            if (percentagelist == null)
+            {
+                // Fix: without a seat percentage for this country the page crashed.
+                ViewBag.message = "Please set the seat percentage for this country first.";
+                return View(new AlgorithemViewModel
+                {
+                    CountryList = fillcountrySyrian(),
+                    Accinfo = new List<AcceptebleIformationAnd_Details>(),
+                    departmentList = FillDepartment(),
+                    statues_Of_Admission_Eligibiltieslist = fillstatusAdmsissionUnSyrian()
+                });
+            }
 
             var brokenlist = brokRepo.List();
             var departmentRelation = department_Relation_Type_Repository.List();
@@ -595,8 +646,13 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             //   if(country.id==1)
             foreach (var item in departmentRelation)
             {
-                var broken = brokRepo.List().SingleOrDefault(d => d.Fk_departmentId == item.FK_DepartmentId);
-                var cahaircountWithouttype = percentagelist.Rate * broken.Chair_count / 100;
+                // Fix: seat rows are saved per admission round, so one department can have several rows
+                // and SingleOrDefault crashed. Use the row of the selected round when there is one
+                // (otherwise any row, as before), and 0 seats when the department has no row at all.
+                var broken = brokenlist.Where(d => d.Fk_departmentId == item.FK_DepartmentId)
+                                       .OrderByDescending(d => d.FK_statues_Of_Admission_EligibiltyId == modelAlgo.statusofAdmissionId)
+                                       .FirstOrDefault();
+                var cahaircountWithouttype = broken == null ? 0 : percentagelist.Rate * broken.Chair_count / 100;
                 var number = new NumberoStuentsForEachDepartment
                 {
 
@@ -723,9 +779,9 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                         //UpdateAcceptTable
                         acceptedREpo.Update(stuAccconfig.id, stuAccconfig);//remmber you want to bring database
                         listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                                     student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish2.FK_DepartmentId
+                                     admissioncirtificate.wish2.FK_DepartmentId
                                       && d.type_of_highschool_Id ==
-                                student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish2.FK_type_Of_High_School_CirtificateId
+                                admissioncirtificate.wish2.FK_type_Of_High_School_CirtificateId
                                      ).chaircount = NumberofstudentinSECOUNDDepartmentREAlTIME.chaircount - 1;
 
                     }
@@ -750,16 +806,25 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
                         //UpdateAcceptTable
                         acceptedREpo.Update(stuAccconfig.id, stuAccconfig);//remmber you want to bring database
                         listDeaprtmentsCahir.SingleOrDefault(d => d.Department_id ==
-                                     student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish3.FK_DepartmentId
+                                     admissioncirtificate.wish3.FK_DepartmentId
                                       && d.type_of_highschool_Id ==
-                                student.FK_Admission_Eligibilty_Requist_For_UNsy_Certificate.wish3.FK_type_Of_High_School_CirtificateId
+                                admissioncirtificate.wish3.FK_type_Of_High_School_CirtificateId
                                      ).chaircount = NumberofstudentinTHEREDDepartmentREAlTIME.chaircount - 1;
 
                     }
-                    //else { 
-
-
-                    //}
+                    else
+                    {
+                        // Fix: no seat left in any of the three wishes. Clear a result that an earlier
+                        // run of the algorithm may have saved, so re-running always gives a clean result.
+                        var stuAccconfig = dB.Accabtable_config.AsNoTracking().SingleOrDefault(a => a.id == student.Id);
+                        if (stuAccconfig != null)
+                        {
+                            stuAccconfig.Accepted_Or_Not = false;
+                            stuAccconfig.Accepted_wish = null;
+                            dB.Accabtable_config.Update(stuAccconfig);
+                            dB.SaveChanges();
+                        }
+                    }
                 }
 
 
@@ -769,7 +834,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
             //  var country = countryRepoooooo.Find();
 
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                                        countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                        CertificateCountryId(a.FK_studentId)
                                                                           == modelAlgo.countryId
                                                                           && a.FK_Statues_of_admission_eligibilty.id == modelAlgo.statusofAdmissionId
                                                                           ).ToList();
@@ -875,7 +940,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
           //  var countryfindsy = countryRepoooooo.Find(1);
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                                 countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                 CertificateCountryId(a.FK_studentId)
 
 
                                                                    == modelalgo.countryId
@@ -991,7 +1056,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
             //  var countryfindsy = countryRepoooooo.Find(1);
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                                 countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                 CertificateCountryId(a.FK_studentId)
 
 
                                                                    == modelalgo.countryId
@@ -1111,7 +1176,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
             // var countryfindsy = countryRepoooooo.Find(1);
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                                         countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                         CertificateCountryId(a.FK_studentId)
                                                                            == modelalgo.countryId
                                                                            && a.FK_Statues_of_admission_eligibilty.id == modelalgo.statusofAdmissionId
                                                                            ).ToList();
@@ -1225,7 +1290,7 @@ namespace AdmissionSystem.Controllers.sub_classes.Admin_classes
 
             // var countryfindsy = countryRepoooooo.Find(1);
             var viewwithCountry = acceptedREpo.List().Where(a =>
-                                                                         countryRepoooooo.Find(studentRepository.Find(a.FK_studentId).Cirtificate_city.id).id
+                                                                         CertificateCountryId(a.FK_studentId)
                                                                            == modelalgo.countryId
                                                                            && a.FK_Statues_of_admission_eligibilty.id == modelalgo.statusofAdmissionId
                                                                            ).ToList();
